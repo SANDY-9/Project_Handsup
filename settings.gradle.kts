@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Dojeon"
 include(":app")
+include(":core:common")
