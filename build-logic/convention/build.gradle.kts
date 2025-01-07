@@ -21,3 +21,12 @@ dependencies {
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
 }
+
+gradlePlugin {
+    plugins {
+        register("androidApplication") {
+            id = libs.plugins.tenday.android.application.get().pluginId
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
+    }
+}
