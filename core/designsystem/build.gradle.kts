@@ -16,6 +16,11 @@ android {
     compileSdk = 35
     namespace = "com.tenday.handsup"
 
+    defaultConfig {
+        minSdk = 29
+        targetSdk = 35
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
@@ -32,4 +37,5 @@ android {
 dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    debugImplementation(libs.ui.tooling)
 }

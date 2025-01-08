@@ -15,7 +15,7 @@ val HandsUpPurpleSub = Color(0xFFF4EBF9)
 val HandsUpOrange = Color(0xFFFA610F)
 val HandsUpOrangeSub = Color(0xFFFFF2EC)
 
-val HandsUpBlack = Color(0xFF2A3038)
+val HandsUpBlack = Color(0xff1c1b1f)
 val HandsUpBlackSub = Color(0xFFF7F8FA)
 
 val Gray900 = Color(0xFF111111)
