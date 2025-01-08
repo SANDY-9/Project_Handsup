@@ -2,7 +2,7 @@
 androidGradlePlugin = "8.7.3"
 androidTools = "31.7.3"
 agp = "8.7.3"
-kotlin = "2.0.21"
+kotlin = "2.1.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
@@ -11,12 +11,11 @@ lifecycleRuntimeKtx = "2.6.1"
 activityCompose = "1.8.0"
 composeBom = "2024.09.00"
 lifecycleVersion = "2.8.7"
-jetbrainsKotlinJvm = "2.0.21"
+jetbrainsKotlinJvm = "2.1.0"
 appcompat = "1.6.1"
 hilt = "2.54"
 ksp = "2.1.0-1.0.29"
 androidxHiltNavigationCompose = "1.2.0"
-uiTooling = "1.7.6"
 
 [libraries]
 # androidx
@@ -54,7 +53,6 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
 
 [bundles]
 androidx = [
@@ -68,9 +66,14 @@ compose = [
     "androidx-viewmodel-compose",
     "androidx-lifecycle-compose",
     "androidx-ui",
+    "androidx-ui-tooling",
     "androidx-ui-graphics",
     "androidx-material3",
     "androidx-ui-tooling-preview",
+]
+hilt = [
+    "hilt-android",
+    "hilt-core"
 ]
 
 [plugins]
@@ -86,3 +89,4 @@ tenday-android-application = { id = "tenday.android.application" }
 tenday-android-compose = { id = "tenday.android.compose" }
 tenday-android-feature = { id = "tenday.android.feature" }
 tenday-hilt = { id = "tenday.hilt" }
+android-library = { id = "com.android.library", version.ref = "agp" }
