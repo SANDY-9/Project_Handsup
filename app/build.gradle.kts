@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.tenday.dojeon"
+    namespace = "com.tenday.handsup"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.tenday.dojeon"
+        applicationId = "com.tenday.handsup"
         minSdk = 29
         targetSdk = 35
         versionCode = 1

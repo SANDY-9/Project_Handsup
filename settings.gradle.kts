@@ -20,7 +20,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Dojeon"
+rootProject.name = "HandsUp"
 include(":app")
 include(":core:common")
 include(":core:data")

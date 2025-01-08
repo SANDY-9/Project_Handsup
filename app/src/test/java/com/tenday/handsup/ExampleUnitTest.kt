@@ -1,4 +1,4 @@
-package com.tenday.dojeon
+package com.tenday.handsup
 
 import org.junit.Test
 

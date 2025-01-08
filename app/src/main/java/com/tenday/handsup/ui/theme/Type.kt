@@ -1,4 +1,4 @@
-package com.tenday.dojeon.ui.theme
+package com.tenday.handsup.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

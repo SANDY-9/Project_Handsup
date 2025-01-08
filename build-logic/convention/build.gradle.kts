@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-group = "com.tenday.dojeon.buildlogic"
+group = "com.tenday.handsup.buildlogic"
 
 java {
     sourceCompatibility = JavaVersion.VERSION_17
