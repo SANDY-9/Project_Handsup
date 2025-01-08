@@ -1,4 +1,4 @@
-package com.tenday.handsup.ui.theme
+package com.tenday.designsystem.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -51,7 +51,8 @@ fun HandsUpTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography,
         content = content
     )
+
 }
+

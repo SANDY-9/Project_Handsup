@@ -13,6 +13,9 @@ kotlin {
     }
 }
 android {
+    compileSdk = 35
+    namespace = "com.tenday.handsup"
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
