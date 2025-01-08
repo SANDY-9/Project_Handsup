@@ -37,5 +37,9 @@ gradlePlugin {
             id = libs.plugins.tenday.android.compose.get().pluginId
             implementationClass = "AndroidComposeConventionPlugin"
         }
+        register("androidFeature") {
+            id = libs.plugins.tenday.android.feature.get().pluginId
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
     }
 }

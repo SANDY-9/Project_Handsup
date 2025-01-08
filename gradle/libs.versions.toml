@@ -13,7 +13,6 @@ composeBom = "2024.09.00"
 lifecycleVersion = "2.8.7"
 jetbrainsKotlinJvm = "2.0.21"
 appcompat = "1.6.1"
-material = "1.10.0"
 hilt = "2.54"
 ksp = "2.1.0-1.0.29"
 androidxHiltNavigationCompose = "1.2.0"
@@ -70,7 +69,6 @@ compose = [
     "androidx-ui-graphics",
     "androidx-material3",
     "androidx-ui-tooling-preview",
-    "androidx-hilt-navigation-compose",
 ]
 
 [plugins]
@@ -84,4 +82,5 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 # Plugins defined by this project
 tenday-android-application = { id = "tenday.android.application" }
 tenday-android-compose = { id = "tenday.android.compose" }
+tenday-android-feature = { id = "tenday.android.feature" }
 tenday-hilt = { id = "tenday.hilt" }
