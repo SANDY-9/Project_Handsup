@@ -20,6 +20,7 @@ dependencies {
     compileOnly(libs.android.tools.common)
     compileOnly(libs.compose.gradlePlugin)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -27,6 +28,10 @@ gradlePlugin {
         register("androidApplication") {
             id = libs.plugins.tenday.android.application.get().pluginId
             implementationClass = "AndroidApplicationConventionPlugin"
+        }
+        register("hilt") {
+            id = libs.plugins.tenday.hilt.get().pluginId
+            implementationClass = "HiltConventionPlugin"
         }
     }
 }
