@@ -16,6 +16,10 @@ appcompat = "1.6.1"
 hilt = "2.54"
 ksp = "2.0.21-1.0.27"
 androidxHiltNavigationCompose = "1.2.0"
+retrofit = "2.11.0"
+retrofitKotlinxSerializationJson = "1.0.0"
+kotlinxSerializationJson = "1.8.0"
+okhttp = "4.12.0"
 
 [libraries]
 # androidx
@@ -54,6 +58,14 @@ hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testi
 hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 hilt-core = { group = "com.google.dagger", name = "hilt-core", version.ref = "hilt" }
 
+# kotlin serialization
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
+
+# retrofit2
+retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofit-kotlin-serialization = { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "retrofit" }
+okhttp-logging = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttp" }
+
 [bundles]
 androidx = [
     "androidx-appcompat",
@@ -75,6 +87,11 @@ hilt = [
     "hilt-android",
     "hilt-core"
 ]
+retrofit = [
+    "retrofit-core",
+    "retrofit-kotlin-serialization",
+    "okhttp-logging"
+]
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
@@ -84,6 +101,7 @@ jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "jetbrai
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 
 # Plugins defined by this project
 tenday-android-application = { id = "tenday.android.application" }
