@@ -33,5 +33,9 @@ gradlePlugin {
             id = libs.plugins.tenday.hilt.get().pluginId
             implementationClass = "HiltConventionPlugin"
         }
+        register("androidCompose") {
+            id = libs.plugins.tenday.android.compose.get().pluginId
+            implementationClass = "AndroidComposeConventionPlugin"
+        }
     }
 }
