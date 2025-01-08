@@ -6,7 +6,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.tenday.handsup.R
+import com.tenday.designsystem.R
 
 private val suit = FontFamily(
     Font(resId = R.font.suit_regular, weight = FontWeight.Normal),
