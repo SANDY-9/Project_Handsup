@@ -13,11 +13,32 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.login.login.components.LoginButton
 import com.tenday.feature.login.login.components.LoginErrorMessage
 import com.tenday.feature.login.login.components.LoginInputBox
 import com.tenday.feature.login.login.components.LoginTitle
+import com.tenday.feature.login.login.model.LoginUiState
+
+@Composable
+internal fun LoginRoute(
+    loginViewModel: LoginViewModel = hiltViewModel()
+) {
+    val idInputState by loginViewModel.idInput.collectAsStateWithLifecycle()
+    val pwdInputState by loginViewModel.pwdInput.collectAsStateWithLifecycle()
+    val loginUiState by loginViewModel.loginUiState.collectAsStateWithLifecycle()
+    LoginScreen(
+        id = idInputState,
+        onIdInputChange = loginViewModel::onIdInputChanged,
+        pwd = pwdInputState,
+        onPwdInputChange = loginViewModel::onPwdInputChanged,
+        enabled = loginUiState !is LoginUiState.Loading,
+        onLogin = loginViewModel::requestLogin,
+        isError = loginUiState is LoginUiState.Fail,
+    )
+}
 
 @Composable
 internal fun LoginScreen(
