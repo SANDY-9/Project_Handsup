@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google {
             content {
@@ -21,4 +22,9 @@ dependencyResolutionManagement {
 
 rootProject.name = "Dojeon"
 include(":app")
- 
+include(":core:common")
+include(":core:data")
+include(":core:domain")
+include(":core:model")
+include(":core:designsystem")
+include(":core:navigation")
