@@ -32,3 +32,5 @@ val Gray50 = Color(0xFFF7F7FB)
 val White = Color(0xFFFFFFFF)
 val Positive = Color(0xFF41C321)
 val Negative = Color(0xFFFF4D4D)
+
+val CardShadow = Color(0x80000000)
