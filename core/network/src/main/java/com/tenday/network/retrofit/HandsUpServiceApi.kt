@@ -1,6 +1,7 @@
 package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
+import com.tenday.core.model.NotificationDetails
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import retrofit2.http.Body
@@ -25,5 +26,10 @@ internal interface HandsUpServiceApi {
         @Path("boardId") boardId: Int,
         @Header("Authorization") token: String,
     )
+
+    @GET("notice")
+    suspend fun getNotificationList(
+        @Header("Authorization") token: String,
+    ): List<NotificationDetails>
 
 }
