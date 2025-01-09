@@ -1,6 +1,7 @@
 package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
+import com.tenday.core.model.NotificationDetails
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.utils.toHeader
 import javax.inject.Inject
@@ -20,5 +21,9 @@ internal class HandsUpService @Inject constructor(
 
     override suspend fun updateBoardReadCount(boardId: Int, token: String) {
         api.updateBoardReadCount(boardId, token.toHeader())
+    }
+
+    override suspend fun getNotificationList(token: String): List<NotificationDetails> {
+        return api.getNotificationList(token.toHeader())
     }
 }
