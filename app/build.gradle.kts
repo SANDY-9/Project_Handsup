@@ -45,6 +45,7 @@ android {
 dependencies {
 
     implementation(project(":core:designsystem"))
+    implementation(project(":feature:splash"))
     implementation(project(":feature:login"))
 
     implementation(libs.bundles.androidx)
