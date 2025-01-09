@@ -22,6 +22,7 @@ android {
 dependencies {
     implementation(project(":core:network"))
     implementation(project(":core:domain"))
+    implementation(project(":core:model"))
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.bundles.hilt)
