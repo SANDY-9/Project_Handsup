@@ -12,15 +12,24 @@ import com.tenday.feature.login.R
 
 @Composable
 internal fun LoginErrorMessage(
-    isError: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
-    if(isError) {
-        Text(
-            modifier = modifier.padding(top = Dimens.margin6),
-            text = stringResource(R.string.login_error),
-            style = HandsUpTypography.body3,
-            color = Negative,
-        )
-    }
+    Text(
+        modifier = modifier.padding(top = Dimens.margin6),
+        text = stringResource(R.string.login_error),
+        style = HandsUpTypography.body3,
+        color = Negative,
+    )
+}
+
+@Composable
+internal fun LoginEmptyValueMessage(
+    modifier: Modifier = Modifier,
+) {
+    Text(
+        modifier = modifier.padding(top = Dimens.margin6),
+        text = stringResource(R.string.login_empty_value),
+        style = HandsUpTypography.body3,
+        color = Negative,
+    )
 }
