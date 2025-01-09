@@ -17,7 +17,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
 @Composable
-fun HansUpButton(
+fun HandsUpButton(
     text: String,
     enabled: Boolean,
     onClick: () -> Unit,
@@ -46,7 +46,7 @@ fun HansUpButton(
 @Composable
 private fun Preview() {
     HandsUpTheme {
-        HansUpButton(
+        HandsUpButton(
             text = "로그인",
             false,
             {}

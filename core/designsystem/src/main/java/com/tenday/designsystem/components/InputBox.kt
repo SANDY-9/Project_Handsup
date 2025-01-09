@@ -1,11 +1,8 @@
 package com.tenday.designsystem.components
 
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -29,6 +26,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 fun HandsUpInputBox(
     input: String,
     onInputChange: (String) -> Unit,
+    placeHolder: String = "",
     pwdMode: Boolean = false,
     modifier: Modifier = Modifier,
 ) {
@@ -53,7 +51,7 @@ fun HandsUpInputBox(
         singleLine = true,
         placeholder = {
             Text(
-                text = "플레이스 홀더",
+                text = placeHolder,
                 style = HandsUpTypography.body1,
             )
         },

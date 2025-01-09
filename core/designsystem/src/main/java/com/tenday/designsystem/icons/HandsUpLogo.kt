@@ -18,12 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlin.Unit
 
-public val Icons.HandUpLogo: ImageVector
+val Icons.HandsUpLogo: ImageVector
     get() {
-        if (_handsupLogo != null) {
-            return _handsupLogo!!
+        if (_handsUpLogo != null) {
+            return _handsUpLogo!!
         }
-        _handsupLogo = Builder(name = "HandsupLogo", defaultWidth = 109.0.dp, defaultHeight =
+        _handsUpLogo = Builder(name = "HandsupLogo", defaultWidth = 109.0.dp, defaultHeight =
                 18.0.dp, viewportWidth = 109.0f, viewportHeight = 18.0f).apply {
             path(fill = SolidColor(Color(0xFFFA610F)), stroke = null, strokeLineWidth = 0.0f,
                     strokeLineCap = Butt, strokeLineJoin = Miter, strokeLineMiter = 4.0f,
@@ -217,10 +217,10 @@ public val Icons.HandUpLogo: ImageVector
             }
         }
         .build()
-        return _handsupLogo!!
+        return _handsUpLogo!!
     }
 
-private var _handsupLogo: ImageVector? = null
+private var _handsUpLogo: ImageVector? = null
 
 @Preview
 @Composable
