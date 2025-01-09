@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="board_title">핸즈업 게시판</string>
+    <string name="board_details_title">게시판 상세</string>
+</resources>

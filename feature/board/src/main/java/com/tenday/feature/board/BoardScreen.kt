@@ -1,10 +1,14 @@
 package com.tenday.feature.board
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.tenday.designsystem.theme.Backgroud
+import com.tenday.feature.board.components.BoardContentView
+import com.tenday.feature.board.components.BoardTitleTopBar
 
 @Composable
 internal fun BoardRoute(
@@ -16,8 +20,11 @@ internal fun BoardRoute(
 internal fun BoardScreen(
     modifier: Modifier = Modifier
 ) {
-    Box(modifier) {
-        Text("게시판")
+    Column(
+        modifier = modifier.fillMaxSize().background(color = Backgroud),
+    ) {
+        BoardTitleTopBar()
+        BoardContentView()
     }
 }
 

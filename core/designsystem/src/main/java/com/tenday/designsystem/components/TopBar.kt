@@ -21,7 +21,7 @@ import com.tenday.designsystem.icons.ArrowBack
 import com.tenday.designsystem.theme.HandsUpTypography
 
 @Composable
-fun HansUpTitleTopBar(
+fun HandsUpTitleTopBar(
     content: @Composable BoxScope.() -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -35,12 +35,12 @@ fun HansUpTitleTopBar(
 }
 
 @Composable
-fun HansUpNavigateTopBar(
+fun HandsUpNavigateTopBar(
     title: String,
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    HansUpTitleTopBar(
+    HandsUpTitleTopBar(
         content = {
             Icon(
                 modifier = modifier.size(24.dp)
@@ -61,7 +61,7 @@ fun HansUpNavigateTopBar(
 @Composable
 @Preview
 private fun Preview() {
-    HansUpNavigateTopBar(
+    HandsUpNavigateTopBar(
         "알람",
         {}
     )

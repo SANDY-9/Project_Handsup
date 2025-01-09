@@ -4,6 +4,7 @@ import androidx.compose.ui.unit.dp
 
 object Dimens {
     // size
+    val cornerShape4 = 4.dp
     val cornerShape8 = 8.dp
     val cornerShape12 = 12.dp
 
@@ -11,6 +12,8 @@ object Dimens {
     val margin2 = 2.dp
     val margin4 = 4.dp
     val margin6 = 6.dp
+    val margin12 = 12.dp
+    val margin14 = 14.dp
     val margin16 = 16.dp
     val margin20 = 20.dp
     val margin24 = 24.dp
