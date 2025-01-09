@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.tenday.designsystem.components.HansUpTitleTopBar
+import com.tenday.designsystem.components.HandsUpTitleTopBar
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -20,7 +20,7 @@ import com.tenday.feature.login.R
 internal fun LoginTitle(
     modifier: Modifier = Modifier
 ) {
-    HansUpTitleTopBar(
+    HandsUpTitleTopBar(
        content = {
            Row(
                verticalAlignment = Alignment.CenterVertically,

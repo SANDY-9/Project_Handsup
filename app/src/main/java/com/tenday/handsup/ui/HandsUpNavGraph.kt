@@ -5,6 +5,9 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
+import com.tenday.feature.board.navigation.boardScreen
+import com.tenday.feature.board.navigation.navigateToBoard
+import com.tenday.feature.login.login.navigation.LoginRoute
 import com.tenday.feature.login.login.navigation.loginScreen
 import com.tenday.feature.login.login.navigation.navigateToLogin
 import com.tenday.feature.splash.navigation.SplashRoute
@@ -27,12 +30,17 @@ fun HandsUpNavGraph(
             onSplashShow = { token ->
                 when(token) {
                     null -> navController.navigateToLogin(splashNavOptions)
-                    else -> {
-
-                    }
+                    else -> navController.navigateToBoard(splashNavOptions)
                 }
             }
         )
-        loginScreen()
+
+        val loginNavOptions = navOptionBuilder.setPopUpTo<LoginRoute>(inclusive = true).build()
+        loginScreen(
+            onSuccessLogin = {
+                navController.navigateToBoard(loginNavOptions)
+            }
+        )
+        boardScreen()
     }
 }
