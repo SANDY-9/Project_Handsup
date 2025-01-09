@@ -28,11 +28,17 @@ import com.tenday.feature.login.login.model.LoginUiState
 
 @Composable
 internal fun LoginRoute(
+    onSuccessLogin: () -> Unit,
     loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
     val idInputState by loginViewModel.idInput.collectAsStateWithLifecycle()
     val pwdInputState by loginViewModel.pwdInput.collectAsStateWithLifecycle()
     val loginUiState by loginViewModel.loginUiState.collectAsStateWithLifecycle()
+    LaunchedEffect(loginUiState) {
+        if(loginUiState is LoginUiState.Success) {
+            onSuccessLogin()
+        }
+    }
     LoginScreen(
         loginUiState = loginUiState,
         id = idInputState,
