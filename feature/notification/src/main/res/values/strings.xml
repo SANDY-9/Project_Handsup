@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="notify_title">알림</string>
+    <string name="notify_empty_title">아직 도착한 알림이 없어요</string>
+    <string name="notify_empty_desc">새로운 소식이나 업데이트가 있으면\n여기에 표시됩니다.</string>
+</resources>
