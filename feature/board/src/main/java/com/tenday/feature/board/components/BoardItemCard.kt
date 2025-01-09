@@ -19,7 +19,11 @@ import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.Gray700
+import com.tenday.designsystem.theme.HandsUpBlack
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.LightGray100
+import com.tenday.designsystem.theme.LightGray200
+import com.tenday.designsystem.theme.LightGray300
 
 @Composable
 fun BoardItemCard(
@@ -41,36 +45,82 @@ fun BoardItemCard(
                     bottom = Dimens.margin16
                 )
             ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        modifier = modifier.weight(1f),
-                        text = boardDetails.title,
-                        style = HandsUpTypography.body2.copy(
-                            fontWeight = FontWeight.SemiBold,
-                        ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
-                    )
-                    Text(
-                        text = boardDetails.createdAt,
-                        color = Gray600,
-                        style = HandsUpTypography.body4,
-                    )
+                when {
+                    boardDetails.isRead -> ReadBoardItem(boardDetails)
+                    else -> NotReadBoardItem(boardDetails)
                 }
-                Spacer(modifier = modifier.height(Dimens.margin6))
-                Text(
-                    text = boardDetails.content,
-                    color = Gray700,
-                    style = HandsUpTypography.body3,
-                    maxLines = 2,
-                    overflow = TextOverflow.Ellipsis,
-                )
             }
         }
     )
     Spacer(modifier = modifier.height(Dimens.margin12))
+}
+
+@Composable
+private fun NotReadBoardItem(
+    boardDetails: BoardDetails,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            modifier = modifier.weight(1f),
+            text = boardDetails.title,
+            style = HandsUpTypography.body2.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = HandsUpBlack,
+        )
+        Text(
+            text = boardDetails.createdAt,
+            color = Gray600,
+            style = HandsUpTypography.body4,
+        )
+    }
+    Spacer(modifier = modifier.height(Dimens.margin6))
+    Text(
+        text = boardDetails.content,
+        color = Gray700,
+        style = HandsUpTypography.body3,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
+    )
+}
+
+@Composable
+private fun ReadBoardItem(
+    boardDetails: BoardDetails,
+    modifier: Modifier = Modifier,
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Text(
+            modifier = modifier.weight(1f),
+            text = boardDetails.title,
+            style = HandsUpTypography.body2.copy(
+                fontWeight = FontWeight.SemiBold,
+            ),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+            color = LightGray300,
+        )
+        Text(
+            text = boardDetails.createdAt,
+            color = LightGray100,
+            style = HandsUpTypography.body4,
+        )
+    }
+    Spacer(modifier = modifier.height(Dimens.margin6))
+    Text(
+        text = boardDetails.content,
+        color = LightGray200,
+        style = HandsUpTypography.body3,
+        maxLines = 2,
+        overflow = TextOverflow.Ellipsis,
+    )
 }
 
 @Preview(name = "BoardItemCard")
@@ -84,7 +134,8 @@ private fun PreviewBoardItemCard() {
                     "해당 프로젝트에 참여할 팀원을 모집합니다.   [프로젝트 목표] 1. 작업",
             "2024.01.14",
             "물류 자동화 프로젝트 신설 물류 자동화 프로젝트 신설 물류 자동화 " +
-                    "프로젝트 신설 물류 자동화 프로젝트 신설"
+                    "프로젝트 신설 물류 자동화 프로젝트 신설",
+            false
         ),
         {}
     )

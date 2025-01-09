@@ -49,16 +49,6 @@ internal fun BoardScreen(
     }
 }
 
-private val details = BoardDetails(
-    3,
-    "안녕하세요. 물류 자동화 프로젝트를 신설하고, 해당 프로젝트에 참여할 팀원을 모집합니다.   " +
-            "[프로젝트 목표] 1. 작업 안녕하세요. 물류 자동화 프로젝트를 신설하고, " +
-            "해당 프로젝트에 참여할 팀원을 모집합니다.   [프로젝트 목표] 1. 작업",
-    "2024.01.14",
-    "물류 자동화 프로젝트 신설 물류 자동화 프로젝트 신설 물류 자동화 " +
-            "프로젝트 신설 물류 자동화 프로젝트 신설"
-)
-
 @Preview(name = "BoardScreen")
 @Composable
 private fun PreviewBoardScreen() {

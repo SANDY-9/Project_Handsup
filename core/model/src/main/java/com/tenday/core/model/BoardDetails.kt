@@ -9,4 +9,5 @@ data class BoardDetails(
     val content: String,
     val createdAt: String,
     val title: String,
+    val isRead: Boolean,
 ): java.io.Serializable

@@ -15,13 +15,13 @@ import com.tenday.feature.board.details.components.BoardDetailsTitleBar
 internal fun BoardDetailsRoute(
     onNavigateBack: () -> Unit,
 ) {
-
    BoardDetailsScreen(
        boardDetails = BoardDetails(
            boardId = 1,
            content = "본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글",
            createdAt = "2025-01-07T17:17:00.980Z",
-           title = "AAA 프로젝트 신설 (경험치 500 do, 신청 마감 ~10/31)"
+           title = "AAA 프로젝트 신설 (경험치 500 do, 신청 마감 ~10/31)",
+           false
        ),
        onNavigateBack = onNavigateBack,
    )
@@ -52,6 +52,7 @@ private fun PreviewBoardDetailsScreen() {
         boardId = 1,
         content = "본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글본문테스트글",
         createdAt = "2025-01-07T17:17:00.980Z",
-        title = "AAA 프로젝트 신설 (경험치 500 do, 신청 마감 ~10/31)"
+        title = "AAA 프로젝트 신설 (경험치 500 do, 신청 마감 ~10/31)",
+        false
     ), {})
 }
