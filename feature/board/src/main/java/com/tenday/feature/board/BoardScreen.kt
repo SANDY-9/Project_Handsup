@@ -4,27 +4,33 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.model.BoardDetails
 import com.tenday.designsystem.theme.Backgroud
 import com.tenday.feature.board.components.BoardContentView
 import com.tenday.feature.board.components.BoardTitleTopBar
+import com.tenday.feature.board.model.BoardUiState
 
 @Composable
 internal fun BoardRoute(
     onNavigateAlarm: () -> Unit,
     onCardClick: (BoardDetails) -> Unit,
+    viewModel: BoardViewModel = hiltViewModel(),
 ) {
+    val boardUiState by viewModel.boardUiState.collectAsStateWithLifecycle()
     BoardScreen(
-        boardItems = List(15){ details },
+        boardUiState = boardUiState,
         onCardClick = onCardClick,
         onNavigateAlarm = onNavigateAlarm,
     )
 }
 @Composable
 internal fun BoardScreen(
-    boardItems: List<BoardDetails>,
+    boardUiState: BoardUiState,
     onCardClick: (BoardDetails) -> Unit,
     onNavigateAlarm: () -> Unit,
     modifier: Modifier = Modifier
@@ -33,7 +39,13 @@ internal fun BoardScreen(
         modifier = modifier.fillMaxSize().background(color = Backgroud),
     ) {
         BoardTitleTopBar(onNavigateAlarm)
-        BoardContentView(boardItems, onCardClick)
+        when(boardUiState) {
+            is BoardUiState.Success -> BoardContentView(
+                boardItems = boardUiState.data,
+                onCardClick = onCardClick
+            )
+            else -> {}
+        }
     }
 }
 
@@ -50,5 +62,5 @@ private val details = BoardDetails(
 @Preview(name = "BoardScreen")
 @Composable
 private fun PreviewBoardScreen() {
-    BoardScreen(List(15){ details }, {}, {})
+    BoardScreen(BoardUiState.Loading, {}, {})
 }

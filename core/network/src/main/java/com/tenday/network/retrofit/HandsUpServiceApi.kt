@@ -5,6 +5,7 @@ import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 internal interface HandsUpServiceApi {
@@ -14,5 +15,7 @@ internal interface HandsUpServiceApi {
     ): LoginResponse
 
     @GET("board")
-    suspend fun getBoardList(): List<BoardDetails>
+    suspend fun getBoardList(
+        @Header("Authorization") token: String,
+    ): List<BoardDetails>
 }

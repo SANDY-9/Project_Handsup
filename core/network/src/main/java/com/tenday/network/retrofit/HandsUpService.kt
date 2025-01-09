@@ -2,6 +2,7 @@ package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
 import com.tenday.network.model.LoginRequestBody
+import com.tenday.network.utils.toHeader
 import javax.inject.Inject
 
 internal class HandsUpService @Inject constructor(
@@ -13,7 +14,7 @@ internal class HandsUpService @Inject constructor(
         ).accessToken
     }
 
-    override suspend fun getBoardList(): List<BoardDetails> {
-        return api.getBoardList()
+    override suspend fun getBoardList(token: String): List<BoardDetails> {
+        return api.getBoardList(token.toHeader())
     }
 }

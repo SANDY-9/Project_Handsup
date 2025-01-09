@@ -9,7 +9,7 @@ import javax.inject.Inject
 class GetBoardListRepositoryImpl @Inject constructor(
     private val handsUpDataSource: HandsUpDataSource
 ) : GetBoardListRepository {
-    override suspend fun getBoardList(): List<BoardDetails> {
-        return handsUpDataSource.getBoardList().toBoardDetails()
+    override suspend fun getBoardList(token: String): List<BoardDetails> {
+        return handsUpDataSource.getBoardList(token).toBoardDetails()
     }
 }

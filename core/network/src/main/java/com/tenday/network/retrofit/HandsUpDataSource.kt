@@ -4,5 +4,5 @@ import com.tenday.core.model.BoardDetails
 
 interface HandsUpDataSource {
     suspend fun login(id: String, pwd: String): String
-    suspend fun getBoardList(): List<BoardDetails>
+    suspend fun getBoardList(token: String): List<BoardDetails>
 }
