@@ -1,4 +1,4 @@
-package com.tenday.handsup
+package com.tenday.handsup.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,8 +7,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.tenday.designsystem.theme.HandsUpTheme
 import com.tenday.feature.login.login.navigation.LoginRoute
-import com.tenday.handsup.ui.HandsUpApp
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

@@ -56,7 +56,7 @@ internal fun LoginScreen(
             .fillMaxSize()
             .padding(Dimens.margin20),
     ) {
-        Spacer(modifier = modifier.fillMaxHeight(0.15f))
+        Spacer(modifier = modifier.fillMaxHeight(0.2f))
         LoginTitle()
         Spacer(modifier = modifier.height(Dimens.margin16))
         LoginInputBox(
