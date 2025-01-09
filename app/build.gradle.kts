@@ -45,9 +45,11 @@ android {
 dependencies {
 
     implementation(project(":core:designsystem"))
+    implementation(project(":core:model"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:login"))
     implementation(project(":feature:board"))
+    implementation(project(":feature:board-details"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))

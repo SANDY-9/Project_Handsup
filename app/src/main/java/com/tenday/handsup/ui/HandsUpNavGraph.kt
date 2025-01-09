@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
+import com.tenday.feature.board.details.navigation.boardDetailsScreen
+import com.tenday.feature.board.details.navigation.navigateToBoardDetails
 import com.tenday.feature.board.navigation.boardScreen
 import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.login.login.navigation.LoginRoute
@@ -41,6 +43,14 @@ fun HandsUpNavGraph(
                 navController.navigateToBoard(loginNavOptions)
             }
         )
-        boardScreen()
+
+        boardScreen(
+            onNavigateAlarm = {},
+            onCardClick = navController::navigateToBoardDetails
+        )
+
+        boardDetailsScreen(
+            onNavigateBack = navController::popBackStack
+        )
     }
 }
