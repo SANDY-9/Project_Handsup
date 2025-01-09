@@ -7,6 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.Path
 
 internal interface HandsUpServiceApi {
     @POST("login")
@@ -18,4 +19,11 @@ internal interface HandsUpServiceApi {
     suspend fun getBoardList(
         @Header("Authorization") token: String,
     ): List<BoardDetails>
+
+    @POST("board/{boardId}/read")
+    suspend fun updateBoardReadCount(
+        @Path("boardId") boardId: Int,
+        @Header("Authorization") token: String,
+    )
+
 }

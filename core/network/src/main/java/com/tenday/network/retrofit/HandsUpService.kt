@@ -17,4 +17,8 @@ internal class HandsUpService @Inject constructor(
     override suspend fun getBoardList(token: String): List<BoardDetails> {
         return api.getBoardList(token.toHeader())
     }
+
+    override suspend fun updateBoardReadCount(boardId: Int, token: String) {
+        api.updateBoardReadCount(boardId, token.toHeader())
+    }
 }
