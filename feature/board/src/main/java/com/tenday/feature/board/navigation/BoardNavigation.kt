@@ -12,10 +12,10 @@ import kotlinx.serialization.Serializable
 object BoardRoute
 fun NavController.navigateToBoard(navOptions: NavOptions) = navigate(route = BoardRoute, navOptions)
 fun NavGraphBuilder.boardScreen(
-    onNavigateAlarm: () -> Unit,
+    onNavigateNoti: () -> Unit,
     onCardClick: (BoardDetails) -> Unit,
 ) {
     composable<BoardRoute> {
-        BoardRoute(onNavigateAlarm, onCardClick)
+        BoardRoute(onNavigateNoti, onCardClick)
     }
 }

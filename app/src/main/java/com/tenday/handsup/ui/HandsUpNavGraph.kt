@@ -12,6 +12,8 @@ import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.login.login.navigation.LoginRoute
 import com.tenday.feature.login.login.navigation.loginScreen
 import com.tenday.feature.login.login.navigation.navigateToLogin
+import com.tenday.feature.notification.navigation.navigateToNotification
+import com.tenday.feature.notification.navigation.notificationScreen
 import com.tenday.feature.splash.navigation.SplashRoute
 import com.tenday.feature.splash.navigation.splashScreen
 
@@ -45,13 +47,17 @@ fun HandsUpNavGraph(
         )
 
         boardScreen(
-            onNavigateAlarm = {},
+            onNavigateNoti = navController::navigateToNotification,
             onCardClick = navController::navigateToBoardDetails,
         )
 
         boardDetailsScreen(
             navController = navController,
             onNavigateBack = navController::popBackStack,
+        )
+
+        notificationScreen(
+            onNavigateBack = navController::popBackStack
         )
     }
 }

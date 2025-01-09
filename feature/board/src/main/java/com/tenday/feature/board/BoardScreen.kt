@@ -17,7 +17,7 @@ import com.tenday.feature.board.model.BoardUiState
 
 @Composable
 internal fun BoardRoute(
-    onNavigateAlarm: () -> Unit,
+    onNavigateNoti: () -> Unit,
     onCardClick: (BoardDetails) -> Unit,
     viewModel: BoardViewModel = hiltViewModel(),
 ) {
@@ -28,20 +28,20 @@ internal fun BoardRoute(
             viewModel.onBoardItemClick(item)
             onCardClick(item)
         },
-        onNavigateAlarm = onNavigateAlarm,
+        onNavigateNoti = onNavigateNoti,
     )
 }
 @Composable
 internal fun BoardScreen(
     boardUiState: BoardUiState,
     onCardClick: (BoardDetails) -> Unit,
-    onNavigateAlarm: () -> Unit,
+    onNavigateNoti: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
         modifier = modifier.fillMaxSize().background(color = Backgroud),
     ) {
-        BoardTitleTopBar(onNavigateAlarm)
+        BoardTitleTopBar(onNavigateNoti)
         when(boardUiState) {
             is BoardUiState.Success -> BoardContentView(
                 boardItems = boardUiState.data,
