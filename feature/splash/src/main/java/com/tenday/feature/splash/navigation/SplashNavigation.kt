@@ -12,7 +12,7 @@ import kotlinx.serialization.Serializable
 fun NavController.navigateToSplash(navOptions: NavOptions) = navigate(route = SplashRoute, navOptions)
 
 fun NavGraphBuilder.splashScreen(
-    onSplashShow: (Boolean) -> Unit,
+    onSplashShow: (String?) -> Unit,
 ) {
     composable<SplashRoute> {
         SplashRoute(onSplashShow)

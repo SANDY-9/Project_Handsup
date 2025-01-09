@@ -2,12 +2,9 @@ package com.tenday.handsup.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
-import com.tenday.feature.login.login.navigation.LoginRoute
 import com.tenday.feature.login.login.navigation.loginScreen
 import com.tenday.feature.login.login.navigation.navigateToLogin
 import com.tenday.feature.splash.navigation.SplashRoute
@@ -25,21 +22,17 @@ fun HandsUpNavGraph(
         startDestination = startDestination,
     ) {
         val navOptionBuilder = NavOptions.Builder()
+        val splashNavOptions = navOptionBuilder.setPopUpTo<SplashRoute>(inclusive = true).build()
         splashScreen(
-            onSplashShow = { show ->
-                if(!show) {
-                    navController.navigateToLogin(
-                        navOptionBuilder.setPopUpTo<SplashRoute>(inclusive = true).build()
-                    )
+            onSplashShow = { token ->
+                when(token) {
+                    null -> navController.navigateToLogin(splashNavOptions)
+                    else -> {
+
+                    }
                 }
             }
         )
         loginScreen()
     }
-}
-
-@Preview(name = "HandsUpNavGraph")
-@Composable
-private fun PreviewMainNavGraph() {
-    HandsUpNavGraph(rememberNavController(), LoginRoute)
 }
