@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:board"))
     implementation(project(":feature:board-details"))
+    implementation(project(":feature:notification"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
