@@ -3,9 +3,10 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 android {
-    namespace = "com.tenday.core.data"
+    namespace = "com.tenday.core.datastore"
     compileSdk = 35
     defaultConfig {
         minSdk = 29
@@ -18,14 +19,12 @@ android {
         jvmTarget = "17"
     }
 }
-
 dependencies {
-    implementation(project(":core:network"))
-    implementation(project(":core:datastore"))
-    implementation(project(":core:domain"))
-    implementation(project(":core:model"))
-
-    implementation(libs.kotlinx.coroutines.android)
+    // hilt
     implementation(libs.bundles.hilt)
     ksp(libs.hilt.compiler)
+
+    // datastore
+    implementation(libs.datastore)
+    implementation(libs.kotlinx.serialization.json)
 }

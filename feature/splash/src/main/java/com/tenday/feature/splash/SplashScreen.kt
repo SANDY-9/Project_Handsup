@@ -30,12 +30,15 @@ import com.tenday.designsystem.theme.White
 
 @Composable
 internal fun SplashRoute(
-    onSplashShow: (Boolean) -> Unit,
+    onAccessToken: (String?) -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
     val splashShow by viewModel.splashShow.collectAsStateWithLifecycle()
     LaunchedEffect(splashShow) {
-        if(!splashShow) onSplashShow(splashShow)
+        if(!splashShow) {
+            val accessToken = viewModel.getAccessToken()
+            onAccessToken(accessToken)
+        }
     }
     SplashScreen()
 }

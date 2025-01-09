@@ -1,6 +1,8 @@
 package com.tenday.core.data.di
 
+import com.tenday.core.data.repository.AuthPrefsRepositoryImpl
 import com.tenday.core.data.repository.LoginRepositoryImpl
+import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.repository.LoginRepository
 import dagger.Binds
 import dagger.Module
@@ -15,5 +17,10 @@ internal abstract class DataModule {
     abstract fun bindsLoginRepository(
         impl: LoginRepositoryImpl
     ): LoginRepository
+
+    @Binds
+    abstract fun bindsAuthPrefsRepository(
+        impl: AuthPrefsRepositoryImpl
+    ): AuthPrefsRepository
 
 }
