@@ -24,7 +24,10 @@ internal fun BoardRoute(
     val boardUiState by viewModel.boardUiState.collectAsStateWithLifecycle()
     BoardScreen(
         boardUiState = boardUiState,
-        onCardClick = onCardClick,
+        onCardClick = { item ->
+            viewModel.onBoardItemClick(item)
+            onCardClick(item)
+        },
         onNavigateAlarm = onNavigateAlarm,
     )
 }

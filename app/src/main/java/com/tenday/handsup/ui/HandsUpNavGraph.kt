@@ -46,11 +46,12 @@ fun HandsUpNavGraph(
 
         boardScreen(
             onNavigateAlarm = {},
-            onCardClick = navController::navigateToBoardDetails
+            onCardClick = navController::navigateToBoardDetails,
         )
 
         boardDetailsScreen(
-            onNavigateBack = navController::popBackStack
+            navController = navController,
+            onNavigateBack = navController::popBackStack,
         )
     }
 }

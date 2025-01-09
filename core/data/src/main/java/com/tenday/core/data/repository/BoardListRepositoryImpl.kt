@@ -14,6 +14,6 @@ class BoardListRepositoryImpl @Inject constructor(
     }
 
     override suspend fun updateReadCount(boardId: Int, token: String) {
-        handsUpDataSource
+        handsUpDataSource.updateBoardReadCount(boardId, token)
     }
 }

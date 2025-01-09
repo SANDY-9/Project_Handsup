@@ -1,9 +1,11 @@
 package com.tenday.feature.board
 
 import android.util.Log
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.usecases.board.GetBoardListUseCase
+import com.tenday.core.model.BoardDetails
 import com.tenday.feature.board.model.BoardUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,7 +14,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,6 +32,26 @@ internal class BoardViewModel @Inject constructor(
         }.catch {
             _boardUiState.value = BoardUiState.Fail
         }.launchIn(viewModelScope)
+    }
+
+    fun onBoardItemClick(boardDetails: BoardDetails) {
+        if(!boardDetails.isRead) {
+            updateItemReadState(boardDetails)
+        }
+    }
+
+    private fun updateItemReadState(boardDetails: BoardDetails) {
+        val currentState = _boardUiState.value
+        if (currentState is BoardUiState.Success) {
+            val updatedList = currentState.data.map { item ->
+                if (item == boardDetails) {
+                    item.copy(isRead = true) // isRead 값을 true로 변경
+                } else {
+                    item
+                }
+            }
+            _boardUiState.value = BoardUiState.Success(updatedList)
+        }
     }
 
 }
