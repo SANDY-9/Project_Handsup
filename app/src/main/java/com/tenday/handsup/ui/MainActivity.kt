@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.navigation.compose.rememberNavController
 import com.tenday.designsystem.theme.HandsUpTheme
-import com.tenday.feature.login.login.navigation.LoginRoute
+import com.tenday.feature.splash.navigation.SplashRoute
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -18,7 +18,7 @@ class MainActivity : ComponentActivity() {
             HandsUpTheme {
                 HandsUpApp(
                     navController = rememberNavController(),
-                    startDestination = LoginRoute,
+                    startDestination = SplashRoute,
                 )
             }
         }
