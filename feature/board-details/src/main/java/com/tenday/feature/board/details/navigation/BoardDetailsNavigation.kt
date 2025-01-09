@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable object BoardDetailsRoute
 
-const val BOARD_DETAILS = "board_details"
+private const val BOARD_DETAILS = "board_details"
 fun NavController.navigateToBoardDetails(
     boardDetails: BoardDetails,
     navOptions: NavOptions? = null,
@@ -20,9 +20,22 @@ fun NavController.navigateToBoardDetails(
 }
 
 fun NavGraphBuilder.boardDetailsScreen(
+    navController: NavController,
     onNavigateBack: () -> Unit,
 ) {
     composable<BoardDetailsRoute> {
-        BoardDetailsRoute(onNavigateBack)
+        val boardDetails = navController.previousBackStackEntry
+            ?.savedStateHandle
+            ?.get<BoardDetails>(BOARD_DETAILS)
+            ?: emptyBoardDetails
+        BoardDetailsRoute(boardDetails, onNavigateBack)
     }
 }
+
+private val emptyBoardDetails = BoardDetails(
+    boardId = -1,
+    content = "",
+    createdAt = "",
+    title = "",
+    isRead = true,
+)

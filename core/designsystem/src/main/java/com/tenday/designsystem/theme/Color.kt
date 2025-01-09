@@ -29,6 +29,10 @@ val Gray200 = Color(0xFFE5E5EC)
 val Gray100 = Color(0xFFF1F1F5)
 val Gray50 = Color(0xFFF7F7FB)
 
+val LightGray300 = Color(0xFFa0a0a0)
+val LightGray200 = Color(0xFFb9b9b9)
+val LightGray100 = Color(0xFFc8c8c8)
+
 val White = Color(0xFFFFFFFF)
 val Positive = Color(0xFF41C321)
 val Negative = Color(0xFFFF4D4D)
