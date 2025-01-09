@@ -24,6 +24,6 @@ internal class HandsUpService @Inject constructor(
     }
 
     override suspend fun getNotificationList(token: String): List<NotificationDetails> {
-        return api.getNotificationList(token.toHeader())
+        return api.getNotificationList(token.toHeader()).noticeList
     }
 }

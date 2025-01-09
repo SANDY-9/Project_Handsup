@@ -26,7 +26,7 @@ import com.tenday.feature.board.R
 
 @Composable
 internal fun BoardTitleTopBar(
-    onNavigateAlarm: () -> Unit,
+    onNavigateNoti: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column (
@@ -43,7 +43,7 @@ internal fun BoardTitleTopBar(
                 Icon(
                     modifier = modifier.align(Alignment.CenterEnd)
                         .size(24.dp)
-                        .clickable(onClick = onNavigateAlarm)
+                        .clickable(onClick = onNavigateNoti)
                     ,
                     imageVector = Icons.Alarm,
                     contentDescription = null,
