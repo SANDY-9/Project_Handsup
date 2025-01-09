@@ -18,8 +18,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.model.NotificationDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.AlarmFill
 import com.tenday.designsystem.theme.Gray200
@@ -32,6 +34,7 @@ import com.tenday.feature.notification.R
 
 @Composable
 internal fun NotificationListItem(
+    noti: NotificationDetails,
     modifier: Modifier = Modifier
 ) {
     Column {
@@ -59,7 +62,7 @@ internal fun NotificationListItem(
             )
             Spacer(modifier = modifier.weight(1f))
             Text(
-                text = "3일전",
+                text = noti.createdAt,
                 style = HandsUpTypography.body3,
                 color = Gray500,
             )
@@ -67,14 +70,16 @@ internal fun NotificationListItem(
         Spacer(modifier = modifier.height(Dimens.margin10))
         Text(
             modifier = modifier.padding(horizontal = Dimens.margin20),
-            text = "새로운 글이 게시되었습니다!",
+            text = noti.title,
             style = HandsUpTypography.body2.copy(
                 fontWeight = FontWeight.Bold,
-            )
+            ),
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
         )
         Text(
             modifier = modifier.padding(horizontal = Dimens.margin20),
-            text = "게시판을 통해 글을 확인해 보세요.",
+            text = noti.body,
             style = HandsUpTypography.body3,
             color = Gray700
         )
@@ -86,5 +91,11 @@ internal fun NotificationListItem(
 @Preview(name = "NotificationListItem")
 @Composable
 private fun PreviewNotificationListItem() {
-    NotificationListItem()
+    NotificationListItem(
+        NotificationDetails(
+            "두둥 경험치를 획득하였습니다. 다음 미션도 도전하세요!",
+            "3일 전",
+            "축하합니다! 새로운 두둥 경험치를 받았어요!"
+        )
+    )
 }

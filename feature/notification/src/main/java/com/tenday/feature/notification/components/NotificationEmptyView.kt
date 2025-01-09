@@ -25,7 +25,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.feature.notification.R
 
 @Composable
-fun NotificationEmptyView(
+internal fun NotificationEmptyView(
     modifier: Modifier = Modifier
 ) {
     Column(
