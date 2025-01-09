@@ -37,6 +37,7 @@ android {
     }
 }
 dependencies {
+    implementation(project(":core:model"))
     // hilt
     implementation(libs.bundles.hilt)
     ksp(libs.hilt.compiler)

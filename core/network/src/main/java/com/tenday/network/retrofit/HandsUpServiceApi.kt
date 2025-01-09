@@ -1,8 +1,10 @@
 package com.tenday.network.retrofit
 
+import com.tenday.core.model.BoardDetails
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 
 internal interface HandsUpServiceApi {
@@ -10,4 +12,7 @@ internal interface HandsUpServiceApi {
     suspend fun login(
         @Body requestBody: LoginRequestBody
     ): LoginResponse
+
+    @GET("board")
+    suspend fun getBoardList(): List<BoardDetails>
 }
