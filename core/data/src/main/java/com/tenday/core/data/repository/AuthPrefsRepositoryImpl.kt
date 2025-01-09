@@ -14,4 +14,8 @@ class AuthPrefsRepositoryImpl @Inject constructor(
     override suspend fun getAccessToken(): String? {
         return prefsDataSource.getAccessToken()
     }
+
+    override suspend fun deleteAccessToken() {
+        prefsDataSource.deleteAccessToken()
+    }
 }
