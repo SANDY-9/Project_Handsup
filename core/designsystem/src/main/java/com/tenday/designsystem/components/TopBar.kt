@@ -1,12 +1,16 @@
 package com.tenday.designsystem.components
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxScope
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
@@ -19,6 +23,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.icons.ArrowBack
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.White
 
 @Composable
 fun HandsUpTitleTopBar(
@@ -40,22 +45,27 @@ fun HandsUpNavigateTopBar(
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    HandsUpTitleTopBar(
-        content = {
-            Icon(
-                modifier = modifier.size(24.dp)
-                    .align(Alignment.CenterStart)
-                    .clip(CircleShape)
-                    .clickable(onClick = onNavigate),
-                imageVector = Icons.ArrowBack,
-                contentDescription = null,
-            )
-            Text(
-                text = title,
-                style = HandsUpTypography.title4,
-            )
-        }
-    )
+    Column(
+        modifier = modifier.background(White)
+    ) {
+        Spacer(modifier = modifier.systemBarsPadding())
+        HandsUpTitleTopBar(
+            content = {
+                Icon(
+                    modifier = modifier.size(24.dp)
+                        .align(Alignment.CenterStart)
+                        .clip(CircleShape)
+                        .clickable(onClick = onNavigate),
+                    imageVector = Icons.ArrowBack,
+                    contentDescription = null,
+                )
+                Text(
+                    text = title,
+                    style = HandsUpTypography.title4,
+                )
+            }
+        )
+    }
 }
 
 @Composable
