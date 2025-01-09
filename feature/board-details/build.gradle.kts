@@ -8,13 +8,14 @@ plugins {
 }
 
 android {
-    namespace = "com.tenday.feature.board"
+    namespace = "com.tenday.feature.board.details"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -61,5 +62,4 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.kotlinx.serialization.json)
-
 }
