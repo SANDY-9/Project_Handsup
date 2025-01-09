@@ -2,6 +2,7 @@ package com.tenday.core.domain.repository
 
 import com.tenday.core.model.BoardDetails
 
-interface GetBoardListRepository {
+interface BoardListRepository {
     suspend fun getBoardList(token: String): List<BoardDetails>
+    suspend fun updateReadCount(boardId: Int, token: String)
 }
