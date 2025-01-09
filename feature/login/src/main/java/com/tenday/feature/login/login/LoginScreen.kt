@@ -24,7 +24,7 @@ import com.tenday.feature.login.login.model.LoginUiState
 
 @Composable
 internal fun LoginRoute(
-    loginViewModel: LoginViewModel = hiltViewModel()
+    loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
     val idInputState by loginViewModel.idInput.collectAsStateWithLifecycle()
     val pwdInputState by loginViewModel.pwdInput.collectAsStateWithLifecycle()
