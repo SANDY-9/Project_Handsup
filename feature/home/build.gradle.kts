@@ -1,5 +1,5 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
@@ -8,15 +8,11 @@ plugins {
 }
 
 android {
-    namespace = "com.tenday.handsup"
+    namespace = "com.tenday.feature.home"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.tenday.handsup"
         minSdk = 29
-        targetSdk = 35
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,18 +40,18 @@ android {
 
 dependencies {
 
-    implementation(project(":core:designsystem"))
+    // module
     implementation(project(":core:model"))
-    implementation(project(":feature:splash"))
-    implementation(project(":feature:login"))
-    implementation(project(":feature:home"))
-    implementation(project(":feature:board"))
-    implementation(project(":feature:board-details"))
-    implementation(project(":feature:notification"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:data"))
+    implementation(project(":core:common"))
+    implementation(project(":core:designsystem"))
+    implementation(project(":core:navigation"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose)
+    implementation(libs.androidx.hilt.navigation.compose)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
@@ -66,4 +62,5 @@ dependencies {
     ksp(libs.hilt.compiler)
 
     implementation(libs.kotlinx.serialization.json)
+
 }

@@ -9,6 +9,8 @@ import com.tenday.feature.board.details.navigation.boardDetailsScreen
 import com.tenday.feature.board.details.navigation.navigateToBoardDetails
 import com.tenday.feature.board.navigation.boardScreen
 import com.tenday.feature.board.navigation.navigateToBoard
+import com.tenday.feature.home.navigation.homeScreen
+import com.tenday.feature.home.navigation.navigateToHome
 import com.tenday.feature.login.login.navigation.LoginRoute
 import com.tenday.feature.login.login.navigation.loginScreen
 import com.tenday.feature.login.login.navigation.navigateToLogin
@@ -34,7 +36,7 @@ fun HandsUpNavGraph(
             onSplashShow = { token ->
                 when(token) {
                     null -> navController.navigateToLogin(splashNavOptions)
-                    else -> navController.navigateToBoard(splashNavOptions)
+                    else -> navController.navigateToHome(splashNavOptions)
                 }
             }
         )
@@ -44,6 +46,10 @@ fun HandsUpNavGraph(
             onSuccessLogin = {
                 navController.navigateToBoard(loginNavOptions)
             }
+        )
+
+        homeScreen(
+            onNavigateNoti = navController::navigateToNotification,
         )
 
         boardScreen(

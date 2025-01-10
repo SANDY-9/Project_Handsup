@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_exp_title">최근 받은 두둥 경험치</string>
+    <string name="home_empty_exp_title">아직 받은 두둥 경험치가 없어요.</string>
+    <string name="home_empty_exp_desc">핸즈업 미션을 통해 두둥 경험치를 얻어보세요!</string>
+</resources>
