@@ -10,12 +10,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,7 +20,6 @@ import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.R
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.dashedFill
-import com.tenday.designsystem.icons.HandsUpLogo
 import com.tenday.designsystem.theme.Gray300
 
 @Composable
@@ -31,7 +27,7 @@ fun ProfileCard(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.height(390.dp)
+        modifier = modifier.height(390.dp).width(330.dp)
     ) {
         ProfileFrameField()
         Column(
@@ -65,11 +61,10 @@ fun ProfileCard(
             )
             Spacer(modifier = modifier.height(Dimens.margin16))
             ProfileCardLevel()
-            Spacer(modifier = modifier.weight(1f))
-            Icon(
-                modifier = modifier.align(Alignment.CenterHorizontally)
-                    .alpha(0.2f).height(20.dp),
-                imageVector = Icons.HandsUpLogo,
+            Spacer(modifier = modifier.height(Dimens.margin8))
+            Image(
+                modifier = modifier.align(Alignment.CenterHorizontally).height(15.dp),
+                painter = painterResource(R.drawable.logo_duhands),
                 contentDescription = null,
             )
         }

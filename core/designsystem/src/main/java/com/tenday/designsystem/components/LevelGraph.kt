@@ -48,14 +48,14 @@ fun LevelGraph(
             drawRoundRect(
                 color = Gray200,
                 size = Size(size.width, size.height),
-                cornerRadius = CornerRadius(35f, 35f)
+                cornerRadius = CornerRadius(50f, 50f)
             )
 
             // Draw progress bar
             drawRoundRect(
                 brush = gradientBrush,
                 size = Size(size.width * progress, size.height),
-                cornerRadius = CornerRadius(35f, 35f)
+                cornerRadius = CornerRadius(50f, 50f)
             )
 
             drawRoundRect(
@@ -64,7 +64,7 @@ fun LevelGraph(
                     startY = 0f,
                     endY = size.height * 0.4f
                 ),
-                cornerRadius = CornerRadius(35f, 35f),
+                cornerRadius = CornerRadius(50f, 50f),
             )
         }
 
@@ -89,5 +89,5 @@ fun LevelGraph(
 @Preview(name = "LevelGraph")
 @Composable
 private fun PreviewLevelGraph() {
-    LevelGraph(13500)
+    LevelGraph(27300)
 }
