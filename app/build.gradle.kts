@@ -48,6 +48,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:login"))
+    implementation(project(":feature:home"))
     implementation(project(":feature:board"))
     implementation(project(":feature:board-details"))
     implementation(project(":feature:notification"))
