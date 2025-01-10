@@ -1,6 +1,5 @@
 package com.tenday.designsystem.components.profileCard
 
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -15,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import com.tenday.designsystem.components.LevelGraph
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray500
@@ -31,8 +30,8 @@ internal fun ProfileCardLevel(
     ) {
         LevelBadge()
         Spacer(modifier = modifier.height(Dimens.margin4))
-        Canvas(modifier) { }
-        Spacer(modifier = modifier.height(20.dp))
+        LevelGraph(14000)
+        Spacer(modifier = modifier.height(Dimens.margin4))
         LevelDesc()
     }
 }

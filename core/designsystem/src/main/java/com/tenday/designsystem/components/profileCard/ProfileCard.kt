@@ -31,7 +31,7 @@ fun ProfileCard(
     modifier: Modifier = Modifier
 ) {
     Box(
-        modifier = modifier.height(390.dp).width(320.dp)
+        modifier = modifier.height(390.dp)
     ) {
         ProfileFrameField()
         Column(
@@ -65,9 +65,10 @@ fun ProfileCard(
             )
             Spacer(modifier = modifier.height(Dimens.margin16))
             ProfileCardLevel()
-            Spacer(modifier = modifier.height(Dimens.margin16))
+            Spacer(modifier = modifier.weight(1f))
             Icon(
-                modifier = modifier.align(Alignment.CenterHorizontally).alpha(0.2f),
+                modifier = modifier.align(Alignment.CenterHorizontally)
+                    .alpha(0.2f).height(20.dp),
                 imageVector = Icons.HandsUpLogo,
                 contentDescription = null,
             )
@@ -104,5 +105,4 @@ private fun ProfileFrameField(
 @Composable
 private fun PreviewProfileCard() {
     ProfileCard()
-    //ProfileFrameField(modifier = Modifier.size(320.dp, 380.dp))
 }
