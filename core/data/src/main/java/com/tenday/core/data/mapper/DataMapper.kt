@@ -1,5 +1,8 @@
 package com.tenday.core.data.mapper
 
+import com.tenday.core.common.BadgeCode
+import com.tenday.core.common.JobFamily
+import com.tenday.core.common.ProfileCode
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails
@@ -26,8 +29,8 @@ internal fun List<NotificationDetails>.toNotificationDetails(): List<Notificatio
     }
 }
 
-private fun String.toBadgeCode(): UserDetails.BadgeCode {
-    return UserDetails.BadgeCode.valueOf(this)
+private fun String.toBadgeCode(): BadgeCode {
+    return BadgeCode.valueOf(this)
 }
 
 internal fun UserResponse.toUserDetails(): UserDetails {
@@ -35,12 +38,12 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         department = department,
         employeeId = employeeId,
         hireDate = hireDate,
-        jobFamily = UserDetails.JobFamily.valueOf(jobFamily),
+        jobFamily = JobFamily.valueOf(jobFamily),
         jobGroup = jobGroup,
         jobLevel = jobLevel,
         possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
         profileBadgeCode = profileBadgeCode.toBadgeCode(),
-        profileImageCode = UserDetails.ProfileCode.valueOf(profileImageCode),
+        profileImageCode = ProfileCode.valueOf(profileImageCode),
         totalExpLastYear = totalExpLastYear,
         username = username,
     )
