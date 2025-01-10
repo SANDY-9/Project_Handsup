@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -24,10 +23,11 @@ import com.tenday.designsystem.theme.Gray300
 
 @Composable
 fun ProfileCard(
-    modifier: Modifier = Modifier
+    parentModifier: Modifier = Modifier,
+    modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.height(390.dp).width(330.dp)
+        modifier = parentModifier.fillMaxWidth().height(390.dp)
     ) {
         ProfileFrameField()
         Column(
