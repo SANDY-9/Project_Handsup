@@ -1,10 +1,10 @@
 package com.tenday.handsup.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.navigation.compose.rememberNavController
 import com.tenday.designsystem.theme.HandsUpTheme
 import com.tenday.feature.splash.navigation.SplashRoute
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,9 +15,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
+            val handsUpAppState = rememberHandsUpAppState()
             HandsUpTheme {
                 HandsUpApp(
-                    navController = rememberNavController(),
+                    appState = handsUpAppState,
                     startDestination = SplashRoute,
                 )
             }
