@@ -19,7 +19,6 @@ import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.Gray700
-import com.tenday.designsystem.theme.HandsUpBlack
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.LightGray100
 import com.tenday.designsystem.theme.LightGray200
@@ -71,7 +70,6 @@ private fun NotReadBoardItem(
             ),
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
-            color = HandsUpBlack,
         )
         Text(
             text = boardDetails.createdAt,

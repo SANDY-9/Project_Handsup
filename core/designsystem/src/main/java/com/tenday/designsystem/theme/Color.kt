@@ -15,8 +15,8 @@ val HandsUpPurpleSub = Color(0xFFF4EBF9)
 val HandsUpOrange = Color(0xFFFA610F)
 val HandsUpOrangeSub = Color(0xFFFFF2EC)
 
-val HandsUpBlack = Color(0xff1c1b1f)
-val HandsUpBlackSub = Color(0xFFF7F8FA)
+val HandsUpNavy = Color(0xFF445368)
+val HandsUpNavySub = Color(0xFFF7F8FA)
 
 val Gray900 = Color(0xFF111111)
 val Gray800 = Color(0xFF333333)
@@ -36,7 +36,7 @@ val LightGray100 = Color(0xFFc8c8c8)
 
 val White = Color(0xFFFFFFFF)
 val Positive = Color(0xFF41C321)
-val Negative = Color(0xFFFF4D4D)
+val Negative = Color(0xFFFF1B1B)
 
 val CardShadow = Color(0x80000000)
 val Backgroud = Color(0xFFF7F8FA)

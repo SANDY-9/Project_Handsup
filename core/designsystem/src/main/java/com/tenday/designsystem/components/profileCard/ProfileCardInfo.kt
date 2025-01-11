@@ -13,7 +13,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
-import com.tenday.designsystem.theme.HandsUpBlack
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpOrangeSub
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -66,7 +65,6 @@ private fun EmployeeNumberBadge(
         text = "2024122050",
         style = HandsUpTypography.body3.copy(
             fontWeight = FontWeight.Bold,
-            color = HandsUpBlack,
         )
     )
 }
