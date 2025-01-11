@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.ArrowBack
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
@@ -55,7 +56,7 @@ fun HandsUpNavigateTopBar(
                     modifier = modifier.size(24.dp)
                         .align(Alignment.CenterStart)
                         .clip(CircleShape)
-                        .clickable(onClick = onNavigate),
+                        .noRippleClickable(onClick = onNavigate),
                     imageVector = Icons.ArrowBack,
                     contentDescription = null,
                 )
