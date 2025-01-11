@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.CardShadow
 import com.tenday.designsystem.theme.White
 
@@ -25,11 +26,9 @@ fun HandsUpShadowCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.shadow(
-            shape = RoundedCornerShape(cornerSize),
-            ambientColor = CardShadow,
-            elevation = elevationSize,
-            spotColor = CardShadow,
+        modifier = modifier.blurShadow(
+            borderRadius = cornerSize,
+            blurRadius = elevationSize,
         ),
         shape = RoundedCornerShape(cornerSize),
         colors = CardDefaults.cardColors(
