@@ -14,6 +14,8 @@ import com.tenday.feature.board.navigation.BoardRoute
 import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.home.navigation.HomeRoute
 import com.tenday.feature.home.navigation.navigateToHome
+import com.tenday.feature.mission.navigation.MissionRoute
+import com.tenday.feature.mission.navigation.navigateToMission
 import com.tenday.handsup.ui.bottomnav.BottomNavDestination
 import kotlinx.coroutines.CoroutineScope
 
@@ -42,7 +44,7 @@ class HandsUpAppState(
         val navOption = NavOptions.Builder().build()
         when(destination) {
             BottomNavDestination.HOME -> navController.navigateToHome(navOption)
-            BottomNavDestination.MISSION -> {}
+            BottomNavDestination.MISSION -> navController.navigateToMission(navOption)
             BottomNavDestination.EXP -> {}
             BottomNavDestination.BOARD -> navController.navigateToBoard(navOption)
         }
@@ -53,6 +55,7 @@ class HandsUpAppState(
         val route = currentDestination?.route ?: ""
         return route in listOf(
             HomeRoute.javaClass.name,
+            MissionRoute.javaClass.name,
             BoardRoute.javaClass.name,
         )
     }
