@@ -23,6 +23,7 @@ val HandsUpTypography = Typography(
         fontSize = 24.sp,
         lineHeight = (33.6).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     title2 = TextStyle(
         fontFamily = suit,
@@ -30,6 +31,7 @@ val HandsUpTypography = Typography(
         fontSize = 22.sp,
         lineHeight = (30.8).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     title3 = TextStyle(
         fontFamily = suit,
@@ -37,6 +39,7 @@ val HandsUpTypography = Typography(
         fontSize = 20.sp,
         lineHeight = 28.sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     title4 = TextStyle(
         fontFamily = suit,
@@ -44,6 +47,7 @@ val HandsUpTypography = Typography(
         fontSize = 18.sp,
         lineHeight = (25.2).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     title5 = TextStyle(
         fontFamily = suit,
@@ -51,6 +55,7 @@ val HandsUpTypography = Typography(
         fontSize = 16.sp,
         lineHeight = (22.4).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     body1 = TextStyle(
         fontFamily = suit,
@@ -58,6 +63,7 @@ val HandsUpTypography = Typography(
         fontSize = 16.sp,
         lineHeight = (22.4).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     body2 = TextStyle(
         fontFamily = suit,
@@ -65,6 +71,7 @@ val HandsUpTypography = Typography(
         fontSize = 14.sp,
         lineHeight = (19.6).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     body3 = TextStyle(
         fontFamily = suit,
@@ -72,6 +79,7 @@ val HandsUpTypography = Typography(
         fontSize = 13.sp,
         lineHeight = (18.2).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     ),
     body4 = TextStyle(
         fontFamily = suit,
@@ -79,6 +87,7 @@ val HandsUpTypography = Typography(
         fontSize = 12.sp,
         lineHeight = (16.8).sp,
         letterSpacing = (-0.5).sp,
+        color = Gray900,
     )
 )
 

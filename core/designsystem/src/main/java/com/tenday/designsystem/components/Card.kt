@@ -8,12 +8,12 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.CardShadow
 import com.tenday.designsystem.theme.White
 
@@ -22,19 +22,28 @@ fun HandsUpShadowCard(
     content: @Composable (ColumnScope.() -> Unit),
     cornerSize: Dp = Dimens.cornerShape12,
     elevationSize: Dp = Dimens.cornerShape8,
+    offsetY: Dp = 0.dp,
+    offsetX: Dp = 0.dp,
+    clickable: Boolean = false,
+    onClick: () -> Unit = {},
+    shadowColor: Color = CardShadow,
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.shadow(
-            shape = RoundedCornerShape(cornerSize),
-            ambientColor = CardShadow,
-            elevation = elevationSize,
-            spotColor = CardShadow,
+        modifier = modifier.blurShadow(
+            borderRadius = cornerSize,
+            blurRadius = elevationSize,
+            offsetY = offsetY,
+            offsetX = offsetX,
+            color = shadowColor,
         ),
         shape = RoundedCornerShape(cornerSize),
         colors = CardDefaults.cardColors(
-            containerColor = White
+            containerColor = White,
+            disabledContainerColor = White,
         ),
+        enabled = clickable,
+        onClick = onClick,
         content = content,
     )
 }

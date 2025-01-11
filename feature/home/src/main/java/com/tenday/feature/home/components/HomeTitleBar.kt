@@ -1,7 +1,6 @@
 package com.tenday.feature.home.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +15,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.tenday.designsystem.components.HandsUpTitleTopBar
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.AlarmFill
 import com.tenday.designsystem.icons.HandsUpLogo
 import com.tenday.designsystem.theme.White
@@ -44,8 +44,9 @@ internal fun HomeTitleBar(
                         tint = White,
                     )
                     Icon(
-                        modifier = modifier.align(Alignment.CenterEnd)
-                            .clickable(onClick = onNavigateNoti),
+                        modifier = modifier
+                            .align(Alignment.CenterEnd)
+                            .noRippleClickable(onClick = onNavigateNoti),
                         imageVector = Icons.AlarmFill,
                         contentDescription = null,
                         tint = White,

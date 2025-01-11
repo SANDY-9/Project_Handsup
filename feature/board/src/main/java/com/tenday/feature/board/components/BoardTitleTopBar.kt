@@ -17,6 +17,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpTitleTopBar
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.Alarm
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray600
@@ -43,7 +44,7 @@ internal fun BoardTitleTopBar(
                 Icon(
                     modifier = modifier.align(Alignment.CenterEnd)
                         .size(24.dp)
-                        .clickable(onClick = onNavigateNoti)
+                        .noRippleClickable(onClick = onNavigateNoti)
                     ,
                     imageVector = Icons.Alarm,
                     contentDescription = null,

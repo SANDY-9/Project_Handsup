@@ -13,9 +13,9 @@ private val HandsUpColorScheme = lightColorScheme(
     background = White,
     surface = White,
     surfaceTint = White,
-    onPrimary = HandsUpBlack,
-    onBackground = HandsUpBlack,
-    onSurface = HandsUpBlack,
+    onPrimary = Gray900,
+    onBackground = Gray900,
+    onSurface = Gray900,
 )
 
 @Composable
