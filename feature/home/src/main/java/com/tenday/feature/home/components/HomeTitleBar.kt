@@ -23,13 +23,14 @@ import com.tenday.feature.home.R
 
 @Composable
 internal fun HomeTitleBar(
+    backResId: Int,
     onNavigateNoti: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box {
         Image(
             modifier = modifier.matchParentSize().graphicsLayer(scaleY = -1f),
-            painter = painterResource(R.drawable.profile_background_field),
+            painter = painterResource(backResId),
             contentDescription = null,
             contentScale = ContentScale.FillWidth,
         )
@@ -59,5 +60,5 @@ internal fun HomeTitleBar(
 @Preview(name = "HomeTitleBar", showBackground = true,)
 @Composable
 private fun PreviewHomeTitleBar() {
-    HomeTitleBar({})
+    HomeTitleBar(R.drawable.profile_background_field, {})
 }

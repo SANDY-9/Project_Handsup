@@ -1,6 +1,7 @@
 package com.tenday.designsystem.components.profileCard
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,6 +27,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 
 @Composable
 internal fun ProfileCardHeader(
+    hireDate: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -55,7 +57,7 @@ internal fun ProfileCardHeader(
             color = Gray600,
         )
         Text(
-            text = "2024.12.20",
+            text = hireDate,
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
             ),
@@ -63,7 +65,8 @@ internal fun ProfileCardHeader(
         )
         Spacer(modifier = modifier.weight(1f))
         Icon(
-            modifier = modifier.size(24.dp),
+            modifier = modifier
+                .size(24.dp)
             imageVector = Icons.Settings,
             contentDescription = null,
             tint = Gray400,
@@ -74,5 +77,5 @@ internal fun ProfileCardHeader(
 @Preview(name = "ProfileCardHeader")
 @Composable
 private fun PreviewProfileCardHeader() {
-    ProfileCardHeader()
+    ProfileCardHeader("2024.12.20", {})
 }
