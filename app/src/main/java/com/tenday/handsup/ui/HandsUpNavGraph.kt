@@ -51,6 +51,7 @@ fun HandsUpNavGraph(
 
         homeScreen(
             onNavigateNoti = navController::navigateToNotification,
+            onNavigateSettings = {}
         )
 
         missionScreen()

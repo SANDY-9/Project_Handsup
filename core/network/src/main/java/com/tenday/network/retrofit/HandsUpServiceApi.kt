@@ -4,6 +4,7 @@ import com.tenday.core.model.BoardDetails
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
+import com.tenday.network.model.UserResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -31,5 +32,10 @@ internal interface HandsUpServiceApi {
     suspend fun getNotificationList(
         @Header("Authorization") token: String,
     ): NotificationResponse
+
+    @GET("user")
+    suspend fun getUserDetails(
+        @Header("Authorization") token: String,
+    ): UserResponse
 
 }

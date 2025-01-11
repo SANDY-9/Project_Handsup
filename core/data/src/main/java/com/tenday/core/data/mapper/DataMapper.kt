@@ -1,7 +1,13 @@
 package com.tenday.core.data.mapper
 
+import com.tenday.core.common.extensions.BadgeCode
+import com.tenday.core.common.extensions.JobFamily
+import com.tenday.core.common.extensions.JobPosition
+import com.tenday.core.common.extensions.ProfileCode
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
+import com.tenday.core.model.UserDetails
+import com.tenday.network.model.UserResponse
 
 private fun String.toDate(): String {
     val datePart = substringBefore("T")
@@ -22,4 +28,24 @@ internal fun List<NotificationDetails>.toNotificationDetails(): List<Notificatio
             createdAt = it.createdAt.toDate()
         )
     }
+}
+
+private fun String.toBadgeCode(): BadgeCode {
+    return BadgeCode.valueOf(this)
+}
+
+internal fun UserResponse.toUserDetails(): UserDetails {
+    return UserDetails(
+        department = department,
+        employeeId = employeeId,
+        hireDate = hireDate,
+        jobFamily = JobFamily.valueOf(jobFamily),
+        jobPosition = JobPosition.getPosition(jobGroup),
+        jobLevel = jobLevel,
+        possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
+        profileBadgeCode = profileBadgeCode.toBadgeCode(),
+        profileImageCode = ProfileCode.valueOf(profileImageCode),
+        totalExpLastYear = totalExpLastYear,
+        username = username,
+    )
 }

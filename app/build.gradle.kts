@@ -46,6 +46,7 @@ dependencies {
 
     implementation(project(":core:designsystem"))
     implementation(project(":core:model"))
+    implementation(project(":core:common"))
     implementation(project(":feature:splash"))
     implementation(project(":feature:login"))
     implementation(project(":feature:home"))

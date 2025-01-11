@@ -10,10 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import com.tenday.core.common.enums.toData
 import com.tenday.designsystem.components.LevelGraph
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
@@ -23,21 +25,25 @@ import com.tenday.designsystem.theme.HandsUpTypography
 
 @Composable
 internal fun ProfileCardLevel(
-    modifier: Modifier = Modifier
+    level: String,
+    exp: Int,
+    maxValue: Int = 27500,
+    modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.fillMaxWidth()
     ) {
-        LevelBadge()
+        LevelBadge(level)
         Spacer(modifier = modifier.height(Dimens.margin4))
-        LevelGraph(14000)
+        LevelGraph(exp, maxValue)
         Spacer(modifier = modifier.height(Dimens.margin4))
-        LevelDesc()
+        LevelDesc(exp, maxValue)
     }
 }
 
 @Composable
 private fun LevelBadge(
+    level: String,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -56,7 +62,7 @@ private fun LevelBadge(
             ),
         )
         Text(
-            text = "F2-II",
+            text = level,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.Bold,
             ),
@@ -66,8 +72,11 @@ private fun LevelBadge(
 
 @Composable
 private fun LevelDesc(
+    exp: Int,
+    maxValue: Int,
     modifier: Modifier = Modifier,
 ) {
+    val remainExp = remember { maxValue - exp }
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.Bottom,
@@ -79,7 +88,7 @@ private fun LevelDesc(
             )
         )
         Text(
-            text = "13,500do",
+            text = "${remainExp.toData()}do",
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.Bold,
             ),
@@ -93,7 +102,7 @@ private fun LevelDesc(
         )
         Spacer(modifier = modifier.weight(1f))
         Text(
-            text = "14,000/27,500",
+            text = "${exp.toData()}/${maxValue.toData()}",
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
             ),
@@ -105,5 +114,5 @@ private fun LevelDesc(
 @Preview(name = "ProfileCardLevel")
 @Composable
 private fun PreviewProfileCardLevel() {
-    ProfileCardLevel()
+    ProfileCardLevel("F2-II", 14000)
 }

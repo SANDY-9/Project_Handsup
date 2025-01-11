@@ -19,19 +19,24 @@ import com.tenday.designsystem.theme.HandsUpTypography
 
 @Composable
 internal fun ProfileCardInfo(
-    modifier: Modifier = Modifier
+    department: String,
+    jobFamily: String,
+    employeeId: String,
+    modifier: Modifier = Modifier,
 ) {
     Row(
         modifier = modifier,
     ) {
-        BelongsBadge()
+        BelongsBadge(department, jobFamily)
         Spacer(modifier = modifier.width(Dimens.margin6))
-        EmployeeNumberBadge()
+        EmployeeNumberBadge(employeeId)
     }
 }
 
 @Composable
 private fun BelongsBadge(
+    department: String,
+    jobFamily: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
@@ -42,7 +47,7 @@ private fun BelongsBadge(
             vertical = Dimens.margin2,
             horizontal = Dimens.margin6,
         ),
-        text = "남양주센터·현장직군",
+        text = "$department·$jobFamily",
         style = HandsUpTypography.body3.copy(
             fontWeight = FontWeight.Bold,
             color = HandsUpOrange,
@@ -52,6 +57,7 @@ private fun BelongsBadge(
 
 @Composable
 private fun EmployeeNumberBadge(
+    employeeId: String,
     modifier: Modifier = Modifier,
 ) {
     Text(
@@ -62,7 +68,7 @@ private fun EmployeeNumberBadge(
             vertical = Dimens.margin2,
             horizontal = Dimens.margin6,
         ),
-        text = "2024122050",
+        text = employeeId,
         style = HandsUpTypography.body3.copy(
             fontWeight = FontWeight.Bold,
         )
@@ -72,5 +78,5 @@ private fun EmployeeNumberBadge(
 @Preview(name = "ProfileCardInfo")
 @Composable
 private fun PreviewProfileCardInfo() {
-    ProfileCardInfo()
+    ProfileCardInfo("남양주센터", "현장직군", "2024122050")
 }
