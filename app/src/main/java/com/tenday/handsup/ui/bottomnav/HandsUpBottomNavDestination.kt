@@ -8,6 +8,7 @@ import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.feature.board.navigation.BoardRoute
 import com.tenday.feature.home.navigation.HomeRoute
 import com.tenday.feature.login.login.navigation.LoginRoute
+import com.tenday.feature.mission.navigation.MissionRoute
 import com.tenday.handsup.R
 import kotlin.reflect.KClass
 
@@ -26,7 +27,7 @@ enum class BottomNavDestination(
     MISSION(
         iconRes = R.drawable.botton_nav_mission,
         titleRes = R.string.bottom_nav_mission,
-        route = LoginRoute::class,
+        route = MissionRoute::class,
     ),
     EXP(
         iconRes = R.drawable.botton_nav_exp,
