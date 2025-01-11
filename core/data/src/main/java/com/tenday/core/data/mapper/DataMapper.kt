@@ -2,6 +2,7 @@ package com.tenday.core.data.mapper
 
 import com.tenday.core.common.BadgeCode
 import com.tenday.core.common.JobFamily
+import com.tenday.core.common.JobPosition
 import com.tenday.core.common.ProfileCode
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
@@ -39,7 +40,7 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         employeeId = employeeId,
         hireDate = hireDate,
         jobFamily = JobFamily.valueOf(jobFamily),
-        jobGroup = jobGroup,
+        jobPosition = JobPosition.valueOf(jobGroup.toString()),
         jobLevel = jobLevel,
         possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
         profileBadgeCode = profileBadgeCode.toBadgeCode(),
