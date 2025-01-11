@@ -1,6 +1,6 @@
 package com.tenday.feature.home.utils
 
-import com.tenday.core.common.extensions.JobFamily
+import com.tenday.core.common.enums.JobFamily
 import com.tenday.feature.home.R
 
 

@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import com.tenday.core.common.enums.toData
+import com.tenday.core.common.extentions.toData
 import com.tenday.designsystem.components.LevelGraph
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100

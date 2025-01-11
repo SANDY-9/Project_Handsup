@@ -24,6 +24,7 @@ okhttp = "4.12.0"
 kotlinxCoroutinesAndroid = "1.10.1"
 dataStore = "1.1.1"
 material = "1.12.0"
+graphics = "1.0.1"
 
 [libraries]
 # androidx
@@ -50,6 +51,7 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-graphics = { group= "androidx.graphics", name = "graphics-shapes", version.ref = "graphics" }
 
 # Coroutine
 kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }
@@ -98,6 +100,7 @@ compose = [
     "androidx-material3",
     "androidx-navigation-compose",
     "androidx-ui-tooling-preview",
+    "androidx-graphics"
 ]
 hilt = [
     "hilt-android",
