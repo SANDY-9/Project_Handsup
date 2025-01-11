@@ -1,4 +1,4 @@
-package com.tenday.core.common
+package com.tenday.core.common.extensions
 
 enum class JobFamily(val desc: String) {
     F("현장직군"),

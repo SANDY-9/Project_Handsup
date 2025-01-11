@@ -1,9 +1,9 @@
 package com.tenday.core.data.mapper
 
-import com.tenday.core.common.BadgeCode
-import com.tenday.core.common.JobFamily
-import com.tenday.core.common.JobPosition
-import com.tenday.core.common.ProfileCode
+import com.tenday.core.common.extensions.BadgeCode
+import com.tenday.core.common.extensions.JobFamily
+import com.tenday.core.common.extensions.JobPosition
+import com.tenday.core.common.extensions.ProfileCode
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails

@@ -1,4 +1,4 @@
-package com.tenday.core.common
+package com.tenday.core.common.extensions
 
 enum class ProfileCode {
     F_A,

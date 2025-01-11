@@ -1,10 +1,10 @@
 package com.tenday.core.model
 
 
-import com.tenday.core.common.BadgeCode
-import com.tenday.core.common.JobFamily
-import com.tenday.core.common.JobPosition
-import com.tenday.core.common.ProfileCode
+import com.tenday.core.common.extensions.BadgeCode
+import com.tenday.core.common.extensions.JobFamily
+import com.tenday.core.common.extensions.JobPosition
+import com.tenday.core.common.extensions.ProfileCode
 import kotlinx.serialization.Serializable
 
 @Serializable
