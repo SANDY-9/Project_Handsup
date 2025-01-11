@@ -40,7 +40,7 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         employeeId = employeeId,
         hireDate = hireDate,
         jobFamily = JobFamily.valueOf(jobFamily),
-        jobPosition = JobPosition.valueOf(jobGroup.toString()),
+        jobPosition = JobPosition.getPosition(jobGroup),
         jobLevel = jobLevel,
         possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
         profileBadgeCode = profileBadgeCode.toBadgeCode(),
