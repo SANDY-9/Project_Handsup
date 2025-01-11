@@ -16,8 +16,15 @@ internal fun ProfileImage(
 ) {
     val resId = remember {
         when(profileCode) {
-            ProfileCode.B_A -> R.drawable.test
-            else -> 3
+            ProfileCode.F_A -> R.drawable.profile_img_fa
+            ProfileCode.F_B -> R.drawable.profile_img_fb
+            ProfileCode.B_A -> R.drawable.profile_img_ba
+            ProfileCode.B_B -> R.drawable.profile_img_fb
+            ProfileCode.G_A -> R.drawable.profile_img_ga
+            ProfileCode.G_B -> R.drawable.profile_img_ga
+            ProfileCode.T_A -> R.drawable.profile_img_ta
+            ProfileCode.T_B -> R.drawable.profile_img_tb
+            else -> R.drawable.profile_img_fb
         }
     }
     Image(
