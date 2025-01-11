@@ -17,8 +17,12 @@ fun NavController.navigateToHome(
 
 fun NavGraphBuilder.homeScreen(
     onNavigateNoti: () -> Unit,
+    onNavigateSettings: () -> Unit,
 ) {
     composable<HomeRoute> {
-        HomeRoute(onNavigateNoti)
+        HomeRoute(
+            onNavigateNoti = onNavigateNoti,
+            onNavigateSettings = onNavigateSettings,
+        )
     }
 }

@@ -34,6 +34,7 @@ fun ProfileCard(
     profileImageCode: ProfileCode,
     totalExpLastYear: Int,
     username: String,
+    onNavigateSettings: () -> Unit,
     parentModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
@@ -55,6 +56,7 @@ fun ProfileCard(
         ) {
             ProfileCardHeader(
                 hireDate = hireDate,
+                onNavigateSettings = onNavigateSettings,
             )
             Spacer(modifier = modifier.height(Dimens.margin6))
             ProfileImage(

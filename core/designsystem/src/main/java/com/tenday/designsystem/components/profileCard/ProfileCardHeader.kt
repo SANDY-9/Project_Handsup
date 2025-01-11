@@ -28,6 +28,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 @Composable
 internal fun ProfileCardHeader(
     hireDate: String,
+    onNavigateSettings: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -67,6 +68,7 @@ internal fun ProfileCardHeader(
         Icon(
             modifier = modifier
                 .size(24.dp)
+                .clickable(onClick = onNavigateSettings),
             imageVector = Icons.Settings,
             contentDescription = null,
             tint = Gray400,
