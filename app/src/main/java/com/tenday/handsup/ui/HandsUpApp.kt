@@ -20,6 +20,7 @@ fun HandsUpApp(
     startDestination: Any,
     modifier: Modifier = Modifier,
 ) {
+    val bottomNavVisible = appState.isBottomNavVisible()
     Surface(
         modifier = modifier
             .fillMaxSize()
@@ -31,14 +32,18 @@ fun HandsUpApp(
             modifier = modifier.fillMaxSize()
         ) {
             HandsUpNavGraph(
-                modifier = modifier.fillMaxSize().weight(1f),
+                modifier = modifier
+                    .fillMaxSize()
+                    .weight(1f),
                 navController = appState.navController,
                 startDestination = startDestination,
             )
-            HandsUpBottomNav(
-                onItemClick = appState::navigateToDestination,
-                currentDestination = appState.currentDestination,
-            )
+            if(bottomNavVisible) {
+                HandsUpBottomNav(
+                    onItemClick = appState::navigateToDestination,
+                    currentDestination = appState.currentDestination,
+                )
+            }
         }
     }
 }

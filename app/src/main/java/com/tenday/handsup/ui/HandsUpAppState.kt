@@ -10,7 +10,9 @@ import androidx.navigation.NavDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
+import com.tenday.feature.board.navigation.BoardRoute
 import com.tenday.feature.board.navigation.navigateToBoard
+import com.tenday.feature.home.navigation.HomeRoute
 import com.tenday.feature.home.navigation.navigateToHome
 import com.tenday.handsup.ui.bottomnav.BottomNavDestination
 import kotlinx.coroutines.CoroutineScope
@@ -44,6 +46,15 @@ class HandsUpAppState(
             BottomNavDestination.EXP -> {}
             BottomNavDestination.BOARD -> navController.navigateToBoard(navOption)
         }
+    }
+
+    @Composable
+    fun isBottomNavVisible(): Boolean {
+        val route = currentDestination?.route ?: ""
+        return route in listOf(
+            HomeRoute.javaClass.name,
+            BoardRoute.javaClass.name,
+        )
     }
 }
 
