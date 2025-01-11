@@ -39,7 +39,11 @@ val Positive = Color(0xFF41C321)
 val Negative = Color(0xFFFF1B1B)
 
 val CardShadow = Color(0x29000000)
+val CardShadowSemiLight = Color(0xf000000)
 val CardShadowLight = Color(0xa000000)
 val Backgroud = Color(0xFFF7F8FA)
 val GradientShadow = Color(0xf000000)
 val BottomNavDivider = Color(0XFFE0E0E0)
+
+val TransparentWhite8 = Color(0x14ffffff)
+val TransparentWhite80 = Color(0xCCFFFFFF)
