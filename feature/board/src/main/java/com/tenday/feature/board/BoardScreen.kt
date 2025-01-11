@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.model.BoardDetails
 import com.tenday.designsystem.theme.Backgroud
+import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.board.components.BoardContentView
 import com.tenday.feature.board.components.BoardTitleTopBar
 import com.tenday.feature.board.model.BoardUiState
@@ -39,7 +40,7 @@ internal fun BoardScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize().background(color = Backgroud),
+        modifier = modifier.fillMaxSize().background(color = Gray100),
     ) {
         BoardTitleTopBar(onNavigateNoti)
         when(boardUiState) {
