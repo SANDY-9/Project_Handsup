@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">HANDSUP</string>
+    <string name="bottom_nav_my">MY</string>
+    <string name="bottom_nav_mission">핸즈업 미션</string>
+    <string name="bottom_nav_exp">두둥 경험치</string>
+    <string name="bottom_nav_board">핸즈업 게시판</string>
 </resources>
