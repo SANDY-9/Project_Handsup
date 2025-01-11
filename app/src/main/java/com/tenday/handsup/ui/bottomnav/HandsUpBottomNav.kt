@@ -50,6 +50,7 @@ internal fun HandsUpBottomNav(
                 BottomNavigationItem(
                     selected = selected,
                     onClick = { onItemClick(destination) },
+                    enabled = !selected,
                     icon = {
                         Column(
                             horizontalAlignment = Alignment.CenterHorizontally,
