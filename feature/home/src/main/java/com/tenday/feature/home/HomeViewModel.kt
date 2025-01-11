@@ -3,7 +3,7 @@ package com.tenday.feature.home
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tenday.core.common.extensions.JobFamily
+import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
 import com.tenday.core.model.UserDetails
 import com.tenday.feature.home.model.ExpListState

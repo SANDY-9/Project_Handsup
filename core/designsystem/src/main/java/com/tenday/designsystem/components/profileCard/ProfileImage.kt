@@ -6,7 +6,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.tenday.core.common.extensions.ProfileCode
+import com.tenday.core.common.enums.ProfileCode
 import com.tenday.designsystem.R
 
 @Composable

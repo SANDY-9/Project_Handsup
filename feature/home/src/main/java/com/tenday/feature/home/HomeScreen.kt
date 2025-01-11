@@ -23,10 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tenday.core.common.extensions.BadgeCode
-import com.tenday.core.common.extensions.JobFamily
-import com.tenday.core.common.extensions.JobPosition
-import com.tenday.core.common.extensions.ProfileCode
+import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.JobFamily
+import com.tenday.core.common.enums.JobPosition
+import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.components.profileCard.ProfileCard
 import com.tenday.designsystem.dimens.Dimens

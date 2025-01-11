@@ -1,4 +1,4 @@
-package com.tenday.core.common.extensions
+package com.tenday.core.common.enums
 
 enum class JobPosition(val position: Int) {
     파트장(1),
