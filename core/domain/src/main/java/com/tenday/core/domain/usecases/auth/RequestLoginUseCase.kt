@@ -13,9 +13,9 @@ class RequestLoginUseCase @Inject constructor(
     private val messagingTokenRepository: MessagingTokenRepository,
 ) {
     suspend operator fun invoke(id: String, pwd: String): Flow<Boolean> {
-        val accessToken = loginRepository.requestLogin(id, pwd)
-        authPrefsRepository.updateAccessToken(accessToken)
         return messagingTokenRepository.getMessagingToken().map { messagingToken ->
+            val accessToken = loginRepository.requestLogin(id, pwd)
+            authPrefsRepository.updateAccessToken(accessToken)
             messagingTokenRepository.updateMessagingToken(
                 accessToken = accessToken,
                 messagingToken = messagingToken
