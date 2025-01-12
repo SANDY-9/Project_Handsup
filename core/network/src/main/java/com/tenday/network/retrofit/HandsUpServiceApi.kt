@@ -4,10 +4,12 @@ import com.tenday.core.model.BoardDetails
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
+import com.tenday.network.model.UserRequestBody
 import com.tenday.network.model.UserResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 
@@ -37,5 +39,11 @@ internal interface HandsUpServiceApi {
     suspend fun getUserDetails(
         @Header("Authorization") token: String,
     ): UserResponse
+
+    @PATCH("user/fcm_token")
+    suspend fun updateMessagingToken(
+        @Body requestBody: UserRequestBody,
+        @Header("Authorization") token: String,
+    ): Boolean
 
 }
