@@ -35,6 +35,7 @@ internal fun MissionTitleBar(
             .padding(horizontal = Dimens.margin20),
     ) {
         Spacer(modifier = modifier.systemBarsPadding())
+        Spacer(modifier = modifier.height(Dimens.margin12))
         MissionTab(
             currentSelectedTab = currentSelectedTab,
             onTabSelect = onTabSelect,

@@ -45,7 +45,7 @@ fun HandsUpToolTip(
             tint = HandsUpNavy
         )
         Column(
-            modifier = modifier.fillMaxWidth().background(
+            modifier = modifier.background(
                 color = HandsUpNavy,
                 shape = RoundedCornerShape(Dimens.cornerShape4),
             ).padding(

@@ -40,7 +40,7 @@ internal fun MissionScreen(
             onTabSelect = onTabSelect,
         )
         when(currentTab) {
-            MissionMenu.리더부여 -> MissionLeaderView("음성 1센터", 1, {})
+            MissionMenu.리더부여 -> MissionLeaderView("음성 1센터", 1)
             MissionMenu.직무미션 -> MissionJobView("음성 1센터", 1, {})
             MissionMenu.전사프로젝트 -> MissionProjectView()
             MissionMenu.인사평가 -> MissionPersonnelView()

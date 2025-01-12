@@ -25,7 +25,7 @@ import com.tenday.feature.mission.components.MissionToolTipTitle
 internal fun ImproveWorkMissionCard(
     jobFamily: String,
     jobGroup: Int,
-    onShowTooltip: () -> Unit,
+    onShowImproveToolTip: () -> Unit,
     visibleTable: Boolean = true,
     modifier: Modifier = Modifier
 ) {
@@ -36,7 +36,7 @@ internal fun ImproveWorkMissionCard(
         MissionToolTipTitle(
             jobFamily = jobFamily,
             jobGroup = jobGroup,
-            onShowTooltip = onShowTooltip,
+            onShowTooltip = onShowImproveToolTip,
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
