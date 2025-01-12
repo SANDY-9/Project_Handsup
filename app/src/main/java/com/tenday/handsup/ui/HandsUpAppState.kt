@@ -12,7 +12,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
 import com.tenday.feature.board.navigation.BoardRoute
 import com.tenday.feature.board.navigation.navigateToBoard
-import com.tenday.feature.exp.navigation.ExpRoute
+import com.tenday.feature.exp.navigation.MyExpRoute
 import com.tenday.feature.exp.navigation.navigateToExp
 import com.tenday.feature.home.navigation.HomeRoute
 import com.tenday.feature.home.navigation.navigateToHome
@@ -58,7 +58,7 @@ class HandsUpAppState(
         return route in listOf(
             HomeRoute.javaClass.name,
             MissionRoute.javaClass.name,
-            ExpRoute.javaClass.name,
+            MyExpRoute.javaClass.name,
             BoardRoute.javaClass.name,
         )
     }

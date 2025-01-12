@@ -7,12 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-internal fun ExpRoute() {
-    ExpScreen()
+internal fun MyExpRoute() {
+    MyExpScreen()
 }
 
 @Composable
-internal fun ExpScreen(
+internal fun MyExpScreen(
     modifier: Modifier = Modifier
 ) {
     Box(modifier) {
@@ -23,5 +23,5 @@ internal fun ExpScreen(
 @Preview(name = "ExpScreen")
 @Composable
 private fun PreviewExpScreen() {
-    ExpScreen()
+    MyExpScreen()
 }

@@ -4,17 +4,17 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.tenday.feature.exp.ExpRoute
+import com.tenday.feature.exp.MyExpRoute
 import kotlinx.serialization.Serializable
 
-@Serializable object ExpRoute
+@Serializable object MyExpRoute
 
 fun NavController.navigateToExp(navOptions: NavOptions) {
-    navigate(ExpRoute, navOptions)
+    navigate(MyExpRoute, navOptions)
 }
 
-fun NavGraphBuilder.expScreen() {
-    composable<ExpRoute> {
-        ExpRoute()
+fun NavGraphBuilder.myExpScreen() {
+    composable<MyExpRoute> {
+        MyExpRoute()
     }
 }
