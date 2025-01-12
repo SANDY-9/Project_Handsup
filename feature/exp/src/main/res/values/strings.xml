@@ -10,4 +10,9 @@
     <string name="exp_remain_next_title">다음 레벨까지 남은 두둥</string>
 
     <string name="exp_banner_desc">%s님, 남은 미션 수행하고\n두둥 경험치를 획득해 볼까요?</string>
+
+    <string name="exp_this_year_title">올해 획득한 두둥 경험치</string>
+    <string name="exp_this_year_sub_title1">올해 획득 경험치</string>
+    <string name="exp_this_year_sub_title2">2026년 예상레벨</string>
+
 </resources>
