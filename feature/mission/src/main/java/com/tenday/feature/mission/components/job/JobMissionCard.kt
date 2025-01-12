@@ -21,7 +21,7 @@ import com.tenday.feature.mission.R
 import com.tenday.feature.mission.components.MissionToolTipTitle
 
 @Composable
-fun JobMissionCard(
+internal fun JobMissionCard(
     jobFamily: String,
     jobGroup: Int,
     onShowTooltip: () -> Unit,
