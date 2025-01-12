@@ -57,6 +57,7 @@ dependencies {
     implementation(project(":feature:board-details"))
     implementation(project(":feature:notification"))
     implementation(project(":feature:mission"))
+    implementation(project(":feature:exp"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
