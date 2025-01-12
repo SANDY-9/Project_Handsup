@@ -18,4 +18,10 @@
     <string name="exp_last_year_title">2024년 나의 여정</string>
     <string name="exp_last_year_desc">작년에 어느 레벨까지 성장했는지 확인해 보세요.</string>
 
+    <string name="exp_history_sort_all">전체</string>
+    <string name="exp_history_sort_leader">리더부여</string>
+    <string name="exp_history_sort_job">직무미션</string>
+    <string name="exp_history_sort_project">전사프로젝트</string>
+    <string name="exp_history_sort_personnel">인사평가</string>
+
 </resources>
