@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.CheckMax
 import com.tenday.designsystem.icons.CheckMedium
@@ -34,6 +35,7 @@ import com.tenday.designsystem.theme.White
 internal fun WeeklyMissionCheckItem(
     list: List<Int>,
     dateTitleList: List<String>,
+    achieveGradeList: List<AchieveGrade>,
     modifier: Modifier = Modifier,
 ) {
     Box {
@@ -43,7 +45,8 @@ internal fun WeeklyMissionCheckItem(
                 val dateTitle = dateTitleList.getOrNull(num)
                 MissionCheckItem(
                     date = date,
-                    dateTitle = dateTitle
+                    dateTitle = dateTitle,
+                    achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.MIN
                 )
                 val isNullLastItem = list.size < 5 && num >= list.size - 1
                 if(num < 4) {
@@ -64,6 +67,7 @@ internal fun WeeklyMissionCheckItem(
 internal fun MissionCheckItem(
     date: Int?,
     dateTitle: String?,
+    achieveGrade: AchieveGrade,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -99,16 +103,20 @@ internal fun MissionCheckItem(
                         )
                     )
                 }
-                Image(
-                    modifier = modifier.size(36.dp),
-                    imageVector = Icons.CheckMedium,
-                    contentDescription = null,
-                )
-                Image(
-                    modifier = modifier.size(36.dp),
-                    imageVector = Icons.CheckMax,
-                    contentDescription = null,
-                )
+                if(achieveGrade == AchieveGrade.MEDIAN) {
+                    Image(
+                        modifier = modifier.size(36.dp),
+                        imageVector = Icons.CheckMedium,
+                        contentDescription = null,
+                    )
+                }
+                if(achieveGrade == AchieveGrade.MAX) {
+                    Image(
+                        modifier = modifier.size(36.dp),
+                        imageVector = Icons.CheckMax,
+                        contentDescription = null,
+                    )
+                }
             }
             Spacer(modifier = modifier.height(Dimens.margin6))
             androidx.compose.material3.Text(
@@ -129,5 +137,8 @@ private fun PreviewMissionCardItem() {
         listOf(
             "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08"
         ),
+        listOf(
+            AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX,
+        )
     )
 }

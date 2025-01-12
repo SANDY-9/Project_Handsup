@@ -27,6 +27,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.designsystem.components.missionCard.WeeklyMissionCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
@@ -106,7 +107,25 @@ internal fun MissionJobView(
                 )
             }
             items(5) {
-                WeeklyMissionCard()
+                if(it == 1) {
+                    WeeklyMissionCard(
+                        it + 1,
+                        listOf(6,7,8,9),
+                        listOf( "02.02~02.05", "02.02~02.05", "02.02~02.05", "99.99~02.08",),
+                        listOf(AchieveGrade.MIN, AchieveGrade.MAX)
+                    )
+                }
+                else if(it == 0) {
+                    WeeklyMissionCard(it + 1)
+                }
+                else {
+                    WeeklyMissionCard(
+                        it + 1,
+                        listOf(10,11,12,13,14),
+                        listOf( "02.02~02.05", "02.02~02.05", "02.02~02.05", "99.99~02.08", "02.02~02.05"),
+                        listOf()
+                    )
+                }
                 Spacer(modifier = modifier.height(Dimens.margin12))
             }
         }
