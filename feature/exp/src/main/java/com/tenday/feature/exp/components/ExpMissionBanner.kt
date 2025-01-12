@@ -32,10 +32,6 @@ internal fun ExpMissionBanner(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(
-                horizontal = Dimens.margin20,
-                vertical = Dimens.margin12,
-            )
             .background(
                 color = HandsUpOrange,
                 shape = RoundedCornerShape(Dimens.cornerShape12)
