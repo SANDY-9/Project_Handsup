@@ -1,5 +1,7 @@
 package com.tenday.feature.mission.components.leader
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -25,6 +27,7 @@ internal fun ImproveWorkMissionCard(
     jobFamily: String,
     jobGroup: Int,
     onShowTooltip: () -> Unit,
+    visibleTable: Boolean = true,
     modifier: Modifier = Modifier
 ) {
     HandsUpTextureCard(
@@ -51,15 +54,19 @@ internal fun ImproveWorkMissionCard(
                 color = White,
             ),
         )
-        Spacer(modifier = modifier.height(Dimens.margin12))
-        HandsUpThreeSpaceTable(
-            title1 = stringResource(R.string.mission_content_term_title),
-            content1 = "주간 미션",
-            title2 = stringResource(R.string.mission_content_max_title),
-            content2 = "개선 리드",
-            title3 = stringResource(R.string.mission_content_median_title),
-            content3 = "개선 참여",
-        )
+        AnimatedVisibility(visibleTable) {
+            Column {
+                Spacer(modifier = modifier.height(Dimens.margin12))
+                HandsUpThreeSpaceTable(
+                    title1 = stringResource(R.string.mission_content_term_title),
+                    content1 = "주간 미션",
+                    title2 = stringResource(R.string.mission_content_max_title),
+                    content2 = "개선 리드",
+                    title3 = stringResource(R.string.mission_content_median_title),
+                    content3 = "개선 참여",
+                )
+            }
+        }
     }
 }
 

@@ -1,5 +1,7 @@
 package com.tenday.feature.mission.components.leader
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -23,6 +25,7 @@ import com.tenday.feature.mission.components.MissionToolTipTitle
 internal fun SpecialWorkMissionCard(
     jobFamily: String,
     jobGroup: Int,
+    visibleTable: Boolean,
     onShowTooltip: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -50,20 +53,24 @@ internal fun SpecialWorkMissionCard(
                 color = White,
             ),
         )
-        Spacer(modifier = modifier.height(Dimens.margin12))
-        HandsUpThreeSpaceTable(
-            title1 = stringResource(R.string.mission_content_term_title),
-            content1 = "주간 미션",
-            title2 = stringResource(R.string.mission_content_max_title),
-            content2 = "개선 리드",
-            title3 = stringResource(R.string.mission_content_median_title),
-            content3 = "개선 참여",
-        )
+        AnimatedVisibility(visibleTable) {
+            Column {
+                Spacer(modifier = modifier.height(Dimens.margin12))
+                HandsUpThreeSpaceTable(
+                    title1 = stringResource(R.string.mission_content_term_title),
+                    content1 = "주간 미션",
+                    title2 = stringResource(R.string.mission_content_max_title),
+                    content2 = "개선 리드",
+                    title3 = stringResource(R.string.mission_content_median_title),
+                    content3 = "개선 참여",
+                )
+            }
+        }
     }
 }
 
 @Preview(name = "SpecialWorkMissionCard")
 @Composable
 private fun PreviewSpecialWorkMissionCard() {
-    SpecialWorkMissionCard("음성 1센터", 1, {})
+    SpecialWorkMissionCard("음성 1센터", 1, false, {})
 }

@@ -61,9 +61,9 @@ fun MonthlyMissionCard(
 
 @Composable
 fun WeeklyMissionCard(
-    list: List<Int> = listOf(1,2,3,4),
+    list: List<Int> = listOf(1,2,3,4,5),
     dateTitleList: List<String> = listOf(
-        "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08"
+        "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08", "99.99~02.08",
     ),
     modifier: Modifier = Modifier,
 ) {
