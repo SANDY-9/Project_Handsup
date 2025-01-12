@@ -43,7 +43,7 @@ fun HandsUpShadowCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.blurShadow(
+        modifier = Modifier.blurShadow(
             borderRadius = cornerSize,
             blurRadius = elevationSize,
             offsetY = offsetY,

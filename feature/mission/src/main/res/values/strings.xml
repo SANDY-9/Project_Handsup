@@ -11,6 +11,9 @@
     <string name="mission_job_title">직무미션</string>
     <string name="mission_job_goal">목표</string>
 
+    <string name="mission_project_title">전사프로젝트</string>
+    <string name="mission_project_exp_desc">부여됨</string>
+
     <string name="mission_content_term_title">TERM</string>
     <string name="mission_content_max_title">MAX</string>
     <string name="mission_content_median_title">MEDIAN</string>
