@@ -1,23 +1,20 @@
-package com.tenday.core.domain.usecases.auth
+package com.tenday.core.domain.usecases.user
 
 import com.tenday.core.domain.repository.AuthPrefsRepository
-import com.tenday.core.domain.repository.LoginRepository
 import com.tenday.core.domain.repository.MessagingTokenRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class RequestLoginUseCase @Inject constructor(
-    private val loginRepository: LoginRepository,
-    private val authPrefsRepository: AuthPrefsRepository,
+class UpdateMessagingTokenUseCase @Inject constructor(
     private val messagingTokenRepository: MessagingTokenRepository,
+    private val authPrefsRepository: AuthPrefsRepository,
 ) {
-    suspend operator fun invoke(id: String, pwd: String): Flow<Boolean> {
-        val accessToken = loginRepository.requestLogin(id, pwd)
-        authPrefsRepository.updateAccessToken(accessToken)
+    operator fun invoke(): Flow<Boolean> {
         return messagingTokenRepository.getMessagingToken().map { messagingToken ->
+            val token = authPrefsRepository.getAccessToken() ?: ""
             messagingTokenRepository.updateMessagingToken(
-                accessToken = accessToken,
+                accessToken = token,
                 messagingToken = messagingToken
             )
         }
