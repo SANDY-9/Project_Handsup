@@ -2,6 +2,7 @@ package com.tenday.feature.mission.components.leader
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -59,12 +60,16 @@ internal fun MissionLeaderView(
             type = if(page == 0) "업무개선" else "월특근"
         }
     }
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPageOffsetFraction }.collectLatest {
+            visibleImproveToolTip = false
+            visibleSpecialToolTip = false
+        }
+    }
     LaunchedEffect(lazyColumnState) {
         snapshotFlow { lazyColumnState.firstVisibleItemScrollOffset }.collectLatest { offset ->
             // 스크롤 오프셋에 따라 크기 변경
             visibleTable = offset <= 0
-            visibleImproveToolTip = false
-            visibleSpecialToolTip = false
         }
     }
     Column(
@@ -96,7 +101,11 @@ internal fun MissionLeaderView(
                         jobFamily = jobFamily,
                         jobGroup = jobGroup,
                         visibleTable = visibleTable,
-                        onShowImproveToolTip = { visibleImproveToolTip = true },
+                        onShowImproveToolTip = {
+                            if (pagerState.currentPage == 0) {
+                                visibleImproveToolTip = true
+                            }
+                        },
                     )
                     else -> SpecialWorkMissionCard(
                         jobFamily = jobFamily,
