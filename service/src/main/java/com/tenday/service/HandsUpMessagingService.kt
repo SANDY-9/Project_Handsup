@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -17,6 +18,7 @@ class HandsUpMessagingService: FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
+        Log.e("확인", "onMessageReceived: $message", )
         createNotification(message)
     }
 
