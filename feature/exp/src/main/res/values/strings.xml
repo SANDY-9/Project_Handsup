@@ -8,4 +8,6 @@
 
     <string name="exp_remain_total_title">나의 총 두둥</string>
     <string name="exp_remain_next_title">다음 레벨까지 남은 두둥</string>
+
+    <string name="exp_banner_desc">%s님, 남은 미션 수행하고\n두둥 경험치를 획득해 볼까요?</string>
 </resources>
