@@ -52,7 +52,9 @@ fun HandsUpInputBox(
         placeholder = {
             Text(
                 text = placeHolder,
-                style = HandsUpTypography.body1,
+                style = HandsUpTypography.body1.copy(
+                    color = Gray500
+                ),
             )
         },
         prefix = {
