@@ -41,7 +41,7 @@ internal fun SpecialWorkMissionCard(
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
             text = stringResource(R.string.mission_leader_special_title),
-            style = HandsUpTypography.title2.copy(
+            style = HandsUpTypography.title3.copy(
                 color = White,
             ),
         )

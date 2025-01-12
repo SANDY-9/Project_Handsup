@@ -1,37 +1,36 @@
-package com.tenday.feature.mission.components.leader
+package com.tenday.feature.mission.components.job
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.HandsUpTypography
-import com.tenday.designsystem.theme.LinearGradientOrange
+import com.tenday.designsystem.theme.LinearGradientSunRise
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
 import com.tenday.feature.mission.components.MissionToolTipTitle
 
 @Composable
-internal fun ImproveWorkMissionCard(
+fun JobMissionCard(
     jobFamily: String,
     jobGroup: Int,
     onShowTooltip: () -> Unit,
     visibleTable: Boolean = true,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     HandsUpTextureCard(
-        modifier = modifier.width(300.dp),
-        gradient = LinearGradientOrange,
+        modifier = modifier.fillMaxWidth(),
+        gradient = LinearGradientSunRise,
     ) {
         MissionToolTipTitle(
             jobFamily = jobFamily,
@@ -40,14 +39,14 @@ internal fun ImproveWorkMissionCard(
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
-            text = stringResource(R.string.mission_leader_improve_title),
+            text = "생산성향상",
             style = HandsUpTypography.title3.copy(
                 color = White,
             ),
         )
         Spacer(modifier = modifier.height(Dimens.margin4))
         Text(
-            text = stringResource(R.string.mission_leader_improve_desc),
+            text = stringResource(R.string.mission_job_goal) + "",
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -69,8 +68,8 @@ internal fun ImproveWorkMissionCard(
     }
 }
 
-@Preview(name = "ImproveWorkMissionCard")
+@Preview(name = "JobMissionCard")
 @Composable
-private fun PreviewImproveWorkMissionCard() {
-    ImproveWorkMissionCard("음성 1센터", 1, {})
+private fun PreviewJobMissionCard() {
+    JobMissionCard("음성 1센터", 1, {})
 }

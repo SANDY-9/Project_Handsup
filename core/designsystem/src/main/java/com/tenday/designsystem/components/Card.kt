@@ -43,7 +43,7 @@ fun HandsUpShadowCard(
     modifier: Modifier = Modifier,
 ) {
     Card(
-        modifier = modifier.blurShadow(
+        modifier = Modifier.blurShadow(
             borderRadius = cornerSize,
             blurRadius = elevationSize,
             offsetY = offsetY,
@@ -67,6 +67,10 @@ fun HandsUpTextureCard(
     gradient: Brush = LinearGradientOrange,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    top: Dp = Dimens.margin24,
+    bottom: Dp = Dimens.margin32,
+    start: Dp = Dimens.margin24,
+    end: Dp = Dimens.margin24,
     modifier: Modifier = Modifier,
     content: @Composable (ColumnScope.() -> Unit),
 ) {
@@ -84,10 +88,10 @@ fun HandsUpTextureCard(
         )
         Column(
             modifier = modifier.padding(
-                top = Dimens.margin24,
-                bottom = Dimens.margin32,
-                start = Dimens.margin24,
-                end = Dimens.margin24,
+                top = top,
+                bottom = bottom,
+                start = start,
+                end = end,
             ),
             verticalArrangement = verticalArrangement,
             horizontalAlignment = horizontalAlignment,
