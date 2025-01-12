@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
@@ -33,7 +32,7 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
 import com.tenday.feature.mission.components.MissionExpTitle
-import com.tenday.feature.mission.components.MissionToolTop
+import com.tenday.feature.mission.components.MissionToolTip
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -82,13 +81,12 @@ internal fun MissionJobView(
                 )
             }
             if(visibleToolTip) {
-                MissionToolTop(
+                MissionToolTip(
                     parentModifier = modifier
                         .absoluteOffset(y = 42.dp,)
                         .align(Alignment.TopEnd)
                         .padding(end = Dimens.margin6),
                     missionName = "생산성향상",
-                    onToolTipClick = {},
                 )
             }
         }

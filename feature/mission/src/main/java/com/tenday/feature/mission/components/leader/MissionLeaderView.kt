@@ -35,7 +35,7 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
 import com.tenday.feature.mission.components.MissionExpTitle
-import com.tenday.feature.mission.components.MissionToolTop
+import com.tenday.feature.mission.components.MissionToolTip
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -108,24 +108,22 @@ internal fun MissionLeaderView(
             }
             //업무개선 툴팁
             if(visibleImproveToolTip) {
-                MissionToolTop(
+                MissionToolTip(
                     parentModifier = modifier.absoluteOffset(
                         x = 122.dp,
                         y = 42.dp,
                     ),
                     missionName = "업무 개선",
-                    onToolTipClick = {},
                 )
             }
             //월특근 툴팁
             if(visibleSpecialToolTip) {
-                MissionToolTop(
+                MissionToolTip(
                     parentModifier = modifier.absoluteOffset(
                         x = 175.dp,
                         y = 42.dp,
                     ),
                     missionName = "업무 개선",
-                    onToolTipClick = {},
                 )
             }
         }

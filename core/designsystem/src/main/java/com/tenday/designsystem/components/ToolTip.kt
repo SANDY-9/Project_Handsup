@@ -29,7 +29,6 @@ import com.tenday.designsystem.theme.HandsUpNavy
 
 @Composable
 fun HandsUpToolTip(
-    onClick: () -> Unit,
     verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     horizontalAlignment: Alignment.Horizontal = Alignment.Start,
     modifier: Modifier = Modifier,
@@ -53,8 +52,6 @@ fun HandsUpToolTip(
                 bottom = Dimens.margin12,
                 start = Dimens.margin12,
                 end = Dimens.margin12,
-            ).noRippleClickable(
-                onClick = onClick
             ),
             verticalArrangement = verticalArrangement,
             horizontalAlignment = horizontalAlignment,
@@ -91,7 +88,6 @@ private var _triangle: ImageVector? = null
 @Preview
 private fun Preview() {
     HandsUpToolTip(
-        {},
         modifier = Modifier.width(200.dp),
     )  {
         Text("테스트")

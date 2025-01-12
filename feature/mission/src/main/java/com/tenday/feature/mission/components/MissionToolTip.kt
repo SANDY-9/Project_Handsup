@@ -4,9 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
@@ -20,7 +18,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpToolTip
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.CheckMax
 import com.tenday.designsystem.icons.CheckMedium
 import com.tenday.designsystem.icons.Dodoong
@@ -29,9 +26,8 @@ import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
 
 @Composable
-internal fun MissionToolTop(
+internal fun MissionToolTip(
     missionName: String = "생산성 향상",
-    onToolTipClick: () -> Unit,
     maxPoint: Int = 80,
     minPoint: Int = 40,
     parentModifier: Modifier = Modifier,
@@ -42,7 +38,6 @@ internal fun MissionToolTop(
     ) {
         HandsUpToolTip(
             modifier = modifier.width(211.dp),
-            onClick = onToolTipClick,
         ) {
             Text(
                 text = "$missionName " +
@@ -132,5 +127,5 @@ internal fun MissionToolTop(
 @Preview(name = "MissionToolTop")
 @Composable
 private fun PreviewMissionToolTop() {
-    MissionToolTop(onToolTipClick = {})
+    MissionToolTip()
 }
