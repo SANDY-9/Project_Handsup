@@ -83,7 +83,12 @@ fun HandsUpTextureCard(
             )
         )
         Column(
-            modifier = modifier,
+            modifier = modifier.padding(
+                top = Dimens.margin24,
+                bottom = Dimens.margin32,
+                start = Dimens.margin24,
+                end = Dimens.margin24,
+            ),
             verticalArrangement = verticalArrangement,
             horizontalAlignment = horizontalAlignment,
         ) {
@@ -100,7 +105,6 @@ private fun Preview() {
         .padding(20.dp)
     )*/
     HandsUpTextureCard(
-        modifier = Modifier.padding(30.dp)
     ) {
         Text("테스트")
     }

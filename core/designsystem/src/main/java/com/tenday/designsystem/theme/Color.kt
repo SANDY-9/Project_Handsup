@@ -47,3 +47,5 @@ val BottomNavDivider = Color(0XFFE0E0E0)
 
 val TransparentWhite8 = Color(0x14ffffff)
 val TransparentWhite80 = Color(0xCCFFFFFF)
+
+val TransparentBlack16 = Color(0x29000000)
