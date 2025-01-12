@@ -32,13 +32,22 @@ val LinearGradientNavy = Brush.linearGradient(
 )
 
 val SingleGradientGray = Brush.horizontalGradient(
-    colors = listOf(Gray500)
+    colors = listOf(
+        Gray500,
+        Gray500
+    )
 )
 
 val SingleGradientBlue = Brush.horizontalGradient(
-    colors = listOf(HandsUpBlue)
+    colors = listOf(
+        HandsUpBlue,
+        HandsUpBlue
+    )
 )
 
 val SingleGradientNavy = Brush.horizontalGradient(
-    colors = listOf(HandsUpNavy)
+    colors = listOf(
+        HandsUpNavy,
+        HandsUpNavy
+    )
 )
