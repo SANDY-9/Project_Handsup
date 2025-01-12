@@ -27,4 +27,5 @@ object Dimens {
     val margin32 = 32.dp
     val margin36 = 36.dp
     val margin38 = 38.dp
+    val margin40 = 40.dp
 }
