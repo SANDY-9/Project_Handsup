@@ -1,6 +1,7 @@
 package com.tenday.designsystem.components
 
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,25 +25,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tenday.designsystem.theme.CardShadow
-import com.tenday.designsystem.theme.GradientShadow
 import com.tenday.designsystem.theme.Gray200
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.TransparentBlack20
 import com.tenday.designsystem.theme.White
 
-val gradientBrush = Brush.horizontalGradient(
-    colors = listOf(Color(0xFFFA610F), Color(0xFFFFC31E)),
-    startX = 10f,
-    endX = 500f,
-)
-
-val shadowGradient = listOf(
-    GradientShadow,
-    Color.Transparent,
-)
 @Composable
-fun LevelGraph(
+fun LinearExpGraph(
     currentValue: Int,
-    maxValue: Int = 27500,
+    maxValue: Int = 27000,
     modifier: Modifier = Modifier,
 ) {
     val progress = currentValue.toFloat() / maxValue
@@ -69,7 +60,7 @@ fun LevelGraph(
 
             drawPath(
                 path = backgroundBarPath,
-                color = Gray200
+                color = TransparentBlack20,
             )
 
             // Clip progress bar to fit within the background bar
@@ -112,34 +103,17 @@ fun LevelGraph(
                 )
             }
         }
-
-        // Draw percentage text
-        Box(
-            modifier = modifier.fillMaxSize(),
-            contentAlignment = androidx.compose.ui.Alignment.Center
-        ) {
-            BasicText(
-                text = "${(progress * 100).toInt()}%",
-                style = HandsUpTypography.body4.copy(
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 11.sp,
-                    color = White,
-                    shadow = Shadow(
-                        color = CardShadow,
-                        blurRadius = 6f
-                    )
-                )
-            )
-        }
     }
 }
 
-@Preview(name = "LevelGraph")
+@Preview(name = "LinearExpGraph")
 @Composable
-private fun PreviewLevelGraph() {
+private fun PreviewLinearExpGraph() {
     Box(
-        modifier = Modifier.padding(10.dp)
+        modifier = Modifier
+            .background(color = Color.Gray)
+            .padding(20.dp),
     ) {
-        LevelGraph(15000)
+        LinearExpGraph(14000)
     }
 }

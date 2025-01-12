@@ -25,6 +25,7 @@ kotlinxCoroutinesAndroid = "1.10.1"
 dataStore = "1.1.1"
 material = "1.12.0"
 graphics = "1.0.1"
+coil = "2.7.0"
 
 googleGmsGoogleServices = "4.3.15"
 firebaseBom = "32.3.1"
@@ -92,6 +93,10 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-messaging-ktx = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
 firebase-messaging-directboot = { module = "com.google.firebase:firebase-messaging-directboot", version.ref = "firebaseMessagingDirectboot" }
 
+# coil
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil"}
+coil-svg = { module = "io.coil-kt:coil-svg", version.ref = "coil"}
+
 
 [bundles]
 androidx = [
@@ -111,7 +116,9 @@ compose = [
     "androidx-material3",
     "androidx-navigation-compose",
     "androidx-ui-tooling-preview",
-    "androidx-graphics"
+    "androidx-graphics",
+    "coil-compose",
+    "coil-svg"
 ]
 hilt = [
     "hilt-android",

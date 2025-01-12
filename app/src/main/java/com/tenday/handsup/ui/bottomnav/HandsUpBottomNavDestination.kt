@@ -6,8 +6,8 @@ import androidx.compose.ui.graphics.Color
 import com.tenday.designsystem.theme.Gray400
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.feature.board.navigation.BoardRoute
+import com.tenday.feature.exp.navigation.MyExpRoute
 import com.tenday.feature.home.navigation.HomeRoute
-import com.tenday.feature.login.navigation.LoginRoute
 import com.tenday.feature.mission.navigation.MissionRoute
 import com.tenday.handsup.R
 import kotlin.reflect.KClass
@@ -32,7 +32,7 @@ enum class BottomNavDestination(
     EXP(
         iconRes = R.drawable.botton_nav_exp,
         titleRes = R.string.bottom_nav_exp,
-        route = LoginRoute::class,
+        route = MyExpRoute::class,
     ),
     BOARD(
         iconRes = R.drawable.botton_nav_board,
