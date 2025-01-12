@@ -1,4 +1,4 @@
-package com.tenday.feature.login.login.model
+package com.tenday.feature.login.model
 
 internal sealed interface LoginUiState {
     data object Ready: LoginUiState

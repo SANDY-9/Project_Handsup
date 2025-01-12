@@ -1,11 +1,11 @@
-package com.tenday.feature.login.login
+package com.tenday.feature.login
 
 import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.usecases.auth.RequestLoginUseCase
-import com.tenday.feature.login.login.model.LoginUiState
+import com.tenday.feature.login.model.LoginUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow

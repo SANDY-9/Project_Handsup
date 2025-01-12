@@ -1,10 +1,10 @@
-package com.tenday.feature.login.login.navigation
+package com.tenday.feature.login.navigation
 
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.tenday.feature.login.login.LoginRoute
+import com.tenday.feature.login.LoginRoute
 import kotlinx.serialization.Serializable
 
 @Serializable object LoginRoute

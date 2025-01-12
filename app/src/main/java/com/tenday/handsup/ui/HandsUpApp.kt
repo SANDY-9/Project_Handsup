@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
-import com.tenday.feature.login.login.navigation.LoginRoute
+import com.tenday.feature.login.navigation.LoginRoute
 import com.tenday.handsup.ui.bottomnav.HandsUpBottomNav
 
 @Composable
