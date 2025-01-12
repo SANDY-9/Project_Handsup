@@ -3,17 +3,14 @@ package com.tenday.feature.mission.components.job
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
@@ -43,7 +40,7 @@ fun JobMissionCard(
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
             text = "생산성향상",
-            style = HandsUpTypography.title2.copy(
+            style = HandsUpTypography.title3.copy(
                 color = White,
             ),
         )

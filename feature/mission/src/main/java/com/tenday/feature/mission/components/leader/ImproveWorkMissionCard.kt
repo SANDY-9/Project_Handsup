@@ -2,7 +2,6 @@ package com.tenday.feature.mission.components.leader
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -42,7 +41,7 @@ internal fun ImproveWorkMissionCard(
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
             text = stringResource(R.string.mission_leader_improve_title),
-            style = HandsUpTypography.title2.copy(
+            style = HandsUpTypography.title3.copy(
                 color = White,
             ),
         )
