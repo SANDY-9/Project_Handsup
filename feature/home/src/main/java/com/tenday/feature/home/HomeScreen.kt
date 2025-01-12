@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -46,6 +47,8 @@ internal fun HomeRoute(
 ) {
     val userState by viewModel.userState.collectAsStateWithLifecycle()
     val expState by viewModel.expState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    CheckPermission(context)
     HomeScreen(
         backResId = viewModel.jobFamily.getBackResId(),
         userDetailsState = userState,

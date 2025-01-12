@@ -1,4 +1,4 @@
-package com.tenday.feature.login.login.components
+package com.tenday.feature.login.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text

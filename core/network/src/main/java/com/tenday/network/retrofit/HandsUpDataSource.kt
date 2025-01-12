@@ -10,4 +10,5 @@ interface HandsUpDataSource {
     suspend fun updateBoardReadCount(boardId: Int, token: String)
     suspend fun getNotificationList(token: String): List<NotificationDetails>
     suspend fun getUserDetails(token: String): UserResponse
+    suspend fun updateMessagingToken(accessToken: String, messagingToken: String): Boolean
 }

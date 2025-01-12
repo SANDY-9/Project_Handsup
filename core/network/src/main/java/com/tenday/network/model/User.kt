@@ -16,3 +16,16 @@ data class UserResponse(
     val totalExpLastYear: Int,
     val username: String
 )
+
+@Serializable
+data class UserRequestBody(
+    val fcmToken: String = "",
+    val password: String = "",
+    val profileBadgeCode: String = "",
+    val profileImageCode: String = "",
+)
+
+@Serializable
+data class UserUpdateResponse(
+    val isSuccess: Boolean,
+)

@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kotlin.serialization)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -43,6 +44,8 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":service"))
 
     implementation(project(":core:designsystem"))
     implementation(project(":core:model"))

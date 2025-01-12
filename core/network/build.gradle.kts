@@ -46,4 +46,8 @@ dependencies {
     implementation(libs.bundles.retrofit)
     implementation(libs.kotlinx.serialization.json)
 
+    // firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.firebase)
+
 }

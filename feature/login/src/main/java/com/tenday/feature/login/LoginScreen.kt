@@ -1,6 +1,5 @@
-package com.tenday.feature.login.login
+package com.tenday.feature.login
 
-import android.widget.Toast
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -14,17 +13,16 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.feature.login.login.components.LoginButton
-import com.tenday.feature.login.login.components.LoginEmptyValueMessage
-import com.tenday.feature.login.login.components.LoginErrorMessage
-import com.tenday.feature.login.login.components.LoginInputBox
-import com.tenday.feature.login.login.components.LoginTitle
-import com.tenday.feature.login.login.model.LoginUiState
+import com.tenday.feature.login.components.LoginButton
+import com.tenday.feature.login.components.LoginEmptyValueMessage
+import com.tenday.feature.login.components.LoginErrorMessage
+import com.tenday.feature.login.components.LoginInputBox
+import com.tenday.feature.login.components.LoginTitle
+import com.tenday.feature.login.model.LoginUiState
 
 @Composable
 internal fun LoginRoute(

@@ -3,12 +3,13 @@ package com.tenday.network.retrofit
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
 import com.tenday.network.model.LoginRequestBody
+import com.tenday.network.model.UserRequestBody
 import com.tenday.network.model.UserResponse
 import com.tenday.network.utils.toHeader
 import javax.inject.Inject
 
 internal class HandsUpService @Inject constructor(
-    private val api: HandsUpServiceApi
+    private val api: HandsUpServiceApi,
 ): HandsUpDataSource {
     override suspend fun login(id: String, pwd: String): String {
         return api.login(
@@ -30,5 +31,13 @@ internal class HandsUpService @Inject constructor(
 
     override suspend fun getUserDetails(token: String): UserResponse {
         return api.getUserDetails(token.toHeader())
+    }
+
+    override suspend fun updateMessagingToken(
+        accessToken: String,
+        messagingToken: String,
+    ): Boolean {
+        val requestBody = UserRequestBody(fcmToken = messagingToken)
+        return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
     }
 }
