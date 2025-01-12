@@ -6,6 +6,7 @@ import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
 import com.tenday.network.model.UserRequestBody
 import com.tenday.network.model.UserResponse
+import com.tenday.network.model.UserUpdateResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -44,6 +45,6 @@ internal interface HandsUpServiceApi {
     suspend fun updateMessagingToken(
         @Body requestBody: UserRequestBody,
         @Header("Authorization") token: String,
-    ): Boolean
+    ): UserUpdateResponse
 
 }

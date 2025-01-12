@@ -38,6 +38,6 @@ internal class HandsUpService @Inject constructor(
         messagingToken: String,
     ): Boolean {
         val requestBody = UserRequestBody(fcmToken = messagingToken)
-        return api.updateMessagingToken(requestBody, accessToken.toHeader())
+        return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
     }
 }

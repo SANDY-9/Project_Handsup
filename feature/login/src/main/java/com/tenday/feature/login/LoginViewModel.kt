@@ -1,6 +1,5 @@
 package com.tenday.feature.login
 
-import android.util.Log
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -51,9 +50,7 @@ internal class LoginViewModel @Inject constructor(
                 _loginUiState.value = LoginUiState.Loading
             }.catch {
                 _loginUiState.value = LoginUiState.Fail
-                Log.e("확인", "requestLogin: $it", )
             }.collectLatest { isSuccess ->
-                Log.e("확인", "requestLogin: $isSuccess", )
                 delay(200L)
                 if(isSuccess) {
                     _loginUiState.value = LoginUiState.Success

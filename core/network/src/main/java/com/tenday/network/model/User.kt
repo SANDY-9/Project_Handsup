@@ -24,3 +24,8 @@ data class UserRequestBody(
     val profileBadgeCode: String = "",
     val profileImageCode: String = "",
 )
+
+@Serializable
+data class UserUpdateResponse(
+    val isSuccess: Boolean,
+)
