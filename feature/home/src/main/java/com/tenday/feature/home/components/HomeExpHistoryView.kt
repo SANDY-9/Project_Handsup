@@ -36,6 +36,7 @@ internal fun HomeExpHistoryView(
     LazyRow(
         modifier = modifier.fillMaxWidth(),
         contentPadding = PaddingValues(horizontal = Dimens.margin20),
+        horizontalArrangement = Arrangement.spacedBy(Dimens.margin8)
     ) {
         items(5) {
             ExpHistoryItem()
@@ -47,11 +48,10 @@ internal fun HomeExpHistoryView(
 private fun ExpHistoryItem(
     modifier: Modifier = Modifier,
 ) {
-    Row {
+    Row(
+        modifier = modifier.width(114.dp)
+    ) {
         HandsUpShadowCard(
-            modifier = modifier
-                .width(114.dp)
-                .padding(end = Dimens.margin8),
             cornerSize = Dimens.cornerShape8,
             content = {
                 Column(

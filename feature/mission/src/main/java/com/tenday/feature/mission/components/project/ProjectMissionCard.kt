@@ -88,7 +88,7 @@ private fun ProjectMissionExp(
                 vertical = Dimens.margin4,
                 horizontal = Dimens.margin6,
             ),
-            text = "2025.01.11" + stringResource(R.string.mission_project_exp_desc),
+            text = "2025.01.11 " + stringResource(R.string.mission_project_exp_desc),
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
             )
