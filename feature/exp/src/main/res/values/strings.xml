@@ -15,4 +15,7 @@
     <string name="exp_this_year_sub_title1">올해 획득 경험치</string>
     <string name="exp_this_year_sub_title2">2026년 예상레벨</string>
 
+    <string name="exp_last_year_title">2024년 나의 여정</string>
+    <string name="exp_last_year_desc">작년에 어느 레벨까지 성장했는지 확인해 보세요.</string>
+
 </resources>
