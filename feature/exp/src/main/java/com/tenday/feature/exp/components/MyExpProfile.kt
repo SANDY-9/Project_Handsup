@@ -39,8 +39,8 @@ internal fun MyExpProfile(
     Column (
         modifier = modifier
             .fillMaxWidth()
-            .statusBarsPadding()
             .background(brush = LinearGradientNavy)
+            .statusBarsPadding()
             .padding(
                 start = Dimens.margin20,
                 end = Dimens.margin20,
