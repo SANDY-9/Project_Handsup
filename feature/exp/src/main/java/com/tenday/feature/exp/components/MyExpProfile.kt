@@ -18,12 +18,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.svgImageLoader
+import com.tenday.designsystem.extentions.svgPath
 import com.tenday.designsystem.icons.Info
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.LinearGradientNavy
@@ -32,6 +33,7 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyExpProfile(
+    level: String,
     currentValue: Int,
     maxValue: Int = 27000,
     modifier: Modifier = Modifier
@@ -71,7 +73,7 @@ internal fun MyExpProfile(
         Spacer(modifier = modifier.height(Dimens.margin8))
         Image(
             modifier = modifier.size(100.dp),
-            painter = painterResource(com.tenday.designsystem.R.drawable.test),
+            painter = svgImageLoader(level.svgPath()),
             contentDescription = null,
         )
         Spacer(modifier = modifier.height(Dimens.margin16))
@@ -116,5 +118,5 @@ internal fun MyExpProfile(
 @Preview(name = "MyExpProfile")
 @Composable
 private fun PreviewMyExpProfile() {
-    MyExpProfile(13000)
+    MyExpProfile("F1-Ⅰ", 13000)
 }

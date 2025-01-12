@@ -20,7 +20,7 @@ internal fun MyExpScreen(
         modifier = modifier.fillMaxSize(),
     ) {
         item {
-            MyExpProfile(currentValue = 14000,)
+            MyExpProfile("F2-Ⅱ", currentValue = 14000,)
         }
     }
 }
