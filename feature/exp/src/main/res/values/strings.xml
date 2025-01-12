@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="exp_guide_title">레벨 가이드</string>
+    <string name="exp_desc_prefix">현재 %s님의 레벨은</string>
+    <string name="exp_desc_suffix">입니다.</string>
+
+    <string name="exp_linear_graph_exp_title">두둥 경험치</string>
+
+    <string name="exp_remain_total_title">나의 총 두둥</string>
+    <string name="exp_remain_next_title">다음 레벨까지 남은 두둥</string>
+</resources>
