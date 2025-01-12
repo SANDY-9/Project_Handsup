@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.CardShadowLight
@@ -45,15 +46,18 @@ fun MonthlyMissionCard(
         )
         WeeklyMissionCheckItem(
             listOf(1,2,3,4,5),
-            listOf("1월", "2월", "3월", "4월", "5월")
+            listOf("1월", "2월", "3월", "4월", "5월"),
+            listOf(AchieveGrade.MAX, AchieveGrade.MEDIAN,)
         )
         WeeklyMissionCheckItem(
             listOf(6,7,8,9,10),
-            listOf("6월", "7월", "8월", "9월", "10월")
+            listOf("6월", "7월", "8월", "9월", "10월"),
+            listOf()
         )
         WeeklyMissionCheckItem(
             listOf(11, 12),
-            listOf("11월", "12월")
+            listOf("11월", "12월"),
+            listOf(),
         )
     }
 
@@ -61,9 +65,13 @@ fun MonthlyMissionCard(
 
 @Composable
 fun WeeklyMissionCard(
+    index: Int,
     list: List<Int> = listOf(1,2,3,4,5),
     dateTitleList: List<String> = listOf(
         "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08", "99.99~02.08",
+    ),
+    achieveGradeList: List<AchieveGrade> = listOf(
+        AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MEDIAN,
     ),
     modifier: Modifier = Modifier,
 ) {
@@ -83,11 +91,11 @@ fun WeeklyMissionCard(
             .padding(20.dp)
     ) {
         Text(
-            text = "1월 미션",
+            text = "${index}월 미션",
             style = HandsUpTypography.title5,
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
-        WeeklyMissionCheckItem(list, dateTitleList)
+        WeeklyMissionCheckItem(list, dateTitleList, achieveGradeList)
     }
 }
 
@@ -99,6 +107,6 @@ private fun Preview() {
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         MonthlyMissionCard()
-        WeeklyMissionCard()
+        WeeklyMissionCard(1)
     }
 }

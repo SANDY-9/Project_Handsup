@@ -19,7 +19,7 @@ import com.tenday.feature.mission.components.MissionExpTitle
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun ProjectMissionView(
+internal fun MissionProjectView(
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -43,8 +43,8 @@ fun ProjectMissionView(
     }
 }
 
-@Preview(name = "ProjectMissionView")
+@Preview(name = "MissionProjectView")
 @Composable
-private fun PreviewProjectMissionView() {
-    ProjectMissionView()
+private fun PreviewMissionProjectView() {
+    MissionProjectView()
 }

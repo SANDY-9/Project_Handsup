@@ -28,7 +28,8 @@
     <string name="mission_content_median_title">MEDIAN</string>
 
     <string name="mission_tool_tip_title">보상 확인</string>
-    <string name="mission_tool_tip_desc">미션의 경우\n아래와 같이 보상이 지급됩니다.</string>
+    <string name="mission_tool_tip_desc1">미션의 경우</string>
+    <string name="mission_tool_tip_desc2">아래와 같이 보상이 지급됩니다.</string>
     <string name="mission_tool_tip_desc_max">MAX로 미션 달성 시</string>
     <string name="mission_tool_tip_desc_medium">MEDIUM로 미션 달성 시 </string>
 </resources>
