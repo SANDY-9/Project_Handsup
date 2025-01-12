@@ -9,16 +9,36 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.tenday.core.domain.usecases.user.UpdateMessagingTokenUseCase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class HandsUpMessagingService: FirebaseMessagingService() {
+
+    @Inject
+    lateinit var updateMessagingTokenUseCase: UpdateMessagingTokenUseCase
 
     // 토큰 자동갱신
     override fun onNewToken(token: String) {
+        flow {
+            emit(updateMessagingTokenUseCase(token))
+        }.onEach { result ->
+            if(result) Log.i("[FCM_TOKEN]", token)
+        }.catch {
+            Log.e("[FCM_TOKEN]", it.message.toString())
+        }.launchIn(CoroutineScope(Dispatchers.IO))
         super.onNewToken(token)
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.e("확인", "onMessageReceived: $message", )
+        Log.i("[FCM_MESSAGE]", "onMessageReceived: $message")
         createNotification(message)
     }
 
