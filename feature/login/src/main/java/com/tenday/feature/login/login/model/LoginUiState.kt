@@ -4,6 +4,6 @@ internal sealed interface LoginUiState {
     data object Ready: LoginUiState
     data object Loading: LoginUiState
     data object EmptyValue: LoginUiState
-    data class Success(val token: String): LoginUiState
+    data object Success: LoginUiState
     data object Fail: LoginUiState
 }

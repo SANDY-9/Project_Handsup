@@ -8,7 +8,6 @@ import androidx.navigation.compose.NavHost
 import com.tenday.feature.board.details.navigation.boardDetailsScreen
 import com.tenday.feature.board.details.navigation.navigateToBoardDetails
 import com.tenday.feature.board.navigation.boardScreen
-import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.home.navigation.homeScreen
 import com.tenday.feature.home.navigation.navigateToHome
 import com.tenday.feature.login.login.navigation.LoginRoute
@@ -45,7 +44,7 @@ fun HandsUpNavGraph(
         val loginNavOptions = navOptionBuilder.setPopUpTo<LoginRoute>(inclusive = true).build()
         loginScreen(
             onSuccessLogin = {
-                navController.navigateToBoard(loginNavOptions)
+                navController.navigateToHome(loginNavOptions)
             }
         )
 
