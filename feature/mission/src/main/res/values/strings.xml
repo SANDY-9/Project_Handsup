@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="mission_leader_title">리더부여에서 획득한 경험치</string>
+    <string name="mission_leader_title">리더부여</string>
+    <string name="mission_exp_title">에서 획득한 경험치</string>
     <string name="mission_leader_improve_title">업무개선</string>
     <string name="mission_leader_improve_desc">매월 31일까지 정리본 제출 시 두둥 경험치 획득</string>
     <string name="mission_leader_special_title">월특근</string>
@@ -14,4 +15,4 @@
     <string name="mission_tool_tip_desc">미션의 경우\n아래와 같이 보상이 지급됩니다.</string>
     <string name="mission_tool_tip_desc_max">MAX로 미션 달성 시</string>
     <string name="mission_tool_tip_desc_medium">MEDIUM로 미션 달성 시 </string>
-</resources> 
+</resources>
