@@ -26,6 +26,7 @@ import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
 import com.tenday.designsystem.theme.Backgroud
+import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.feature.exp.R
 
@@ -34,6 +35,9 @@ internal fun MyExpThisYearCard(
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
+        elevationSize = 4.dp,
+        offsetY = 2.dp,
+        shadowColor = CardShadowLight,
         content = {
             Column(
                 modifier = modifier.fillMaxWidth().padding(Dimens.margin20),

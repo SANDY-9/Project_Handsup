@@ -13,9 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.components.LevelGraph
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -26,6 +28,9 @@ internal fun MyExpLastYearCard(
     modifier: Modifier = Modifier
 ) {
     HandsUpShadowCard(
+        elevationSize = 4.dp,
+        offsetY = 2.dp,
+        shadowColor = CardShadowLight,
         content = {
             Column(
                 modifier = modifier.padding(Dimens.margin20)

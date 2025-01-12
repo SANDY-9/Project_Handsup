@@ -29,6 +29,7 @@ import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.ArrowBottom
 import com.tenday.designsystem.icons.Dodoong
+import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.Gray900
@@ -42,6 +43,9 @@ internal fun MyExpHistory(
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
+        elevationSize = 4.dp,
+        offsetY = 2.dp,
+        shadowColor = CardShadowLight,
         content = {
             Column(
                 modifier = modifier
