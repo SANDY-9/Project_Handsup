@@ -35,7 +35,7 @@ import com.tenday.feature.exp.R
 internal fun MyExpProfile(
     level: String,
     currentValue: Int,
-    maxValue: Int = 27000,
+    maxValue: Int,
     modifier: Modifier = Modifier
 ) {
     Column (
@@ -118,5 +118,5 @@ internal fun MyExpProfile(
 @Preview(name = "MyExpProfile")
 @Composable
 private fun PreviewMyExpProfile() {
-    MyExpProfile("F1-Ⅰ", 13000)
+    MyExpProfile("F1-Ⅰ", 13000, 27000)
 }
