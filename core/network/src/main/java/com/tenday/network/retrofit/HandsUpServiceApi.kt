@@ -48,7 +48,7 @@ internal interface HandsUpServiceApi {
         @Header("Authorization") token: String,
     ): UserUpdateResponse
 
-    @GET("status")
+    @GET("exp/status")
     suspend fun getExpDetails(
         @Header("Authorization") token: String,
     ): ExpResponse
