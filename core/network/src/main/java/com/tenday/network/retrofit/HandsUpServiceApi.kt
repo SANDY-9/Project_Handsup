@@ -1,7 +1,7 @@
 package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
-import com.tenday.core.model.ExpDetails
+import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
@@ -51,6 +51,6 @@ internal interface HandsUpServiceApi {
     @GET("status")
     suspend fun getExpDetails(
         @Header("Authorization") token: String,
-    ): ExpDetails
+    ): ExpResponse
 
 }
