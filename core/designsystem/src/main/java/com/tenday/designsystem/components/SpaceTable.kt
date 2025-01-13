@@ -62,7 +62,7 @@ fun HandsUpThreeSpaceTable(
             Spacer(modifier = modifier.height(Dimens.margin4))
             Text(
                 text = content1,
-                style = HandsUpTypography.body1.copy(
+                style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
                 color = White,
@@ -86,7 +86,7 @@ fun HandsUpThreeSpaceTable(
             Spacer(modifier = modifier.height(Dimens.margin4))
             Text(
                 text = content2,
-                style = HandsUpTypography.body1.copy(
+                style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
                 color = White,
@@ -110,7 +110,7 @@ fun HandsUpThreeSpaceTable(
             Spacer(modifier = modifier.height(Dimens.margin4))
             Text(
                 text = content3,
-                style = HandsUpTypography.body1.copy(
+                style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
                 color = White,
