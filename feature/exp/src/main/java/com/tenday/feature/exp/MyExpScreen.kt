@@ -78,7 +78,12 @@ internal fun MyExpScreen(
                         currentYearExp = data.currentYearExp,
                         expectLevel = data.expectedLevel,
                     )
-                    MyExpLastYearCard()
+                    MyExpLastYearCard(
+                        currentLevel = data.currentLevel,
+                        previousLevel = "F1-III",
+                        lastYearExp = data.lastYearExp,
+                        currentLevelTotalExp = data.totalExp + data.expToNextLevel,
+                    )
                     MyExpHistory()
                 }
             }
