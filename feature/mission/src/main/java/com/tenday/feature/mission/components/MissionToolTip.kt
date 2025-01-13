@@ -30,10 +30,10 @@ import com.tenday.feature.mission.R
 @Composable
 internal fun MissionToolTip(
     position: IntOffset,
-    modifier: Modifier = Modifier,
-    missionName: String = "생산성 향상",
+    missionName: String,
     maxPoint: Int = 80,
     minPoint: Int = 40,
+    modifier: Modifier = Modifier,
     size: Int = 211,
 ) {
     Box(
@@ -134,5 +134,5 @@ internal fun MissionToolTip(
 @Preview(name = "MissionToolTop")
 @Composable
 private fun PreviewMissionToolTop() {
-    MissionToolTip(IntOffset.Zero)
+    MissionToolTip(IntOffset.Zero, "생산성 향상", )
 }

@@ -2,8 +2,8 @@
 package com.tenday.feature.mission.components.leader
 
 import android.content.res.Configuration
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
@@ -17,7 +17,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.theme.White
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -26,6 +25,7 @@ internal fun MissionLeaderCardPager(
     jobGroup: Int,
     visibleTable: Boolean,
     onPageChange: (Int) -> Unit,
+    onPagerSwipe: () -> Unit,
     onShowImproveToolTip: (IntOffset) -> Unit,
     onShowSpecialTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
@@ -36,8 +36,13 @@ internal fun MissionLeaderCardPager(
             onPageChange(page)
         }
     }
+    LaunchedEffect(pagerState) {
+        snapshotFlow { pagerState.currentPageOffsetFraction }.collectLatest {
+            onPagerSwipe()
+        }
+    }
     HorizontalPager(
-        modifier = modifier.background(color = White),
+        modifier = modifier.fillMaxWidth(),
         state = pagerState,
         pageSize = PageSize.Fixed(
             pageSize = calculatePage(LocalConfiguration.current)
@@ -82,5 +87,13 @@ private fun calculatePage(
 @Preview(name = "MissionLeaderCardPager")
 @Composable
 private fun PreviewMissionLeaderCardPager() {
-    MissionLeaderCardPager("음성 1센터", 1,true, {}, {}, {})
+    MissionLeaderCardPager(
+        jobFamily = "음성 1센터",
+        jobGroup = 1,
+        visibleTable = true,
+        onPageChange = {},
+        onPagerSwipe = {},
+        onShowImproveToolTip = {},
+        onShowSpecialTooltip = {}
+    )
 }

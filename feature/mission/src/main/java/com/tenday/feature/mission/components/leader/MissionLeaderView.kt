@@ -17,13 +17,16 @@ import com.tenday.designsystem.theme.Gray100
 
 @Composable
 internal fun MissionLeaderView(
+    type: String,
     jobFamily: String,
     jobGroup: Int,
+    onPageChange: (Int) -> Unit,
+    onPagerSwipe: () -> Unit,
+    onListScroll: () -> Unit,
     onShowImproveToolTip: (IntOffset) -> Unit,
     onShowSpecialTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var type by remember { mutableStateOf("업무개선") }
     var visibleTable by remember { mutableStateOf(true) }
 
     Column(modifier = modifier.fillMaxSize()) {
@@ -32,9 +35,8 @@ internal fun MissionLeaderView(
             jobFamily = jobFamily,
             jobGroup = jobGroup,
             visibleTable = visibleTable,
-            onPageChange = { page ->
-                type = if (page == 0) "업무개선" else "월특근"
-            },
+            onPageChange = onPageChange,
+            onPagerSwipe = onPagerSwipe,
             onShowImproveToolTip = onShowImproveToolTip,
             onShowSpecialTooltip = onShowSpecialTooltip,
         )
@@ -42,6 +44,7 @@ internal fun MissionLeaderView(
             type = type,
             onFullScroll = { fullScroll ->
                 visibleTable = fullScroll
+                onListScroll()
             },
             modifier = modifier.fillMaxSize(),
         )
@@ -57,6 +60,15 @@ private fun PreviewMissionLeaderView() {
             color = Gray100,
         )
     ) {
-        MissionLeaderView("음성 1센터", 1, {}, {})
+        MissionLeaderView(
+            type = "업무개선",
+            jobFamily = "음성 1센터",
+            jobGroup = 1,
+            onPageChange = {},
+            onPagerSwipe = {},
+            onListScroll = {},
+            onShowImproveToolTip = {},
+            onShowSpecialTooltip = {},
+        )
     }
 }
