@@ -1,6 +1,7 @@
 package com.tenday.feature.mission.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -40,7 +41,7 @@ internal fun MissionTitleBar(
             currentSelectedTab = currentSelectedTab,
             onTabSelect = onTabSelect,
         )
-        Spacer(modifier = modifier.height(Dimens.margin16))
+        Spacer(modifier = modifier.height(Dimens.margin12))
     }
 
 }
@@ -57,32 +58,33 @@ private fun MissionTab(
                 color = Gray100,
                 shape = RoundedCornerShape(Dimens.margin12)
             )
-            .padding(Dimens.margin8)
+            .padding(Dimens.margin8),
+        horizontalArrangement = Arrangement.Center,
     ) {
         HandsUpTabButton(
+            modifier = modifier.weight(1f),
             title = MissionMenu.리더부여.name,
             selected = MissionMenu.리더부여 == currentSelectedTab,
-            onSelectClick = {},
             onUnselectClick = { onTabSelect(MissionMenu.리더부여) }
         )
         HandsUpTabButton(
+            modifier = modifier.weight(1f),
             title = MissionMenu.직무미션.name,
             selected = MissionMenu.직무미션 == currentSelectedTab,
-            onSelectClick = {},
-            onUnselectClick = { onTabSelect(MissionMenu.직무미션) }
+            onUnselectClick = { onTabSelect(MissionMenu.직무미션) },
 
         )
         HandsUpTabButton(
+            modifier = modifier.weight(1f),
             title = MissionMenu.전사프로젝트.name,
             selected = MissionMenu.전사프로젝트 == currentSelectedTab,
-            onSelectClick = {},
-            onUnselectClick = { onTabSelect(MissionMenu.전사프로젝트) }
+            onUnselectClick = { onTabSelect(MissionMenu.전사프로젝트) },
         )
         HandsUpTabButton(
+            modifier = modifier.weight(1f),
             title = MissionMenu.인사평가.name,
             selected = MissionMenu.인사평가 == currentSelectedTab,
-            onSelectClick = {},
-            onUnselectClick = { onTabSelect(MissionMenu.인사평가) }
+            onUnselectClick = { onTabSelect(MissionMenu.인사평가) },
         )
     }
 }
