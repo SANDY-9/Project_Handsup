@@ -18,11 +18,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MyExpViewModel @Inject constructor(
     getExpDetailsUseCase: GetExpDetailsUseCase,
+    getUserDetailsUseCase: GetUserDetailsUseCase,
 ): ViewModel() {
 
     private val _myExpState: MutableStateFlow<MyExpState> = MutableStateFlow(MyExpState.Loading)
     val myExpState = _myExpState.asStateFlow()
 
+    val userDetails = getUserDetailsUseCase().shareIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+    )
 
     init {
         getExpDetailsUseCase()

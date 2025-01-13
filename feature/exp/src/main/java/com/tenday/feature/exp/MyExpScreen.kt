@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.exp.components.ExpMissionBanner
@@ -27,19 +28,20 @@ internal fun MyExpRoute(
     viewModel: MyExpViewModel = hiltViewModel()
 ) {
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
+    val userDetails by viewModel.userDetails.collectAsStateWithLifecycle()
 
     MyExpScreen(
+        user = userDetails,
         myExpState = myExpState,
     )
 }
 
 @Composable
 internal fun MyExpScreen(
+    user: UserDetails,
+    myExpState: MyExpState,
     modifier: Modifier = Modifier
 ) {
-    LazyColumn(
-            .fillMaxSize()
-            .background(color = Gray100),
     if(myExpState is MyExpState.Success) {
         val data = myExpState.data
         LazyColumn(
@@ -64,7 +66,9 @@ internal fun MyExpScreen(
                     ),
                     verticalArrangement = Arrangement.spacedBy(Dimens.margin12),
                 ) {
-                    ExpMissionBanner()
+                    ExpMissionBanner(
+                        userName = user.username,
+                    )
                     MyExpThisYearCard()
                     MyExpLastYearCard()
                     MyExpHistory()
