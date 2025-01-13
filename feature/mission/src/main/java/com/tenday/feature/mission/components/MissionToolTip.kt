@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -15,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpToolTip
 import com.tenday.designsystem.dimens.Dimens
@@ -27,17 +29,22 @@ import com.tenday.feature.mission.R
 
 @Composable
 internal fun MissionToolTip(
-    missionName: String = "생산성 향상",
+    position: IntOffset,
+    missionName: String,
     maxPoint: Int = 80,
     minPoint: Int = 40,
-    parentModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
+    size: Int = 211,
 ) {
     Box(
-        modifier = parentModifier,
+        modifier = modifier.absoluteOffset {
+            position.copy(
+                x = position.x - (size - 45).dp.roundToPx()
+            )
+        }
     ) {
         HandsUpToolTip(
-            modifier = modifier.width(211.dp),
+            modifier = modifier.width(size.dp),
         ) {
             Text(
                 text = "$missionName " +
@@ -127,5 +134,5 @@ internal fun MissionToolTip(
 @Preview(name = "MissionToolTop")
 @Composable
 private fun PreviewMissionToolTop() {
-    MissionToolTip()
+    MissionToolTip(IntOffset.Zero, "생산성 향상", )
 }

@@ -1,7 +1,6 @@
 package com.tenday.designsystem.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -18,8 +17,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
@@ -66,23 +65,23 @@ fun HandsUpButton(
 fun HandsUpTabButton(
     title: String,
     selected: Boolean,
-    onSelectClick: () -> Unit,
     onUnselectClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     when {
-        selected -> SelectedTabButton(title, onSelectClick)
-        else -> UnselectedTabButton(title, onUnselectClick)
+        selected -> SelectedTabButton(title, modifier)
+        else -> UnselectedTabButton(title, onUnselectClick, modifier)
     }
 }
 
 @Composable
 private fun SelectedTabButton(
     title: String,
-    onSelectClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
         modifier = modifier
+            .fillMaxWidth()
             .blurShadow(
                 borderRadius = Dimens.cornerShape8,
                 blurRadius = 4.dp,
@@ -93,23 +92,18 @@ private fun SelectedTabButton(
                 color = White,
                 shape = RoundedCornerShape(Dimens.cornerShape8),
             )
-            .clip(
-                shape = RoundedCornerShape(Dimens.cornerShape8),
-            )
-            .clickable(
-                onClick = onSelectClick,
-            )
             .padding(
-                horizontal = Dimens.margin11,
                 vertical = Dimens.margin8,
             )
     ) {
         Text(
+            modifier = modifier.fillMaxWidth(),
             text = title,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.Bold,
                 color = HandsUpOrange,
-            )
+            ),
+            textAlign = TextAlign.Center,
         )
     }
 }
@@ -122,20 +116,22 @@ private fun UnselectedTabButton(
 ) {
     Box(
         modifier = modifier
+            .fillMaxWidth()
             .noRippleClickable(
                 onClick = onUnselectClick
             )
             .padding(
-                horizontal = Dimens.margin11,
                 vertical = Dimens.margin8,
             )
     ) {
         Text(
+            modifier = modifier.fillMaxWidth(),
             text = title,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.Medium,
                 color = Gray600,
-            )
+            ),
+            textAlign = TextAlign.Center,
         )
     }
 }
@@ -159,7 +155,6 @@ private fun Preview() {
             HandsUpTabButton(
                 "리더부여",
                 selected,
-                { selected = !selected },
                 { selected = !selected },
             )
         }
