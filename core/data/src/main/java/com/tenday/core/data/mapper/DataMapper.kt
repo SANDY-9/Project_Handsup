@@ -5,6 +5,7 @@ import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.BoardDetails
+import com.tenday.core.model.Exp
 import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails
 import com.tenday.network.model.UserResponse
@@ -53,4 +54,12 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         totalExpLastYear = totalExpLastYear,
         username = username,
     )
+}
+
+internal fun List<Exp>.toExpList(): List<Exp> {
+    return map {
+        it.copy(
+            expAt = it.expAt.toDate()
+        )
+    }
 }
