@@ -30,11 +30,11 @@ internal fun List<NotificationDetails>.toNotificationDetails(): List<Notificatio
     }
 }
 
-private fun String.toBadgeCode(): BadgeCode {
+private fun String?.toBadgeCode(): BadgeCode {
     return try {
-        BadgeCode.valueOf(this)
-    } catch (e: IllegalArgumentException) {
-        BadgeCode.ANNUAL_MVP_2024
+        BadgeCode.valueOf(this!!)
+    } catch (e: Exception) {
+        BadgeCode.NULL
     }
 }
 

@@ -12,7 +12,7 @@ data class UserResponse(
     val jobGroup: Int,
     val jobLevel: String,
     val possibleBadgeCodeList: List<String>,
-    val profileBadgeCode: String,
+    val profileBadgeCode: String? = null,
     val profileImageCode: String,
     val totalExpLastYear: Int,
     val username: String

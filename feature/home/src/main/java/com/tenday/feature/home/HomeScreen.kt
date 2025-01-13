@@ -168,6 +168,7 @@ private fun PreviewHomeScreen() {
                 jobLevel = "F1-Ⅰ",
                 totalExpLastYear = 5000,
                 profileImageCode = ProfileCode.F_A,
+                profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
                 possibleBadgeCodeList = emptyList()
             )
         ),

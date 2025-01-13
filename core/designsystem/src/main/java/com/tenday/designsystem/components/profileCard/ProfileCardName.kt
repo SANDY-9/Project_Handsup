@@ -44,5 +44,5 @@ internal fun ProfileCardName(
 @Preview(name = "ProfileCardName")
 @Composable
 private fun PreviewProfileCardName() {
-    ProfileCardName("김민수", "파트장", BadgeCode.A)
+    ProfileCardName("김민수", "파트장", BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR)
 }
