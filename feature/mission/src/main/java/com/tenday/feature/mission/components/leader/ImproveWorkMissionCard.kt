@@ -69,5 +69,5 @@ internal fun ImproveWorkMissionCard(
 @Preview(name = "ImproveWorkMissionCard")
 @Composable
 private fun PreviewImproveWorkMissionCard() {
-    ImproveWorkMissionCard("음성 1센터", 1, {})
+    ImproveWorkMissionCard("음성 1센터", 1, {},)
 }

@@ -1,7 +1,6 @@
 package com.tenday.feature.mission.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
@@ -32,96 +31,91 @@ internal fun MissionToolTip(
     maxPoint: Int = 80,
     minPoint: Int = 40,
     width: Dp = 211.dp,
-    parentModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
-    Box(
-        modifier = parentModifier,
+    HandsUpToolTip(
+        modifier = modifier.width(width),
     ) {
-        HandsUpToolTip(
-            modifier = modifier.width(width),
-        ) {
-            Text(
-                text = "$missionName " +
-                        stringResource(R.string.mission_tool_tip_desc1),
-                style = HandsUpTypography.body4.copy(
-                    fontWeight = FontWeight.SemiBold,
-                    color = White,
-                )
+        Text(
+            text = "$missionName " +
+                    stringResource(R.string.mission_tool_tip_desc1),
+            style = HandsUpTypography.body4.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = White,
+            )
 
+        )
+        Spacer(modifier = modifier.height(Dimens.margin2))
+        Text(
+            text = stringResource(R.string.mission_tool_tip_desc2),
+            style = HandsUpTypography.body4.copy(
+                fontWeight = FontWeight.SemiBold,
+                color = White,
             )
-            Spacer(modifier = modifier.height(Dimens.margin2))
+        )
+        Spacer(modifier = modifier.height(Dimens.margin6))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                modifier = modifier.size(16.dp),
+                imageVector = Icons.CheckMax,
+                contentDescription = null,
+            )
+            Spacer(modifier = modifier.width(Dimens.margin4))
             Text(
-                text = stringResource(R.string.mission_tool_tip_desc2),
+                text = stringResource(R.string.mission_tool_tip_desc_max),
                 style = HandsUpTypography.body4.copy(
-                    fontWeight = FontWeight.SemiBold,
+                    fontWeight = FontWeight.Medium,
                     color = White,
                 )
             )
-            Spacer(modifier = modifier.height(Dimens.margin6))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Image(
-                    modifier = modifier.size(16.dp),
-                    imageVector = Icons.CheckMax,
-                    contentDescription = null,
+            Spacer(modifier = modifier.weight(1f))
+            Text(
+                text = "$maxPoint",
+                style = HandsUpTypography.body4.copy(
+                    fontWeight = FontWeight.ExtraBold,
+                    color = White,
                 )
-                Spacer(modifier = modifier.width(Dimens.margin4))
-                Text(
-                    text = stringResource(R.string.mission_tool_tip_desc_max),
-                    style = HandsUpTypography.body4.copy(
-                        fontWeight = FontWeight.Medium,
-                        color = White,
-                    )
+            )
+            Spacer(modifier = modifier.width(Dimens.margin2))
+            Image(
+                modifier = modifier.size(12.dp),
+                imageVector = Icons.Dodoong,
+                contentDescription = null,
+            )
+        }
+        Spacer(modifier = modifier.height(Dimens.margin6))
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Image(
+                modifier = modifier.size(16.dp),
+                imageVector = Icons.CheckMedium,
+                contentDescription = null,
+            )
+            Spacer(modifier = modifier.width(Dimens.margin4))
+            Text(
+                text = stringResource(R.string.mission_tool_tip_desc_medium),
+                style = HandsUpTypography.body4.copy(
+                    fontWeight = FontWeight.Medium,
+                    color = White,
                 )
-                Spacer(modifier = modifier.weight(1f))
-                Text(
-                    text = "$maxPoint",
-                    style = HandsUpTypography.body4.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        color = White,
-                    )
+            )
+            Spacer(modifier = modifier.weight(1f))
+            Text(
+                text = "$minPoint",
+                style = HandsUpTypography.body4.copy(
+                    fontWeight = FontWeight.ExtraBold,
+                    color = White,
                 )
-                Spacer(modifier = modifier.width(Dimens.margin2))
-                Image(
-                    modifier = modifier.size(12.dp),
-                    imageVector = Icons.Dodoong,
-                    contentDescription = null,
-                )
-            }
-            Spacer(modifier = modifier.height(Dimens.margin6))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
-                Image(
-                    modifier = modifier.size(16.dp),
-                    imageVector = Icons.CheckMedium,
-                    contentDescription = null,
-                )
-                Spacer(modifier = modifier.width(Dimens.margin4))
-                Text(
-                    text = stringResource(R.string.mission_tool_tip_desc_medium),
-                    style = HandsUpTypography.body4.copy(
-                        fontWeight = FontWeight.Medium,
-                        color = White,
-                    )
-                )
-                Spacer(modifier = modifier.weight(1f))
-                Text(
-                    text = "$minPoint",
-                    style = HandsUpTypography.body4.copy(
-                        fontWeight = FontWeight.ExtraBold,
-                        color = White,
-                    )
-                )
-                Spacer(modifier = modifier.width(Dimens.margin2))
-                Image(
-                    modifier = modifier.size(12.dp),
-                    imageVector = Icons.Dodoong,
-                    contentDescription = null,
-                )
-            }
+            )
+            Spacer(modifier = modifier.width(Dimens.margin2))
+            Image(
+                modifier = modifier.size(12.dp),
+                imageVector = Icons.Dodoong,
+                contentDescription = null,
+            )
         }
     }
 }

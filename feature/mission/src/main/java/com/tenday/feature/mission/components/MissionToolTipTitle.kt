@@ -63,13 +63,15 @@ private fun JopFamilyBadge(
   modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.background(
-            color = TransparentBlack16,
-            shape = RoundedCornerShape(Dimens.cornerShape4),
-        ).padding(
-            vertical = Dimens.margin2,
-            horizontal = Dimens.margin6,
-        )
+        modifier = modifier
+            .background(
+                color = TransparentBlack16,
+                shape = RoundedCornerShape(Dimens.cornerShape4),
+            )
+            .padding(
+                vertical = Dimens.margin2,
+                horizontal = Dimens.margin6,
+            )
     ) {
         Text(
             text = "${jobFamily} · ${jobGroup}그룹",
@@ -87,9 +89,10 @@ private fun JopFamilyBadge(
 @Preview
 private fun Preview() {
     Box(
-        modifier = Modifier.background(color = Color.Gray)
+        modifier = Modifier
+            .background(color = Color.Gray)
             .padding(10.dp)
     ) {
-        MissionToolTipTitle("음성 1센터", 1, {})
+        MissionToolTipTitle("음성 1센터", 1, {},)
     }
 }
