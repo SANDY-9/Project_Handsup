@@ -1,8 +1,8 @@
 package com.tenday.feature.mission.components.leader
 
+import android.content.res.Configuration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,13 +22,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.designsystem.components.missionCard.MonthlyMissionCard
@@ -48,9 +49,10 @@ internal fun MissionLeaderView(
     modifier: Modifier = Modifier
 ) {
     var type by remember { mutableStateOf("업무개선") }
-    var visibleTable by rememberSaveable { mutableStateOf(true) }
-    var visibleImproveToolTip by rememberSaveable { mutableStateOf(false) }
-    var visibleSpecialToolTip by rememberSaveable { mutableStateOf(false) }
+    var visibleTable by remember { mutableStateOf(true) }
+    var visibleImproveToolTip by remember { mutableStateOf(false) }
+    var visibleSpecialToolTip by remember { mutableStateOf(false) }
+
     val pagerState = rememberPagerState (
         pageCount = { 2 }
     )
@@ -89,13 +91,15 @@ internal fun MissionLeaderView(
                     .fillMaxWidth()
                     .background(color = White),
                 state = pagerState,
-                pageSize = PageSize.Fixed(300.dp),
+                pageSize = PageSize.Fixed(
+                    calculatePage(LocalConfiguration.current)
+                ),
                 pageSpacing = Dimens.margin8,
                 contentPadding = PaddingValues(
                     start = Dimens.margin20,
                     end = Dimens.margin20,
                     bottom = Dimens.margin16
-                )
+                ),
             ) { page ->
                 when(page) {
                     0 -> ImproveWorkMissionCard(
@@ -185,7 +189,19 @@ internal fun MissionLeaderView(
     }
 }
 
-@Preview(name = "MissionLeaderView")
+@Composable
+private fun calculatePage(
+    configuration: Configuration,
+    maxPageWidth: Dp = 392.dp,
+    widthRate: Float = 0.85f,
+): Dp {
+    val screenWidth = configuration.screenWidthDp.dp
+    val rateWidth = remember { screenWidth * widthRate }
+    val pageWidth = remember { minOf(rateWidth, maxPageWidth) }
+    return pageWidth
+}
+
+@Preview(name = "MissionLeaderView", widthDp = 500)
 @Composable
 private fun PreviewMissionLeaderView() {
     Box {
