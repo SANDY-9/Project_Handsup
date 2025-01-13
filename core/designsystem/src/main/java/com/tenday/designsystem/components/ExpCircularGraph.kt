@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -28,10 +29,12 @@ private val pieChartGradientBrush = Brush.linearGradient(
 
 @Composable
 fun ExpCircularGraph(
-    progress: Float,
+    currentYearExp: Int,
     avg: Int = 9000,
     modifier: Modifier = Modifier
 ) {
+    val progress = remember { currentYearExp.toFloat() / avg.toFloat() }
+    val percent = remember { String.format("%.1f", progress * 100) }
     Box(
         modifier = modifier.size(140.dp), // 전체 원의 크기 (반경 = 70dp 기준)
         contentAlignment = Alignment.Center
@@ -82,7 +85,7 @@ fun ExpCircularGraph(
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             Text(
-                text = "${(progress * 100).toInt()}%",
+                text = "${percent}%",
                 style = HandsUpTypography.title3,
                 color = HandsUpOrange,
             )
@@ -100,5 +103,5 @@ fun ExpCircularGraph(
 @Preview(name = "ExpCircularGraph")
 @Composable
 private fun PreviewExpCircularGraph() {
-    ExpCircularGraph(0.75f)
+    ExpCircularGraph(5730)
 }

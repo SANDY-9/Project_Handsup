@@ -32,6 +32,8 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyExpThisYearCard(
+    currentYearExp: Int,
+    expectLevel: String,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -48,12 +50,12 @@ internal fun MyExpThisYearCard(
                 )
                 Spacer(modifier = modifier.height(Dimens.margin16))
                 Row {
-                    ExpCircularGraph(0.75f)
+                    ExpCircularGraph(currentYearExp = currentYearExp)
                     Spacer(modifier = modifier.width(Dimens.margin12))
                     Column {
-                        ThisYearExpCard(400)
+                        ThisYearExpCard(exp = currentYearExp)
                         Spacer(modifier = modifier.height(Dimens.margin6))
-                        ExpectLevelCard()
+                        ExpectLevelCard(expectLevel = expectLevel)
                     }
                 }
             }
@@ -104,6 +106,7 @@ private fun ThisYearExpCard(
 
 @Composable
 private fun ExpectLevelCard(
+    expectLevel: String,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -120,7 +123,7 @@ private fun ExpectLevelCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "F1-II",
+                text = expectLevel,
                 style = HandsUpTypography.title4.copy(
                     fontWeight = FontWeight.ExtraBold,
                 )
@@ -142,6 +145,6 @@ private fun PreviewMyExpThisYearCard() {
     Box(
         modifier = Modifier.padding(10.dp)
     ) {
-        MyExpThisYearCard()
+        MyExpThisYearCard(6000,"B1")
     }
 }

@@ -74,7 +74,10 @@ internal fun MyExpScreen(
                     ExpMissionBanner(
                         userName = user.username,
                     )
-                    MyExpThisYearCard()
+                    MyExpThisYearCard(
+                        currentYearExp = data.currentYearExp,
+                        expectLevel = data.expectedLevel,
+                    )
                     MyExpLastYearCard()
                     MyExpHistory()
                 }
