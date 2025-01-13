@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.extentions.toData
+import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.ArrowBottom
@@ -40,6 +41,8 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyExpHistory(
+    year: Int,
+    expList: List<Exp>,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -52,14 +55,14 @@ internal fun MyExpHistory(
                     .fillMaxWidth()
                     .padding(Dimens.margin20),
             ) {
-                MyExpHistoryHeader()
+                MyExpHistoryHeader(year = year)
                 Spacer(modifier = modifier.height(Dimens.margin12))
-                repeat(10) {
+                expList.forEach { data ->
                     MyExpHistoryItem(
-                        missionName = "직무미션",
-                        expName = listOf("생산성 향상", "월특근", "업무 개선").random(),
-                        date = "2025.02.02",
-                        exp = (10..3000).random()
+                        missionName = data.questName,
+                        expName = data.expType.quest,
+                        date = data.expAt,
+                        exp = data.exp
                     )
                 }
             }
@@ -69,6 +72,7 @@ internal fun MyExpHistory(
 
 @Composable
 private fun MyExpHistoryHeader(
+    year: Int,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -76,7 +80,7 @@ private fun MyExpHistoryHeader(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "2025년",
+            text = "${year}년",
             style = HandsUpTypography.title4.copy(
                 fontWeight = FontWeight.ExtraBold,
             )
@@ -95,14 +99,14 @@ private fun MyExpHistoryHeader(
                     color = HandsUpOrangeSub,
                     shape = CircleShape,
                 )
+                .clip(CircleShape)
+                .clickable(onClick = {})
                 .padding(
                     start = Dimens.margin16,
                     end = Dimens.margin12,
                     top = Dimens.margin6,
                     bottom = Dimens.margin6,
                 )
-                .clip(CircleShape)
-                .clickable(onClick = {})
         ) {
             Text(
                 text = stringResource(R.string.exp_history_sort_all),
@@ -179,5 +183,5 @@ private fun MyExpHistoryItem(
 @Preview(name = "MyExpHistory")
 @Composable
 private fun PreviewMyExpHistory() {
-    MyExpHistory()
+    MyExpHistory(2025, listOf())
 }

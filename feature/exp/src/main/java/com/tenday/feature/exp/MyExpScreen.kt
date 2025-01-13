@@ -84,7 +84,10 @@ internal fun MyExpScreen(
                         lastYearExp = data.lastYearExp,
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
                     )
-                    MyExpHistory()
+                    MyExpHistory(
+                        year = 2025,
+                        expList = data.expList,
+                    )
                 }
             }
         }
