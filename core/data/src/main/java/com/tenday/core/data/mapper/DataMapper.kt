@@ -60,7 +60,7 @@ internal fun UserResponse.toUserDetails(): UserDetails {
     )
 }
 
-internal fun List<ExpData>.toExpList(): List<Exp> {
+internal fun List<ExpData>.toExpMap(): Map<Int, List<Exp>> {
     return map {
         Exp(
             exp = it.exp,
@@ -69,6 +69,8 @@ internal fun List<ExpData>.toExpList(): List<Exp> {
             questName = it.questName,
             year = it.year
         )
+    }.groupBy {
+        it.year
     }
 }
 
@@ -77,7 +79,7 @@ internal fun ExpResponse.toExpDetails(): ExpDetails {
         currentLevel = currentLevel,
         currentYearExp = currentYearExp,
         expCount = expCount,
-        expList = expList.toExpList(),
+        expList = expList.toExpMap(),
         expToNextLevel = expToNextLevel,
         expectedLevel = expectedLevel,
         jobFamily = JobFamily.valueOf(jobFamily),

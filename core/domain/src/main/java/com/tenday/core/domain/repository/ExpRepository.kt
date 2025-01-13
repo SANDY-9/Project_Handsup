@@ -4,6 +4,6 @@ import com.tenday.core.model.Exp
 import com.tenday.core.model.ExpDetails
 
 interface ExpRepository {
-    suspend fun getLastExpList(token: String, listSize: Int): List<Exp>
+    suspend fun getLastExpList(token: String, listSize: Int): Map<Int, List<Exp>>
     suspend fun getExpDetails(token: String): ExpDetails
 }

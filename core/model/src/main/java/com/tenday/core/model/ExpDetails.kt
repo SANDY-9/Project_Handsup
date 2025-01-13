@@ -8,7 +8,7 @@ data class ExpDetails(
     val currentLevel: String,
     val currentYearExp: Int,
     val expCount: Int,
-    val expList: List<Exp>,
+    val expList: Map<Int, List<Exp>>,
     val expToNextLevel: Int,
     val expectedLevel: String,
     val jobFamily: JobFamily,

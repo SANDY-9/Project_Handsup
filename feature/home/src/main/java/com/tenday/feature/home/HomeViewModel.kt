@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
+import com.tenday.core.model.Exp
 import com.tenday.feature.home.model.ExpListState
 import com.tenday.feature.home.model.UserDetailsState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -55,13 +56,21 @@ internal class HomeViewModel @Inject constructor(
                 if (data.isEmpty()) {
                     _expState.value = ExpListState.EmptyExp
                 } else {
-                    _expState.value = ExpListState.Success(data)
+                    _expState.value = ExpListState.Success(data.toExpList())
                 }
             }
             .catch {
                 _expState.value = ExpListState.Fail
             }
             .launchIn(viewModelScope)
+    }
+
+    private fun Map<Int, List<Exp>>.toExpList(): List<Exp> {
+        return values
+            .flatten()
+            .sortedByDescending {
+                it.expAt
+            }
     }
 
 }

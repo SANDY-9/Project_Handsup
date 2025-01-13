@@ -19,7 +19,6 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -37,8 +36,8 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyRemainingExpCard(
-    currentValue: Int,
-    maxValue: Int = 27000,
+    currentExp: Int,
+    requireExp: Int,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -66,7 +65,7 @@ internal fun MyRemainingExpCard(
             Spacer(modifier = modifier.height(Dimens.margin4))
             Row {
                 Text(
-                    text = currentValue.toData(),
+                    text = currentExp.toData(),
                     style = HandsUpTypography.body1.copy(
                         fontWeight = FontWeight.ExtraBold,
                     ),
@@ -98,7 +97,7 @@ internal fun MyRemainingExpCard(
             Spacer(modifier = modifier.height(Dimens.margin4))
             Row {
                 Text(
-                    text = (maxValue - currentValue).toData(),
+                    text = requireExp.toData(),
                     style = HandsUpTypography.body1.copy(
                         fontWeight = FontWeight.SemiBold,
                     ),
@@ -123,6 +122,6 @@ private fun PreviewMyRemainingExpCard() {
             .background(color = HandsUpNavy)
             .padding(20.dp)
     ) {
-        MyRemainingExpCard(14000)
+        MyRemainingExpCard(14000, 13000)
     }
 }

@@ -25,6 +25,10 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyExpLastYearCard(
+    currentLevel: String,
+    previousLevel: String,
+    lastYearExp: Int,
+    currentLevelTotalExp: Int,
     modifier: Modifier = Modifier
 ) {
     HandsUpShadowCard(
@@ -48,7 +52,10 @@ internal fun MyExpLastYearCard(
                     )
                 )
                 Spacer(modifier = modifier.height(Dimens.margin12))
-                LevelGraph(13000)
+                LevelGraph(
+                    currentValue = lastYearExp,
+                    maxValue = currentLevelTotalExp,
+                )
                 Spacer(modifier = modifier.height(Dimens.margin8))
                 Row {
                     Text(
@@ -61,7 +68,7 @@ internal fun MyExpLastYearCard(
                                 vertical = Dimens.margin2,
                                 horizontal = Dimens.margin6,
                             ),
-                        text = "F1-II",
+                        text = previousLevel,
                         style = HandsUpTypography.body3.copy(
                             fontWeight = FontWeight.Bold,
                         )
@@ -77,7 +84,7 @@ internal fun MyExpLastYearCard(
                                 vertical = Dimens.margin2,
                                 horizontal = Dimens.margin6,
                             ),
-                        text = "F1-III",
+                        text = currentLevel,
                         style = HandsUpTypography.body3.copy(
                             fontWeight = FontWeight.Bold,
                         )
@@ -91,5 +98,9 @@ internal fun MyExpLastYearCard(
 @Preview(name = "MyExpLastYearCard")
 @Composable
 private fun PreviewMyExpLastYearCard() {
-    MyExpLastYearCard()
+    MyExpLastYearCard(
+        "F1-Ⅰ", "F1-Ⅰ",
+        lastYearExp = 1200,
+        currentLevelTotalExp = 6000,
+    )
 }
