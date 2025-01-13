@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
@@ -24,7 +25,7 @@ import com.tenday.feature.mission.components.MissionToolTipTitle
 internal fun JobMissionCard(
     jobFamily: String,
     jobGroup: Int,
-    onShowTooltip: () -> Unit,
+    onShowTooltip: (IntOffset) -> Unit,
     visibleTable: Boolean = true,
     modifier: Modifier = Modifier,
 ) {
@@ -35,7 +36,7 @@ internal fun JobMissionCard(
         MissionToolTipTitle(
             jobFamily = jobFamily,
             jobGroup = jobGroup,
-            onShowTooltip = {},
+            onShowTooltip = onShowTooltip,
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
