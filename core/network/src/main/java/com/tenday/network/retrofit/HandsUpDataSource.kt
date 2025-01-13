@@ -13,6 +13,6 @@ interface HandsUpDataSource {
     suspend fun getNotificationList(token: String): List<NotificationDetails>
     suspend fun getUserDetails(token: String): UserResponse
     suspend fun updateMessagingToken(accessToken: String, messagingToken: String): Boolean
-    suspend fun getLastExpList(token: String): List<ExpData>
+    suspend fun getLastExpList(token: String, listSize: Int): List<ExpData>
     suspend fun getExpDetails(token: String): ExpResponse
 }

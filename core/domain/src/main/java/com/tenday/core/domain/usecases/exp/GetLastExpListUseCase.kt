@@ -11,10 +11,17 @@ class GetLastExpListUseCase @Inject constructor(
     private val expRepository: ExpRepository,
     private val authPrefsRepository: AuthPrefsRepository,
 ) {
-    operator fun invoke(): Flow<List<Exp>> {
+    operator fun invoke(
+        listSize: Int,
+    ): Flow<List<Exp>> {
         return flow {
             val accessToken = authPrefsRepository.getAccessToken() ?: ""
-            emit(expRepository.getLastExpList(accessToken))
+            emit(
+                expRepository.getLastExpList(
+                    token = accessToken,
+                    listSize = listSize
+                )
+            )
         }
     }
 }

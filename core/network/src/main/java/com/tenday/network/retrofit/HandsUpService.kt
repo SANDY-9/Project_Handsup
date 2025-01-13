@@ -43,8 +43,11 @@ internal class HandsUpService @Inject constructor(
         return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
     }
 
-    override suspend fun getLastExpList(token: String): List<ExpData> {
-        return api.getExpDetails(token.toHeader()).expList.sortedBy { it.expAt }.takeLast(3)
+    override suspend fun getLastExpList(
+        token: String,
+        listSize: Int,
+    ): List<ExpData> {
+        return api.getExpDetails(token.toHeader()).expList.take(listSize)
     }
 
     override suspend fun getExpDetails(token: String): ExpResponse {

@@ -48,7 +48,9 @@ internal class HomeViewModel @Inject constructor(
     }
 
     private fun fetchExpList() {
-        getLastExpListUseCase()
+        getLastExpListUseCase(
+            listSize = 3
+        )
             .onEach { data ->
                 if (data.isEmpty()) {
                     _expState.value = ExpListState.EmptyExp

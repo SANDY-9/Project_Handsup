@@ -9,7 +9,7 @@ import javax.inject.Inject
 internal class ExpRepositoryImpl @Inject constructor(
     private val handsUpDataSource: HandsUpDataSource,
 ) : ExpRepository {
-    override suspend fun getLastExpList(token: String): List<Exp> {
-        return handsUpDataSource.getLastExpList(token).toExpList()
+    override suspend fun getLastExpList(token: String, listSize: Int,): List<Exp> {
+        return handsUpDataSource.getLastExpList(token, listSize).toExpList()
     }
 }
