@@ -23,7 +23,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.R
-import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.CardShadow
@@ -40,7 +39,6 @@ fun HandsUpShadowCard(
     clickable: Boolean = false,
     onClick: () -> Unit = {},
     shadowColor: Color = CardShadow,
-    modifier: Modifier = Modifier,
 ) {
     Card(
         modifier = Modifier.blurShadow(
@@ -104,12 +102,18 @@ fun HandsUpTextureCard(
 @Preview
 @Composable
 private fun Preview() {
-    /*HandsUpShadowCard({}, modifier = Modifier
-        .size(100.dp)
-        .padding(20.dp)
-    )*/
-    HandsUpTextureCard(
+    HandsUpShadowCard(
+        content = {
+            Column(
+                modifier = Modifier.size(100.dp)
+                    .padding(20.dp)
+            ) {
+                Text("테스트")
+            }
+        }
+    )
+    /*HandsUpTextureCard(
     ) {
         Text("테스트")
-    }
+    }*/
 }

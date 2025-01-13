@@ -3,4 +3,8 @@
     <string name="home_exp_title">최근 받은 두둥 경험치</string>
     <string name="home_empty_exp_title">아직 받은 두둥 경험치가 없어요.</string>
     <string name="home_empty_exp_desc">핸즈업 미션을 통해 두둥 경험치를 얻어보세요!</string>
+    
+    <string name="home_exp_banner_title1">내가 받은</string>
+    <string name="home_exp_banner_title2">두둥 경험치</string>
+    <string name="home_exp_banner_title3">확인하기</string>
 </resources>

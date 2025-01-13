@@ -9,7 +9,9 @@ object Dimens {
     val cornerShape12 = 12.dp
 
     // margin
+    val margin1 = 1.dp
     val margin2 = 2.dp
+    val margin3 = 3.dp
     val margin4 = 4.dp
     val margin6 = 6.dp
     val margin8 = 8.dp

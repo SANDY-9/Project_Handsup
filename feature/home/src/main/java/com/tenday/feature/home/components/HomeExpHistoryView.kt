@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,6 +23,9 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tenday.core.common.enums.ExpType
+import com.tenday.core.common.extentions.toData
+import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
@@ -31,6 +35,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 
 @Composable
 internal fun HomeExpHistoryView(
+    expList: List<Exp>,
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
@@ -38,78 +43,93 @@ internal fun HomeExpHistoryView(
         contentPadding = PaddingValues(horizontal = Dimens.margin20),
         horizontalArrangement = Arrangement.spacedBy(Dimens.margin8)
     ) {
-        items(5) {
-            ExpHistoryItem()
+        items(expList) { exp ->
+            ExpHistoryItem(exp)
+        }
+        item {
+            HomeExpBanner()
         }
     }
 }
 
 @Composable
 private fun ExpHistoryItem(
+    exp: Exp,
     modifier: Modifier = Modifier,
 ) {
-    Row(
-        modifier = modifier.width(114.dp)
-    ) {
-        HandsUpShadowCard(
-            cornerSize = Dimens.cornerShape8,
-            content = {
-                Column(
-                    modifier = modifier.padding(
-                        horizontal = Dimens.margin12,
-                        vertical = Dimens.margin16,
-                    )
+    HandsUpShadowCard(
+        cornerSize = Dimens.cornerShape8,
+        content = {
+            Column(
+                modifier = modifier.size(
+                    width = 114.dp,
+                    height = 127.dp,
+                ).padding(
+                    horizontal = Dimens.margin12,
+                    vertical = Dimens.margin16,
+                )
+            ) {
+                Text(
+                    text = exp.expType.quest,
+                    style = HandsUpTypography.body4,
+                    color = Gray600,
+                )
+                Spacer(modifier = modifier.height(Dimens.margin2))
+                Text(
+                    text = exp.questName,
+                    style = HandsUpTypography.body2.copy(
+                        fontWeight = FontWeight.Black,
+                    ),
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                )
+                Spacer(modifier = modifier.height(Dimens.margin4))
+                Text(
+                    text = exp.expAt,
+                    style = HandsUpTypography.body2.copy(
+                        fontSize = 10.sp
+                    ),
+                    color = Gray600,
+                )
+                Spacer(modifier = modifier.weight(1f))
+                Row(
+                    modifier = modifier
+                        .fillMaxWidth()
+                        .height(20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.End,
                 ) {
                     Text(
-                        text = "직무미션",
-                        style = HandsUpTypography.body4,
-                        color = Gray600,
-                    )
-                    Spacer(modifier = modifier.height(Dimens.margin2))
-                    Text(
-                        text = "생산성 향상",
-                        style = HandsUpTypography.body2.copy(
-                            fontWeight = FontWeight.Black,
+                        text = exp.exp.toData(),
+                        style = HandsUpTypography.title5.copy(
+                            fontWeight = FontWeight.ExtraBold,
                         ),
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis,
+                        color = HandsUpOrange,
                     )
-                    Spacer(modifier = modifier.height(Dimens.margin4))
-                    Text(
-                        text = "2025.01.03",
-                        style = HandsUpTypography.body2.copy(
-                            fontSize = 10.sp
-                        ),
-                        color = Gray600,
+                    Spacer(modifier = modifier.width(Dimens.margin2))
+                    Image(
+                        modifier = modifier.size(18.dp),
+                        imageVector = Icons.Dodoong,
+                        contentDescription = null,
                     )
-                    Spacer(modifier = modifier.height(Dimens.margin16))
-                    Row(
-                        modifier = modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.End,
-                    ) {
-                        Text(
-                            text = "500",
-                            style = HandsUpTypography.title5.copy(
-                                fontWeight = FontWeight.ExtraBold,
-                            ),
-                            color = HandsUpOrange,
-                        )
-                        Spacer(modifier = modifier.width(Dimens.margin2))
-                        Image(
-                            modifier = modifier.size(18.dp),
-                            imageVector = Icons.Dodoong,
-                            contentDescription = null,
-                        )
-                    }
                 }
             }
-        )
-    }
+        }
+    )
 }
 
 @Preview(name = "HomeExpHistoryView")
 @Composable
 private fun PreviewHomeExpHistoryView() {
-    HomeExpHistoryView()
+    HomeExpHistoryView(
+        listOf(
+            Exp(
+                exp = 50,
+                expAt = "2025.02.13",
+                expType = ExpType.C,
+                questName = "월특근",
+                year = 2025
+            )
+        )
+    )
 }
