@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpToolTip
 import com.tenday.designsystem.dimens.Dimens
@@ -30,6 +31,7 @@ internal fun MissionToolTip(
     missionName: String = "생산성 향상",
     maxPoint: Int = 80,
     minPoint: Int = 40,
+    width: Dp = 211.dp,
     parentModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
 ) {
@@ -37,7 +39,7 @@ internal fun MissionToolTip(
         modifier = parentModifier,
     ) {
         HandsUpToolTip(
-            modifier = modifier.width(211.dp),
+            modifier = modifier.width(width),
         ) {
             Text(
                 text = "$missionName " +

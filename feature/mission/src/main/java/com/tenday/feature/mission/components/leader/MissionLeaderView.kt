@@ -58,6 +58,8 @@ internal fun MissionLeaderView(
     )
     val lazyColumnState = rememberLazyListState()
 
+    val pageWidth = calculatePage(LocalConfiguration.current)
+
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collectLatest { page ->
             type = if(page == 0) "업무개선" else "월특근"
@@ -91,9 +93,7 @@ internal fun MissionLeaderView(
                     .fillMaxWidth()
                     .background(color = White),
                 state = pagerState,
-                pageSize = PageSize.Fixed(
-                    calculatePage(LocalConfiguration.current)
-                ),
+                pageSize = PageSize.Fixed(pageWidth),
                 pageSpacing = Dimens.margin8,
                 contentPadding = PaddingValues(
                     start = Dimens.margin20,
@@ -120,11 +120,15 @@ internal fun MissionLeaderView(
                     )
                 }
             }
+
+            val toolTipWidth = 211.dp
+            val improveToolTipAbsoluteX = remember { pageWidth - toolTipWidth + 35.dp }
             //업무개선 툴팁
             if(visibleImproveToolTip) {
                 MissionToolTip(
+                    width = toolTipWidth,
                     parentModifier = modifier.absoluteOffset(
-                        x = 122.dp,
+                        x = improveToolTipAbsoluteX,
                         y = 42.dp,
                     ),
                     missionName = "업무 개선",
@@ -193,10 +197,10 @@ internal fun MissionLeaderView(
 private fun calculatePage(
     configuration: Configuration,
     maxPageWidth: Dp = 392.dp,
-    widthRate: Float = 0.85f,
+    rate: Float = 0.85f,
 ): Dp {
     val screenWidth = configuration.screenWidthDp.dp
-    val rateWidth = remember { screenWidth * widthRate }
+    val rateWidth = remember { screenWidth * rate }
     val pageWidth = remember { minOf(rateWidth, maxPageWidth) }
     return pageWidth
 }
