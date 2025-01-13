@@ -33,6 +33,7 @@ import com.tenday.designsystem.components.profileCard.ProfileCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Backgroud
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.feature.home.components.HomeExpEmptyView
 import com.tenday.feature.home.components.HomeExpHistoryView
 import com.tenday.feature.home.components.HomeTitleBar
 import com.tenday.feature.home.model.ExpListState
@@ -142,8 +143,8 @@ private fun HomeContentView(
             )
             Spacer(modifier = modifier.height(Dimens.margin12))
             when(exp) {
-                is ExpListState.EmptyExp -> HomeExpHistoryView()
-                is ExpListState.Success -> HomeExpHistoryView()
+                is ExpListState.EmptyExp -> HomeExpEmptyView()
+                is ExpListState.Success -> HomeExpHistoryView(expList = exp.data)
                 else -> {}
             }
             Spacer(modifier = modifier.height(Dimens.margin24))

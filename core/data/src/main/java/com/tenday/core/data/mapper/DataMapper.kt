@@ -1,12 +1,15 @@
 package com.tenday.core.data.mapper
 
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.ExpType
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.BoardDetails
+import com.tenday.core.model.Exp
 import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails
+import com.tenday.network.model.ExpData
 import com.tenday.network.model.UserResponse
 
 private fun String.toDate(): String {
@@ -53,4 +56,16 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         totalExpLastYear = totalExpLastYear,
         username = username,
     )
+}
+
+internal fun List<ExpData>.toExpList(): List<Exp> {
+    return map {
+        Exp(
+            exp = it.exp,
+            expAt = it.expAt.toDate(),
+            expType = ExpType.valueOf(it.expType),
+            questName = it.questName,
+            year = it.year
+        )
+    }
 }
