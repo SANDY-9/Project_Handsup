@@ -93,7 +93,6 @@ private fun SelectedTabButton(
                 shape = RoundedCornerShape(Dimens.cornerShape8),
             )
             .padding(
-                horizontal = Dimens.margin11,
                 vertical = Dimens.margin8,
             )
     ) {
@@ -122,7 +121,6 @@ private fun UnselectedTabButton(
                 onClick = onUnselectClick
             )
             .padding(
-                horizontal = Dimens.margin11,
                 vertical = Dimens.margin8,
             )
     ) {

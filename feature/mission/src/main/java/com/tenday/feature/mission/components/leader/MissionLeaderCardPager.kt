@@ -2,6 +2,7 @@
 package com.tenday.feature.mission.components.leader
 
 import android.content.res.Configuration
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.pager.HorizontalPager
@@ -17,6 +18,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.theme.White
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -42,7 +44,9 @@ internal fun MissionLeaderCardPager(
         }
     }
     HorizontalPager(
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .background(color = White),
         state = pagerState,
         pageSize = PageSize.Fixed(
             pageSize = calculatePage(LocalConfiguration.current)
