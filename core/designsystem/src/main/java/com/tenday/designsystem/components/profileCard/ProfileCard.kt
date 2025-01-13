@@ -108,5 +108,17 @@ fun ProfileCard(
 @Preview(name = "ProfileCard")
 @Composable
 private fun PreviewProfileCard() {
-    // ProfileCard()
+     ProfileCard(
+         department = "음성 1센터",
+         employeeId = "2023010101",
+         hireDate = "2023-01-01",
+         jobFamily = JobFamily.F,
+         jobPosition = "파트장",
+         jobLevel = "F1-Ⅰ",
+         profileBadgeCode = BadgeCode.NULL,
+         profileImageCode = ProfileCode.F_A,
+         totalExpLastYear = 5000,
+         username = "",
+         onNavigateSettings = {  }
+     )
 }

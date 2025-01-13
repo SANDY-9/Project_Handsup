@@ -68,7 +68,9 @@ private fun ExpHistoryItem(
                     Spacer(modifier = modifier.height(Dimens.margin2))
                     Text(
                         text = "생산성 향상",
-                        style = HandsUpTypography.title5,
+                        style = HandsUpTypography.body2.copy(
+                            fontWeight = FontWeight.Black,
+                        ),
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
                     )
