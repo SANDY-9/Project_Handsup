@@ -34,10 +34,12 @@ internal fun MyExpRoute(
 ) {
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
     val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
+    val currentSelectYear by viewModel.currentExpListYear.collectAsStateWithLifecycle()
 
     MyExpScreen(
         user = userDetails ?: return,
         myExpState = myExpState,
+        currentSelectYear = currentSelectYear,
     )
 }
 
@@ -45,6 +47,7 @@ internal fun MyExpRoute(
 internal fun MyExpScreen(
     user: UserDetails,
     myExpState: MyExpState,
+    currentSelectYear: Int,
     modifier: Modifier = Modifier
 ) {
     if(myExpState is MyExpState.Success) {
@@ -85,8 +88,8 @@ internal fun MyExpScreen(
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
                     )
                     MyExpHistory(
-                        year = 2025,
-                        expList = data.expList,
+                        year = currentSelectYear,
+                        expList = data.expList[currentSelectYear] ?: emptyList(),
                     )
                 }
             }
@@ -117,13 +120,14 @@ private fun PreviewExpScreen() {
                 currentLevel = "F1-Ⅰ",
                 currentYearExp = 5730,
                 expCount = 7,
-                expList = emptyList(),
+                expList = emptyMap(),
                 expToNextLevel=7770,
                 expectedLevel="F1-Ⅰ",
                 jobFamily=JobFamily.F,
                 lastYearExp=0,
                 totalExp=5730
             )
-        )
+        ),
+        2025
     )
 }

@@ -16,7 +16,7 @@ import kotlinx.coroutines.flow.shareIn
 import javax.inject.Inject
 
 @HiltViewModel
-class MyExpViewModel @Inject constructor(
+internal class MyExpViewModel @Inject constructor(
     getExpDetailsUseCase: GetExpDetailsUseCase,
     getUserDetailsUseCase: GetUserDetailsUseCase,
 ): ViewModel() {
@@ -29,6 +29,9 @@ class MyExpViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
     )
 
+    private val _currentExpListYear: MutableStateFlow<Int> = MutableStateFlow(2025)
+    val currentExpListYear = _currentExpListYear.asStateFlow()
+
     init {
         getExpDetailsUseCase()
             .onEach { data ->
@@ -36,6 +39,10 @@ class MyExpViewModel @Inject constructor(
             }.catch {
                 _myExpState.value = MyExpState.Fail
             }.launchIn(viewModelScope)
+    }
+
+    fun updateSelectExpYear(year: Int) {
+        _currentExpListYear.value = year
     }
 
 
