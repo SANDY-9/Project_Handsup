@@ -8,6 +8,7 @@ data class UserResponse(
     val employeeId: String,
     val hireDate: String,
     val jobFamily: String,
+    val jobPosition: Int,
     val jobGroup: Int,
     val jobLevel: String,
     val possibleBadgeCodeList: List<String>,

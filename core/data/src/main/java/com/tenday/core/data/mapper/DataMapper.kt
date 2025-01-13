@@ -31,7 +31,11 @@ internal fun List<NotificationDetails>.toNotificationDetails(): List<Notificatio
 }
 
 private fun String.toBadgeCode(): BadgeCode {
-    return BadgeCode.valueOf(this)
+    return try {
+        BadgeCode.valueOf(this)
+    } catch (e: IllegalArgumentException) {
+        BadgeCode.ANNUAL_MVP_2024
+    }
 }
 
 internal fun UserResponse.toUserDetails(): UserDetails {
@@ -40,7 +44,8 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         employeeId = employeeId,
         hireDate = hireDate,
         jobFamily = JobFamily.valueOf(jobFamily),
-        jobPosition = JobPosition.getPosition(jobGroup),
+        jobPosition = JobPosition.getPosition(jobPosition),
+        jobGroup = jobGroup,
         jobLevel = jobLevel,
         possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
         profileBadgeCode = profileBadgeCode.toBadgeCode(),

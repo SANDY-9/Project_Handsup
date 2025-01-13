@@ -13,6 +13,7 @@ data class UserDetails(
     val employeeId: String,
     val hireDate: String,
     val jobFamily: JobFamily,
+    val jobGroup: Int,
     val jobPosition: JobPosition,
     val jobLevel: String,
     val possibleBadgeCodeList: List<BadgeCode>,
