@@ -13,6 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.JobFamily
+import com.tenday.core.common.enums.JobPosition
+import com.tenday.core.common.enums.ProfileCode
+import com.tenday.core.model.ExpDetails
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
@@ -28,10 +33,10 @@ internal fun MyExpRoute(
     viewModel: MyExpViewModel = hiltViewModel()
 ) {
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
-    val userDetails by viewModel.userDetails.collectAsStateWithLifecycle()
+    val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
 
     MyExpScreen(
-        user = userDetails,
+        user = userDetails ?: return,
         myExpState = myExpState,
     )
 }
@@ -52,9 +57,9 @@ internal fun MyExpScreen(
         ) {
             item {
                 MyExpProfile(
-                    level = data.currentLevel,
-                    currentValue = data.totalExp,
-                    maxValue = 27000,
+                    user = user,
+                    currentTotalExp = data.totalExp,
+                    requireExp = data.expToNextLevel,
                 )
             }
             item {
@@ -81,5 +86,33 @@ internal fun MyExpScreen(
 @Preview(name = "ExpScreen")
 @Composable
 private fun PreviewExpScreen() {
-    MyExpScreen()
+    MyExpScreen(
+        UserDetails(
+            employeeId = "2023010101",
+            username = "김민수",
+            hireDate = "2023-01-01",
+            department = "음성 1센터",
+            jobPosition = JobPosition.파트장,
+            jobGroup = 1,
+            jobFamily = JobFamily.F,
+            jobLevel = "F1-Ⅰ",
+            totalExpLastYear = 5000,
+            profileImageCode = ProfileCode.F_A,
+            profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
+            possibleBadgeCodeList = emptyList()
+        ),
+        MyExpState.Success(
+            ExpDetails(
+                currentLevel = "F1-Ⅰ",
+                currentYearExp = 5730,
+                expCount = 7,
+                expList = emptyList(),
+                expToNextLevel=7770,
+                expectedLevel="F1-Ⅰ",
+                jobFamily=JobFamily.F,
+                lastYearExp=0,
+                totalExp=5730
+            )
+        )
+    )
 }

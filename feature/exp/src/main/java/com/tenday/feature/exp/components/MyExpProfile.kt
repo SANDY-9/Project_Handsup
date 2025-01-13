@@ -22,6 +22,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.JobFamily
+import com.tenday.core.common.enums.JobPosition
+import com.tenday.core.common.enums.ProfileCode
+import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.extentions.svgPath
@@ -33,9 +38,9 @@ import com.tenday.feature.exp.R
 
 @Composable
 internal fun MyExpProfile(
-    level: String,
-    currentValue: Int,
-    maxValue: Int,
+    user: UserDetails,
+    currentTotalExp: Int,
+    requireExp: Int,
     modifier: Modifier = Modifier
 ) {
     Column (
@@ -73,7 +78,7 @@ internal fun MyExpProfile(
         Spacer(modifier = modifier.height(Dimens.margin8))
         Image(
             modifier = modifier.size(100.dp),
-            painter = svgImageLoader(level.svgPath()),
+            painter = svgImageLoader(user.jobLevel.svgPath()),
             contentDescription = null,
         )
         Spacer(modifier = modifier.height(Dimens.margin16))
@@ -81,14 +86,14 @@ internal fun MyExpProfile(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = stringResource(R.string.exp_desc_prefix, "김민수"),
+                text = stringResource(R.string.exp_desc_prefix, user.username),
                 style = HandsUpTypography.body1.copy(
                     color = White,
                 )
             )
             Spacer(modifier = modifier.width(Dimens.margin4))
             Text(
-                text = "F1-II",
+                text = user.jobLevel,
                 style = HandsUpTypography.body1.copy(
                     fontWeight = FontWeight.ExtraBold,
                     color = White,
@@ -104,13 +109,13 @@ internal fun MyExpProfile(
         }
         Spacer(modifier = modifier.height(Dimens.margin16))
         MyExpLinearGraph(
-            currentValue = currentValue,
-            maxValue = maxValue,
+            currentValue = currentTotalExp,
+            maxValue = currentTotalExp + requireExp,
         )
         Spacer(modifier = modifier.height(Dimens.margin20))
         MyRemainingExpCard(
-            currentValue = currentValue,
-            maxValue = maxValue,
+            currentExp = currentTotalExp,
+            requireExp = requireExp,
         )
     }
 }
@@ -118,5 +123,20 @@ internal fun MyExpProfile(
 @Preview(name = "MyExpProfile")
 @Composable
 private fun PreviewMyExpProfile() {
-    MyExpProfile("F1-Ⅰ", 13000, 27000)
+    MyExpProfile(
+        UserDetails(
+            employeeId = "2023010101",
+            username = "김민수",
+            hireDate = "2023-01-01",
+            department = "음성 1센터",
+            jobPosition = JobPosition.파트장,
+            jobGroup = 1,
+            jobFamily = JobFamily.F,
+            jobLevel = "F1-Ⅰ",
+            totalExpLastYear = 5000,
+            profileImageCode = ProfileCode.F_A,
+            profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
+            possibleBadgeCodeList = emptyList()
+        ), 13000, 27000
+    )
 }
