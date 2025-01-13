@@ -163,11 +163,12 @@ private fun PreviewHomeScreen() {
                 hireDate = "2023-01-01",
                 department = "음성 1센터",
                 jobPosition = JobPosition.파트장,
+                jobGroup = 1,
                 jobFamily = JobFamily.F,
                 jobLevel = "F1-Ⅰ",
                 totalExpLastYear = 5000,
                 profileImageCode = ProfileCode.F_A,
-                profileBadgeCode = BadgeCode.B,
+                profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
                 possibleBadgeCodeList = emptyList()
             )
         ),
