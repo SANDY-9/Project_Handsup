@@ -7,9 +7,11 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.Exp
+import com.tenday.core.model.ExpDetails
 import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails
 import com.tenday.network.model.ExpData
+import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.UserResponse
 
 private fun String.toDate(): String {
@@ -68,4 +70,18 @@ internal fun List<ExpData>.toExpList(): List<Exp> {
             year = it.year
         )
     }
+}
+
+internal fun ExpResponse.toExpDetails(): ExpDetails {
+    return ExpDetails(
+        currentLevel = currentLevel,
+        currentYearExp = currentYearExp,
+        expCount = expCount,
+        expList = expList.toExpList(),
+        expToNextLevel = expToNextLevel,
+        expectedLevel = expectedLevel,
+        jobFamily = JobFamily.valueOf(jobFamily),
+        lastYearExp = lastYearExp,
+        totalExp = totalExp,
+    )
 }
