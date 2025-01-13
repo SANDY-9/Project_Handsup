@@ -14,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
@@ -25,6 +26,8 @@ internal fun MissionLeaderCardPager(
     jobGroup: Int,
     visibleTable: Boolean,
     onPageChange: (Int) -> Unit,
+    onShowImproveToolTip: (IntOffset) -> Unit,
+    onShowSpecialTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState (pageCount = { 2 })
@@ -51,13 +54,13 @@ internal fun MissionLeaderCardPager(
                 jobFamily = jobFamily,
                 jobGroup = jobGroup,
                 visibleTable = visibleTable,
-                onShowImproveToolTip = {},
+                onShowImproveToolTip = onShowImproveToolTip,
             )
             else -> SpecialWorkMissionCard(
                 jobFamily = jobFamily,
                 jobGroup = jobGroup,
                 visibleTable = visibleTable,
-                onShowTooltip = {},
+                onShowSpecialTooltip = onShowSpecialTooltip,
             )
         }
     }
@@ -79,5 +82,5 @@ private fun calculatePage(
 @Preview(name = "MissionLeaderCardPager")
 @Composable
 private fun PreviewMissionLeaderCardPager() {
-    MissionLeaderCardPager("음성 1센터", 1,true, {})
+    MissionLeaderCardPager("음성 1센터", 1,true, {}, {}, {})
 }

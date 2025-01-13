@@ -11,12 +11,20 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 import androidx.compose.ui.unit.sp
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
@@ -31,9 +39,10 @@ import com.tenday.feature.mission.R
 internal fun MissionToolTipTitle(
     jobFamily: String,
     jobGroup: Int,
-    onShowTooltip: () -> Unit,
+    onShowTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var tooltipIconPosition by remember { mutableStateOf(IntOffset.Zero) }
     Row(
         modifier = modifier,
     ) {
@@ -48,7 +57,13 @@ internal fun MissionToolTipTitle(
         )
         Spacer(modifier = modifier.width(Dimens.margin4))
         Icon(
-            modifier = modifier.noRippleClickable(onClick = onShowTooltip),
+            modifier = modifier
+                .onGloballyPositioned {
+                    tooltipIconPosition = it.boundsInRoot().bottomCenter.round()
+                }
+                .noRippleClickable(
+                    onClick = { onShowTooltip(tooltipIconPosition) }
+                ),
             imageVector = Icons.Info,
             contentDescription = null,
             tint = White,

@@ -35,7 +35,7 @@ internal fun JobMissionCard(
         MissionToolTipTitle(
             jobFamily = jobFamily,
             jobGroup = jobGroup,
-            onShowTooltip = onShowTooltip,
+            onShowTooltip = {},
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(

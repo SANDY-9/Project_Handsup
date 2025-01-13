@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.designsystem.components.missionCard.WeeklyMissionCard
@@ -81,6 +82,7 @@ internal fun MissionJobView(
             }
             if(visibleToolTip) {
                 MissionToolTip(
+                    position = IntOffset.Zero,
                     missionName = "생산성향상",
                 )
             }
