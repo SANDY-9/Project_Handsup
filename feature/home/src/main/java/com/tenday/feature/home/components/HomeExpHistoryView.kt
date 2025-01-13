@@ -29,6 +29,7 @@ import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
+import com.tenday.designsystem.theme.Gray500
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -63,7 +64,7 @@ private fun ExpHistoryItem(
             Column(
                 modifier = modifier.size(
                     width = 114.dp,
-                    height = 127.dp,
+                    height = 129.dp,
                 ).padding(
                     horizontal = Dimens.margin12,
                     vertical = Dimens.margin16,
@@ -71,25 +72,27 @@ private fun ExpHistoryItem(
             ) {
                 Text(
                     text = exp.expType.quest,
-                    style = HandsUpTypography.body4,
+                    style = HandsUpTypography.body4.copy(
+                        fontSize = 10.sp
+                    ),
                     color = Gray600,
                 )
                 Spacer(modifier = modifier.height(Dimens.margin2))
                 Text(
                     text = exp.questName,
                     style = HandsUpTypography.body2.copy(
-                        fontWeight = FontWeight.Black,
+                        fontWeight = FontWeight.Bold,
                     ),
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
-                Spacer(modifier = modifier.height(Dimens.margin4))
+                Spacer(modifier = modifier.height(Dimens.margin6))
                 Text(
                     text = exp.expAt,
                     style = HandsUpTypography.body2.copy(
                         fontSize = 10.sp
                     ),
-                    color = Gray600,
+                    color = Gray500,
                 )
                 Spacer(modifier = modifier.weight(1f))
                 Row(
