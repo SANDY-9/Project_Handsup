@@ -39,7 +39,7 @@ fun HandsUpThreeSpaceTable(
     content2: String,
     title3: String,
     content3: String,
-    up: Boolean? = null,
+    diff: Int? = null,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -124,7 +124,7 @@ fun HandsUpThreeSpaceTable(
                     ),
                     color = White,
                 )
-                up?.let {
+                diff?.let {
                     Icon(
                         modifier = Modifier.size(20.dp),
                         imageVector = Icons.Up,

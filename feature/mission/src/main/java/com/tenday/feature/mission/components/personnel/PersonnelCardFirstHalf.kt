@@ -79,7 +79,7 @@ internal fun PersonnelCardFirstHalf(
             content2 = exp?.toData() ?: "-",
             title3 = stringResource(R.string.mission_personnel_analysis_title),
             content3 = if(diff == null) "-" else "${diff}등급",
-            up = diff != null,
+            diff = diff,
         )
     }
 }
