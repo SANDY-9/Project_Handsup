@@ -26,7 +26,7 @@ import com.tenday.feature.mission.R
 
 // 하반기
 @Composable
-private fun PersonnelCardSecondHalf(
+internal fun PersonnelCardSecondHalf(
     date: String?,
     exp: Int?,
     achieveGrade: AchieveGrade,

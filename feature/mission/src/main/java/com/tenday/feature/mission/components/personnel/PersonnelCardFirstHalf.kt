@@ -25,7 +25,7 @@ import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
 
 @Composable
-private fun PersonnelCardFirstHalf(
+internal fun PersonnelCardFirstHalf(
     date: String?,
     exp: Int?,
     achieveGrade: AchieveGrade,
