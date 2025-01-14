@@ -13,6 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.AchieveGrade
+import com.tenday.core.common.extentions.toData
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
@@ -24,8 +26,14 @@ import com.tenday.feature.mission.R
 
 @Composable
 private fun PersonnelCardFirstHalf(
+    date: String?,
+    exp: Int,
+    achieveGrade: AchieveGrade,
+    diff: Int?,
     modifier: Modifier = Modifier
 ) {
+    val dateText = if (date == null) "-" else
+        "$date " + stringResource(R.string.mission_personnel_date_desc)
     HandsUpTextureCard(
         modifier = modifier,
         gradient = SingleGradientBlue,
@@ -33,7 +41,7 @@ private fun PersonnelCardFirstHalf(
         bottom = Dimens.margin28,
     ) {
         Text(
-            text = "01.01 - 06.30",
+            text = stringResource(R.string.mission_personnel_first_date),
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -48,14 +56,16 @@ private fun PersonnelCardFirstHalf(
         )
         Spacer(modifier = modifier.height(Dimens.margin6))
         Text(
-            modifier = modifier.background(
-                color = TransparentWhite12,
-                shape = RoundedCornerShape(Dimens.cornerShape4),
-            ).padding(
-                vertical = Dimens.margin4,
-                horizontal = Dimens.margin6,
-            ),
-            text = "2025.01.11 " + stringResource(R.string.mission_personnel_date_desc),
+            modifier = modifier
+                .background(
+                    color = TransparentWhite12,
+                    shape = RoundedCornerShape(Dimens.cornerShape4),
+                )
+                .padding(
+                    vertical = Dimens.margin4,
+                    horizontal = Dimens.margin6,
+                ),
+            text = dateText,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -64,16 +74,22 @@ private fun PersonnelCardFirstHalf(
         Spacer(modifier = modifier.height(Dimens.margin12))
         HandsUpThreeSpaceTable(
             title1 = stringResource(R.string.mission_personnel_grade_title),
-            content1 = "S",
+            content1 = achieveGrade.alias,
             title2 = stringResource(R.string.mission_personnel_do_title),
-            content2 = "6,500",
+            content2 = exp.toData(),
             title3 = stringResource(R.string.mission_personnel_analysis_title),
-            content3 = "2등급",
+            content3 = if(diff == null) "-" else "${diff}등급",
+            up = diff != null,
         )
     }
 }
 @Preview(name = "PersonnelMissionCardFirstHalf")
 @Composable
 private fun PreviewPersonnelMissionCardFirstHalf() {
-    PersonnelCardFirstHalf()
+    PersonnelCardFirstHalf(
+        "2025.01.11",
+        300,
+        AchieveGrade.C등급,
+        2
+    )
 }
