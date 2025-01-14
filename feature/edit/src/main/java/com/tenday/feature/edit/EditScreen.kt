@@ -42,15 +42,23 @@ internal fun EditRoute(
         profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
         possibleBadgeCodeList = BadgeCode.entries,
     )
+    val editInputState = EditInputState(
+        pwdInput = "",
+        pwdConfirmInput = "",
+        pwdError = false,
+        pwdConfirmError = false,
+    )
     EditScreen(
         user = userDetails,
-        onNavigateBack = onNavigateBack
+        inputState = editInputState,
+        onNavigateBack = onNavigateBack,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EditScreen(
     user: UserDetails,
+    inputState: EditInputState,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -80,12 +88,12 @@ internal fun EditScreen(
         }
         item {
             EditPasswordView(
-                pwd = pwd,
-                pwdConfirm = pwdConfirm,
-                pwdError = true,
-                pwdConfirmError = false,
-                onPwdInputChange = { pwd = it },
-                onPwdConfirmInputChange = { pwdConfirm = it },
+                pwd = inputState.pwdInput,
+                pwdConfirm = inputState.pwdConfirmInput,
+                pwdError = inputState.pwdError,
+                pwdConfirmError = inputState.pwdConfirmError,
+                onPwdInputChange = {},
+                onPwdConfirmInputChange = {},
                 onEditComplete = {}
             )
         }
