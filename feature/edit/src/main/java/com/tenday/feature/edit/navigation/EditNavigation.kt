@@ -15,8 +15,12 @@ fun NavController.navigateToEdit(
     navigate(EditRoute, navOptions)
 }
 
-fun NavGraphBuilder.editScreen() {
+fun NavGraphBuilder.editScreen(
+    onNavigateBack: () -> Unit,
+) {
     composable<EditRoute> {
-        EditRoute()
+        EditRoute(
+            onNavigateBack = onNavigateBack,
+        )
     }
 }

@@ -71,9 +71,11 @@ fun HandsUpNavGraph(
         )
 
         notificationScreen(
-            onNavigateBack = navController::popBackStack
+            onNavigateBack = navController::popBackStack,
         )
 
-        editScreen()
+        editScreen(
+            onNavigateBack = navController::popBackStack,
+        )
     }
 }
