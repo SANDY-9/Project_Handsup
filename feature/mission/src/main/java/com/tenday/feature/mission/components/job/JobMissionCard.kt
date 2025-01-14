@@ -64,7 +64,7 @@ internal fun JobMissionCard(
                 Spacer(modifier = modifier.height(Dimens.margin12))
                 HandsUpThreeSpaceTable(
                     title1 = stringResource(R.string.mission_content_term_title),
-                    content1 = period.query,
+                    content1 = period.desc,
                     title2 = stringResource(R.string.mission_content_max_title),
                     content2 = maxCondition,
                     title3 = stringResource(R.string.mission_content_median_title),

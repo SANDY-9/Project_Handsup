@@ -1,7 +1,10 @@
 package com.tenday.feature.mission.components.leader
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
@@ -64,10 +67,13 @@ internal fun MissionLeaderExpList(
                         mutableStateOf(expList.getWeeklyExpList())
                     }
                     data.forEach { (month, list) ->
-                        MissionWeeklyCard(
-                            month = month,
-                            expList = list,
-                        )
+                        Column {
+                            MissionWeeklyCard(
+                                month = month,
+                                expList = list,
+                            )
+                            Spacer(modifier = modifier.height(Dimens.margin12))
+                        }
                     }
                 }
             }
@@ -111,8 +117,7 @@ private fun PreviewMissionLeaderExpList() {
                 month = 2,
             ),
         ),
-        totalExp = TODO(),
-        onFullScroll = TODO(),
-        modifier = TODO()
+        totalExp = 5000,
+        onFullScroll = {},
     )
 }
