@@ -54,6 +54,7 @@ internal class MyExpViewModel @Inject constructor(
                     val expData = data.expList
                     it.copy(
                         originData = expData,
+                        data = expData[it.selectYear] ?: emptyList(),
                         yearCategories = expData.keys.toList().sorted()
                     )
                 }
