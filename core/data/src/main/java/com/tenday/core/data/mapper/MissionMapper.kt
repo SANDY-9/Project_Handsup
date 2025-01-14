@@ -2,14 +2,14 @@ package com.tenday.core.data.mapper
 
 import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.core.common.enums.MissionPeriod
-import com.tenday.core.model.LeaderMissionDetails
+import com.tenday.core.model.LeaderMission
 import com.tenday.core.model.MissionDetails
 import com.tenday.core.model.MissionExp
 import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.QuestInfo
 
-internal fun LeaderMissionResponse.toLeaderMissionDetails(): LeaderMissionDetails {
-    return LeaderMissionDetails(
+internal fun LeaderMissionResponse.toLeaderMissionDetails(): LeaderMission {
+    return LeaderMission(
         department = department,
         jobGroup = jobGroup,
         missionCount = questCount,
