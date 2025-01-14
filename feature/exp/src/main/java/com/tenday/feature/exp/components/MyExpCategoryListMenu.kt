@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,8 +17,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
@@ -36,17 +33,12 @@ internal fun MyExpCategoryListMenu(
     categoryEntry: List<ExpCategory>,
     selectedCategory: ExpCategory,
     onSelectCategory: (ExpCategory) -> Unit,
-    position: IntOffset,
     modifier: Modifier = Modifier,
-    size: Dp = 123.dp,
 ) {
     Box(
-        modifier = modifier.absoluteOffset {
-            position.copy(
-                x = position.x - size.roundToPx()
-            )
-        }.padding(
-            top = Dimens.margin7
+        modifier = modifier.width(123.dp).padding(
+            top = 58.dp,
+            end = Dimens.margin20,
         ),
     ) {
         HandsUpShadowCard(
@@ -55,7 +47,6 @@ internal fun MyExpCategoryListMenu(
             content = {
                 categoryEntry.forEachIndexed { index, category ->
                     CategoryItem(
-                        modifier = modifier.width(size),
                         category = category,
                         selected = selectedCategory == category,
                         visibleDivider = index < categoryEntry.lastIndex,
@@ -122,7 +113,6 @@ private fun PreviewMyExpCategoryListMenu() {
             ExpCategory.entries,
             selectedCategory = ExpCategory.전체보기,
             {},
-            IntOffset.Zero,
         )
         CategoryItem(
             category = ExpCategory.전체보기,
