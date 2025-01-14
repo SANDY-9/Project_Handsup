@@ -56,7 +56,8 @@ fun HandsUpButton(
     ) {
         Text(
             text = text,
-            style = HandsUpTypography.title5
+            style = HandsUpTypography.title5,
+            color = White,
         )
     }
 }

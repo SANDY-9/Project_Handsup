@@ -1,5 +1,6 @@
 package com.tenday.feature.exp
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,9 @@ import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
 import com.tenday.feature.exp.components.MyExpThisYearCard
+import com.tenday.feature.exp.components.MyExpYearListBottomSheet
+import com.tenday.feature.exp.model.ExpCategory
+import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
 
 @Composable
@@ -34,12 +38,15 @@ internal fun MyExpRoute(
 ) {
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
     val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
-    val currentSelectYear by viewModel.currentExpListYear.collectAsStateWithLifecycle()
+    val expListState by viewModel.expListState.collectAsStateWithLifecycle()
 
     MyExpScreen(
         user = userDetails ?: return,
         myExpState = myExpState,
-        currentSelectYear = currentSelectYear,
+        expListState = expListState,
+        onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
+        onBottomSheetComplete = viewModel::updateSelectExpYear,
+        onSelectCategory = viewModel::updateSelectCategory,
     )
 }
 
@@ -47,7 +54,10 @@ internal fun MyExpRoute(
 internal fun MyExpScreen(
     user: UserDetails,
     myExpState: MyExpState,
-    currentSelectYear: Int,
+    expListState: ExpListState,
+    onShowYearBottomSheet: () -> Unit,
+    onBottomSheetComplete: (Int) -> Unit,
+    onSelectCategory: (ExpCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if(myExpState is MyExpState.Success) {
@@ -88,12 +98,25 @@ internal fun MyExpScreen(
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
                     )
                     MyExpHistory(
-                        year = currentSelectYear,
-                        expList = data.expList[currentSelectYear] ?: emptyList(),
+                        selectYear = expListState.selectYear,
+                        selectCategory = expListState.selectCategory,
+                        data = expListState.data,
+                        categoryEntry = expListState.expCategories,
+                        onSelectCategory = onSelectCategory,
+                        onShowYearBottomSheet = onShowYearBottomSheet,
                     )
                 }
             }
         }
+    }
+    AnimatedVisibility(
+        expListState.showBottomSheet
+    ) {
+        MyExpYearListBottomSheet(
+            selectedYear = expListState.selectYear,
+            yearList = expListState.yearCategories,
+            onComplete = onBottomSheetComplete,
+        )
     }
 }
 
@@ -128,6 +151,17 @@ private fun PreviewExpScreen() {
                 totalExp=5730
             )
         ),
-        2025
+        ExpListState(
+            selectYear = 2025,
+            selectCategory = ExpCategory.전체보기,
+            data = listOf(),
+            originData = emptyMap(),
+            yearCategories = listOf(2025, 2024),
+            expCategories = ExpCategory.entries,
+            false,
+        ),
+        {},
+        {},
+        {},
     )
 }

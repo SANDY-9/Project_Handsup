@@ -4,6 +4,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.usecases.exp.GetExpDetailsUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
+import com.tenday.core.model.Exp
+import com.tenday.feature.exp.model.ExpCategory
+import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,6 +16,7 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
@@ -29,21 +33,67 @@ internal class MyExpViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
     )
 
-    private val _currentExpListYear: MutableStateFlow<Int> = MutableStateFlow(2025)
-    val currentExpListYear = _currentExpListYear.asStateFlow()
+    private val _expListState: MutableStateFlow<ExpListState> = MutableStateFlow(
+        ExpListState(
+            selectYear = 2025,
+            selectCategory = ExpCategory.전체보기,
+            data = emptyList(),
+            originData = emptyMap(),
+            yearCategories = emptyList(),
+            expCategories = ExpCategory.entries,
+            showBottomSheet = false,
+        )
+    )
+    val expListState = _expListState.asStateFlow()
 
     init {
         getExpDetailsUseCase()
             .onEach { data ->
-                _myExpState.value = MyExpState.Success(data)
+                _myExpState.update { MyExpState.Success(data) }
+                _expListState.update {
+                    val expData = data.expList
+                    it.copy(
+                        originData = expData,
+                        data = expData.filterYearAndCategory(it.selectYear, it.selectCategory),
+                        yearCategories = expData.keys.toList().sorted()
+                    )
+                }
             }.catch {
                 _myExpState.value = MyExpState.Fail
             }.launchIn(viewModelScope)
     }
 
-    fun updateSelectExpYear(year: Int) {
-        _currentExpListYear.value = year
+    internal fun updateBottomSheetVisible() {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            showBottomSheet = !state.showBottomSheet,
+        )
     }
 
+    internal fun updateSelectExpYear(year: Int) {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            selectYear = year,
+            data = state.originData.filterYearAndCategory(year, state.selectCategory),
+            showBottomSheet = false,
+        )
+    }
+
+    internal fun updateSelectCategory(category: ExpCategory) {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            selectCategory = category,
+            data = state.originData.filterYearAndCategory(state.selectYear, category),
+        )
+    }
+
+    private fun Map<Int, List<Exp>>.filterYearAndCategory(
+        selectYear: Int,
+        selectCategory: ExpCategory
+    ): List<Exp> {
+        return this[selectYear]?.filter { exp ->
+            selectCategory == ExpCategory.전체보기 || selectCategory.name in exp.expType.quest
+        } ?: emptyList()
+    }
 
 }

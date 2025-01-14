@@ -63,7 +63,9 @@ internal fun MyRemainingExpCard(
                 color = TransparentWhite80,
             )
             Spacer(modifier = modifier.height(Dimens.margin4))
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Text(
                     text = currentExp.toData(),
                     style = HandsUpTypography.body1.copy(
