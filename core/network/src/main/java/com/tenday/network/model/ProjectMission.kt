@@ -3,11 +3,8 @@ package com.tenday.network.model
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
-
-class ProjectMissionResponse : ArrayList<ProjectMissionItem>()
-
 @Serializable
-data class ProjectMissionItem(
+data class ProjectResponse(
     @SerialName("content")
     val content: String,
     @SerialName("exp")

@@ -10,6 +10,7 @@ import com.tenday.core.model.ProjectMission
 import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.LeaderQuestInfo
+import com.tenday.network.model.ProjectResponse
 import com.tenday.network.model.QuestExp
 
 internal fun LeaderMissionResponse.toLeaderMission(): LeaderMission {
@@ -64,7 +65,7 @@ internal fun JobMissionResponse.toJobMission(): JobMission {
     )
 }
 
-internal fun ProjectMissionResponse.toProjectMission(): List<ProjectMission> {
+internal fun List<ProjectResponse>.toProjectMission(): List<ProjectMission> {
     return map {
         ProjectMission(
             content = it.content,
