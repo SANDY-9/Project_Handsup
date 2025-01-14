@@ -35,6 +35,7 @@ internal fun MissionLeaderExpList(
     totalExp: Int,
     onFullScroll: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
+    year: Int = 2025,
 ) {
     val lazyColumnState = rememberLazyListState()
     LaunchedEffect(lazyColumnState) {
@@ -79,7 +80,10 @@ internal fun MissionLeaderExpList(
             }
             else -> {
                 item {
-                    MonthlyMissionCard()
+                    MonthlyMissionCard(
+                        year = year,
+                        achieve = expList.map { it.achieveGrade },
+                    )
                 }
             }
         }

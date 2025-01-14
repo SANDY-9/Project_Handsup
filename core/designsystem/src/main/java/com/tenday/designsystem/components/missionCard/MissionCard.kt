@@ -22,6 +22,8 @@ import com.tenday.designsystem.theme.White
 
 @Composable
 fun MonthlyMissionCard(
+    year: Int,
+    achieve: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -41,26 +43,40 @@ fun MonthlyMissionCard(
         verticalArrangement = Arrangement.spacedBy(Dimens.margin12),
     ) {
         Text(
-            text = "2025년 미션",
+            text = "${year}년 미션",
             style = HandsUpTypography.title5,
         )
         WeeklyMissionCheckItem(
             listOf(1,2,3,4,5),
             listOf("1월", "2월", "3월", "4월", "5월"),
-            listOf(AchieveGrade.MAX, AchieveGrade.MEDIAN,)
+            listOf(
+                achieve.getOrNull(0),
+                achieve.getOrNull(1),
+                achieve.getOrNull(2),
+                achieve.getOrNull(3),
+                achieve.getOrNull(4),
+            ),
         )
         WeeklyMissionCheckItem(
             listOf(6,7,8,9,10),
             listOf("6월", "7월", "8월", "9월", "10월"),
-            listOf()
+            listOf(
+                achieve.getOrNull(5),
+                achieve.getOrNull(6),
+                achieve.getOrNull(7),
+                achieve.getOrNull(8),
+                achieve.getOrNull(9),
+            )
         )
         WeeklyMissionCheckItem(
             listOf(11, 12),
             listOf("11월", "12월"),
-            listOf(),
+            listOf(
+                achieve.getOrNull(10),
+                achieve.getOrNull(11),
+            ),
         )
     }
-
 }
 
 @Composable
@@ -106,7 +122,11 @@ private fun Preview() {
         modifier = Modifier.padding(10.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        MonthlyMissionCard()
+        MonthlyMissionCard(2025, listOf(
+            AchieveGrade.MAX,
+            AchieveGrade.MEDIAN,
+            AchieveGrade.MAX,
+        ))
         WeeklyMissionCard(1)
     }
 }

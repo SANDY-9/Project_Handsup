@@ -35,7 +35,7 @@ import com.tenday.designsystem.theme.White
 internal fun WeeklyMissionCheckItem(
     list: List<Int>,
     dateTitleList: List<String>,
-    achieveGradeList: List<AchieveGrade>,
+    achieveGradeList: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
     Row {
@@ -45,7 +45,7 @@ internal fun WeeklyMissionCheckItem(
             MissionCheckItem(
                 date = date,
                 dateTitle = dateTitle,
-                achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.MIN
+                achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.NULL
             )
             val isNullLastItem = list.size < 5 && num >= list.size - 1
             if(num < 4) {

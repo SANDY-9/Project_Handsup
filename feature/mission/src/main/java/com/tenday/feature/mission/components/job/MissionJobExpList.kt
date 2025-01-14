@@ -33,7 +33,8 @@ internal fun MissionJobExpList(
     expList: List<MissionExp>,
     totalExp: Int,
     lazyColumnState: LazyListState,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    year: Int = 2025,
 ) {
     LazyColumn(
         modifier = modifier.fillMaxSize(),
@@ -71,7 +72,10 @@ internal fun MissionJobExpList(
             }
             else -> {
                 item {
-                    MonthlyMissionCard()
+                    MonthlyMissionCard(
+                        year = year,
+                        achieve = expList.map { it.achieveGrade },
+                    )
                 }
             }
         }
