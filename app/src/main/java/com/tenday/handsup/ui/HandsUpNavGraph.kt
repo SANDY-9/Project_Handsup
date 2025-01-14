@@ -8,6 +8,8 @@ import androidx.navigation.compose.NavHost
 import com.tenday.feature.board.details.navigation.boardDetailsScreen
 import com.tenday.feature.board.details.navigation.navigateToBoardDetails
 import com.tenday.feature.board.navigation.boardScreen
+import com.tenday.feature.edit.navigation.editScreen
+import com.tenday.feature.edit.navigation.navigateToEdit
 import com.tenday.feature.exp.navigation.myExpScreen
 import com.tenday.feature.home.navigation.homeScreen
 import com.tenday.feature.home.navigation.navigateToHome
@@ -51,7 +53,7 @@ fun HandsUpNavGraph(
 
         homeScreen(
             onNavigateNoti = navController::navigateToNotification,
-            onNavigateSettings = {}
+            onNavigateEdit = navController::navigateToEdit
         )
 
         missionScreen()
@@ -71,5 +73,7 @@ fun HandsUpNavGraph(
         notificationScreen(
             onNavigateBack = navController::popBackStack
         )
+
+        editScreen()
     }
 }

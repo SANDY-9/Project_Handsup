@@ -58,6 +58,7 @@ dependencies {
     implementation(project(":feature:notification"))
     implementation(project(":feature:mission"))
     implementation(project(":feature:exp"))
+    implementation(project(":feature:edit"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
