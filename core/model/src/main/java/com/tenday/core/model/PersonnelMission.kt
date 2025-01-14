@@ -9,4 +9,10 @@ data class PersonnelMission(
     val diff: Int?,
     val exp: Int?,
     val expAt: String?,
-)
+    val term: EvaluationTerm,
+) {
+    enum class EvaluationTerm {
+        상반기,
+        하반기,
+    }
+}
