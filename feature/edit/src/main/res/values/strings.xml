@@ -7,9 +7,9 @@
     <string name="edit_pwd_title">비밀번호 변경</string>
 
     <string name="edit_pwd_placeholder">변경할 비밀번호를 입력해 주세요.</string>
-    <string name="edit_pwd_error">*4글자 이상의 비밀번호를 입력해주세요</string>
+    <string name="edit_pwd_error">* 4글자 이상의 비밀번호를 입력해주세요</string>
     <string name="edit_pwd_confirm_placeholder">비밀번호를 한번 더 입력해 주세요.</string>
-    <string name="edit_pwd_confirm_error">입력하신 비밀번호가 일치하지 않습니다.</string>
+    <string name="edit_pwd_confirm_error">* 입력하신 비밀번호가 일치하지 않습니다.</string>
 
     <string name="edit_btn_complete_title">변경완료</string>
     <string name="edit_btn_logout_title">로그아웃</string>

@@ -18,8 +18,10 @@ import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.edit.components.EditBadgeView
+import com.tenday.feature.edit.components.EditPasswordView
 import com.tenday.feature.edit.components.EditPushSettings
 import com.tenday.feature.edit.components.EditTitleBar
+import com.tenday.feature.edit.model.EditInputState
 
 
 @Composable
@@ -53,6 +55,8 @@ internal fun EditScreen(
     modifier: Modifier = Modifier
 ) {
     var checked by remember { mutableStateOf(true) }
+    var pwd by remember { mutableStateOf("") }
+    var pwdConfirm by remember { mutableStateOf("") }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -72,6 +76,17 @@ internal fun EditScreen(
             EditPushSettings(
                 checked = checked,
                 onCheckedChange = { checked = !checked }
+            )
+        }
+        item {
+            EditPasswordView(
+                pwd = pwd,
+                pwdConfirm = pwdConfirm,
+                pwdError = true,
+                pwdConfirmError = false,
+                onPwdInputChange = { pwd = it },
+                onPwdConfirmInputChange = { pwdConfirm = it },
+                onEditComplete = {}
             )
         }
     }
