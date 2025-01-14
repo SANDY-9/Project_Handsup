@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.tenday.core.model.NotificationDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.AlarmFill
-import com.tenday.designsystem.theme.Gray200
+import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray500
 import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.HandsUpOrange
@@ -55,7 +55,7 @@ internal fun NotificationListItem(
             Spacer(modifier = modifier.width(Dimens.margin4))
             Text(
                 text = stringResource(R.string.notify_title),
-                style = HandsUpTypography.body4.copy(
+                style = HandsUpTypography.body3.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
                 color = HandsUpOrange
@@ -77,6 +77,7 @@ internal fun NotificationListItem(
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,
         )
+        Spacer(modifier = modifier.height(Dimens.margin6))
         Text(
             modifier = modifier.padding(horizontal = Dimens.margin20),
             text = noti.body,
@@ -84,7 +85,7 @@ internal fun NotificationListItem(
             color = Gray700
         )
         Spacer(modifier = modifier.height(Dimens.margin20))
-        HorizontalDivider(color = Gray200)
+        HorizontalDivider(color = Gray100)
     }
 }
 
