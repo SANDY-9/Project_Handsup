@@ -17,22 +17,23 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun MissionLeaderCardPager(
-    jobFamily: String,
+    department: String,
     jobGroup: Int,
+    item: List<MissionDetails>,
     visibleTable: Boolean,
     onPageChange: (Int) -> Unit,
     onPagerSwipe: () -> Unit,
-    onShowImproveToolTip: (IntOffset) -> Unit,
-    onShowSpecialTooltip: (IntOffset) -> Unit,
+    onShowToolTip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    val pagerState = rememberPagerState (pageCount = { 2 })
+    val pagerState = rememberPagerState (pageCount = { item.size })
     LaunchedEffect(pagerState) {
         snapshotFlow { pagerState.currentPage }.collectLatest { page ->
             onPageChange(page)
@@ -58,20 +59,19 @@ internal fun MissionLeaderCardPager(
             bottom = Dimens.margin16
         ),
     ) { page ->
-        when(page) {
-            0 -> ImproveWorkMissionCard(
-                jobFamily = jobFamily,
-                jobGroup = jobGroup,
-                visibleTable = visibleTable,
-                onShowImproveToolTip = onShowImproveToolTip,
-            )
-            else -> SpecialWorkMissionCard(
-                jobFamily = jobFamily,
-                jobGroup = jobGroup,
-                visibleTable = visibleTable,
-                onShowSpecialTooltip = onShowSpecialTooltip,
-            )
-        }
+        val mission = item[page]
+        LeaderMissionCard(
+            index = page,
+            department = department,
+            jobGroup = jobGroup,
+            missionName = mission.missionName,
+            missionGoal = mission.missionGoal,
+            period = mission.period,
+            maxCondition = mission.maxCondition,
+            medianCondition = mission.medianCondition,
+            visibleTable = visibleTable,
+            onShowTooltip = onShowToolTip,
+        )
     }
 }
 
@@ -92,12 +92,12 @@ private fun calculatePage(
 @Composable
 private fun PreviewMissionLeaderCardPager() {
     MissionLeaderCardPager(
-        jobFamily = "음성 1센터",
+        department = "음성 1센터",
         jobGroup = 1,
+        item = listOf(),
         visibleTable = true,
         onPageChange = {},
         onPagerSwipe = {},
-        onShowImproveToolTip = {},
-        onShowSpecialTooltip = {}
+        onShowToolTip = {},
     )
 }
