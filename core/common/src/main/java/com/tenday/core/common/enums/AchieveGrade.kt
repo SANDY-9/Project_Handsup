@@ -9,5 +9,5 @@ enum class AchieveGrade(val alias: String) {
     B등급("B"),
     C등급("C"),
     D등급("D"),
-    NULL("-");
+    NULL("심사중");
 }
