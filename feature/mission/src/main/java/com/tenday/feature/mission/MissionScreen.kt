@@ -24,6 +24,8 @@ import com.tenday.feature.mission.components.job.MissionJobView
 import com.tenday.feature.mission.components.leader.MissionLeaderView
 import com.tenday.feature.mission.components.personnel.MissionPersonnelView
 import com.tenday.feature.mission.components.project.MissionProjectView
+import com.tenday.feature.mission.model.HandsUpMission
+import com.tenday.feature.mission.model.MissionUiState
 
 @Composable
 internal fun MissionRoute(
@@ -34,6 +36,7 @@ internal fun MissionRoute(
 
     MissionScreen(
         currentTab = currentTab,
+        uiState = uiState,
         onTabSelect = viewModel::updateCurrentTabState
     )
 }
@@ -41,12 +44,12 @@ internal fun MissionRoute(
 @Composable
 internal fun MissionScreen(
     currentTab: MissionMenu,
+    uiState: MissionUiState,
     onTabSelect: (MissionMenu) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var visibleToolTip by remember { mutableStateOf(false) }
     var tooltipPosition by remember { mutableStateOf(IntOffset.Zero) }
-    var type by remember { mutableStateOf("업무개선") }
 
     Box(
         modifier = modifier
@@ -63,42 +66,51 @@ internal fun MissionScreen(
                 currentSelectedTab = currentTab,
                 onTabSelect = onTabSelect,
             )
-            when (currentTab) {
-                MissionMenu.리더부여 -> MissionLeaderView(
-                    type = type,
-                    jobFamily = "음성 1센터",
-                    jobGroup = 1,
-                    onPageChange = { page ->
-                        type = if (page == 0) "업무개선" else "월특근"
-                    },
-                    onPagerSwipe = { visibleToolTip = false },
-                    onListScroll = { visibleToolTip = false },
-                    onShowImproveToolTip = {
-                        tooltipPosition = it
-                        visibleToolTip = true
-                    },
-                    onShowSpecialTooltip = {
-                        tooltipPosition = it
-                        visibleToolTip = true
-                    },
-                )
-                MissionMenu.직무미션 -> MissionJobView(
-                    "음성 1센터", 1,
-                    onListScroll = { visibleToolTip = false },
-                    onShowJobToolTip = {
-                        tooltipPosition = it
-                        visibleToolTip = true
-                    },
-                )
-                MissionMenu.전사프로젝트 -> MissionProjectView()
-                MissionMenu.인사평가 -> MissionPersonnelView()
+            when (uiState) {
+                is MissionUiState.Success -> {
+                    when (uiState.data) {
+                        is HandsUpMission.Leader -> MissionLeaderView(
+                            data = uiState.data.mission,
+                            onPagerSwipe = { visibleToolTip = false },
+                            onListScroll = { visibleToolTip = false },
+                            onShowImproveToolTip = {
+                                tooltipPosition = it
+                                visibleToolTip = true
+                            },
+                            onShowSpecialTooltip = {
+                                tooltipPosition = it
+                                visibleToolTip = true
+                            },
+                        )
+
+                        is HandsUpMission.Job -> MissionJobView(
+                            "음성 1센터", 1,
+                            onListScroll = { visibleToolTip = false },
+                            onShowJobToolTip = {
+                                tooltipPosition = it
+                                visibleToolTip = true
+                            },
+                        )
+
+                        is HandsUpMission.Project -> MissionProjectView()
+                        is HandsUpMission.Personnel -> MissionPersonnelView()
+                    }
+                }
+
+                MissionUiState.Loading -> {
+
+                }
+
+                MissionUiState.Fail -> {
+
+                }
             }
-        }
-        if(visibleToolTip) {
-            MissionToolTip(
-                missionName = "생산성 향상",
-                position = tooltipPosition,
-            )
+            if (visibleToolTip) {
+                MissionToolTip(
+                    missionName = "생산성 향상",
+                    position = tooltipPosition,
+                )
+            }
         }
     }
 }
@@ -107,5 +119,9 @@ internal fun MissionScreen(
 @Composable
 private fun PreviewMissionScreen() {
     var currentClickTab by remember { mutableStateOf(MissionMenu.리더부여) }
-    MissionScreen(currentClickTab, { currentClickTab = it })
+    MissionScreen(
+        currentClickTab,
+        MissionUiState.Loading,
+        { currentClickTab = it }
+    )
 }
