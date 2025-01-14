@@ -24,7 +24,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,7 +54,6 @@ internal fun MyExpYearListBottomSheet(
     val bottomSheetState = rememberModalBottomSheetState(
         skipPartiallyExpanded = true,
     )
-    val scope = rememberCoroutineScope()
 
     var selectYear by remember { mutableStateOf(selectedYear) }
 
@@ -86,9 +84,7 @@ internal fun MyExpYearListBottomSheet(
                 Icon(
                     modifier = modifier
                         .size(24.dp)
-                        .noRippleClickable {
-                            onComplete(selectedYear)
-                        },
+                        .noRippleClickable { onComplete(selectedYear) },
                     imageVector = Icons.Cancel,
                     contentDescription = null,
                 )
@@ -103,10 +99,7 @@ internal fun MyExpYearListBottomSheet(
                         year = year,
                         selected = year == selectYear,
                         visibleDivider = index < yearList.lastIndex,
-                        onSelect = {
-                            selectYear = year
-                            onComplete(selectedYear)
-                        },
+                        onSelect = { selectYear = year },
                     )
                 }
             }

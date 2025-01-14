@@ -74,7 +74,8 @@ internal class MyExpViewModel @Inject constructor(
         val state = expListState.value
         _expListState.value = state.copy(
             selectYear = year,
-            data = state.originData.filterYearAndCategory(year, state.selectCategory)
+            data = state.originData.filterYearAndCategory(year, state.selectCategory),
+            showBottomSheet = false,
         )
     }
 

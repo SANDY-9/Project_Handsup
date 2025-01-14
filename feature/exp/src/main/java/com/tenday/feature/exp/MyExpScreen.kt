@@ -10,12 +10,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.IntOffset
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
@@ -27,7 +23,6 @@ import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.exp.components.ExpMissionBanner
-import com.tenday.feature.exp.components.MyExpCategoryListMenu
 import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
@@ -65,9 +60,6 @@ internal fun MyExpScreen(
     onSelectCategory: (ExpCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var dropDownPosition by remember { mutableStateOf(IntOffset.Zero) }
-    var visibleDropDown by remember { mutableStateOf(false) }
-
     if(myExpState is MyExpState.Success) {
         val data = myExpState.data
         LazyColumn(
@@ -109,11 +101,9 @@ internal fun MyExpScreen(
                         selectYear = expListState.selectYear,
                         selectCategory = expListState.selectCategory,
                         data = expListState.data,
+                        categoryEntry = expListState.expCategories,
+                        onSelectCategory = onSelectCategory,
                         onShowYearBottomSheet = onShowYearBottomSheet,
-                        onShowCategoryDropdown = {
-                            dropDownPosition = it
-                            visibleDropDown = true
-                        },
                     )
                 }
             }
@@ -126,18 +116,6 @@ internal fun MyExpScreen(
             selectedYear = expListState.selectYear,
             yearList = expListState.yearCategories,
             onComplete = onBottomSheetComplete,
-        )
-    }
-
-    if(visibleDropDown) {
-        MyExpCategoryListMenu(
-            categoryEntry = expListState.expCategories,
-            selectedCategory = expListState.selectCategory,
-            onSelectCategory = {
-                onSelectCategory(it)
-                visibleDropDown = false
-            },
-            position = dropDownPosition,
         )
     }
 }
