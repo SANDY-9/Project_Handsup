@@ -7,38 +7,39 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import com.tenday.core.model.LeaderMission
 import com.tenday.designsystem.theme.Gray100
 
 @Composable
 internal fun MissionLeaderView(
-    type: String,
-    jobFamily: String,
-    jobGroup: Int,
-    onPageChange: (Int) -> Unit,
+    data: LeaderMission,
     onPagerSwipe: () -> Unit,
     onListScroll: () -> Unit,
-    onShowImproveToolTip: (IntOffset) -> Unit,
-    onShowSpecialTooltip: (IntOffset) -> Unit,
+    onShowToolTip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var visibleTable by remember { mutableStateOf(true) }
+    var currentPage by remember { mutableIntStateOf(0) }
 
     Column(modifier = modifier.fillMaxSize()) {
         MissionLeaderCardPager(
             modifier = modifier.fillMaxWidth(),
-            jobFamily = jobFamily,
-            jobGroup = jobGroup,
+            department = data.department,
+            jobGroup = data.jobGroup,
+            item = data.missionList,
             visibleTable = visibleTable,
-            onPageChange = onPageChange,
+            onPageChange = { page ->
+                currentPage = page
+            },
             onPagerSwipe = onPagerSwipe,
-            onShowImproveToolTip = onShowImproveToolTip,
-            onShowSpecialTooltip = onShowSpecialTooltip,
+            onShowToolTip = onShowToolTip,
         )
         MissionLeaderExpList(
             type = type,
