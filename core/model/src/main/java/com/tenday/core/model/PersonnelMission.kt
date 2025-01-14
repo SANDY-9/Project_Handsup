@@ -8,5 +8,5 @@ data class PersonnelMission(
     val achieveGrade: AchieveGrade,
     val diff: Int?,
     val exp: Int,
-    val expAt: String,
+    val expAt: String?,
 )

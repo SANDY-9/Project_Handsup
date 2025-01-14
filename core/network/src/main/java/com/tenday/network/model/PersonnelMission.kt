@@ -11,7 +11,7 @@ data class PersonnelMissionResponse(
     @SerialName("diff")
     val diff: Int?,
     @SerialName("exp")
-    val exp: Int,
+    val exp: Int?,
     @SerialName("expAt")
-    val expAt: String
+    val expAt: String?
 )
