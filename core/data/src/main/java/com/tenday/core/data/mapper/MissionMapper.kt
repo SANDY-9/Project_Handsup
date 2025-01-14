@@ -84,7 +84,7 @@ internal fun List<PersonnelMissionResponse>.toPersonnelMission(): List<Personnel
         PersonnelMission(
             achieveGrade = it.achieveGrade?.run { AchieveGrade.valueOf(this) } ?: AchieveGrade.NULL,
             diff = it.diff,
-            exp = it.exp ?: 0,
+            exp = it.exp,
             expAt = it.expAt?.toDate(),
         )
     }

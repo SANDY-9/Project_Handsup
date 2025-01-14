@@ -27,7 +27,7 @@ import com.tenday.feature.mission.R
 @Composable
 private fun PersonnelCardFirstHalf(
     date: String?,
-    exp: Int,
+    exp: Int?,
     achieveGrade: AchieveGrade,
     diff: Int?,
     modifier: Modifier = Modifier
@@ -76,7 +76,7 @@ private fun PersonnelCardFirstHalf(
             title1 = stringResource(R.string.mission_personnel_grade_title),
             content1 = achieveGrade.alias,
             title2 = stringResource(R.string.mission_personnel_do_title),
-            content2 = exp.toData(),
+            content2 = exp?.toData() ?: "-",
             title3 = stringResource(R.string.mission_personnel_analysis_title),
             content3 = if(diff == null) "-" else "${diff}등급",
             up = diff != null,

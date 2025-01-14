@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
 data class PersonnelMission(
     val achieveGrade: AchieveGrade,
     val diff: Int?,
-    val exp: Int,
+    val exp: Int?,
     val expAt: String?,
 )
