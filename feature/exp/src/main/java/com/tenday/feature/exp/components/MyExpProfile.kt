@@ -55,7 +55,7 @@ internal fun MyExpProfile(
             ),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Spacer(modifier = modifier.height(Dimens.margin12))
+        Spacer(modifier = modifier.height(Dimens.margin16))
         Row(
             modifier = modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.End

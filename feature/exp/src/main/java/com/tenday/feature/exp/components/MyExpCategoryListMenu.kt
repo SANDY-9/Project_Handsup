@@ -36,10 +36,10 @@ internal fun MyExpCategoryListMenu(
     modifier: Modifier = Modifier,
 ) {
     Box(
-        modifier = modifier.width(123.dp).padding(
+        modifier = modifier.padding(
             top = 58.dp,
             end = Dimens.margin20,
-        ),
+        ).width(123.dp),
     ) {
         HandsUpShadowCard(
             cornerSize = Dimens.cornerShape8,

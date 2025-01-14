@@ -20,8 +20,10 @@ import androidx.compose.ui.unit.sp
 import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.extentions.innerShadow
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
+import kotlin.math.roundToInt
 
 private val pieChartGradientBrush = Brush.linearGradient(
     colors = listOf(Color(0xFFFA610F), Color(0xFFFBBE1D)),
@@ -34,7 +36,7 @@ fun ExpCircularGraph(
     modifier: Modifier = Modifier
 ) {
     val progress = remember { currentYearExp.toFloat() / avg.toFloat() }
-    val percent = remember { String.format("%.1f", progress * 100) }
+    val percent = remember { (progress * 100).roundToInt() }
     Box(
         modifier = modifier.size(140.dp), // 전체 원의 크기 (반경 = 70dp 기준)
         contentAlignment = Alignment.Center
@@ -93,7 +95,8 @@ fun ExpCircularGraph(
                 text = "평균 $avg 기준",
                 style = HandsUpTypography.body4.copy(
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 11.sp
+                    fontSize = 11.sp,
+                    color = Gray700
                 ),
             )
         }

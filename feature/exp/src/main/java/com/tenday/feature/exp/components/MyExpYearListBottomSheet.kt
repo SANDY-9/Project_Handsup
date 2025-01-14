@@ -68,11 +68,12 @@ internal fun MyExpYearListBottomSheet(
         ) {
             Row(
                 modifier = modifier.fillMaxWidth().padding(
-                    top = Dimens.margin20,
+                    top = Dimens.margin28,
                     start = Dimens.margin20,
                     end = Dimens.margin20,
                     bottom = Dimens.margin13,
-                )
+                ),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(
                     text = stringResource(R.string.exp_bottom_sheet_title),

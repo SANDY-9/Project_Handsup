@@ -28,7 +28,7 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
 import com.tenday.designsystem.theme.HandsUpNavy
 import com.tenday.designsystem.theme.HandsUpTypography
-import com.tenday.designsystem.theme.TransparentWhite16
+import com.tenday.designsystem.theme.TransparentWhite12
 import com.tenday.designsystem.theme.TransparentWhite8
 import com.tenday.designsystem.theme.TransparentWhite80
 import com.tenday.designsystem.theme.White
@@ -45,7 +45,7 @@ internal fun MyRemainingExpCard(
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .background(
-                color = TransparentWhite16,
+                color = TransparentWhite12,
                 shape = RoundedCornerShape(Dimens.margin8),
             )
             .padding(Dimens.margin12),
@@ -59,8 +59,8 @@ internal fun MyRemainingExpCard(
                 text = stringResource(R.string.exp_remain_total_title),
                 style = HandsUpTypography.body4.copy(
                     fontWeight = FontWeight.SemiBold,
+                    color = TransparentWhite80,
                 ),
-                color = TransparentWhite80,
             )
             Spacer(modifier = modifier.height(Dimens.margin4))
             Row(
@@ -93,15 +93,17 @@ internal fun MyRemainingExpCard(
                 text = stringResource(R.string.exp_remain_next_title),
                 style = HandsUpTypography.body4.copy(
                     fontWeight = FontWeight.SemiBold,
+                    color = TransparentWhite80,
                 ),
-                color = White,
             )
             Spacer(modifier = modifier.height(Dimens.margin4))
-            Row {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+            ) {
                 Text(
                     text = requireExp.toData(),
                     style = HandsUpTypography.body1.copy(
-                        fontWeight = FontWeight.SemiBold,
+                        fontWeight = FontWeight.ExtraBold,
                     ),
                     color = White,
                 )

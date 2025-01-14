@@ -154,7 +154,8 @@ private fun MyExpHistoryHeader(
                     end = Dimens.margin12,
                     top = Dimens.margin6,
                     bottom = Dimens.margin6,
-                )
+                ),
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
                 text = category.desc,
