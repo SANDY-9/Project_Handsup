@@ -8,7 +8,7 @@ import com.tenday.designsystem.components.HandsUpNavigateTopBar
 import com.tenday.feature.board.details.R
 
 @Composable
-fun BoardDetailsTitleBar(
+internal fun BoardDetailsTitleBar(
     onNavigate: () -> Unit,
     modifier: Modifier = Modifier
 ) {
