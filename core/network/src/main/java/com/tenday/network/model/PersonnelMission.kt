@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class PersonnelMissionResponse(
     @SerialName("achieveGrade")
-    val achieveGrade: String,
+    val achieveGrade: String?,
     @SerialName("diff")
-    val diff: Int,
+    val diff: Int?,
     @SerialName("exp")
     val exp: Int,
     @SerialName("expAt")

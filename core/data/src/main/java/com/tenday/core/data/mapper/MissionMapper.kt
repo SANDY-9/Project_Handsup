@@ -82,7 +82,7 @@ internal fun List<ProjectResponse>.toProjectMission(): List<ProjectMission> {
 internal fun List<PersonnelMissionResponse>.toPersonnelMission(): List<PersonnelMission> {
     return map { 
         PersonnelMission(
-            achieveGrade = AchieveGrade.valueOf(it.achieveGrade),
+            achieveGrade = it.achieveGrade?.run { AchieveGrade.valueOf(this) } ?: AchieveGrade.NULL,
             diff = it.diff,
             exp = it.exp,
             expAt = it.expAt.toDate(),
