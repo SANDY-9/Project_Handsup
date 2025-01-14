@@ -16,7 +16,11 @@ data class MissionDetails(
 ) {
     companion object {
         fun List<MissionExp>.getWeeklyExpList(): Map<Int, List<MissionExp>> {
-            return groupBy { it.month }
+            return sortedBy {
+                it.index
+            }.groupBy {
+                it.month
+            }
         }
     }
 }
