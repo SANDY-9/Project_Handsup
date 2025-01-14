@@ -11,6 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
@@ -29,6 +30,7 @@ import com.tenday.feature.edit.model.EditInputState
 internal fun EditRoute(
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
+    viewModel: EditViewModel = hiltViewModel(),
 ) {
     val userDetails = UserDetails(
         employeeId = "2023010101",
