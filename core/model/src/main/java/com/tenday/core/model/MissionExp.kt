@@ -8,7 +8,7 @@ data class MissionExp(
     val achieveGrade: AchieveGrade,
     val exp: Int,
     val index: Int, // period가 week인 경우에는 주차, month인 경우에는 월
-    val startDate: String = "",
-    val endDate: String = "",
+    val startDate: String?,
+    val endDate: String?,
     val month: Int,
 )

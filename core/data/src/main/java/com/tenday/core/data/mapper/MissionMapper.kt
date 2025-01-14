@@ -1,6 +1,7 @@
 package com.tenday.core.data.mapper
 
 import com.tenday.core.common.enums.AchieveGrade
+import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.LeaderMissionDetails
 import com.tenday.core.model.MissionDetails
 import com.tenday.core.model.MissionExp
@@ -25,7 +26,7 @@ private fun QuestInfo.toMissionDetails(): MissionDetails {
         maxExp = maxExp,
         medianCondition = medianCondition,
         medianExp = medianExp,
-        period = MissionDetails.MissionPeriod.valueOf(period),
+        period = MissionPeriod.getPeriod(period),
         missionGoal = questGoal,
         missionName = questName,
     )
@@ -37,7 +38,7 @@ internal fun QuestExp.toMissionExp(): MissionExp {
         exp = exp,
         index = index,
         month = month,
-        startDate = range.first(),
-        endDate = range.last()
+        startDate = range.firstOrNull(),
+        endDate = range.firstOrNull()
     )
 }

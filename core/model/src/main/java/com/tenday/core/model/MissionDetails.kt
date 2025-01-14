@@ -1,5 +1,6 @@
 package com.tenday.core.model
 
+import com.tenday.core.common.enums.MissionPeriod
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -12,8 +13,4 @@ data class MissionDetails(
     val period: MissionPeriod,
     val missionGoal: String,
     val missionName: String,
-) {
-    enum class MissionPeriod(desc: String) {
-        MONTH("month"), YEAR("year")
-    }
-}
+)
