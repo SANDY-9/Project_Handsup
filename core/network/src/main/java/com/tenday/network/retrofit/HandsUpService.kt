@@ -73,4 +73,19 @@ internal class HandsUpService @Inject constructor(
     override suspend fun getPersonnelMission(token: String): List<PersonnelMissionResponse> {
         return api.getPersonnelMission(token.toHeader())
     }
+
+    override suspend fun updateUserPwd(accessToken: String, pwd: String): Boolean {
+        val requestBody = UserRequestBody(password = pwd)
+        return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
+    }
+
+    override suspend fun updateUserProfileBadge(accessToken: String, code: String): Boolean {
+        val requestBody = UserRequestBody(profileBadgeCode = code)
+        return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
+    }
+
+    override suspend fun updateUserProfileImage(accessToken: String, code: String): Boolean {
+        val requestBody = UserRequestBody(profileImageCode = code)
+        return api.updateMessagingToken(requestBody, accessToken.toHeader()).isSuccess
+    }
 }

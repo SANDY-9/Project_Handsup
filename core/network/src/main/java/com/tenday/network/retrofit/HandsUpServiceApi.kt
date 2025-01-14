@@ -77,4 +77,22 @@ internal interface HandsUpServiceApi {
         @Header("Authorization") token: String,
     ): List<PersonnelMissionResponse>
 
+    @PATCH("user/password")
+    suspend fun updateUserPwd(
+        @Body requestBody: UserRequestBody,
+        @Header("Authorization") token: String,
+    ): UserUpdateResponse
+
+    @PATCH("user/profile_badge_code")
+    suspend fun updateProfileBadge(
+        @Body requestBody: UserRequestBody,
+        @Header("Authorization") token: String,
+    ): UserUpdateResponse
+
+    @PATCH("user/profile_image_code")
+    suspend fun updateProfileImage(
+        @Body requestBody: UserRequestBody,
+        @Header("Authorization") token: String,
+    ): UserUpdateResponse
+
 }

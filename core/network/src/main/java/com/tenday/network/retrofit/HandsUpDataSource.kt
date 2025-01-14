@@ -23,4 +23,7 @@ interface HandsUpDataSource {
     suspend fun getJobMission(token: String): JobMissionResponse
     suspend fun getProjectMission(token: String): List<ProjectResponse>
     suspend fun getPersonnelMission(token: String): List<PersonnelMissionResponse>
+    suspend fun updateUserPwd(accessToken: String, pwd: String): Boolean
+    suspend fun updateUserProfileBadge(accessToken: String, code: String): Boolean
+    suspend fun updateUserProfileImage(accessToken: String, code: String): Boolean
 }
