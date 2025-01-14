@@ -81,7 +81,8 @@ internal fun MissionScreen(
                         )
 
                         is HandsUpMission.Job -> MissionJobView(
-                            "음성 1센터", 1,
+                            data = uiState.data.mission,
+                            totalExp = uiState.data.mission.totalExp,
                             onListScroll = { visibleToolTip = false },
                             onShowJobToolTip = {
                                 tooltipPosition = it
