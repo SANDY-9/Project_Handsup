@@ -42,7 +42,6 @@ internal class MyExpViewModel @Inject constructor(
             yearCategories = emptyList(),
             expCategories = ExpCategory.entries,
             showBottomSheet = false,
-            showDropDown = false,
         )
     )
     val expListState = _expListState.asStateFlow()
@@ -71,13 +70,6 @@ internal class MyExpViewModel @Inject constructor(
         )
     }
 
-    internal fun updateDropDownVisible() {
-        val state = expListState.value
-        _expListState.value = state.copy(
-            showDropDown = !state.showDropDown,
-        )
-    }
-
     internal fun updateSelectExpYear(year: Int) {
         val state = expListState.value
         _expListState.value = state.copy(
@@ -91,7 +83,7 @@ internal class MyExpViewModel @Inject constructor(
         val state = expListState.value
         _expListState.value = state.copy(
             selectCategory = category,
-            data = filterDataByYearAndCategory(state, state.selectYear)
+            data = filterDataByYearAndCategory(state, state.selectYear),
         )
     }
 

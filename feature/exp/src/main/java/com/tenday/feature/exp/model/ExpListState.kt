@@ -10,7 +10,6 @@ internal data class ExpListState(
     val yearCategories: List<Int>,
     val expCategories: List<ExpCategory>,
     val showBottomSheet: Boolean,
-    val showDropDown: Boolean,
 )
 
 internal enum class ExpCategory(val desc: String) {

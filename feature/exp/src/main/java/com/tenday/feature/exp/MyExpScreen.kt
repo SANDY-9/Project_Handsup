@@ -10,8 +10,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
@@ -46,8 +50,8 @@ internal fun MyExpRoute(
         myExpState = myExpState,
         expListState = expListState,
         onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
-        onShowCategoryDropdown = viewModel::updateDropDownVisible,
         onBottomSheetComplete = viewModel::updateSelectExpYear,
+        onSelectCategory = viewModel::updateSelectCategory,
     )
 }
 
@@ -57,10 +61,13 @@ internal fun MyExpScreen(
     myExpState: MyExpState,
     expListState: ExpListState,
     onShowYearBottomSheet: () -> Unit,
-    onShowCategoryDropdown: () -> Unit,
     onBottomSheetComplete: (Int) -> Unit,
+    onSelectCategory: (ExpCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var dropDownPosition by remember { mutableStateOf(IntOffset.Zero) }
+    var visibleDropDown by remember { mutableStateOf(false) }
+
     if(myExpState is MyExpState.Success) {
         val data = myExpState.data
         LazyColumn(
@@ -103,7 +110,10 @@ internal fun MyExpScreen(
                         selectCategory = expListState.selectCategory,
                         data = expListState.data,
                         onShowYearBottomSheet = onShowYearBottomSheet,
-                        onShowCategoryDropdown = onShowCategoryDropdown,
+                        onShowCategoryDropdown = {
+                            dropDownPosition = it
+                            visibleDropDown = true
+                        },
                     )
                 }
             }
@@ -118,11 +128,16 @@ internal fun MyExpScreen(
             onComplete = onBottomSheetComplete,
         )
     }
-    if(expListState.showDropDown) {
+
+    if(visibleDropDown) {
         MyExpCategoryListMenu(
             categoryEntry = expListState.expCategories,
             selectedCategory = expListState.selectCategory,
-            onSelectCategory = {},
+            onSelectCategory = {
+                onSelectCategory(it)
+                visibleDropDown = false
+            },
+            position = dropDownPosition,
         )
     }
 }
@@ -165,7 +180,6 @@ private fun PreviewExpScreen() {
             originData = emptyMap(),
             yearCategories = listOf(2025, 2024),
             expCategories = ExpCategory.entries,
-            false,
             false,
         ),
         {},

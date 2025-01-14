@@ -15,6 +15,7 @@ object Dimens {
     val margin3 = 3.dp
     val margin4 = 4.dp
     val margin6 = 6.dp
+    val margin7 = 7.dp
     val margin8 = 8.dp
     val margin10 = 10.dp
     val margin11 = 11.dp

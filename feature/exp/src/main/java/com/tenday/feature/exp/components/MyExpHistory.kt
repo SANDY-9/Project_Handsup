@@ -17,12 +17,20 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.boundsInRoot
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.round
 import com.tenday.core.common.extentions.toData
 import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
@@ -45,7 +53,7 @@ internal fun MyExpHistory(
     selectCategory: ExpCategory,
     data: List<Exp>,
     onShowYearBottomSheet: () -> Unit,
-    onShowCategoryDropdown: () -> Unit,
+    onShowCategoryDropdown: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -83,9 +91,10 @@ private fun MyExpHistoryHeader(
     year: Int,
     category: ExpCategory,
     onShowYearBottomSheet: () -> Unit,
-    onShowCategoryDropdown: () -> Unit,
+    onShowCategoryDropdown: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var dropDownIconPosition by remember { mutableStateOf(IntOffset.Zero) }
     Row(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -118,7 +127,12 @@ private fun MyExpHistoryHeader(
                     shape = CircleShape,
                 )
                 .clip(CircleShape)
-                .clickable(onClick = onShowCategoryDropdown)
+                .clickable {
+                    onShowCategoryDropdown(dropDownIconPosition)
+                }
+                .onGloballyPositioned {
+                    dropDownIconPosition = it.boundsInRoot().bottomRight.round()
+                }
                 .padding(
                     start = Dimens.margin16,
                     end = Dimens.margin12,
