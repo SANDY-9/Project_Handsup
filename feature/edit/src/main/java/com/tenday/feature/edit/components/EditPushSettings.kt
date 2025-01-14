@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.Gray200
 import com.tenday.designsystem.theme.Gray300
 import com.tenday.designsystem.theme.HandsUpOrange
@@ -36,6 +37,8 @@ internal fun EditPushSettings(
         )
     ) {
         HandsUpShadowCard(
+            shadowColor = CardShadowLight,
+            offsetY = 2.dp,
             content = {
                 Row(
                     modifier = modifier.padding(
@@ -56,6 +59,7 @@ internal fun EditPushSettings(
                         colors = SwitchDefaults.colors(
                             checkedTrackColor = HandsUpOrange,
                             checkedBorderColor = White,
+                            checkedThumbColor = White,
                             uncheckedTrackColor = Gray200,
                             uncheckedBorderColor = White,
                             uncheckedThumbColor = Gray300,

@@ -28,6 +28,7 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.icons.Info
+import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -49,6 +50,8 @@ internal fun EditBadgeView(
         )
     ) {
         HandsUpShadowCard(
+            shadowColor = CardShadowLight,
+            offsetY = 2.dp,
             content = {
                 Column(
                     modifier = modifier
