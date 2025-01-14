@@ -24,4 +24,7 @@
     <string name="exp_history_sort_project">전사프로젝트</string>
     <string name="exp_history_sort_personnel">인사평가</string>
 
+    <string name="exp_bottom_sheet_title">연도 선택</string>
+    <string name="exp_bottom_sheet_btn_title">변경완료</string>
+
 </resources>
