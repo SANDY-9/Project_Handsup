@@ -13,7 +13,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,7 +26,8 @@ import com.tenday.feature.mission.R
 
 @Composable
 internal fun MissionExpTitle(
-    type: String,
+    title: String,
+    exp: Int,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -43,14 +43,14 @@ internal fun MissionExpTitle(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
-            text = "$type"+ stringResource(R.string.mission_exp_title),
+            text = "$title"+ stringResource(R.string.mission_exp_title),
             style = HandsUpTypography.title5.copy(
                 fontWeight = FontWeight.ExtraBold,
             )
         )
         Spacer(modifier = modifier.width(Dimens.margin8))
         Text(
-            text = "2440",
+            text = exp.toString(),
             style = HandsUpTypography.title5.copy(
                 fontWeight = FontWeight.ExtraBold,
                 color = HandsUpOrange,
@@ -68,5 +68,5 @@ internal fun MissionExpTitle(
 @Preview(name = "MissionExpTitle")
 @Composable
 private fun PreviewMissionExpTitle() {
-    MissionExpTitle("리더부여")
+    MissionExpTitle("리더부여", 4000)
 }
