@@ -6,6 +6,7 @@ import com.tenday.core.model.JobMission
 import com.tenday.core.model.LeaderMission
 import com.tenday.core.model.MissionDetails
 import com.tenday.core.model.MissionExp
+import com.tenday.core.model.ProjectMission
 import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.LeaderQuestInfo
@@ -61,4 +62,16 @@ internal fun JobMissionResponse.toJobMission(): JobMission {
             missionName = questName,
         )
     )
+}
+
+internal fun ProjectMissionResponse.toProjectMission(): List<ProjectMission> {
+    return map {
+        ProjectMission(
+            content = it.content,
+            exp = it.exp,
+            expAt = it.expAt.toDate(),
+            period = MissionPeriod.getPeriod(it.period),
+            missionName = it.questName,
+        )
+    }
 }
