@@ -5,6 +5,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.tenday.core.common.enums.BadgeCode
@@ -14,6 +18,7 @@ import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.edit.components.EditBadgeView
+import com.tenday.feature.edit.components.EditPushSettings
 import com.tenday.feature.edit.components.EditTitleBar
 
 
@@ -47,6 +52,7 @@ internal fun EditScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var checked by remember { mutableStateOf(true) }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -60,6 +66,12 @@ internal fun EditScreen(
                 currentBadge = user.profileBadgeCode,
                 badgeList = user.possibleBadgeCodeList,
                 onShowBadgeInfo = {},
+            )
+        }
+        item {
+            EditPushSettings(
+                checked = checked,
+                onCheckedChange = { checked = !checked }
             )
         }
     }
