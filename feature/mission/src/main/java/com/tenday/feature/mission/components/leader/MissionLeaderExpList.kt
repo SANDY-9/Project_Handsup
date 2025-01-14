@@ -21,6 +21,7 @@ import com.tenday.designsystem.components.missionCard.MonthlyMissionCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.mission.MissionMenu
 import com.tenday.feature.mission.components.MissionExpTitle
+import com.tenday.feature.mission.components.MissionWeeklyCard
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -63,7 +64,7 @@ internal fun MissionLeaderExpList(
                         mutableStateOf(expList.getWeeklyExpList())
                     }
                     data.forEach { (month, list) ->
-                        WeeklyLeaderMissionCard(
+                        MissionWeeklyCard(
                             month = month,
                             expList = list,
                         )

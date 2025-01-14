@@ -1,4 +1,4 @@
-package com.tenday.feature.mission.components.leader
+package com.tenday.feature.mission.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -26,7 +26,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
 @Composable
-internal fun WeeklyLeaderMissionCard(
+internal fun MissionWeeklyCard(
     month: Int,
     expList: List<MissionExp>,
     modifier: Modifier = Modifier,
@@ -79,7 +79,7 @@ internal fun WeeklyLeaderMissionCard(
 @Preview(name = "WeeklyLeaderMissionCard")
 @Composable
 private fun PreviewWeeklyLeaderMissionCard() {
-    WeeklyLeaderMissionCard(
+    MissionWeeklyCard(
         2,
         listOf(
             MissionExp(
