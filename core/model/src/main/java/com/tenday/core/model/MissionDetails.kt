@@ -13,4 +13,10 @@ data class MissionDetails(
     val period: MissionPeriod,
     val missionGoal: String,
     val missionName: String,
-)
+) {
+    companion object {
+        fun List<MissionExp>.getWeeklyExpList(): Map<Int, List<MissionExp>> {
+            return groupBy { it.month }
+        }
+    }
+}

@@ -11,41 +11,48 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.HandsUpTypography
-import com.tenday.designsystem.theme.LinearGradientBlue
 import com.tenday.designsystem.theme.White
+import com.tenday.designsystem.theme.getHandsUpGradient
 import com.tenday.feature.mission.R
 import com.tenday.feature.mission.components.MissionToolTipTitle
 
 @Composable
-internal fun SpecialWorkMissionCard(
-    jobFamily: String,
+internal fun LeaderMissionCard(
+    index: Int,
+    department: String,
     jobGroup: Int,
+    missionName: String,
+    missionGoal: String,
+    period: MissionPeriod,
+    maxCondition: String,
+    medianCondition: String,
     visibleTable: Boolean,
-    onShowSpecialTooltip: (IntOffset) -> Unit,
+    onShowTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier
 ) {
     HandsUpTextureCard(
-        gradient = LinearGradientBlue,
+        gradient = getHandsUpGradient(index),
     ) {
         MissionToolTipTitle(
-            jobFamily = jobFamily,
+            jobFamily = department,
             jobGroup = jobGroup,
-            onShowTooltip = onShowSpecialTooltip,
+            onShowTooltip = onShowTooltip,
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
         Text(
-            text = stringResource(R.string.mission_leader_special_title),
+            text = missionName,
             style = HandsUpTypography.title3.copy(
                 color = White,
             ),
         )
         Spacer(modifier = modifier.height(Dimens.margin4))
         Text(
-            text = stringResource(R.string.mission_leader_special_desc),
+            text = missionGoal,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -56,19 +63,30 @@ internal fun SpecialWorkMissionCard(
                 Spacer(modifier = modifier.height(Dimens.margin12))
                 HandsUpThreeSpaceTable(
                     title1 = stringResource(R.string.mission_content_term_title),
-                    content1 = "주간 미션",
+                    content1 = period.desc,
                     title2 = stringResource(R.string.mission_content_max_title),
-                    content2 = "개선 리드",
+                    content2 = maxCondition,
                     title3 = stringResource(R.string.mission_content_median_title),
-                    content3 = "개선 참여",
+                    content3 = medianCondition,
                 )
             }
         }
     }
 }
 
-@Preview(name = "SpecialWorkMissionCard")
+@Preview(name = "MissionLeaderCardItem")
 @Composable
-private fun PreviewSpecialWorkMissionCard() {
-    SpecialWorkMissionCard("음성 1센터", 1, false, {})
+private fun PreviewMissionLeaderCardItem() {
+    LeaderMissionCard(
+        index = 3,
+        department = "음성 1센터",
+        jobGroup = 1,
+        missionName = "생산성 향상",
+        missionGoal = "5번 연속 두둥 경험치 획득",
+        period = MissionPeriod.WEEK,
+        maxCondition = "5.1 이상",
+        medianCondition = "4.3 이상",
+        visibleTable = true,
+        onShowTooltip = {},
+    )
 }

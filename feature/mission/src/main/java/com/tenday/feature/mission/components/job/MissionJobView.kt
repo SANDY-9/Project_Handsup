@@ -4,13 +4,9 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -20,23 +16,20 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import com.tenday.core.common.enums.AchieveGrade
-import com.tenday.designsystem.components.missionCard.WeeklyMissionCard
+import com.tenday.core.common.enums.MissionPeriod
+import com.tenday.core.model.JobMission
+import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
-import com.tenday.feature.mission.R
-import com.tenday.feature.mission.components.MissionExpTitle
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun MissionJobView(
-    jobFamily: String,
-    jobGroup: Int,
+    data: JobMission,
+    totalExp: Int,
     onListScroll: () -> Unit,
     onShowJobToolTip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier,
@@ -67,56 +60,44 @@ internal fun MissionJobView(
                 )
             ) {
                 JobMissionCard(
-                    jobFamily = jobFamily,
-                    jobGroup = jobGroup,
+                    department = data.department,
+                    jobGroup = data.jobGroup,
+                    missionName = data.missionDetails.missionName,
+                    missionGoal = data.missionDetails.missionGoal,
+                    period = data.missionDetails.period,
+                    maxCondition = data.missionDetails.maxCondition,
+                    medianCondition = data.missionDetails.medianCondition,
                     visibleTable = visibleTable,
                     onShowTooltip = onShowJobToolTip,
                 )
             }
         }
-        LazyColumn(
-            modifier = modifier.fillMaxSize(),
-            contentPadding = PaddingValues(
-                start = Dimens.margin20,
-                end = Dimens.margin20,
-                bottom = Dimens.margin24,
-                top = 0.dp
-            ),
-            state = lazyColumnState,
-        ) {
-            stickyHeader {
-                MissionExpTitle(
-                    type = stringResource(R.string.mission_job_title)
-                )
-            }
-            items(5) {
-                if(it == 1) {
-                    WeeklyMissionCard(
-                        it + 1,
-                        listOf(6,7,8,9),
-                        listOf( "02.02~02.05", "02.02~02.05", "02.02~02.05", "99.99~02.08",),
-                        listOf(AchieveGrade.MIN, AchieveGrade.MAX)
-                    )
-                }
-                else if(it == 0) {
-                    WeeklyMissionCard(it + 1)
-                }
-                else {
-                    WeeklyMissionCard(
-                        it + 1,
-                        listOf(10,11,12,13,14),
-                        listOf( "02.02~02.05", "02.02~02.05", "02.02~02.05", "99.99~02.08", "02.02~02.05"),
-                        listOf()
-                    )
-                }
-                Spacer(modifier = modifier.height(Dimens.margin12))
-            }
-        }
+        MissionJobExpList(
+            totalExp = totalExp,
+            lazyColumnState = lazyColumnState,
+            period = data.missionDetails.period,
+            expList = data.missionDetails.expList,
+        )
     }
 }
 
 @Preview(name = "MissionJobView")
 @Composable
 private fun PreviewMissionJobView() {
-    MissionJobView("음성 1센터", 1, {}, {})
+    MissionJobView(
+        JobMission(
+            department = "음성1센터",
+            jobGroup = 1,
+            totalExp = 5000,
+            missionDetails = MissionDetails(
+                expList = emptyList(),
+                maxCondition = "개선 리드",
+                maxExp = 80,
+                medianCondition = "개선 참여",
+                medianExp = 20,
+                period = MissionPeriod.WEEK,
+                missionGoal = "열심히 생산성 향상하자",
+                missionName = "생산성향상"
+            ),
+    ), 1, {}, {})
 }

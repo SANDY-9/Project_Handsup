@@ -35,7 +35,7 @@ val LightGray200 = Color(0xFFb9b9b9)
 val LightGray100 = Color(0xFFc8c8c8)
 
 val White = Color(0xFFFFFFFF)
-val Positive = Color(0xFF41C321)
+val Positive = Color(0xFF83DD77)
 val Negative = Color(0xFFFF1B1B)
 
 val CardShadow = Color(0x29000000)

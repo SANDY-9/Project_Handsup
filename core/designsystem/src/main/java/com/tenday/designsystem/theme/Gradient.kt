@@ -17,6 +17,20 @@ val LinearGradientBlue = Brush.linearGradient(
     )
 )
 
+val LinearGradientGreen = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFF399500),
+        Color(0xFF06798D),
+    )
+)
+
+val LinearGradientPurple = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFFC03BEC),
+        Color(0xFF7200B5),
+    )
+)
+
 val LinearGradientSunRise = Brush.linearGradient(
     colors = listOf(
         Color(0xFF0C64E8),
@@ -51,3 +65,15 @@ val SingleGradientNavy = Brush.horizontalGradient(
         HandsUpNavy
     )
 )
+
+private val HandsUpGradientGroup = listOf(
+    LinearGradientOrange,
+    LinearGradientBlue,
+    LinearGradientGreen,
+    LinearGradientPurple,
+    LinearGradientNavy,
+)
+fun getHandsUpGradient(index: Int): Brush {
+    val gradientNumber = index % HandsUpGradientGroup.size
+    return HandsUpGradientGroup[gradientNumber]
+}

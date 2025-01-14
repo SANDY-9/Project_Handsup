@@ -1,18 +1,18 @@
-package com.tenday.feature.mission.components.leader
+package com.tenday.feature.mission.components.job
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -25,28 +25,19 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.mission.MissionMenu
 import com.tenday.feature.mission.components.MissionExpTitle
 import com.tenday.feature.mission.components.MissionWeeklyCard
-import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-internal fun MissionLeaderExpList(
+internal fun MissionJobExpList(
     period: MissionPeriod,
     expList: List<MissionExp>,
     totalExp: Int,
-    onFullScroll: (Boolean) -> Unit,
+    lazyColumnState: LazyListState,
     modifier: Modifier = Modifier,
     year: Int = 2025,
 ) {
-    val lazyColumnState = rememberLazyListState()
-    LaunchedEffect(lazyColumnState) {
-        snapshotFlow { lazyColumnState.firstVisibleItemScrollOffset }.collectLatest { offset ->
-            // 스크롤 오프셋에 따라 크기 변경
-            val isFullScroll = offset <= 0
-            onFullScroll(isFullScroll)
-        }
-    }
     LazyColumn(
-        modifier = modifier,
+        modifier = modifier.fillMaxSize(),
         contentPadding = PaddingValues(
             start = Dimens.margin20,
             end = Dimens.margin20,
@@ -57,10 +48,11 @@ internal fun MissionLeaderExpList(
     ) {
         stickyHeader {
             MissionExpTitle(
-                title = MissionMenu.리더부여.name,
-                exp = totalExp
+                title = MissionMenu.직무미션.name,
+                exp = totalExp,
             )
         }
+
         when(period) {
             MissionPeriod.WEEK -> {
                 item {
@@ -90,10 +82,10 @@ internal fun MissionLeaderExpList(
     }
 }
 
-@Preview(name = "MissionLeaderExpList")
+@Preview(name = "MissionJobExpList")
 @Composable
-private fun PreviewMissionLeaderExpList() {
-    MissionLeaderExpList(
+private fun PreviewMissionJobExpList() {
+    MissionJobExpList(
         period = MissionPeriod.WEEK,
         expList = listOf(
             MissionExp(
@@ -122,6 +114,6 @@ private fun PreviewMissionLeaderExpList() {
             ),
         ),
         totalExp = 5000,
-        onFullScroll = {},
+        lazyColumnState = rememberLazyListState(),
     )
 }

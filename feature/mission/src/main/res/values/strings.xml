@@ -16,7 +16,9 @@
 
     <string name="mission_personnel_title">인사평가</string>
     <string name="mission_personnel_first_title">상반기 인사평가</string>
+    <string name="mission_personnel_first_date">01.01 - 06.30</string>
     <string name="mission_personnel_second_title">하반기 인사평가</string>
+    <string name="mission_personnel_second_date">07.01-12.31</string>
     <string name="mission_personnel_date_desc">부여됨</string>
     <string name="mission_personnel_grade_title">등급</string>
     <string name="mission_personnel_do_title">do</string>

@@ -35,36 +35,34 @@ import com.tenday.designsystem.theme.White
 internal fun WeeklyMissionCheckItem(
     list: List<Int>,
     dateTitleList: List<String>,
-    achieveGradeList: List<AchieveGrade>,
+    achieveGradeList: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
-    Box {
-        Row {
-            repeat(5) { num ->
-                val date = list.getOrNull(num)
-                val dateTitle = dateTitleList.getOrNull(num)
-                MissionCheckItem(
-                    date = date,
-                    dateTitle = dateTitle,
-                    achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.MIN
+    Row {
+        repeat(5) { num ->
+            val date = list.getOrNull(num)
+            val dateTitle = dateTitleList.getOrNull(num)
+            MissionCheckItem(
+                date = date,
+                dateTitle = dateTitle,
+                achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.NULL
+            )
+            val isNullLastItem = list.size < 5 && num >= list.size - 1
+            if(num < 4) {
+                HorizontalDivider(
+                    modifier = modifier
+                        .weight(1f)
+                        .padding(top = Dimens.margin16),
+                    thickness = 4.dp,
+                    color = if(isNullLastItem) Color.Transparent else Gray100,
                 )
-                val isNullLastItem = list.size < 5 && num >= list.size - 1
-                if(num < 4) {
-                    HorizontalDivider(
-                        modifier = modifier
-                            .weight(1f)
-                            .padding(top = Dimens.margin16),
-                        thickness = 4.dp,
-                        color = if(isNullLastItem) Color.Transparent else Gray100,
-                    )
-                }
             }
         }
     }
 }
 
 @Composable
-internal fun MissionCheckItem(
+fun MissionCheckItem(
     date: Int?,
     dateTitle: String?,
     achieveGrade: AchieveGrade,
@@ -119,7 +117,7 @@ internal fun MissionCheckItem(
                 }
             }
             Spacer(modifier = modifier.height(Dimens.margin6))
-            androidx.compose.material3.Text(
+            Text(
                 text = dateTitle ?: "",
                 style = HandsUpTypography.body4.copy(
                     color = Gray500,

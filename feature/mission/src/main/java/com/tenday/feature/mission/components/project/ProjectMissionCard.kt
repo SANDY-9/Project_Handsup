@@ -21,6 +21,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.MissionPeriod
+import com.tenday.core.model.ProjectMission
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
@@ -33,7 +35,8 @@ import com.tenday.feature.mission.R
 
 @Composable
 internal fun ProjectMissionCard(
-    modifier: Modifier = Modifier
+    data: ProjectMission,
+    modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
         offsetY = 2.dp,
@@ -44,7 +47,7 @@ internal fun ProjectMissionCard(
                 modifier = modifier.padding(Dimens.margin20),
             ) {
                 Text(
-                    text = "01.02 - 01.05",
+                    text = data.expAt,
                     style = HandsUpTypography.body4.copy(
                         fontWeight = FontWeight.SemiBold,
                         color = HandsUpOrange,
@@ -53,7 +56,7 @@ internal fun ProjectMissionCard(
                 Spacer(modifier = modifier.height(8.dp))
                 Text(
                     modifier = modifier.fillMaxWidth(),
-                    text = "환불 프로세스 최적화",
+                    text = data.missionName,
                     style = HandsUpTypography.title5,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
@@ -61,15 +64,17 @@ internal fun ProjectMissionCard(
                 Spacer(modifier = modifier.height(6.dp))
                 Text(
                     modifier = modifier.fillMaxWidth(),
-                    text = "환불 절차를 간소화하고 고객의 불편을 " +
-                            "최소화 할 수있는 정책 개선 및 운영 비용 절감 프로젝트",
+                    text = data.content,
                     style = HandsUpTypography.body2,
                     color = Gray600,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Spacer(modifier = modifier.height(20.dp))
-                ProjectMissionExp()
+                ProjectMissionExp(
+                    date = data.expAt,
+                    exp = data.exp,
+                )
             }
         }
     )
@@ -77,6 +82,8 @@ internal fun ProjectMissionCard(
 
 @Composable
 private fun ProjectMissionExp(
+    date: String,
+    exp: Int,
     modifier: Modifier = Modifier,
 ) {
     Row {
@@ -88,14 +95,14 @@ private fun ProjectMissionExp(
                 vertical = Dimens.margin4,
                 horizontal = Dimens.margin6,
             ),
-            text = "2025.01.11 " + stringResource(R.string.mission_project_exp_desc),
+            text = "$date " + stringResource(R.string.mission_project_exp_desc),
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
             )
         )
         Spacer(modifier = modifier.weight(1f))
         Text(
-            text = "2440",
+            text = exp.toString(),
             style = HandsUpTypography.title5.copy(
                 fontWeight = FontWeight.ExtraBold,
                 color = HandsUpOrange,
@@ -116,6 +123,15 @@ private fun PreviewProjectMissionCard() {
     Box(
         modifier = Modifier.padding(10.dp)
     ) {
-        ProjectMissionCard()
+        ProjectMissionCard(
+            ProjectMission(
+                content = "환불 절차를 간소화하고 고객의 불편을 최소화 할 수있는 " +
+                        "정책 개선 및 운영 비용 절감 프로젝트",
+                exp = 2440,
+                expAt = "2025.01.11",
+                period = MissionPeriod.WEEK,
+                missionName = "환불 프로세스 최적화"
+            )
+        )
     }
 }
