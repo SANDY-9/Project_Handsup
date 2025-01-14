@@ -26,6 +26,7 @@ import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
 import com.tenday.feature.exp.components.MyExpThisYearCard
+import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
 
@@ -89,8 +90,10 @@ internal fun MyExpScreen(
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
                     )
                     MyExpHistory(
-                        year = currentSelectYear,
-                        expList = data.expList[currentSelectYear] ?: emptyList(),
+                        selectYear = expListState.selectYear,
+                        selectCategory = expListState.selectCategory,
+                        data = expListState.data,
+                        yearCategories = expListState.yearCategories,
                     )
                 }
             }
@@ -129,6 +132,12 @@ private fun PreviewExpScreen() {
                 totalExp=5730
             )
         ),
-        2025
+        ExpListState(
+            selectYear = 2025,
+            selectCategory = ExpCategory.전체보기,
+            data = listOf(),
+            originData = emptyMap(),
+            yearCategories = listOf(2025, 2024),
+        )
     )
 }

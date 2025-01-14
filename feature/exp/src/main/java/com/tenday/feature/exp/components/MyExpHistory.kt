@@ -20,7 +20,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -37,12 +36,14 @@ import com.tenday.designsystem.theme.Gray900
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpOrangeSub
 import com.tenday.designsystem.theme.HandsUpTypography
-import com.tenday.feature.exp.R
+import com.tenday.feature.exp.model.ExpCategory
 
 @Composable
 internal fun MyExpHistory(
-    year: Int,
-    expList: List<Exp>,
+    selectYear: Int,
+    selectCategory: ExpCategory,
+    data: List<Exp>,
+    yearCategories: List<Int>,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -55,14 +56,17 @@ internal fun MyExpHistory(
                     .fillMaxWidth()
                     .padding(Dimens.margin20),
             ) {
-                MyExpHistoryHeader(year = year)
+                MyExpHistoryHeader(
+                    year = selectYear,
+                    category = selectCategory,
+                )
                 Spacer(modifier = modifier.height(Dimens.margin12))
-                expList.forEach { data ->
+                data.forEach { item ->
                     MyExpHistoryItem(
-                        missionName = data.questName,
-                        expName = data.expType.quest,
-                        date = data.expAt,
-                        exp = data.exp
+                        missionName = item.questName,
+                        expName = item.expType.quest,
+                        date = item.expAt,
+                        exp = item.exp
                     )
                 }
             }
@@ -73,6 +77,7 @@ internal fun MyExpHistory(
 @Composable
 private fun MyExpHistoryHeader(
     year: Int,
+    category: ExpCategory,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -109,7 +114,7 @@ private fun MyExpHistoryHeader(
                 )
         ) {
             Text(
-                text = stringResource(R.string.exp_history_sort_all),
+                text = category.desc,
                 style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                     color = HandsUpOrange,
@@ -183,5 +188,10 @@ private fun MyExpHistoryItem(
 @Preview(name = "MyExpHistory")
 @Composable
 private fun PreviewMyExpHistory() {
-    MyExpHistory(2025, listOf())
+    MyExpHistory(
+        selectYear = 2025,
+        selectCategory = ExpCategory.리더부여,
+        data = listOf(),
+        yearCategories = listOf(2025, 2024, 2023),
+    )
 }

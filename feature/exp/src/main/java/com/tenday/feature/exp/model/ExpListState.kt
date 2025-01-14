@@ -10,10 +10,10 @@ internal data class ExpListState(
     val yearCategories: List<Int>,
 )
 
-internal enum class ExpCategory {
-    전체보기,
-    리더부여,
-    직무미션,
-    전사프로젝트,
-    인사평가,
+internal enum class ExpCategory(val desc: String) {
+    전체보기("전체"),
+    리더부여("리더부여"),
+    직무미션("직무미션"),
+    전사프로젝트("전사프로젝트"),
+    인사평가("인사평가"),
 }
