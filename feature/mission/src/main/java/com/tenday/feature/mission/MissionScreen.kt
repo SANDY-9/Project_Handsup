@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.mission.components.MissionTitleBar
 import com.tenday.feature.mission.components.MissionToolTip
@@ -24,7 +25,9 @@ import com.tenday.feature.mission.components.personnel.MissionPersonnelView
 import com.tenday.feature.mission.components.project.MissionProjectView
 
 @Composable
-internal fun MissionRoute() {
+internal fun MissionRoute(
+    viewModel: MissionViewModel = hiltViewModel()
+) {
     var currentClickTab by remember { mutableStateOf(MissionMenu.리더부여) }
     MissionScreen(currentClickTab, { currentClickTab = it })
 }

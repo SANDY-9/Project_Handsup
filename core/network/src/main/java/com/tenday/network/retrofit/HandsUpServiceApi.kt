@@ -2,6 +2,7 @@ package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
 import com.tenday.network.model.ExpResponse
+import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
@@ -52,5 +53,10 @@ internal interface HandsUpServiceApi {
     suspend fun getExpDetails(
         @Header("Authorization") token: String,
     ): ExpResponse
+
+    @GET("exp/leader-quest")
+    suspend fun getLeaderMission(
+        @Header("Authorization") token: String,
+    ): LeaderMissionResponse
 
 }
