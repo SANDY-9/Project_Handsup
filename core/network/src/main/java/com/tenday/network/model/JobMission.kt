@@ -4,23 +4,13 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class LeaderMissionResponse(
+data class JobMissionResponse(
     @SerialName("department")
     val department: String,
     @SerialName("jobGroup")
     val jobGroup: Int,
-    @SerialName("questCount")
-    val questCount: Int,
-    @SerialName("questInfo")
-    val questInfo: List<QuestInfo>,
-    @SerialName("totalExp")
-    val totalExp: Int,
-)
-
-@Serializable
-data class QuestInfo(
-    @SerialName("leaderQuestResponse")
-    val leaderQuest: List<QuestExp>,
+    @SerialName("jobQuestResponse")
+    val jobQuest: List<QuestExp>,
     @SerialName("maxCondition")
     val maxCondition: String,
     @SerialName("maxExp")
@@ -35,18 +25,6 @@ data class QuestInfo(
     val questGoal: String,
     @SerialName("questName")
     val questName: String,
-)
-
-@Serializable
-data class QuestExp(
-    @SerialName("achieveGrade")
-    val achieveGrade: String,
-    @SerialName("exp")
-    val exp: Int,
-    @SerialName("index")
-    val index: Int,
-    @SerialName("month")
-    val month: Int,
-    @SerialName("range")
-    val range: List<String> = emptyList(),
+    @SerialName("totalExp")
+    val totalExp: Int
 )
