@@ -1,12 +1,19 @@
 package com.tenday.feature.edit
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.tenday.designsystem.theme.White
+import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.JobFamily
+import com.tenday.core.common.enums.JobPosition
+import com.tenday.core.common.enums.ProfileCode
+import com.tenday.core.model.UserDetails
+import com.tenday.designsystem.theme.Gray100
+import com.tenday.feature.edit.components.EditBadgeView
 import com.tenday.feature.edit.components.EditTitleBar
 
 
@@ -14,25 +21,69 @@ import com.tenday.feature.edit.components.EditTitleBar
 internal fun EditRoute(
     onNavigateBack: () -> Unit,
 ) {
+    val userDetails = UserDetails(
+        employeeId = "2023010101",
+        username = "김민수",
+        hireDate = "2023-01-01",
+        department = "음성 1센터",
+        jobPosition = JobPosition.파트장,
+        jobGroup = 1,
+        jobFamily = JobFamily.F,
+        jobLevel = "F1-Ⅰ",
+        totalExpLastYear = 5000,
+        profileImageCode = ProfileCode.F_A,
+        profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
+        possibleBadgeCodeList = BadgeCode.entries,
+    )
     EditScreen(
+        user = userDetails,
         onNavigateBack = onNavigateBack
     )
 }
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EditScreen(
+    user: UserDetails,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    Column(
-        modifier = modifier.fillMaxSize().background(color = White)
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = Gray100)
     ) {
-        EditTitleBar(onNavigate = onNavigateBack)
+        stickyHeader {
+            EditTitleBar(onNavigate = onNavigateBack)
+        }
+        item {
+            EditBadgeView(
+                currentBadge = user.profileBadgeCode,
+                badgeList = user.possibleBadgeCodeList,
+                onShowBadgeInfo = {},
+            )
+        }
     }
 }
 
 @Preview(name = "EditScreen")
 @Composable
 private fun PreviewEditScreen() {
-    EditScreen({})
+    EditScreen(
+        user = UserDetails(
+            employeeId = "2023010101",
+            username = "김민수",
+            hireDate = "2023-01-01",
+            department = "음성 1센터",
+            jobPosition = JobPosition.파트장,
+            jobGroup = 1,
+            jobFamily = JobFamily.F,
+            jobLevel = "F1-Ⅰ",
+            totalExpLastYear = 5000,
+            profileImageCode = ProfileCode.F_A,
+            profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
+            possibleBadgeCodeList = BadgeCode.entries,
+        ),
+        onNavigateBack = {}
+    )
 
 }

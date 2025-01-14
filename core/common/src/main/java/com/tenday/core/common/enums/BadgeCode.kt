@@ -44,4 +44,5 @@ enum class BadgeCode(
         resFilePath = resPath + "열정의_불꽃.svg",
         offResFilePath = resPath + "열정의_불꽃_off.svg",
     );
+
 }
