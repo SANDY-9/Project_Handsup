@@ -26,6 +26,7 @@ import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
 import com.tenday.feature.exp.components.MyExpThisYearCard
+import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
 
 @Composable
@@ -34,12 +35,12 @@ internal fun MyExpRoute(
 ) {
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
     val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
-    val currentSelectYear by viewModel.currentExpListYear.collectAsStateWithLifecycle()
+    val expListState by viewModel.expListState.collectAsStateWithLifecycle()
 
     MyExpScreen(
         user = userDetails ?: return,
         myExpState = myExpState,
-        currentSelectYear = currentSelectYear,
+        expListState = expListState,
     )
 }
 
@@ -47,7 +48,7 @@ internal fun MyExpRoute(
 internal fun MyExpScreen(
     user: UserDetails,
     myExpState: MyExpState,
-    currentSelectYear: Int,
+    expListState: ExpListState,
     modifier: Modifier = Modifier
 ) {
     if(myExpState is MyExpState.Success) {
