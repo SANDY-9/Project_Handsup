@@ -1,5 +1,6 @@
 package com.tenday.feature.exp
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -26,6 +27,7 @@ import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
 import com.tenday.feature.exp.components.MyExpThisYearCard
+import com.tenday.feature.exp.components.MyExpYearListBottomSheet
 import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
@@ -44,6 +46,7 @@ internal fun MyExpRoute(
         expListState = expListState,
         onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
         onShowCategoryDropdown = viewModel::updateDropDownVisible,
+        onBottomSheetComplete = viewModel::updateSelectExpYear,
     )
 }
 
@@ -54,6 +57,7 @@ internal fun MyExpScreen(
     expListState: ExpListState,
     onShowYearBottomSheet: () -> Unit,
     onShowCategoryDropdown: () -> Unit,
+    onBottomSheetComplete: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     if(myExpState is MyExpState.Success) {
@@ -97,13 +101,21 @@ internal fun MyExpScreen(
                         selectYear = expListState.selectYear,
                         selectCategory = expListState.selectCategory,
                         data = expListState.data,
-                        yearCategories = expListState.yearCategories,
                         onShowYearBottomSheet = onShowYearBottomSheet,
                         onShowCategoryDropdown = onShowCategoryDropdown,
                     )
                 }
             }
         }
+    }
+    AnimatedVisibility(
+        expListState.showBottomSheet
+    ) {
+        MyExpYearListBottomSheet(
+            selectedYear = expListState.selectYear,
+            yearList = expListState.yearCategories,
+            onComplete = onBottomSheetComplete,
+        )
     }
 }
 
@@ -147,6 +159,7 @@ private fun PreviewExpScreen() {
             false,
             false,
         ),
+        {},
         {},
         {},
     )

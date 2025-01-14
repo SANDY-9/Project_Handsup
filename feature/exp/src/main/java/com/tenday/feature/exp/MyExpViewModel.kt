@@ -80,8 +80,23 @@ internal class MyExpViewModel @Inject constructor(
         val state = expListState.value
         _expListState.value = state.copy(
             selectYear = year,
+            data = filterDataByYearAndCategory(state, state.selectYear),
+            showBottomSheet = false,
+        )
+    }
+
+    internal fun updateSelectCategory(category: ExpCategory) {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            selectCategory = category,
             data = filterDataByYearAndCategory(state, state.selectYear)
         )
+    }
+
+    private fun filterDataByYearAndCategory(state: ExpListState, year: Int): List<Exp> {
+        return state.originData[year]?.filter { exp ->
+            state.selectCategory == ExpCategory.전체보기 || exp.questName == state.selectCategory.name
+        } ?: emptyList()
     }
 
 }

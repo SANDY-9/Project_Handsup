@@ -43,14 +43,12 @@ import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.exp.R
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MyExpYearListBottomSheet(
     selectedYear: Int,
     yearList: List<Int>,
-    onDismiss: () -> Unit,
     onComplete: (Int) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -64,10 +62,7 @@ internal fun MyExpYearListBottomSheet(
     ModalBottomSheet(
         sheetState = bottomSheetState,
         dragHandle = null,
-        onDismissRequest = {
-            onComplete(selectedYear)
-            onDismiss()
-        },
+        onDismissRequest = { onComplete(selectedYear) },
         containerColor = White,
     ) {
         Column(
@@ -92,12 +87,7 @@ internal fun MyExpYearListBottomSheet(
                     modifier = modifier
                         .size(24.dp)
                         .noRippleClickable {
-                            scope.launch {
-                                bottomSheetState.hide()
-                            }.invokeOnCompletion {
-                                onComplete(selectedYear)
-                                onDismiss()
-                            }
+                            onComplete(selectedYear)
                         },
                     imageVector = Icons.Cancel,
                     contentDescription = null,
@@ -113,7 +103,10 @@ internal fun MyExpYearListBottomSheet(
                         year = year,
                         selected = year == selectYear,
                         visibleDivider = index < yearList.lastIndex,
-                        onSelect = { selectYear = year },
+                        onSelect = {
+                            selectYear = year
+                            onComplete(selectedYear)
+                        },
                     )
                 }
             }
@@ -175,7 +168,6 @@ private fun PreviewMyExpYearListBottomSheet() {
     MyExpYearListBottomSheet(
         2024,
         listOf(2025,2024,2023,2022,2021),
-        {},
         {},
     )
     //MyExpYearItem(2025, false, true, {})

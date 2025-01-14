@@ -44,7 +44,6 @@ internal fun MyExpHistory(
     selectYear: Int,
     selectCategory: ExpCategory,
     data: List<Exp>,
-    yearCategories: List<Int>,
     onShowYearBottomSheet: () -> Unit,
     onShowCategoryDropdown: () -> Unit,
     modifier: Modifier = Modifier,
@@ -91,21 +90,26 @@ private fun MyExpHistoryHeader(
         modifier = modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        Text(
-            text = "${year}년",
-            style = HandsUpTypography.title4.copy(
-                fontWeight = FontWeight.ExtraBold,
-            )
-        )
-        Spacer(modifier = modifier.width(Dimens.margin4))
-        Icon(
-            modifier = modifier.size(16.dp).noRippleClickable(
+        Row(
+            modifier = modifier.noRippleClickable(
                 onClick = onShowYearBottomSheet,
             ),
-            imageVector = Icons.ArrowBottom,
-            contentDescription = null,
-            tint = Gray900
-        )
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Text(
+                text = "${year}년",
+                style = HandsUpTypography.title4.copy(
+                    fontWeight = FontWeight.ExtraBold,
+                )
+            )
+            Spacer(modifier = modifier.width(Dimens.margin4))
+            Icon(
+                modifier = modifier.size(16.dp),
+                imageVector = Icons.ArrowBottom,
+                contentDescription = null,
+                tint = Gray900
+            )
+        }
         Spacer(modifier = modifier.weight(1f))
         Row(
             modifier = modifier
@@ -201,7 +205,6 @@ private fun PreviewMyExpHistory() {
         selectYear = 2025,
         selectCategory = ExpCategory.리더부여,
         data = listOf(),
-        yearCategories = listOf(2025, 2024, 2023),
         {},
         {}
     )
