@@ -71,16 +71,13 @@ internal fun MissionScreen(
                     when (uiState.data) {
                         is HandsUpMission.Leader -> MissionLeaderView(
                             data = uiState.data.mission,
+                            totalExp = uiState.data.mission.totalExp,
                             onPagerSwipe = { visibleToolTip = false },
                             onListScroll = { visibleToolTip = false },
-                            onShowImproveToolTip = {
+                            onShowToolTip = {
                                 tooltipPosition = it
                                 visibleToolTip = true
-                            },
-                            onShowSpecialTooltip = {
-                                tooltipPosition = it
-                                visibleToolTip = true
-                            },
+                            }
                         )
 
                         is HandsUpMission.Job -> MissionJobView(

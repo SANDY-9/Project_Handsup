@@ -14,12 +14,15 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
+import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.LeaderMission
+import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.theme.Gray100
 
 @Composable
 internal fun MissionLeaderView(
     data: LeaderMission,
+    totalExp: Int,
     onPagerSwipe: () -> Unit,
     onListScroll: () -> Unit,
     onShowToolTip: (IntOffset) -> Unit,
@@ -42,12 +45,14 @@ internal fun MissionLeaderView(
             onShowToolTip = onShowToolTip,
         )
         MissionLeaderExpList(
-            type = type,
+            modifier = modifier.fillMaxSize(),
+            expList = data.missionList[currentPage].expList,
+            totalExp = totalExp,
+            period = data.missionList[currentPage].period,
             onFullScroll = { fullScroll ->
                 visibleTable = fullScroll
                 onListScroll()
             },
-            modifier = modifier.fillMaxSize(),
         )
     }
 }
@@ -62,14 +67,38 @@ private fun PreviewMissionLeaderView() {
         )
     ) {
         MissionLeaderView(
-            type = "업무개선",
-            jobFamily = "음성 1센터",
-            jobGroup = 1,
-            onPageChange = {},
+            data = LeaderMission(
+                department = "음성1센터",
+                jobGroup = 1,
+                missionCount = 3,
+                missionList = listOf(
+                    MissionDetails(
+                        expList = emptyList(),
+                        maxCondition = "개선 리드",
+                        maxExp = 80,
+                        medianCondition = "개선 참여",
+                        medianExp = 20,
+                        period = MissionPeriod.WEEK,
+                        missionGoal = "열심히 업무개선하자",
+                        missionName = "업무개선"
+                    ),
+                    MissionDetails(
+                        expList = emptyList(),
+                        maxCondition = "개선 리드",
+                        maxExp = 80,
+                        medianCondition = "개선 참여",
+                        medianExp = 20,
+                        period = MissionPeriod.WEEK,
+                        missionGoal = "열심히 업무개선하자",
+                        missionName = "업무개선"
+                    )
+                ),
+                totalExp = 3000,
+            ),
+            totalExp = 4000,
             onPagerSwipe = {},
             onListScroll = {},
-            onShowImproveToolTip = {},
-            onShowSpecialTooltip = {},
+            onShowToolTip = {},
         )
     }
 }
