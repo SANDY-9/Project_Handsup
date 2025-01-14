@@ -8,5 +8,6 @@ enum class AchieveGrade {
     A등급,
     B등급,
     C등급,
-    D등급;
+    D등급,
+    NULL;
 }

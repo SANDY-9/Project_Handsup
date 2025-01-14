@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.usecases.mission.GetJobMissionUseCase
 import com.tenday.core.domain.usecases.mission.GetLeaderMissionUseCase
+import com.tenday.core.domain.usecases.mission.GetPersonnelMissionUseCase
 import com.tenday.core.domain.usecases.mission.GetProjectMissionUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
@@ -18,6 +19,7 @@ class MissionViewModel @Inject constructor(
     private val getLeaderMissionUseCase: GetLeaderMissionUseCase,
     private val getJobMissionUseCase: GetJobMissionUseCase,
     private val getProjectMissionUseCase: GetProjectMissionUseCase,
+    private val getPersonnelMissionUseCase: GetPersonnelMissionUseCase,
 ): ViewModel() {
 
     init {
@@ -38,6 +40,14 @@ class MissionViewModel @Inject constructor(
         }.launchIn(viewModelScope)
 
         getProjectMissionUseCase().onStart {
+            Log.e("확인", "로딩 ")
+        }.onEach {
+            Log.e("확인", "$it ")
+        }.catch {
+            Log.e("확인", "$it ")
+        }.launchIn(viewModelScope)
+
+        getPersonnelMissionUseCase().onStart {
             Log.e("확인", "로딩 ")
         }.onEach {
             Log.e("확인", "$it ")
