@@ -21,6 +21,7 @@ fun NavGraphBuilder.editScreen(
     composable<EditRoute> {
         EditRoute(
             onNavigateBack = onNavigateBack,
+            onLogout = {}
         )
     }
 }

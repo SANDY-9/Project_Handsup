@@ -21,12 +21,14 @@ import com.tenday.feature.edit.components.EditBadgeView
 import com.tenday.feature.edit.components.EditPasswordView
 import com.tenday.feature.edit.components.EditPushSettings
 import com.tenday.feature.edit.components.EditTitleBar
+import com.tenday.feature.edit.components.LogoutButton
 import com.tenday.feature.edit.model.EditInputState
 
 
 @Composable
 internal fun EditRoute(
     onNavigateBack: () -> Unit,
+    onLogout: () -> Unit,
 ) {
     val userDetails = UserDetails(
         employeeId = "2023010101",
@@ -52,6 +54,7 @@ internal fun EditRoute(
         user = userDetails,
         inputState = editInputState,
         onNavigateBack = onNavigateBack,
+        onLogout = onLogout,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -60,6 +63,7 @@ internal fun EditScreen(
     user: UserDetails,
     inputState: EditInputState,
     onNavigateBack: () -> Unit,
+    onLogout: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var checked by remember { mutableStateOf(true) }
@@ -97,6 +101,9 @@ internal fun EditScreen(
                 onEditComplete = {}
             )
         }
+        item {
+            LogoutButton(onLogout = onLogout)
+        }
     }
 }
 
@@ -118,7 +125,14 @@ private fun PreviewEditScreen() {
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = BadgeCode.entries,
         ),
-        onNavigateBack = {}
+        inputState = EditInputState(
+            pwdInput = "",
+            pwdConfirmInput = "",
+            pwdError = false,
+            pwdConfirmError = false,
+        ),
+        onNavigateBack = {},
+        onLogout = {},
     )
 
 }

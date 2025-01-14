@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -39,6 +40,8 @@ fun HandsUpButton(
     enabled: Boolean,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
+    btnColor: Color = HandsUpOrange,
+    textColor: Color = White,
 ) {
     Button(
         modifier = modifier
@@ -46,8 +49,8 @@ fun HandsUpButton(
             .fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = ButtonColors(
-            containerColor = HandsUpOrange,
-            contentColor = White,
+            containerColor = btnColor,
+            contentColor = textColor,
             disabledContainerColor = Gray500,
             disabledContentColor = White,
         ),
@@ -57,7 +60,7 @@ fun HandsUpButton(
         Text(
             text = text,
             style = HandsUpTypography.title5,
-            color = White,
+            color = textColor,
         )
     }
 }
