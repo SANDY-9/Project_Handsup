@@ -11,5 +11,4 @@ data class MissionExp(
     val startDate: String?,
     val endDate: String?,
     val month: Int,
-    val content: String = "",
 )
