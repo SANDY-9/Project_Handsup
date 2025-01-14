@@ -44,3 +44,21 @@ internal fun QuestExp.toMissionExp(): MissionExp {
         endDate = range.firstOrNull()
     )
 }
+
+internal fun JobMissionResponse.toJobMission(): JobMission {
+    return JobMission(
+        department = department,
+        jobGroup = jobGroup,
+        totalExp = totalExp,
+        missionDetails = MissionDetails(
+            expList = jobQuest.map { it.toMissionExp() },
+            maxCondition = maxCondition,
+            maxExp = maxExp,
+            medianCondition = medianCondition,
+            medianExp = medianExp,
+            period = MissionPeriod.getPeriod(period),
+            missionGoal = questGoal,
+            missionName = questName,
+        )
+    )
+}
