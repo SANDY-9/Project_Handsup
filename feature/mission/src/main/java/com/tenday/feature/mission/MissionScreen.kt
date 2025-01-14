@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -90,7 +91,15 @@ internal fun MissionScreen(
                             },
                         )
 
-                        is HandsUpMission.Project -> MissionProjectView()
+                        is HandsUpMission.Project -> {
+                            val totalExp by remember { mutableIntStateOf(
+                                uiState.data.mission.sumOf { it.exp }
+                            ) }
+                            MissionProjectView(
+                                data = uiState.data.mission,
+                                totalExp = totalExp,
+                            )
+                        }
                         is HandsUpMission.Personnel -> MissionPersonnelView()
                     }
                 }
