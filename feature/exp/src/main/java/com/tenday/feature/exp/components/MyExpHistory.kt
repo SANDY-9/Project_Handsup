@@ -27,6 +27,7 @@ import com.tenday.core.common.extentions.toData
 import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.ArrowBottom
 import com.tenday.designsystem.icons.Dodoong
 import com.tenday.designsystem.theme.CardShadowLight
@@ -44,6 +45,8 @@ internal fun MyExpHistory(
     selectCategory: ExpCategory,
     data: List<Exp>,
     yearCategories: List<Int>,
+    onShowYearBottomSheet: () -> Unit,
+    onShowCategoryDropdown: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -59,6 +62,8 @@ internal fun MyExpHistory(
                 MyExpHistoryHeader(
                     year = selectYear,
                     category = selectCategory,
+                    onShowYearBottomSheet = onShowYearBottomSheet,
+                    onShowCategoryDropdown = onShowCategoryDropdown,
                 )
                 Spacer(modifier = modifier.height(Dimens.margin12))
                 data.forEach { item ->
@@ -78,6 +83,8 @@ internal fun MyExpHistory(
 private fun MyExpHistoryHeader(
     year: Int,
     category: ExpCategory,
+    onShowYearBottomSheet: () -> Unit,
+    onShowCategoryDropdown: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -92,7 +99,9 @@ private fun MyExpHistoryHeader(
         )
         Spacer(modifier = modifier.width(Dimens.margin4))
         Icon(
-            modifier = modifier.size(16.dp),
+            modifier = modifier.size(16.dp).noRippleClickable(
+                onClick = onShowYearBottomSheet,
+            ),
             imageVector = Icons.ArrowBottom,
             contentDescription = null,
             tint = Gray900
@@ -105,7 +114,7 @@ private fun MyExpHistoryHeader(
                     shape = CircleShape,
                 )
                 .clip(CircleShape)
-                .clickable(onClick = {})
+                .clickable(onClick = onShowCategoryDropdown)
                 .padding(
                     start = Dimens.margin16,
                     end = Dimens.margin12,
@@ -193,5 +202,7 @@ private fun PreviewMyExpHistory() {
         selectCategory = ExpCategory.리더부여,
         data = listOf(),
         yearCategories = listOf(2025, 2024, 2023),
+        {},
+        {}
     )
 }

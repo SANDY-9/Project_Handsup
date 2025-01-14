@@ -8,6 +8,8 @@ internal data class ExpListState(
     val data: List<Exp>,
     val originData: Map<Int, List<Exp>>,
     val yearCategories: List<Int>,
+    val showBottomSheet: Boolean,
+    val showDropDown: Boolean,
 )
 
 internal enum class ExpCategory(val desc: String) {

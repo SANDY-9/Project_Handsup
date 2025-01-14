@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.usecases.exp.GetExpDetailsUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
+import com.tenday.core.model.Exp
 import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpState
@@ -39,6 +40,8 @@ internal class MyExpViewModel @Inject constructor(
             data = emptyList(),
             originData = emptyMap(),
             yearCategories = emptyList(),
+            showBottomSheet = false,
+            showDropDown = false,
         )
     )
     val expListState = _expListState.asStateFlow()
@@ -57,6 +60,28 @@ internal class MyExpViewModel @Inject constructor(
             }.catch {
                 _myExpState.value = MyExpState.Fail
             }.launchIn(viewModelScope)
+    }
+
+    internal fun updateBottomSheetVisible() {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            showBottomSheet = !state.showBottomSheet,
+        )
+    }
+
+    internal fun updateDropDownVisible() {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            showDropDown = !state.showDropDown,
+        )
+    }
+
+    internal fun updateSelectExpYear(year: Int) {
+        val state = expListState.value
+        _expListState.value = state.copy(
+            selectYear = year,
+            data = filterDataByYearAndCategory(state, state.selectYear)
+        )
     }
 
 }

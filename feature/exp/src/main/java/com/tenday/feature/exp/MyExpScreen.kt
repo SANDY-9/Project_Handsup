@@ -42,6 +42,8 @@ internal fun MyExpRoute(
         user = userDetails ?: return,
         myExpState = myExpState,
         expListState = expListState,
+        onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
+        onShowCategoryDropdown = viewModel::updateDropDownVisible,
     )
 }
 
@@ -50,6 +52,8 @@ internal fun MyExpScreen(
     user: UserDetails,
     myExpState: MyExpState,
     expListState: ExpListState,
+    onShowYearBottomSheet: () -> Unit,
+    onShowCategoryDropdown: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     if(myExpState is MyExpState.Success) {
@@ -94,6 +98,8 @@ internal fun MyExpScreen(
                         selectCategory = expListState.selectCategory,
                         data = expListState.data,
                         yearCategories = expListState.yearCategories,
+                        onShowYearBottomSheet = onShowYearBottomSheet,
+                        onShowCategoryDropdown = onShowCategoryDropdown,
                     )
                 }
             }
@@ -138,6 +144,10 @@ private fun PreviewExpScreen() {
             data = listOf(),
             originData = emptyMap(),
             yearCategories = listOf(2025, 2024),
-        )
+            false,
+            false,
+        ),
+        {},
+        {},
     )
 }
