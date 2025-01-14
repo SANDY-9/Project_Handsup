@@ -24,11 +24,11 @@ data class QuestInfo(
     @SerialName("maxCondition")
     val maxCondition: String,
     @SerialName("maxExp")
-    val maxExp: String,
+    val maxExp: Int,
     @SerialName("medianCondition")
     val medianCondition: String,
     @SerialName("medianExp")
-    val medianExp: String,
+    val medianExp: Int,
     @SerialName("period")
     val period: String,
     @SerialName("questGoal")

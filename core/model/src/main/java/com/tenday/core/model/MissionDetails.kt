@@ -7,9 +7,9 @@ import kotlinx.serialization.Serializable
 data class MissionDetails(
     val expList: List<MissionExp>,
     val maxCondition: String,
-    val maxExp: String,
+    val maxExp: Int,
     val medianCondition: String,
-    val medianExp: String,
+    val medianExp: Int,
     val period: MissionPeriod,
     val missionGoal: String,
     val missionName: String,
