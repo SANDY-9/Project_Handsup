@@ -54,7 +54,7 @@ internal class MyExpViewModel @Inject constructor(
                     val expData = data.expList
                     it.copy(
                         originData = expData,
-                        data = expData[it.selectYear] ?: emptyList(),
+                        data = expData.filterYearAndCategory(it.selectYear, it.selectCategory),
                         yearCategories = expData.keys.toList().sorted()
                     )
                 }
@@ -74,8 +74,7 @@ internal class MyExpViewModel @Inject constructor(
         val state = expListState.value
         _expListState.value = state.copy(
             selectYear = year,
-            data = filterDataByYearAndCategory(state, state.selectYear),
-            showBottomSheet = false,
+            data = state.originData.filterYearAndCategory(year, state.selectCategory)
         )
     }
 
@@ -83,13 +82,16 @@ internal class MyExpViewModel @Inject constructor(
         val state = expListState.value
         _expListState.value = state.copy(
             selectCategory = category,
-            data = filterDataByYearAndCategory(state, state.selectYear),
+            data = state.originData.filterYearAndCategory(state.selectYear, category),
         )
     }
 
-    private fun filterDataByYearAndCategory(state: ExpListState, year: Int): List<Exp> {
-        return state.originData[year]?.filter { exp ->
-            state.selectCategory == ExpCategory.전체보기 || exp.questName == state.selectCategory.name
+    private fun Map<Int, List<Exp>>.filterYearAndCategory(
+        selectYear: Int,
+        selectCategory: ExpCategory
+    ): List<Exp> {
+        return this[selectYear]?.filter { exp ->
+            selectCategory == ExpCategory.전체보기 || selectCategory.name in exp.expType.quest
         } ?: emptyList()
     }
 
