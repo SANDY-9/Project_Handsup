@@ -9,7 +9,11 @@ data class MissionDetails(
     val maxExp: String,
     val medianCondition: String,
     val medianExp: String,
-    val period: String,
-    val questGoal: String,
-    val questName: String,
-)
+    val period: MissionPeriod,
+    val missionGoal: String,
+    val missionName: String,
+) {
+    enum class MissionPeriod(desc: String) {
+        MONTH("month"), YEAR("year")
+    }
+}

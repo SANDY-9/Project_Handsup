@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 data class LeaderMissionDetails(
     val department: String,
     val jobGroup: Int,
-    val questCount: Int,
-    val questList: Map<String, List<MissionDetails>>,
+    val missionCount: Int,
+    val missionList: List<MissionDetails>,
     val totalExp: Int,
 )

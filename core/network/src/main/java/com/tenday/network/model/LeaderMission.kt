@@ -20,7 +20,7 @@ data class LeaderMissionResponse(
 @Serializable
 data class QuestInfo(
     @SerialName("leaderQuestResponse")
-    val leaderQuest: List<LeaderQuestExp>,
+    val leaderQuest: List<QuestExp>,
     @SerialName("maxCondition")
     val maxCondition: String,
     @SerialName("maxExp")
@@ -38,7 +38,7 @@ data class QuestInfo(
 )
 
 @Serializable
-data class LeaderQuestExp(
+data class QuestExp(
     @SerialName("achieveGrade")
     val achieveGrade: String,
     @SerialName("exp")
@@ -47,4 +47,6 @@ data class LeaderQuestExp(
     val index: Int,
     @SerialName("month")
     val month: Int,
+    @SerialName("range")
+    val range: List<String> = emptyList(),
 )
