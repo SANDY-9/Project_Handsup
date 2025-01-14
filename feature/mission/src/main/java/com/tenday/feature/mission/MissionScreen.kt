@@ -100,7 +100,17 @@ internal fun MissionScreen(
                                 totalExp = totalExp,
                             )
                         }
-                        is HandsUpMission.Personnel -> MissionPersonnelView()
+                        is HandsUpMission.Personnel -> {
+                            val totalExp by remember {
+                                mutableIntStateOf(
+                                    uiState.data.mission.sumOf { it.exp ?: 0 }
+                                )
+                            }
+                            MissionPersonnelView(
+                                data = uiState.data.mission,
+                                totalExp = totalExp,
+                            )
+                        }
                     }
                 }
 
