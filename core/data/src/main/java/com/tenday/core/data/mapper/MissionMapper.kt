@@ -6,7 +6,6 @@ import com.tenday.core.model.LeaderMissionDetails
 import com.tenday.core.model.MissionDetails
 import com.tenday.core.model.MissionExp
 import com.tenday.network.model.LeaderMissionResponse
-import com.tenday.network.model.QuestExp
 import com.tenday.network.model.QuestInfo
 
 internal fun LeaderMissionResponse.toLeaderMissionDetails(): LeaderMissionDetails {

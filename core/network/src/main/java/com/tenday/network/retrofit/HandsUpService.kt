@@ -4,6 +4,7 @@ import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
 import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
+import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.UserRequestBody
@@ -57,5 +58,9 @@ internal class HandsUpService @Inject constructor(
 
     override suspend fun getLeaderMission(token: String): LeaderMissionResponse {
         return api.getLeaderMission(token.toHeader())
+    }
+
+    override suspend fun getJobMission(token: String): JobMissionResponse {
+        return api.getJobMission(token.toHeader())
     }
 }
