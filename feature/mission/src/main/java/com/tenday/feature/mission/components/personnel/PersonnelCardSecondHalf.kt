@@ -13,6 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.enums.AchieveGrade
+import com.tenday.core.common.extentions.toData
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
@@ -25,8 +27,14 @@ import com.tenday.feature.mission.R
 // 하반기
 @Composable
 private fun PersonnelCardSecondHalf(
+    date: String?,
+    exp: Int?,
+    achieveGrade: AchieveGrade,
+    diff: Int?,
     modifier: Modifier = Modifier
 ) {
+    val dateText = if (date == null) "-" else
+        "$date " + stringResource(R.string.mission_personnel_date_desc)
     HandsUpTextureCard(
         modifier = modifier,
         gradient = SingleGradientGray,
@@ -34,7 +42,7 @@ private fun PersonnelCardSecondHalf(
         bottom = Dimens.margin28,
     ) {
         Text(
-            text = "01.01 - 06.30",
+            text = stringResource(R.string.mission_personnel_second_date),
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -56,7 +64,7 @@ private fun PersonnelCardSecondHalf(
                 vertical = Dimens.margin4,
                 horizontal = Dimens.margin6,
             ),
-            text = "-",
+            text = dateText,
             style = HandsUpTypography.body3.copy(
                 fontWeight = FontWeight.SemiBold,
                 color = White,
@@ -65,11 +73,12 @@ private fun PersonnelCardSecondHalf(
         Spacer(modifier = modifier.height(Dimens.margin12))
         HandsUpThreeSpaceTable(
             title1 = stringResource(R.string.mission_personnel_grade_title),
-            content1 = stringResource(R.string.mission_personnel_grade_yet),
+            content1 = achieveGrade.alias,
             title2 = stringResource(R.string.mission_personnel_do_title),
-            content2 = "-",
+            content2 = exp?.toData() ?: "-",
             title3 = stringResource(R.string.mission_personnel_analysis_title),
-            content3 = "-",
+            content3 = if(diff == null) "-" else "${diff}등급",
+            up = diff != null,
         )
     }
 }
@@ -77,5 +86,10 @@ private fun PersonnelCardSecondHalf(
 @Preview(name = "PersonnelMissionCard")
 @Composable
 private fun PreviewPersonnelMissionCard() {
-    PersonnelCardSecondHalf()
+    PersonnelCardSecondHalf(
+        date = null,
+        exp = null,
+        achieveGrade = AchieveGrade.NULL,
+        diff = null,
+    )
 }
