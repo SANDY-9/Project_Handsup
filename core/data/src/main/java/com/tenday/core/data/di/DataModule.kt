@@ -5,6 +5,7 @@ import com.tenday.core.data.repository.BoardListRepositoryImpl
 import com.tenday.core.data.repository.ExpRepositoryImpl
 import com.tenday.core.data.repository.LoginRepositoryImpl
 import com.tenday.core.data.repository.MessagingTokenRepositoryImpl
+import com.tenday.core.data.repository.MissionRepositoryImpl
 import com.tenday.core.data.repository.NotificationRepositoryImpl
 import com.tenday.core.data.repository.UserRepositoryImpl
 import com.tenday.core.domain.repository.AuthPrefsRepository
@@ -12,6 +13,7 @@ import com.tenday.core.domain.repository.BoardListRepository
 import com.tenday.core.domain.repository.ExpRepository
 import com.tenday.core.domain.repository.LoginRepository
 import com.tenday.core.domain.repository.MessagingTokenRepository
+import com.tenday.core.domain.repository.MissionRepository
 import com.tenday.core.domain.repository.NotificationRepository
 import com.tenday.core.domain.repository.UserRepository
 import dagger.Binds
@@ -57,5 +59,10 @@ internal abstract class DataModule {
     abstract fun bindsExpRepository(
         impl: ExpRepositoryImpl
     ): ExpRepository
+
+    @Binds
+    abstract fun bindsMissionRepository(
+        impl: MissionRepositoryImpl
+    ): MissionRepository
 
 }
