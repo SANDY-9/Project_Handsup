@@ -14,7 +14,7 @@ import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.UserResponse
 
-private fun String.toDate(): String {
+internal fun String.toDate(): String {
     val datePart = substringBefore("T")
     return datePart.replace("-", ".")
 }
@@ -87,3 +87,4 @@ internal fun ExpResponse.toExpDetails(): ExpDetails {
         totalExp = totalExp,
     )
 }
+

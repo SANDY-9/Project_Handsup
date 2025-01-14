@@ -7,6 +7,7 @@ import com.tenday.network.model.LeaderMissionResponse
 import com.tenday.network.model.LoginRequestBody
 import com.tenday.network.model.LoginResponse
 import com.tenday.network.model.NotificationResponse
+import com.tenday.network.model.ProjectResponse
 import com.tenday.network.model.UserRequestBody
 import com.tenday.network.model.UserResponse
 import com.tenday.network.model.UserUpdateResponse
@@ -64,5 +65,10 @@ internal interface HandsUpServiceApi {
     suspend fun getJobMission(
         @Header("Authorization") token: String,
     ): JobMissionResponse
+
+    @GET("exp/company-quest")
+    suspend fun getProjectMission(
+        @Header("Authorization") token: String,
+    ): List<ProjectResponse>
 
 }
