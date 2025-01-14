@@ -6,6 +6,7 @@ import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
+import com.tenday.network.model.ProjectMissionResponse
 import com.tenday.network.model.UserResponse
 
 interface HandsUpDataSource {
@@ -19,4 +20,5 @@ interface HandsUpDataSource {
     suspend fun getExpDetails(token: String): ExpResponse
     suspend fun getLeaderMission(token: String): LeaderMissionResponse
     suspend fun getJobMission(token: String): JobMissionResponse
+    suspend fun getProjectMission(token: String): ProjectMissionResponse
 }
