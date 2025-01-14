@@ -7,19 +7,19 @@ import com.tenday.core.model.ProjectMission
 
 internal sealed interface HandsUpMission {
     data class Leader(
-        val data: LeaderMission,
+        val mission: LeaderMission,
         val name: String = "리더부여",
     ): HandsUpMission
     data class Job(
-        val data: JobMission,
+        val mission: JobMission,
         val name: String = "직무미션",
     ): HandsUpMission
     data class Project(
-        val data: List<ProjectMission>,
+        val mission: List<ProjectMission>,
         val name: String = "전사프로젝트",
     ): HandsUpMission
     data class Personnel(
-        val data: List<PersonnelMission>,
+        val mission: List<PersonnelMission>,
         val name: String = "인사평가",
     ): HandsUpMission
 }
