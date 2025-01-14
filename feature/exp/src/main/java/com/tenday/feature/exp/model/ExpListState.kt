@@ -8,6 +8,7 @@ internal data class ExpListState(
     val data: List<Exp>,
     val originData: Map<Int, List<Exp>>,
     val yearCategories: List<Int>,
+    val expCategories: List<ExpCategory>,
     val showBottomSheet: Boolean,
     val showDropDown: Boolean,
 )

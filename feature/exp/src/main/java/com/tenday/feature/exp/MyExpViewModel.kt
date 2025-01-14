@@ -40,6 +40,7 @@ internal class MyExpViewModel @Inject constructor(
             data = emptyList(),
             originData = emptyMap(),
             yearCategories = emptyList(),
+            expCategories = ExpCategory.entries,
             showBottomSheet = false,
             showDropDown = false,
         )

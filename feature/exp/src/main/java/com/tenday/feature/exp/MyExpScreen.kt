@@ -23,6 +23,7 @@ import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.exp.components.ExpMissionBanner
+import com.tenday.feature.exp.components.MyExpCategoryListMenu
 import com.tenday.feature.exp.components.MyExpHistory
 import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
@@ -117,6 +118,13 @@ internal fun MyExpScreen(
             onComplete = onBottomSheetComplete,
         )
     }
+    if(expListState.showDropDown) {
+        MyExpCategoryListMenu(
+            categoryEntry = expListState.expCategories,
+            selectedCategory = expListState.selectCategory,
+            onSelectCategory = {},
+        )
+    }
 }
 
 @Preview(name = "ExpScreen")
@@ -156,6 +164,7 @@ private fun PreviewExpScreen() {
             data = listOf(),
             originData = emptyMap(),
             yearCategories = listOf(2025, 2024),
+            expCategories = ExpCategory.entries,
             false,
             false,
         ),
