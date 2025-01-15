@@ -20,6 +20,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
@@ -71,7 +72,7 @@ internal class EditViewModel @Inject constructor(
             )
         }.catch {
             _editUiState.value = EditUiState.Fail
-        }
+        }.launchIn(viewModelScope)
     }
 
     private val _inputState = MutableStateFlow(
@@ -113,7 +114,7 @@ internal class EditViewModel @Inject constructor(
             _editUiState.value = EditUiState.Success(UpdateType.PASSWORD)
         }.catch {
             _editUiState.value = EditUiState.Fail
-        }
+        }.launchIn(viewModelScope)
     }
 
     fun resetUiState() {
