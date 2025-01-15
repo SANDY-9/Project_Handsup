@@ -14,4 +14,14 @@ data class ExpDetails(
     val jobFamily: JobFamily,
     val lastYearExp: Int,
     val totalExp: Int
-)
+) {
+    companion object {
+        fun Map<Int, List<Exp>>.toExpList(): List<Exp> {
+            return values
+                .flatten()
+                .sortedByDescending {
+                    it.expAt
+                }
+        }
+    }
+}

@@ -16,6 +16,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -31,6 +33,8 @@ import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.Exp
+import com.tenday.core.model.ExpDetails
+import com.tenday.core.model.ExpDetails.Companion.toExpList
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.components.HandsUpFailView
 import com.tenday.designsystem.components.HandsUpLoadingView
@@ -66,14 +70,16 @@ internal fun HomeRoute(
         onPermissionResult = viewModel::updateNotificationState,
     )
     when (val state = uiState) {
-        is HomeUiState.Success -> HomeScreen(
-            userDetails = state.userDetails,
-            expList = state.expList,
-            onNavigateNoti = onNavigateNoti,
-            onNavigateEdit = onNavigateEdit,
-            onExpClick = onExpClick,
-            onBannerClick = onBannerClick,
-        )
+        is HomeUiState.Success -> {
+            HomeScreen(
+                userDetails = state.userDetails,
+                expDetails = state.expDetails,
+                onNavigateNoti = onNavigateNoti,
+                onNavigateEdit = onNavigateEdit,
+                onExpClick = onExpClick,
+                onBannerClick = onBannerClick,
+            )
+        }
         HomeUiState.Loading -> HandsUpLoadingView()
         HomeUiState.Fail -> HandsUpFailView()
     }
@@ -83,7 +89,7 @@ internal fun HomeRoute(
 @Composable
 internal fun HomeScreen(
     userDetails: UserDetails,
-    expList: List<Exp>,
+    expDetails: ExpDetails,
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
     onExpClick: (ExpType) -> Unit,
@@ -105,10 +111,16 @@ internal fun HomeScreen(
             )
         }
         item {
+            val expList by remember {
+                mutableStateOf(
+                    expDetails.expList.toExpList()
+                )
+            }
             HomeContentView(
                 backResId = userDetails.jobFamily.getBackResId(),
                 user = userDetails,
                 exp = expList,
+                totalExp = expDetails.totalExp,
                 onNavigateSettings = onNavigateEdit,
                 onExpClick = onExpClick,
                 onBannerClick = onBannerClick,
@@ -122,6 +134,7 @@ private fun HomeContentView(
     backResId: Int,
     user: UserDetails,
     exp: List<Exp>,
+    totalExp: Int,
     onNavigateSettings: (UserDetails) -> Unit,
     onExpClick: (ExpType) -> Unit,
     onBannerClick: () -> Unit,
@@ -152,7 +165,7 @@ private fun HomeContentView(
                 jobLevel = user.jobLevel,
                 profileBadgeCode = user.profileBadgeCode,
                 profileImageCode = user.profileImageCode,
-                totalExpLastYear = user.totalExpLastYear,
+                totalExpLastYear = totalExp,
                 username = user.username,
                 onNavigateSettings = { onNavigateSettings(user) },
             )
@@ -197,7 +210,17 @@ private fun PreviewHomeScreen() {
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
         ),
-        expList = emptyList(),
+        expDetails = ExpDetails(
+            currentLevel = "",
+            currentYearExp = 2000,
+            expCount = 3,
+            expList = emptyMap(),
+            expToNextLevel = 2000,
+            expectedLevel = "",
+            jobFamily = JobFamily.F,
+            lastYearExp = 1223,
+            totalExp = 3223,
+        ),
         onNavigateNoti = {},
         onNavigateEdit = {},
         onExpClick = {},
