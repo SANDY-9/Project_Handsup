@@ -37,6 +37,7 @@ internal fun HomeExpEmptyView(
     Column(
         modifier = modifier
             .fillMaxWidth()
+            .padding(horizontal = Dimens.margin20)
             .background(
                 color = Gray100,
                 shape = RoundedCornerShape(Dimens.cornerShape8)
