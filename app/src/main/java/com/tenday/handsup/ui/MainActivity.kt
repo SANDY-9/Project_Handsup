@@ -19,7 +19,7 @@ class MainActivity : ComponentActivity() {
                 HandsUpApp(
                     appState = handsUpAppState,
                     startDestination = SplashRoute,
-                    onAppFinish = ::finish
+                    onAppFinish = ::finishAffinity
                 )
             }
         }
