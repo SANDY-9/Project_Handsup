@@ -28,24 +28,11 @@ import com.tenday.feature.edit.model.EditInputState
 
 @Composable
 internal fun EditRoute(
+    user: UserDetails,
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
 ) {
-    val userDetails = UserDetails(
-        employeeId = "2023010101",
-        username = "김민수",
-        hireDate = "2023-01-01",
-        department = "음성 1센터",
-        jobPosition = JobPosition.파트장,
-        jobGroup = 1,
-        jobFamily = JobFamily.F,
-        jobLevel = "F1-Ⅰ",
-        totalExpLastYear = 5000,
-        profileImageCode = ProfileCode.F_A,
-        profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
-        possibleBadgeCodeList = BadgeCode.entries,
-    )
     val editInputState = EditInputState(
         pwdInput = "",
         pwdConfirmInput = "",
@@ -53,7 +40,7 @@ internal fun EditRoute(
         pwdConfirmError = false,
     )
     EditScreen(
-        user = userDetails,
+        user = user,
         inputState = editInputState,
         onNavigateBack = onNavigateBack,
         onLogout = onLogout,

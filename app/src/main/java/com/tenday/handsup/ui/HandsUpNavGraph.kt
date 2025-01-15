@@ -75,6 +75,7 @@ fun HandsUpNavGraph(
         )
 
         editScreen(
+            navController = navController,
             onNavigateBack = navController::popBackStack,
         )
     }

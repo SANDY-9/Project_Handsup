@@ -21,4 +21,4 @@ data class UserDetails(
     val profileImageCode: ProfileCode,
     val totalExpLastYear: Int,
     val username: String
-)
+): java.io.Serializable
