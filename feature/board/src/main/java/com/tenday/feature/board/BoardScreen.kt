@@ -10,8 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.model.BoardDetails
-import com.tenday.designsystem.theme.Backgroud
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.board.components.BoardContentView
 import com.tenday.feature.board.components.BoardTitleTopBar
 import com.tenday.feature.board.model.BoardUiState
@@ -22,6 +22,8 @@ internal fun BoardRoute(
     onCardClick: (BoardDetails) -> Unit,
     viewModel: BoardViewModel = hiltViewModel(),
 ) {
+    StatusBarStyle(false)
+
     val boardUiState by viewModel.boardUiState.collectAsStateWithLifecycle()
     BoardScreen(
         boardUiState = boardUiState,
