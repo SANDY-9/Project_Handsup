@@ -40,10 +40,11 @@ internal class EditViewModel @Inject constructor(
     private val _editUiState: MutableStateFlow<EditUiState> = MutableStateFlow(EditUiState.None)
     val editUiState = _editUiState.asStateFlow()
 
-    val notificationEnable = appPrefsRepository.getNotificationState().stateIn(
+    val notificationEnable = appPrefsRepository.getNotificationState()
+        .stateIn(
         scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-        initialValue = false,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = null,
     )
 
     fun updateNotiChange(enable: Boolean) {

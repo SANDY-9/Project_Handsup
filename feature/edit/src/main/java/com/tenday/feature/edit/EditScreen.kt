@@ -66,7 +66,7 @@ internal fun EditRoute(
     EditScreen(
         user = user,
         inputState = editInputState,
-        enableNoti = enableNoti,
+        enableNoti = enableNoti ?: return,
         editUiState = editUiState,
         onNavigateBack = onNavigateBack,
         onLogout = viewModel::handleLogout,
