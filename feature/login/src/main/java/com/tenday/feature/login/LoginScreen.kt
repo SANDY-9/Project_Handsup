@@ -87,7 +87,8 @@ internal fun LoginScreen(
         Spacer(modifier = modifier.height(Dimens.margin24))
         LoginButton(
             enabled = loginUiState !is LoginUiState.Loading,
-            onLogin = onLogin
+            loading = loginUiState is LoginUiState.Loading,
+            onLogin = onLogin,
         )
     }
 }
