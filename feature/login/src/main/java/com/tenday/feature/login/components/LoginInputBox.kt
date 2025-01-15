@@ -19,8 +19,9 @@ import com.tenday.feature.login.R
 @Composable
 internal fun LoginInputBox(
     id: String,
-    onIdInputChange: (String) -> Unit,
     pwd: String,
+    error: Boolean,
+    onIdInputChange: (String) -> Unit,
     onPwdInputChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -28,14 +29,16 @@ internal fun LoginInputBox(
         HandsUpInputBox(
             input = id,
             onInputChange = onIdInputChange,
-            placeHolder = stringResource(R.string.login_id_placeholder)
+            placeHolder = stringResource(R.string.login_id_placeholder),
+            error = error
         )
         Spacer(modifier = modifier.height(Dimens.margin16))
         HandsUpInputBox(
             input = pwd,
             onInputChange = onPwdInputChange,
             pwdMode = true,
-            placeHolder = stringResource(R.string.login_pwd_placeholder)
+            placeHolder = stringResource(R.string.login_pwd_placeholder),
+            error = error,
         )
     }
 }
@@ -47,8 +50,9 @@ private fun PreviewLoginInputBox() {
     var pwd by remember { mutableStateOf("") }
     LoginInputBox(
         id,
-        { id = it },
         pwd,
-        { pwd = pwd }
+        true,
+        { id = it },
+        { pwd = pwd },
     )
 }

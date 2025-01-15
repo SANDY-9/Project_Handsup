@@ -75,6 +75,7 @@ internal fun LoginScreen(
             id = id,
             onIdInputChange = onIdInputChange,
             pwd = pwd,
+            error = loginUiState is LoginUiState.Fail,
             onPwdInputChange = onPwdInputChange,
         )
         if(loginUiState is LoginUiState.EmptyValue) {
