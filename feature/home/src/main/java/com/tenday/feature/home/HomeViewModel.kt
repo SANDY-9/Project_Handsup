@@ -1,6 +1,7 @@
 package com.tenday.feature.home
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
@@ -11,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
@@ -26,8 +28,6 @@ internal class HomeViewModel @Inject constructor(
     val homeUiState = _homeUiState.asStateFlow()
 
     init {
-        getUserDetailsUseCase()
-        getLastExpListUseCase(listSize = 3)
         combine(
             getUserDetailsUseCase(),
             getLastExpListUseCase(listSize = 3)
@@ -42,7 +42,7 @@ internal class HomeViewModel @Inject constructor(
             _homeUiState.value = it
         }.catch {
             _homeUiState.value = HomeUiState.Fail
-        }
+        }.launchIn(viewModelScope)
     }
 
     private fun Map<Int, List<Exp>>.toExpList(): List<Exp> {
