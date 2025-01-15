@@ -22,6 +22,7 @@ import com.tenday.feature.edit.components.EditPushSettings
 import com.tenday.feature.edit.components.EditTitleBar
 import com.tenday.feature.edit.components.LogoutButton
 import com.tenday.feature.edit.model.EditInputState
+import com.tenday.feature.edit.model.EditUiState
 
 
 @Composable
@@ -33,15 +34,18 @@ internal fun EditRoute(
 ) {
     val enableNoti by viewModel.notificationEnable.collectAsStateWithLifecycle()
     val editInputState by viewModel.inputState.collectAsStateWithLifecycle()
+    val editUiState by viewModel.editUiState.collectAsStateWithLifecycle()
     EditScreen(
         user = user,
         inputState = editInputState,
         enableNoti = enableNoti,
+        editUiState = editUiState,
         onNavigateBack = onNavigateBack,
         onLogout = onLogout,
         onPwdInputChange = viewModel::updatePwdInputState,
         onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
         onEnableNotiChange = viewModel::updateNotifiChange,
+        onEditComplete = viewModel::requestUpdatePwdChange,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -50,11 +54,13 @@ internal fun EditScreen(
     user: UserDetails,
     inputState: EditInputState,
     enableNoti: Boolean,
+    editUiState: EditUiState,
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
     onPwdInputChange: (String) -> Unit,
     onPwdConfirmInputChange: (String) -> Unit,
     onEnableNotiChange: (Boolean) -> Unit,
+    onEditComplete: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -74,7 +80,7 @@ internal fun EditScreen(
         }
         item {
             EditPushSettings(
-                checked = enableNoti,
+                enableNoti = enableNoti,
                 onCheckedChange = onEnableNotiChange,
             )
         }
@@ -86,7 +92,7 @@ internal fun EditScreen(
                 pwdConfirmError = inputState.pwdConfirmError,
                 onPwdInputChange = onPwdInputChange,
                 onPwdConfirmInputChange = onPwdConfirmInputChange,
-                onEditComplete = {}
+                onEditComplete = onEditComplete,
             )
         }
         item {
@@ -120,11 +126,13 @@ private fun PreviewEditScreen() {
             pwdConfirmError = false,
         ),
         enableNoti = true,
+        editUiState = EditUiState.None,
         onNavigateBack = {},
         onLogout = {},
         onPwdInputChange = {},
         onPwdConfirmInputChange = {},
         onEnableNotiChange = {},
+        onEditComplete = {},
     )
 
 }

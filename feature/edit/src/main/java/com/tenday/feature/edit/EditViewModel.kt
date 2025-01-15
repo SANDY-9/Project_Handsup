@@ -7,11 +7,17 @@ import com.tenday.core.domain.usecases.user.UpdateProfileBadgeUseCase
 import com.tenday.core.domain.usecases.user.UpdateProfileImageUseCase
 import com.tenday.core.domain.usecases.user.UpdateUserPwdUseCase
 import com.tenday.feature.edit.model.EditInputState
+import com.tenday.feature.edit.model.EditUiState
+import com.tenday.feature.edit.model.UpdateType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -30,6 +36,9 @@ internal class EditViewModel @Inject constructor(
         started = SharingStarted.Eagerly,
         initialValue = false,
     )
+
+    private val _editUiState: MutableStateFlow<EditUiState> = MutableStateFlow(EditUiState.None)
+    val editUiState = _editUiState.asStateFlow()
 
     fun updateNotifiChange(enable: Boolean) {
         viewModelScope.launch {
@@ -64,6 +73,18 @@ internal class EditViewModel @Inject constructor(
                 pwdConfirmInput = query,
                 pwdConfirmError = it.pwdInput != query,
             )
+        }
+    }
+
+    fun requestUpdatePwdChange() {
+        flow {
+            emit(updateUserPwdUseCase(inputState.value.pwdInput))
+        }.onStart {
+            _editUiState.value = EditUiState.Loading
+        }.onEach {
+            _editUiState.value = EditUiState.Success(UpdateType.PASSWORD)
+        }.catch {
+            _editUiState.value = EditUiState.Fail
         }
     }
 
