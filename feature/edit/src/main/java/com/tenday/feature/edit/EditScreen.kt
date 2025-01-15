@@ -14,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -22,6 +23,7 @@ import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
+import com.tenday.designsystem.extentions.addFocusCleaner
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.edit.components.EditBadgeDialog
@@ -33,6 +35,7 @@ import com.tenday.feature.edit.components.EditTitleBar
 import com.tenday.feature.edit.components.LogoutButton
 import com.tenday.feature.edit.guide.BadgeGuideScreen
 import com.tenday.feature.edit.model.EditInputState
+import com.tenday.feature.edit.model.EditInputState.Companion.disabled
 import com.tenday.feature.edit.model.EditUiState
 import com.tenday.feature.edit.model.UpdateType
 
@@ -66,7 +69,7 @@ internal fun EditRoute(
     EditScreen(
         user = user,
         inputState = editInputState,
-        enableNoti = enableNoti,
+        enableNoti = enableNoti ?: return,
         editUiState = editUiState,
         onNavigateBack = onNavigateBack,
         onLogout = viewModel::handleLogout,
@@ -98,10 +101,18 @@ internal fun EditScreen(
     var selectBadge by remember { mutableStateOf(BadgeCode.NULL) }
     var visibleGuide by remember { mutableStateOf(false) }
 
+    val focusManager = LocalFocusManager.current
+    LaunchedEffect(editUiState) {
+        if(editUiState is EditUiState.Loading) {
+            focusManager.clearFocus()
+        }
+    }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
             .background(color = Gray100)
+            .addFocusCleaner(focusManager),
     ) {
         stickyHeader {
             EditTitleBar(onNavigate = onNavigateBack)
@@ -113,13 +124,15 @@ internal fun EditScreen(
                 onShowBadgeInfo = { visibleGuide = true },
                 onBadgeClick = { badge ->
                     selectBadge = badge
-                }
+                },
+                modifier = modifier.addFocusCleaner(focusManager),
             )
         }
         item {
             EditPushSettings(
                 enableNoti = enableNoti,
                 onCheckedChange = onEnableNotiChange,
+                modifier = modifier.addFocusCleaner(focusManager),
             )
         }
         item {
@@ -128,9 +141,12 @@ internal fun EditScreen(
                 pwdConfirm = inputState.pwdConfirmInput,
                 pwdError = inputState.pwdError,
                 pwdConfirmError = inputState.pwdConfirmError,
+                enabled = !inputState.disabled(),
+                loading = editUiState == EditUiState.Loading,
                 onPwdInputChange = onPwdInputChange,
                 onPwdConfirmInputChange = onPwdConfirmInputChange,
                 onEditComplete = onEditComplete,
+                modifier = modifier.addFocusCleaner(focusManager),
             )
         }
         item {
@@ -148,6 +164,7 @@ internal fun EditScreen(
     }
 
     AnimatedVisibility(selectBadge != BadgeCode.NULL) {
+        focusManager.clearFocus()
         EditBadgeDialog(
             selectBadge = selectBadge,
             onCancel = { selectBadge = BadgeCode.NULL },

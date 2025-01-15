@@ -1,5 +1,6 @@
 package com.tenday.feature.edit.guide
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -25,6 +26,10 @@ internal fun BadgeGuideScreen(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    BackHandler(enabled = true) {
+        onClose()
+    }
+
     val badgeList by remember { mutableStateOf(BadgeCode.list()) }
     LazyColumn(
         modifier = modifier.fillMaxSize().background(
