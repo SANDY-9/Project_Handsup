@@ -56,7 +56,12 @@ internal fun EditPushSettings(
     }
 
     var switchChecked by remember { mutableStateOf(enableNoti) }
+    var isInitial by remember { mutableStateOf(true) } // 초기 상태 관리
     LaunchedEffect(switchChecked) {
+        if(isInitial) {
+            isInitial = false
+            return@LaunchedEffect
+        }
         if(switchChecked) {
             if (context.hasNotiPermission()) {
                 onCheckedChange(true)
