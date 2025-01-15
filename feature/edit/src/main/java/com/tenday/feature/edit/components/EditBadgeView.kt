@@ -1,7 +1,6 @@
 package com.tenday.feature.edit.components
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -112,7 +111,7 @@ private fun ProfileBadgeItem(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.clickable(onClick = onItemClick),
+        modifier = modifier.noRippleClickable(onClick = onItemClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
