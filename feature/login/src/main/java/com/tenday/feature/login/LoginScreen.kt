@@ -15,10 +15,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.addFocusCleaner
 import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.login.components.LoginButton
 import com.tenday.feature.login.components.LoginEmptyValueMessage
@@ -67,10 +69,19 @@ internal fun LoginScreen(
     onLogin: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    val focusManager = LocalFocusManager.current
+
+    LaunchedEffect(loginUiState) {
+        if(loginUiState is LoginUiState) {
+            focusManager.clearFocus()
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(Dimens.margin20),
+            .padding(Dimens.margin20)
+            .addFocusCleaner(focusManager),
     ) {
         Spacer(modifier = modifier.fillMaxHeight(0.2f))
         LoginTitle()
