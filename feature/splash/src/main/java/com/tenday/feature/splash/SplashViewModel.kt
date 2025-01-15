@@ -15,8 +15,8 @@ internal class SplashViewModel @Inject constructor(
     private val getAccessTokenUseCase: GetAccessTokenUseCase,
 ): ViewModel() {
 
-    val splashShow = flow {
-        delay(200)
+    val animationActive = flow {
+        delay(1000)
         emit(false)
     }.stateIn(
         scope = viewModelScope,
