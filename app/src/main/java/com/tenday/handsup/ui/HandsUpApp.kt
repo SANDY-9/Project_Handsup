@@ -18,6 +18,7 @@ import com.tenday.handsup.ui.bottomnav.HandsUpBottomNav
 fun HandsUpApp(
     appState: HandsUpAppState,
     startDestination: Any,
+    onAppFinish: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val bottomNavVisible = appState.isBottomNavVisible()
@@ -37,6 +38,7 @@ fun HandsUpApp(
                     .weight(1f),
                 navController = appState.navController,
                 startDestination = startDestination,
+                onAppFinish = onAppFinish,
             )
             if(bottomNavVisible) {
                 HandsUpBottomNav(
@@ -51,5 +53,9 @@ fun HandsUpApp(
 @Preview(name = "HandsUpApp")
 @Composable
 private fun PreviewHandsUpApp() {
-    HandsUpApp(HandsUpAppState(rememberNavController(), rememberCoroutineScope()), LoginRoute)
+    HandsUpApp(
+        HandsUpAppState(rememberNavController(), rememberCoroutineScope()),
+        LoginRoute,
+        {},
+    )
 }

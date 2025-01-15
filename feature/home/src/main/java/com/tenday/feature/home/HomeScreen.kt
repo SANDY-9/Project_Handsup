@@ -1,5 +1,6 @@
 package com.tenday.feature.home
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -44,10 +45,16 @@ import com.tenday.feature.home.utils.getBackResId
 internal fun HomeRoute(
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
+    onFinish: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
+    BackHandler(enabled = true) {
+        onFinish()
+    }
+
     val userState by viewModel.userState.collectAsStateWithLifecycle()
     val expState by viewModel.expState.collectAsStateWithLifecycle()
+
     val context = LocalContext.current
     CheckPermission(
         context = context,
