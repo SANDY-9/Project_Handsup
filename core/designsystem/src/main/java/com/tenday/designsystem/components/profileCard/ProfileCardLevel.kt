@@ -27,7 +27,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 internal fun ProfileCardLevel(
     level: String,
     exp: Int,
-    maxValue: Int = 27500,
+    maxExp: Int,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -35,9 +35,9 @@ internal fun ProfileCardLevel(
     ) {
         LevelBadge(level)
         Spacer(modifier = modifier.height(Dimens.margin4))
-        LevelGraph(exp, maxValue)
+        LevelGraph(exp, maxExp)
         Spacer(modifier = modifier.height(Dimens.margin4))
-        LevelDesc(exp, maxValue)
+        LevelDesc(exp, maxExp)
     }
 }
 
@@ -115,5 +115,5 @@ private fun LevelDesc(
 @Preview(name = "ProfileCardLevel")
 @Composable
 private fun PreviewProfileCardLevel() {
-    ProfileCardLevel("F2-II", 14000)
+    ProfileCardLevel("F2-II", 14000, 27500)
 }
