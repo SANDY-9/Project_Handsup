@@ -3,6 +3,7 @@ package com.tenday.designsystem.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -47,7 +48,8 @@ fun HandsUpButton(
         modifier = modifier
             .height(56.dp)
             .fillMaxWidth(),
-        shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(Dimens.cornerShape12),
+        contentPadding = PaddingValues(0.dp),
         colors = ButtonColors(
             containerColor = btnColor,
             contentColor = textColor,

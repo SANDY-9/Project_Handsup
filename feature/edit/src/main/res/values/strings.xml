@@ -14,11 +14,12 @@
     <string name="edit_btn_complete_title">변경완료</string>
     <string name="edit_btn_logout_title">로그아웃</string>
 
-    <string name="edit_badge_edit_cancel">취소</string>
     <string name="edit_badge_edit_ok">대표 배지 설정</string>
-    <string name="edit_badge_edit_success_title">비밀번호 변경 완료</string>
-    <string name="edit_badge_edit_success_desc">비밀번호 변경이 완료되었습니다.</string>
-    <string name="edit_badge_edit_success_close">확인</string>
+
+    <string name="edit_dialog_success_title">%s 변경 완료</string>
+    <string name="edit_dialog_success_desc">%s 변경이 완료되었습니다.</string>
+    <string name="edit_dialog_edit_cancel">취소</string>
+    <string name="edit_dialog_success_close">확인</string>
     
     <string name="edit_badge_guide_title">배지 가이드</string>
     <string name="edit_badge_guide_level">레벨</string>

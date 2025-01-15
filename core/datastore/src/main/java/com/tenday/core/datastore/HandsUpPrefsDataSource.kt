@@ -2,9 +2,11 @@ package com.tenday.core.datastore
 
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
@@ -34,12 +36,27 @@ class HandsUpPrefsDataSource @Inject constructor(
     suspend fun deleteAccessToken() {
         withContext(Dispatchers.IO) {
             dataStore.edit { prefs ->
-                prefs.clear()
+                prefs.remove(ACCESS_TOKEN)
             }
+        }
+    }
+
+    suspend fun updateNotificationState(enable: Boolean) {
+        withContext(Dispatchers.IO) {
+            dataStore.edit { prefs ->
+                prefs[NOTIFICATION_ENABLE] = enable
+            }
+        }
+    }
+
+    fun getNotificationState(): Flow<Boolean> {
+        return dataStore.data.map { prefs ->
+            prefs[NOTIFICATION_ENABLE] ?: false
         }
     }
 
     private companion object PrefsKeys {
         val ACCESS_TOKEN = stringPreferencesKey("access_token")
+        val NOTIFICATION_ENABLE = booleanPreferencesKey("notification_permission")
     }
 }

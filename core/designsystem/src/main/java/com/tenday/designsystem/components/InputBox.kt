@@ -21,14 +21,16 @@ import com.tenday.designsystem.theme.Gray500
 import com.tenday.designsystem.theme.Gray900
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.Negative
 
 @Composable
 fun HandsUpInputBox(
     input: String,
     onInputChange: (String) -> Unit,
     placeHolder: String = "",
-    pwdMode: Boolean = false,
     modifier: Modifier = Modifier,
+    error: Boolean = false,
+    pwdMode: Boolean = false,
 ) {
     val visualTransformation = remember {
         if(pwdMode) PasswordVisualTransformation('●')
@@ -42,12 +44,14 @@ fun HandsUpInputBox(
         colors = OutlinedTextFieldDefaults.colors(
             focusedBorderColor = HandsUpOrange,
             unfocusedBorderColor = Gray200,
+            errorBorderColor = Negative,
             cursorColor = HandsUpOrange,
             focusedTextColor = Gray900,
             unfocusedTextColor = Gray900,
             focusedPlaceholderColor = Gray500,
             unfocusedPlaceholderColor = Gray500,
         ),
+        isError = error,
         singleLine = true,
         placeholder = {
             Text(

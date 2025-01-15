@@ -3,6 +3,7 @@ package com.tenday.feature.home
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.common.enums.JobFamily
+import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
 import com.tenday.core.model.Exp
@@ -20,6 +21,7 @@ import javax.inject.Inject
 internal class HomeViewModel @Inject constructor(
     private val getUserDetailsUseCase: GetUserDetailsUseCase,
     private val getLastExpListUseCase: GetLastExpListUseCase,
+    private val appPrefsRepository: AuthPrefsRepository,
 ): ViewModel() {
 
     private val _userState = MutableStateFlow<UserDetailsState>(UserDetailsState.Loading)
@@ -71,6 +73,10 @@ internal class HomeViewModel @Inject constructor(
             .sortedByDescending {
                 it.expAt
             }
+    }
+
+    suspend fun updateNotificationState(enable: Boolean) {
+        appPrefsRepository.updateNotificationState(enable)
     }
 
 }

@@ -43,13 +43,16 @@ import com.tenday.feature.home.utils.getBackResId
 @Composable
 internal fun HomeRoute(
     onNavigateNoti: () -> Unit,
-    onNavigateEdit: () -> Unit,
+    onNavigateEdit: (UserDetails) -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val userState by viewModel.userState.collectAsStateWithLifecycle()
     val expState by viewModel.expState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    CheckPermission(context)
+    CheckPermission(
+        context = context,
+        onPermissionResult = viewModel::updateNotificationState,
+    )
     HomeScreen(
         backResId = viewModel.jobFamily.getBackResId(),
         userDetailsState = userState,
@@ -66,7 +69,7 @@ internal fun HomeScreen(
     expListState: ExpListState,
     backResId: Int,
     onNavigateNoti: () -> Unit,
-    onNavigateEdit: () -> Unit,
+    onNavigateEdit: (UserDetails) -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn (
@@ -98,7 +101,7 @@ private fun HomeContentView(
     backResId: Int,
     user: UserDetailsState,
     exp: ExpListState,
-    onNavigateSettings: () -> Unit,
+    onNavigateSettings: (UserDetails) -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box {
@@ -129,7 +132,7 @@ private fun HomeContentView(
                     profileImageCode = user.data.profileImageCode,
                     totalExpLastYear = user.data.totalExpLastYear,
                     username = user.data.username,
-                    onNavigateSettings = onNavigateSettings,
+                    onNavigateSettings = { onNavigateSettings(user.data) },
                 )
                 else -> {}
             }

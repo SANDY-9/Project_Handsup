@@ -52,3 +52,4 @@ val TransparentWhite80 = Color(0xCCFFFFFF)
 
 val TransparentBlack16 = Color(0x29000000)
 val TransparentBlack20 = Color(0x33000000)
+val TransparentBlack70 = Color(0xb3000000)

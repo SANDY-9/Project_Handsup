@@ -61,6 +61,8 @@ internal fun EditPasswordView(
                         input = pwd,
                         onInputChange = onPwdInputChange,
                         placeHolder = stringResource(R.string.edit_pwd_placeholder),
+                        pwdMode = true,
+                        error = pwdError,
                     )
                     if(pwdError) {
                         Text(
@@ -77,6 +79,8 @@ internal fun EditPasswordView(
                         input = pwdConfirm,
                         onInputChange = onPwdConfirmInputChange,
                         placeHolder = stringResource(R.string.edit_pwd_confirm_placeholder),
+                        pwdMode = true,
+                        error = pwdConfirmError,
                     )
                     if(pwdConfirmError) {
                         Text(

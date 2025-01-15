@@ -4,6 +4,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
+import com.tenday.core.model.UserDetails
 import com.tenday.feature.home.HomeRoute
 import kotlinx.serialization.Serializable
 
@@ -17,7 +18,7 @@ fun NavController.navigateToHome(
 
 fun NavGraphBuilder.homeScreen(
     onNavigateNoti: () -> Unit,
-    onNavigateEdit: () -> Unit,
+    onNavigateEdit: (UserDetails) -> Unit,
 ) {
     composable<HomeRoute> {
         HomeRoute(
