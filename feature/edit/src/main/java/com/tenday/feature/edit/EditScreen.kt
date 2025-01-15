@@ -1,5 +1,6 @@
 package com.tenday.feature.edit
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,10 +20,12 @@ import com.tenday.designsystem.theme.Gray100
 import com.tenday.feature.edit.components.EditBadgeView
 import com.tenday.feature.edit.components.EditPasswordView
 import com.tenday.feature.edit.components.EditPushSettings
+import com.tenday.feature.edit.components.EditSuccessDialog
 import com.tenday.feature.edit.components.EditTitleBar
 import com.tenday.feature.edit.components.LogoutButton
 import com.tenday.feature.edit.model.EditInputState
 import com.tenday.feature.edit.model.EditUiState
+import com.tenday.feature.edit.model.UpdateType
 
 
 @Composable
@@ -46,6 +49,7 @@ internal fun EditRoute(
         onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
         onEnableNotiChange = viewModel::updateNotifiChange,
         onEditComplete = viewModel::requestUpdatePwdChange,
+        onDialogCancel = viewModel::resetUiState,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -61,6 +65,7 @@ internal fun EditScreen(
     onPwdConfirmInputChange: (String) -> Unit,
     onEnableNotiChange: (Boolean) -> Unit,
     onEditComplete: () -> Unit,
+    onDialogCancel: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn(
@@ -99,6 +104,16 @@ internal fun EditScreen(
             LogoutButton(onLogout = onLogout)
         }
     }
+
+    AnimatedVisibility(editUiState is EditUiState.Success) {
+        if(editUiState is EditUiState.Success) {
+            EditSuccessDialog(
+                editUiState.update,
+                onCancel = onDialogCancel,
+            )
+        }
+    }
+
 }
 
 @Preview(name = "EditScreen")
@@ -126,13 +141,14 @@ private fun PreviewEditScreen() {
             pwdConfirmError = false,
         ),
         enableNoti = true,
-        editUiState = EditUiState.None,
+        editUiState = EditUiState.Success(UpdateType.PASSWORD),
         onNavigateBack = {},
         onLogout = {},
         onPwdInputChange = {},
         onPwdConfirmInputChange = {},
         onEnableNotiChange = {},
         onEditComplete = {},
+        onDialogCancel = {},
     )
 
 }

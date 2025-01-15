@@ -88,4 +88,8 @@ internal class EditViewModel @Inject constructor(
         }
     }
 
+    fun resetUiState() {
+        _editUiState.value = EditUiState.None
+    }
+
 }
