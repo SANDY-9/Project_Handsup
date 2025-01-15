@@ -9,7 +9,7 @@ class UpdateProfileBadgeUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val authPrefsRepository: AuthPrefsRepository,
 ) {
-    suspend fun invoke(badgeCode: BadgeCode): Boolean {
+    suspend operator fun invoke(badgeCode: BadgeCode): Boolean {
         val token = authPrefsRepository.getAccessToken() ?: ""
         return userRepository.updateUserProfileBadge(
             accessToken = token,

@@ -9,7 +9,7 @@ class UpdateProfileImageUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val authPrefsRepository: AuthPrefsRepository,
 ) {
-    suspend fun invoke(profileCode: ProfileCode): Boolean {
+    suspend operator fun invoke(profileCode: ProfileCode): Boolean {
         val token = authPrefsRepository.getAccessToken() ?: ""
         return userRepository.updateUserProfileImage(
             accessToken = token,

@@ -8,7 +8,7 @@ class UpdateUserPwdUseCase @Inject constructor(
     private val userRepository: UserRepository,
     private val authPrefsRepository: AuthPrefsRepository,
 ) {
-    suspend fun invoke(pwd: String): Boolean {
+    suspend operator fun invoke(pwd: String): Boolean {
         val token = authPrefsRepository.getAccessToken() ?: ""
         return userRepository.updateUserPwd(
             accessToken = token,
