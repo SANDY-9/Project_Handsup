@@ -1,68 +1,48 @@
 package com.tenday.feature.home
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
 import com.tenday.core.model.Exp
-import com.tenday.feature.home.model.ExpListState
-import com.tenday.feature.home.model.UserDetailsState
+import com.tenday.feature.home.model.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.onStart
 import javax.inject.Inject
 
 @HiltViewModel
 internal class HomeViewModel @Inject constructor(
-    private val getUserDetailsUseCase: GetUserDetailsUseCase,
-    private val getLastExpListUseCase: GetLastExpListUseCase,
+    getUserDetailsUseCase: GetUserDetailsUseCase,
+    getLastExpListUseCase: GetLastExpListUseCase,
     private val appPrefsRepository: AuthPrefsRepository,
 ): ViewModel() {
 
-    private val _userState = MutableStateFlow<UserDetailsState>(UserDetailsState.Loading)
-    val userState: StateFlow<UserDetailsState> get() = _userState
-
-    private val _expState = MutableStateFlow<ExpListState>(ExpListState.EmptyExp)
-    val expState: StateFlow<ExpListState> get() = _expState
-
-    var jobFamily: JobFamily = JobFamily.F
-        private set
+    private val _homeUiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
+    val homeUiState = _homeUiState.asStateFlow()
 
     init {
-        fetchUserDetails()
-        fetchExpList()
-    }
-
-    private fun fetchUserDetails() {
         getUserDetailsUseCase()
-            .onEach { data ->
-                _userState.value = UserDetailsState.Success(data)
-                jobFamily = data.jobFamily
-            }
-            .catch {
-                _userState.value = UserDetailsState.Fail
-            }
-            .launchIn(viewModelScope)
-    }
-
-    private fun fetchExpList() {
         getLastExpListUseCase(listSize = 3)
-            .onEach { data ->
-                if (data.isEmpty()) {
-                    _expState.value = ExpListState.EmptyExp
-                } else {
-                    _expState.value = ExpListState.Success(data.toExpList())
-                }
-            }
-            .catch {
-                _expState.value = ExpListState.Fail
-            }
-            .launchIn(viewModelScope)
+        combine(
+            getUserDetailsUseCase(),
+            getLastExpListUseCase(listSize = 3)
+        ) { userDetails, expMap ->
+            HomeUiState.Success(
+                expList = expMap.toExpList(),
+                userDetails = userDetails
+            )
+        }.onStart {
+            _homeUiState.value = HomeUiState.Loading
+        }.onEach {
+            _homeUiState.value = it
+        }.catch {
+            _homeUiState.value = HomeUiState.Fail
+        }
     }
 
     private fun Map<Int, List<Exp>>.toExpList(): List<Exp> {
