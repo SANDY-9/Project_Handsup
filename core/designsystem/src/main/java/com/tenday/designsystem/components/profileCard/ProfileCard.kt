@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
@@ -41,7 +42,10 @@ fun ProfileCard(
     Box(
         modifier = parentModifier
             .fillMaxWidth()
-            .height(390.dp)
+            .heightIn(
+                min = 376.dp,
+                max = 400.dp,
+            )
     ) {
         ProfileCardFrame(
             jobFamily = jobFamily,
@@ -92,7 +96,7 @@ fun ProfileCard(
                 level = jobLevel,
                 exp = totalExpLastYear,
             )
-            Spacer(modifier = modifier.height(Dimens.margin8))
+            Spacer(modifier = modifier.height(Dimens.margin16))
             Image(
                 modifier = modifier
                     .align(Alignment.CenterHorizontally)

@@ -47,7 +47,7 @@ internal fun UserResponse.toUserDetails(): UserDetails {
     return UserDetails(
         department = department,
         employeeId = employeeId,
-        hireDate = hireDate,
+        hireDate = hireDate.toDate(),
         jobFamily = JobFamily.valueOf(jobFamily),
         jobPosition = JobPosition.getPosition(jobPosition),
         jobGroup = jobGroup,

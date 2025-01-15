@@ -1,7 +1,6 @@
 package com.tenday.designsystem.components.profileCard
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,6 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.HandsUp
 import com.tenday.designsystem.icons.Settings
 import com.tenday.designsystem.theme.Gray400
@@ -68,7 +68,7 @@ internal fun ProfileCardHeader(
         Icon(
             modifier = modifier
                 .size(24.dp)
-                .clickable(onClick = onNavigateSettings),
+                .noRippleClickable (onClick = onNavigateSettings),
             imageVector = Icons.Settings,
             contentDescription = null,
             tint = Gray400,
