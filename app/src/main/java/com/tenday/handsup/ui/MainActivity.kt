@@ -1,7 +1,6 @@
 package com.tenday.handsup.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -20,6 +19,7 @@ class MainActivity : ComponentActivity() {
                 HandsUpApp(
                     appState = handsUpAppState,
                     startDestination = SplashRoute,
+                    onAppFinish = ::finish
                 )
             }
         }

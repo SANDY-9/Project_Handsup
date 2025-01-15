@@ -1,5 +1,6 @@
 package com.tenday.feature.splash
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,8 +32,13 @@ import com.tenday.designsystem.theme.White
 @Composable
 internal fun SplashRoute(
     onAccessToken: (String?) -> Unit,
+    onFinish: () -> Unit,
     viewModel: SplashViewModel = hiltViewModel()
 ) {
+    BackHandler(enabled = true) {
+        onFinish()
+    }
+
     val splashShow by viewModel.splashShow.collectAsStateWithLifecycle()
     LaunchedEffect(splashShow) {
         if(!splashShow) {

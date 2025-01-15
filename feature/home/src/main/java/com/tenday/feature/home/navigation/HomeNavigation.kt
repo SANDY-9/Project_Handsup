@@ -19,11 +19,13 @@ fun NavController.navigateToHome(
 fun NavGraphBuilder.homeScreen(
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
+    onFinish: () -> Unit,
 ) {
     composable<HomeRoute> {
         HomeRoute(
             onNavigateNoti = onNavigateNoti,
             onNavigateEdit = onNavigateEdit,
+            onFinish = onFinish,
         )
     }
 }

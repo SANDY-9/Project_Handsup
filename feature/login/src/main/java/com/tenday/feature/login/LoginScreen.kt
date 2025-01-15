@@ -1,5 +1,6 @@
 package com.tenday.feature.login
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -27,8 +28,13 @@ import com.tenday.feature.login.model.LoginUiState
 @Composable
 internal fun LoginRoute(
     onSuccessLogin: () -> Unit,
+    onFinish: () -> Unit,
     loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
+    BackHandler(enabled = true) {
+        onFinish()
+    }
+
     val idInputState by loginViewModel.idInput.collectAsStateWithLifecycle()
     val pwdInputState by loginViewModel.pwdInput.collectAsStateWithLifecycle()
     val loginUiState by loginViewModel.loginUiState.collectAsStateWithLifecycle()

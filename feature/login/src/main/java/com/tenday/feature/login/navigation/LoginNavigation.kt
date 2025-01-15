@@ -14,10 +14,12 @@ fun NavController.navigateToLogin(navOptions: NavOptions) {
 
 fun NavGraphBuilder.loginScreen(
     onSuccessLogin: () -> Unit,
+    onFinish: () -> Unit,
 ) {
     composable<LoginRoute> {
         LoginRoute(
-            onSuccessLogin = onSuccessLogin
+            onSuccessLogin = onSuccessLogin,
+            onFinish = onFinish,
         )
     }
 }

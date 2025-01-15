@@ -26,6 +26,7 @@ import com.tenday.feature.splash.navigation.splashScreen
 fun HandsUpNavGraph(
     navController: NavHostController,
     startDestination: Any,
+    onAppFinish: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     NavHost(
@@ -41,19 +42,22 @@ fun HandsUpNavGraph(
                     null -> navController.navigateToLogin(splashNavOptions)
                     else -> navController.navigateToHome(splashNavOptions)
                 }
-            }
+            },
+            onFinish = onAppFinish,
         )
 
         val loginNavOptions = navOptionBuilder.setPopUpTo<LoginRoute>(inclusive = true).build()
         loginScreen(
             onSuccessLogin = {
                 navController.navigateToHome(loginNavOptions)
-            }
+            },
+            onFinish = onAppFinish,
         )
 
         homeScreen(
             onNavigateNoti = navController::navigateToNotification,
             onNavigateEdit = navController::navigateToEdit,
+            onFinish = onAppFinish,
         )
 
         missionScreen()
