@@ -73,13 +73,13 @@ private fun ExpHistoryItem(
                 modifier = modifier.size(
                     width = 114.dp,
                     height = 129.dp,
-                ).padding(
-                    horizontal = Dimens.margin12,
-                    vertical = Dimens.margin16,
                 ).clip(
                     RoundedCornerShape(Dimens.cornerShape8)
                 ).clickable(
                     onClick = onItemClick
+                ).padding(
+                    horizontal = Dimens.margin12,
+                    vertical = Dimens.margin16,
                 )
             ) {
                 Text(

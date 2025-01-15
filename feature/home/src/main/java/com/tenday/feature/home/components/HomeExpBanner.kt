@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,13 +45,13 @@ internal fun HomeExpBanner(
                         width = 114.dp,
                         height = 127.dp,
                     )
-                    .padding(
-                        horizontal = Dimens.margin12,
-                        vertical = Dimens.margin16,
-                    ).clip(
+                    .clip(
                         RoundedCornerShape(Dimens.cornerShape8)
                     ).clickable(
                         onClick = onBannerClick
+                    ).padding(
+                        horizontal = Dimens.margin12,
+                        vertical = Dimens.margin16,
                     )
             ) {
                 Text(
@@ -95,13 +94,12 @@ internal fun HomeExpBanner(
                 Box(
                     modifier = modifier.fillMaxWidth(),
                 ) {
-                    Icon(
+                    Image(
                         modifier = modifier
                             .align(Alignment.CenterEnd)
                             .size(16.dp),
                         imageVector = Icons.ArrowCircle,
                         contentDescription = null,
-                        tint = HandsUpOrange,
                     )
                 }
             }
