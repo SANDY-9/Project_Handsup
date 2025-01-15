@@ -11,6 +11,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -61,6 +63,15 @@ internal class LoginViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    init {
+        loginUiState.onEach {
+            if(it is LoginUiState.Fail || it is LoginUiState.EmptyValue) {
+                delay(1100L)
+                _loginUiState.value = LoginUiState.Ready
+            }
+        }.launchIn(viewModelScope)
     }
 
 }

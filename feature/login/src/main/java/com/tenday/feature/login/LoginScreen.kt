@@ -1,6 +1,7 @@
 package com.tenday.feature.login
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -81,10 +82,10 @@ internal fun LoginScreen(
             onPwdInputChange = onPwdInputChange,
             onIdInputChange = onIdInputChange,
         )
-        if(loginUiState is LoginUiState.EmptyValue) {
+        AnimatedVisibility(loginUiState is LoginUiState.EmptyValue,) {
             LoginEmptyValueMessage()
         }
-        if(loginUiState is LoginUiState.Fail) {
+        AnimatedVisibility(loginUiState is LoginUiState.Fail) {
             LoginErrorMessage()
         }
         Spacer(modifier = modifier.height(Dimens.margin24))
