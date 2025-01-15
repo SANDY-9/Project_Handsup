@@ -38,6 +38,7 @@ internal fun BadgeGuidItem(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
         ) {
+
             Image(
                 modifier = modifier.size(56.dp),
                 painter = svgImageLoader(badge.resFilePath),
@@ -54,12 +55,12 @@ internal fun BadgeGuidItem(
         Spacer(modifier = modifier.width(Dimens.margin6))
         Text(
             modifier = modifier.fillMaxWidth().padding(vertical = Dimens.margin27),
-            text = badge.desc,
+            text = badge.shortDesc,
             style = HandsUpTypography.body2.copy(
                 color = Gray700,
             ),
             maxLines = 2,
-            overflow = TextOverflow.Visible,
+            overflow = TextOverflow.Ellipsis,
         )
     }
 }

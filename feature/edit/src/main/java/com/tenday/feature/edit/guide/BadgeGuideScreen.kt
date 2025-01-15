@@ -1,6 +1,7 @@
 package com.tenday.feature.edit.guide
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.designsystem.theme.White
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -25,7 +27,9 @@ internal fun BadgeGuideScreen(
 ) {
     val badgeList by remember { mutableStateOf(BadgeCode.list()) }
     LazyColumn(
-        modifier = modifier.fillMaxSize()
+        modifier = modifier.fillMaxSize().background(
+            color = White,
+        )
     ) {
         stickyHeader {
             BadgeGuideTitleBar(
