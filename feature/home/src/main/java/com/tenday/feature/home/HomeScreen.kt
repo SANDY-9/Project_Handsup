@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.ExpType
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
@@ -47,6 +48,8 @@ internal fun HomeRoute(
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
     onFinish: () -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     BackHandler(enabled = true) {
@@ -68,6 +71,8 @@ internal fun HomeRoute(
         expListState = expState,
         onNavigateNoti = onNavigateNoti,
         onNavigateEdit = onNavigateEdit,
+        onExpClick = onExpClick,
+        onBannerClick = onBannerClick,
     )
 }
 
@@ -79,6 +84,8 @@ internal fun HomeScreen(
     backResId: Int,
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     LazyColumn (
@@ -100,6 +107,8 @@ internal fun HomeScreen(
                 user = userDetailsState,
                 exp = expListState,
                 onNavigateSettings = onNavigateEdit,
+                onExpClick = onExpClick,
+                onBannerClick = onBannerClick,
             )
         }
     }
@@ -111,6 +120,8 @@ private fun HomeContentView(
     user: UserDetailsState,
     exp: ExpListState,
     onNavigateSettings: (UserDetails) -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box {
@@ -156,7 +167,11 @@ private fun HomeContentView(
             Spacer(modifier = modifier.height(Dimens.margin12))
             when(exp) {
                 is ExpListState.EmptyExp -> HomeExpEmptyView()
-                is ExpListState.Success -> HomeExpHistoryView(expList = exp.data)
+                is ExpListState.Success -> HomeExpHistoryView(
+                    expList = exp.data,
+                    onExpClick = onExpClick,
+                    onBannerClick = onBannerClick,
+                )
                 else -> {}
             }
             Spacer(modifier = modifier.height(Dimens.margin24))
@@ -188,5 +203,7 @@ private fun PreviewHomeScreen() {
         expListState = ExpListState.EmptyExp,
         onNavigateNoti = {},
         onNavigateEdit = {},
+        onExpClick = {},
+        onBannerClick = {},
     )
 }

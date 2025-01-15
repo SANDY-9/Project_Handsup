@@ -39,6 +39,8 @@ import com.tenday.designsystem.theme.HandsUpTypography
 @Composable
 internal fun HomeExpHistoryView(
     expList: List<Exp>,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
@@ -47,10 +49,13 @@ internal fun HomeExpHistoryView(
         horizontalArrangement = Arrangement.spacedBy(Dimens.margin8)
     ) {
         items(expList) { exp ->
-            ExpHistoryItem(exp)
+            ExpHistoryItem(
+                exp,
+                onItemClick = { onExpClick(exp.expType) }
+            )
         }
         item {
-            HomeExpBanner()
+            HomeExpBanner(onBannerClick = onBannerClick)
         }
     }
 }
@@ -58,6 +63,7 @@ internal fun HomeExpHistoryView(
 @Composable
 private fun ExpHistoryItem(
     exp: Exp,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(

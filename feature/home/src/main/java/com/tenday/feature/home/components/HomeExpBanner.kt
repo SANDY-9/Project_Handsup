@@ -34,7 +34,8 @@ import com.tenday.feature.home.R
 
 @Composable
 internal fun HomeExpBanner(
-    modifier: Modifier = Modifier
+    onBannerClick: () -> Unit,
+    modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
         cornerSize = Dimens.cornerShape8,
@@ -48,6 +49,10 @@ internal fun HomeExpBanner(
                     .padding(
                         horizontal = Dimens.margin12,
                         vertical = Dimens.margin16,
+                    ).clip(
+                        RoundedCornerShape(Dimens.cornerShape8)
+                    ).clickable(
+                        onClick = onBannerClick
                     )
             ) {
                 Text(
@@ -107,5 +112,5 @@ internal fun HomeExpBanner(
 @Preview(name = "HomeExpBanner")
 @Composable
 private fun PreviewHomeExpBanner() {
-    HomeExpBanner()
+    HomeExpBanner({})
 }
