@@ -46,8 +46,8 @@ internal fun LoginRoute(
     LoginScreen(
         loginUiState = loginUiState,
         id = idInputState,
-        onIdInputChange = loginViewModel::onIdInputChanged,
         pwd = pwdInputState,
+        onIdInputChange = loginViewModel::onIdInputChanged,
         onPwdInputChange = loginViewModel::onPwdInputChanged,
         onLogin = loginViewModel::requestLogin,
     )
@@ -57,8 +57,8 @@ internal fun LoginRoute(
 internal fun LoginScreen(
     loginUiState: LoginUiState,
     id: String,
-    onIdInputChange: (String) -> Unit,
     pwd: String,
+    onIdInputChange: (String) -> Unit,
     onPwdInputChange: (String) -> Unit,
     onLogin: () -> Unit,
     modifier: Modifier = Modifier,
@@ -73,10 +73,10 @@ internal fun LoginScreen(
         Spacer(modifier = modifier.height(Dimens.margin16))
         LoginInputBox(
             id = id,
-            onIdInputChange = onIdInputChange,
             pwd = pwd,
             error = loginUiState is LoginUiState.Fail,
             onPwdInputChange = onPwdInputChange,
+            onIdInputChange = onIdInputChange,
         )
         if(loginUiState is LoginUiState.EmptyValue) {
             LoginEmptyValueMessage()
@@ -100,8 +100,8 @@ private fun PreviewLoginScreen() {
     LoginScreen(
         LoginUiState.Ready,
         id,
-        { id = it },
         pwd,
+        { id = it },
         { pwd = pwd },
         {},
     )
