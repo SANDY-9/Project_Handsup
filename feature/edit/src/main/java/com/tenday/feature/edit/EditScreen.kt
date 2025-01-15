@@ -12,6 +12,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
@@ -33,17 +34,14 @@ internal fun EditRoute(
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
 ) {
-    val editInputState = EditInputState(
-        pwdInput = "",
-        pwdConfirmInput = "",
-        pwdError = false,
-        pwdConfirmError = false,
-    )
+    val editInputState by viewModel.inputState.collectAsStateWithLifecycle()
     EditScreen(
         user = user,
         inputState = editInputState,
         onNavigateBack = onNavigateBack,
         onLogout = onLogout,
+        onPwdInputChange = viewModel::updatePwdInputState,
+        onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -53,11 +51,11 @@ internal fun EditScreen(
     inputState: EditInputState,
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
+    onPwdInputChange: (String) -> Unit,
+    onPwdConfirmInputChange: (String) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var checked by remember { mutableStateOf(true) }
-    var pwd by remember { mutableStateOf("") }
-    var pwdConfirm by remember { mutableStateOf("") }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -85,8 +83,8 @@ internal fun EditScreen(
                 pwdConfirm = inputState.pwdConfirmInput,
                 pwdError = inputState.pwdError,
                 pwdConfirmError = inputState.pwdConfirmError,
-                onPwdInputChange = {},
-                onPwdConfirmInputChange = {},
+                onPwdInputChange = onPwdInputChange,
+                onPwdConfirmInputChange = onPwdConfirmInputChange,
                 onEditComplete = {}
             )
         }
@@ -122,6 +120,8 @@ private fun PreviewEditScreen() {
         ),
         onNavigateBack = {},
         onLogout = {},
+        onPwdInputChange = {},
+        onPwdConfirmInputChange = {},
     )
 
 }
