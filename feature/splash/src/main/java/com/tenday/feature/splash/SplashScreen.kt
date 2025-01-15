@@ -3,9 +3,11 @@ package com.tenday.feature.splash
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
 import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -50,9 +52,14 @@ internal fun SplashRoute(
     LaunchedEffect(Unit) {
         delay(500)
         showText = true
-        delay(1500)
+        delay(1000)
         showLogo = true
         showText = false
+        delay(500)
+        showLogo = false
+        delay(600)
+        val accessToken = viewModel.getAccessToken()
+        onAccessToken(accessToken)
     }
     SplashScreen(
         textVisible = showText,
@@ -66,37 +73,40 @@ internal fun SplashScreen(
     logoVisible: Boolean,
     modifier: Modifier = Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier.fillMaxSize().background(
             color = HandsUpOrange
         ),
-        contentAlignment = Alignment.TopCenter,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
+        Spacer(modifier = modifier.fillMaxHeight(0.38f))
+        Column (
+            modifier = modifier.height(90.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
-            Spacer(modifier = modifier.fillMaxHeight(0.38f))
             AnimatedVisibility(
                 visible = logoVisible,
+                enter = fadeIn() + expandIn(
+                    expandFrom = Alignment.TopCenter,
+                    clip = false,
+                ),
+                exit = fadeOut(animationSpec = tween(durationMillis = 1000))
             ) {
-                Box(
-                    modifier = modifier.height(90.dp)
-                ) {
-                    Icon(
-                        modifier = modifier.size(
-                            width = 200.dp,
-                            height = 30.dp
-                        ).align(Alignment.Center),
-                        imageVector = Icons.HandsUpLogo,
-                        contentDescription = null,
-                        tint = White,
-                    )
-                }
+                Icon(
+                    modifier = modifier.size(
+                        width = 200.dp,
+                        height = 30.dp
+                    ),
+                    imageVector = Icons.HandsUpLogo,
+                    contentDescription = null,
+                    tint = White,
+                )
             }
 
             AnimatedVisibility(
                 visible = textVisible,
-                enter = fadeIn(animationSpec = tween(durationMillis = 1000)),
+                enter = fadeIn(animationSpec = tween(durationMillis = 500)),
             ) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
