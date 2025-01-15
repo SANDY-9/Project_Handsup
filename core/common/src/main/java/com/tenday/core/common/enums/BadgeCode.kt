@@ -45,4 +45,16 @@ enum class BadgeCode(
         offResFilePath = resPath + "열정의_불꽃_off.svg",
     );
 
+    companion object {
+        fun list(): List<BadgeCode> {
+            return listOf(
+                ANNUAL_MVP_2024,
+                S_GRADE_H1_H2,
+                JOB_EXP_OVER_1700,
+                EXP_EVERY_MONTH_FOR_A_YEAR,
+                COMPANY_PROJECT_OVER_5,
+                MONTH_SPECIAL_JOB_OVER_6,
+            )
+        }
+    }
 }
