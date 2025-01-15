@@ -80,8 +80,8 @@ internal class EditViewModel @Inject constructor(
         EditInputState(
             pwdInput = "",
             pwdConfirmInput = "",
-            pwdError = true,
-            pwdConfirmError = true,
+            pwdError = false,
+            pwdConfirmError = false,
         )
     )
     val inputState: StateFlow<EditInputState> = _inputState.asStateFlow()

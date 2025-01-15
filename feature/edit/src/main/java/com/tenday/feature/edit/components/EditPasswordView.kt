@@ -31,6 +31,8 @@ internal fun EditPasswordView(
     pwd: String,
     pwdConfirm: String,
     pwdError: Boolean,
+    enabled: Boolean,
+    loading: Boolean,
     pwdConfirmError: Boolean,
     onPwdInputChange: (String) -> Unit,
     onPwdConfirmInputChange: (String) -> Unit,
@@ -95,8 +97,9 @@ internal fun EditPasswordView(
                     Spacer(modifier = modifier.height(Dimens.margin12))
                     HandsUpButton(
                         text = stringResource(R.string.edit_btn_complete_title),
-                        enabled = !pwdError && !pwdConfirmError,
+                        enabled = enabled,
                         onClick = onEditComplete,
+                        loading = loading,
                     )
                 }
             }
@@ -115,6 +118,8 @@ private fun PreviewEditPasswordView() {
         pwdConfirm = input2,
         pwdError = false,
         pwdConfirmError = false,
+        enabled = true,
+        loading = false,
         onPwdInputChange = {input1 = it},
         onPwdConfirmInputChange = {input2 = it},
     )
