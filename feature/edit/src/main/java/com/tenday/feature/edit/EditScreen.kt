@@ -6,7 +6,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -17,6 +21,7 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.feature.edit.components.EditBadgeDialog
 import com.tenday.feature.edit.components.EditBadgeView
 import com.tenday.feature.edit.components.EditPasswordView
 import com.tenday.feature.edit.components.EditPushSettings
@@ -30,14 +35,20 @@ import com.tenday.feature.edit.model.UpdateType
 
 @Composable
 internal fun EditRoute(
-    user: UserDetails,
+    userDetails: UserDetails,
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
 ) {
+    LaunchedEffect(userDetails) {
+        viewModel.setUserDetails(userDetails)
+    }
+
     val enableNoti by viewModel.notificationEnable.collectAsStateWithLifecycle()
     val editInputState by viewModel.inputState.collectAsStateWithLifecycle()
     val editUiState by viewModel.editUiState.collectAsStateWithLifecycle()
+    val user by viewModel.user.collectAsStateWithLifecycle()
+
     EditScreen(
         user = user,
         inputState = editInputState,
@@ -47,15 +58,16 @@ internal fun EditRoute(
         onLogout = onLogout,
         onPwdInputChange = viewModel::updatePwdInputState,
         onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
-        onEnableNotiChange = viewModel::updateNotifiChange,
+        onEnableNotiChange = viewModel::updateNotiChange,
         onEditComplete = viewModel::requestUpdatePwdChange,
         onDialogCancel = viewModel::resetUiState,
+        onEditBadge = viewModel::requestUpdateBadgeChange,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun EditScreen(
-    user: UserDetails,
+    user: UserDetails?,
     inputState: EditInputState,
     enableNoti: Boolean,
     editUiState: EditUiState,
@@ -66,8 +78,11 @@ internal fun EditScreen(
     onEnableNotiChange: (Boolean) -> Unit,
     onEditComplete: () -> Unit,
     onDialogCancel: () -> Unit,
+    onEditBadge: (BadgeCode) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var selectBadge by remember { mutableStateOf(BadgeCode.NULL) }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -78,9 +93,12 @@ internal fun EditScreen(
         }
         item {
             EditBadgeView(
-                currentBadge = user.profileBadgeCode,
-                badgeList = user.possibleBadgeCodeList,
+                currentBadge = user?.profileBadgeCode ?: BadgeCode.NULL,
+                badgeList = user?.possibleBadgeCodeList ?: emptyList(),
                 onShowBadgeInfo = {},
+                onBadgeClick = { badge ->
+                    selectBadge = badge
+                }
             )
         }
         item {
@@ -112,6 +130,17 @@ internal fun EditScreen(
                 onCancel = onDialogCancel,
             )
         }
+    }
+
+    AnimatedVisibility(selectBadge != BadgeCode.NULL) {
+        EditBadgeDialog(
+            selectBadge = selectBadge,
+            onCancel = { selectBadge = BadgeCode.NULL },
+            onComplete = { badge ->
+                selectBadge = BadgeCode.NULL
+                onEditBadge(badge)
+            },
+        )
     }
 
 }
@@ -149,6 +178,7 @@ private fun PreviewEditScreen() {
         onEnableNotiChange = {},
         onEditComplete = {},
         onDialogCancel = {},
+        onEditBadge = {},
     )
 
 }

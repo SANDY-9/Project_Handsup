@@ -1,14 +1,18 @@
 package com.tenday.feature.edit
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.user.UpdateProfileBadgeUseCase
 import com.tenday.core.domain.usecases.user.UpdateProfileImageUseCase
 import com.tenday.core.domain.usecases.user.UpdateUserPwdUseCase
+import com.tenday.core.model.UserDetails
 import com.tenday.feature.edit.model.EditInputState
 import com.tenday.feature.edit.model.EditUiState
 import com.tenday.feature.edit.model.UpdateType
+import com.tenday.feature.edit.navigation.USER_DETAILS
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -29,7 +33,11 @@ internal class EditViewModel @Inject constructor(
     private val updateProfileBadgeUseCase: UpdateProfileBadgeUseCase,
     private val updateProfileImageUseCase: UpdateProfileImageUseCase,
     private val appPrefsRepository: AuthPrefsRepository,
+    private val savedStateHandle: SavedStateHandle,
 ): ViewModel() {
+
+    private val _editUiState: MutableStateFlow<EditUiState> = MutableStateFlow(EditUiState.None)
+    val editUiState = _editUiState.asStateFlow()
 
     val notificationEnable = appPrefsRepository.getNotificationState().stateIn(
         scope = viewModelScope,
@@ -37,12 +45,32 @@ internal class EditViewModel @Inject constructor(
         initialValue = false,
     )
 
-    private val _editUiState: MutableStateFlow<EditUiState> = MutableStateFlow(EditUiState.None)
-    val editUiState = _editUiState.asStateFlow()
-
-    fun updateNotifiChange(enable: Boolean) {
+    fun updateNotiChange(enable: Boolean) {
         viewModelScope.launch {
             appPrefsRepository.updateNotificationState(enable)
+        }
+    }
+
+    val user: StateFlow<UserDetails?> = savedStateHandle.getStateFlow(USER_DETAILS, null)
+
+    fun setUserDetails(userDetails: UserDetails?) {
+        userDetails?.let {
+            savedStateHandle[USER_DETAILS] = it
+        }
+    }
+
+    fun requestUpdateBadgeChange(badge: BadgeCode) {
+        flow {
+            emit(updateProfileBadgeUseCase(badge))
+        }.onStart {
+            _editUiState.value = EditUiState.Loading
+        }.onEach {
+            _editUiState.value = EditUiState.Success(UpdateType.PROFILE_BADGE)
+            setUserDetails(
+                user.value?.copy(profileBadgeCode = badge)
+            )
+        }.catch {
+            _editUiState.value = EditUiState.Fail
         }
     }
 

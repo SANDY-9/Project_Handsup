@@ -1,6 +1,7 @@
 package com.tenday.feature.edit.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -40,6 +41,7 @@ internal fun EditBadgeView(
     currentBadge: BadgeCode,
     badgeList: List<BadgeCode>,
     onShowBadgeInfo: () -> Unit,
+    onBadgeClick: (BadgeCode) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -88,6 +90,7 @@ internal fun EditBadgeView(
                                     modifier = modifier.weight(1f),
                                     select = badge == currentBadge,
                                     badge = badge,
+                                    onItemClick = { onBadgeClick(badge) }
                                 )
                             }
                         }
@@ -102,10 +105,11 @@ internal fun EditBadgeView(
 private fun ProfileBadgeItem(
     select: Boolean,
     badge: BadgeCode,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier,
+        modifier = modifier.clickable(onClick = onItemClick),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Image(
@@ -140,6 +144,7 @@ private fun PreviewEditBadgeView() {
     EditBadgeView(
         BadgeCode.JOB_EXP_OVER_1700,
         BadgeCode.entries,
+        {},
         {},
     )
 }

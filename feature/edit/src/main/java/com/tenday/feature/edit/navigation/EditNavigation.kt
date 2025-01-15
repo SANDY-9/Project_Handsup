@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable object EditRoute
 
-private const val USER_DETAILS = "user_details"
+internal const val USER_DETAILS = "user_details"
 
 fun NavController.navigateToEdit(
     user: UserDetails,
@@ -30,9 +30,9 @@ fun NavGraphBuilder.editScreen(
             ?.get<UserDetails>(USER_DETAILS)
             ?: return@composable
         EditRoute(
-            user = user,
+            userDetails = user,
             onNavigateBack = onNavigateBack,
-            onLogout = {}
+            onLogout = {},
         )
     }
 }
