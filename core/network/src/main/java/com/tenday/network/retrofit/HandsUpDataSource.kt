@@ -2,7 +2,6 @@ package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
-import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
@@ -17,7 +16,7 @@ interface HandsUpDataSource {
     suspend fun getNotificationList(token: String): List<NotificationDetails>
     suspend fun getUserDetails(token: String): UserResponse
     suspend fun updateMessagingToken(accessToken: String, messagingToken: String): Boolean
-    suspend fun getLastExpList(token: String, listSize: Int): List<ExpData>
+    suspend fun getLastExpList(token: String, listSize: Int): ExpResponse
     suspend fun getExpDetails(token: String): ExpResponse
     suspend fun getLeaderMission(token: String): LeaderMissionResponse
     suspend fun getJobMission(token: String): JobMissionResponse

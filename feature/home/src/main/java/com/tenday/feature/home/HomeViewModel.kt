@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
-import com.tenday.core.model.Exp
 import com.tenday.feature.home.model.HomeUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,9 +30,9 @@ internal class HomeViewModel @Inject constructor(
         combine(
             getUserDetailsUseCase(),
             getLastExpListUseCase(listSize = 3)
-        ) { userDetails, expMap ->
+        ) { userDetails, expDetails ->
             HomeUiState.Success(
-                expList = expMap.toExpList(),
+                expDetails = expDetails,
                 userDetails = userDetails
             )
         }.onStart {
@@ -43,14 +42,6 @@ internal class HomeViewModel @Inject constructor(
         }.catch {
             _homeUiState.value = HomeUiState.Fail
         }.launchIn(viewModelScope)
-    }
-
-    private fun Map<Int, List<Exp>>.toExpList(): List<Exp> {
-        return values
-            .flatten()
-            .sortedByDescending {
-                it.expAt
-            }
     }
 
     suspend fun updateNotificationState(enable: Boolean) {

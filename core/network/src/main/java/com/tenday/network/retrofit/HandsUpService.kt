@@ -2,7 +2,6 @@ package com.tenday.network.retrofit
 
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.NotificationDetails
-import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
 import com.tenday.network.model.JobMissionResponse
 import com.tenday.network.model.LeaderMissionResponse
@@ -50,8 +49,11 @@ internal class HandsUpService @Inject constructor(
     override suspend fun getLastExpList(
         token: String,
         listSize: Int,
-    ): List<ExpData> {
-        return api.getExpDetails(token.toHeader()).expList.take(listSize)
+    ): ExpResponse {
+        val expDetails = api.getExpDetails(token.toHeader())
+        return api.getExpDetails(token.toHeader()).copy(
+            expList = expDetails.expList.take(listSize)
+        )
     }
 
     override suspend fun getExpDetails(token: String): ExpResponse {

@@ -35,6 +35,7 @@ fun ProfileCard(
     profileImageCode: ProfileCode,
     totalExpLastYear: Int,
     username: String,
+    maxExp: Int,
     onNavigateSettings: () -> Unit,
     parentModifier: Modifier = Modifier,
     modifier: Modifier = Modifier,
@@ -95,6 +96,7 @@ fun ProfileCard(
             ProfileCardLevel(
                 level = jobLevel,
                 exp = totalExpLastYear,
+                maxExp = maxExp,
             )
             Spacer(modifier = modifier.height(Dimens.margin16))
             Image(
@@ -123,6 +125,7 @@ private fun PreviewProfileCard() {
          profileImageCode = ProfileCode.F_A,
          totalExpLastYear = 5000,
          username = "",
+         maxExp = 27500,
          onNavigateSettings = {  }
      )
 }
