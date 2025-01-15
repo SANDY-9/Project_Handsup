@@ -3,7 +3,6 @@ package com.tenday.feature.edit.components
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -59,7 +58,6 @@ internal fun EditPushSettings(
     var switchChecked by remember { mutableStateOf(enableNoti) }
     var isInitial by remember { mutableStateOf(true) } // 초기 상태 관리
     LaunchedEffect(switchChecked) {
-        Log.e("확인", "EditPushSettings23: $switchChecked", )
         if(isInitial) {
             isInitial = false
             return@LaunchedEffect
@@ -92,7 +90,8 @@ internal fun EditPushSettings(
                         .padding(
                             horizontal = Dimens.margin20,
                         )
-                        .height(52.dp),
+                        .height(52.dp)
+                    ,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(

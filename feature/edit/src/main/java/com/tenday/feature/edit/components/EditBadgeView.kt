@@ -2,10 +2,10 @@ package com.tenday.feature.edit.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +13,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -58,8 +61,7 @@ internal fun EditBadgeView(
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
-                        .padding(Dimens.margin20)
-                    ,
+                        .padding(Dimens.margin20),
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -80,11 +82,12 @@ internal fun EditBadgeView(
                         )
                     }
                     Spacer(modifier = modifier.height(Dimens.margin12))
-                    FlowRow(
-                        modifier = modifier.fillMaxWidth(),
-                        maxItemsInEachRow = 3,
+                    LazyVerticalGrid(
+                        modifier = modifier.height(225.dp),
+                        columns = GridCells.Fixed(3),
+                        verticalArrangement = Arrangement.spacedBy(Dimens.margin6),
                     ) {
-                        badgeList.forEach { badge ->
+                        items(badgeList) { badge ->
                             if(badge != BadgeCode.NULL) {
                                 ProfileBadgeItem(
                                     modifier = modifier.weight(1f),
@@ -111,6 +114,7 @@ private fun ProfileBadgeItem(
     Column(
         modifier = modifier.clickable(onClick = onItemClick),
         horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center,
     ) {
         Image(
             modifier = Modifier.size(64.dp),
@@ -143,7 +147,7 @@ private fun ProfileBadgeItem(
 private fun PreviewEditBadgeView() {
     EditBadgeView(
         BadgeCode.JOB_EXP_OVER_1700,
-        BadgeCode.entries,
+        BadgeCode.list(),
         {},
         {},
     )
