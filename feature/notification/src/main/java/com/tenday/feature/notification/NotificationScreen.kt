@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.theme.White
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.notification.components.NotificationEmptyView
 import com.tenday.feature.notification.components.NotificationListView
 import com.tenday.feature.notification.components.NotificationTitleBar
@@ -20,6 +21,8 @@ internal fun NotificationRoute(
     onNavigateBack: () -> Unit,
     viewModel: NotificationViewModel = hiltViewModel()
 ) {
+    StatusBarStyle(false)
+
     val notifyUiState by viewModel.notifyUiState.collectAsStateWithLifecycle()
     NotificationScreen(
         uiState = notifyUiState,

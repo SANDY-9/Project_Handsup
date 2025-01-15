@@ -23,6 +23,7 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.edit.components.EditBadgeDialog
 import com.tenday.feature.edit.components.EditBadgeView
 import com.tenday.feature.edit.components.EditPasswordView
@@ -43,6 +44,7 @@ internal fun EditRoute(
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
 ) {
+    StatusBarStyle(false)
     LaunchedEffect(userDetails) {
         viewModel.setUserDetails(userDetails)
     }

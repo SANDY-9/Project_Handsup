@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.theme.Gray100
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.mission.components.MissionTitleBar
 import com.tenday.feature.mission.components.MissionToolTip
 import com.tenday.feature.mission.components.job.MissionJobView
@@ -32,9 +33,11 @@ import com.tenday.feature.mission.model.MissionUiState
 internal fun MissionRoute(
     viewModel: MissionViewModel = hiltViewModel()
 ) {
+
     val currentTab by viewModel.currentTab.collectAsStateWithLifecycle()
     val uiState by viewModel.missionUiState.collectAsStateWithLifecycle()
 
+    StatusBarStyle(false)
     MissionScreen(
         currentTab = currentTab,
         uiState = uiState,

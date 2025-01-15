@@ -34,6 +34,7 @@ import com.tenday.designsystem.components.profileCard.ProfileCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Backgroud
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.home.components.HomeExpEmptyView
 import com.tenday.feature.home.components.HomeExpHistoryView
 import com.tenday.feature.home.components.HomeTitleBar
@@ -51,6 +52,7 @@ internal fun HomeRoute(
     BackHandler(enabled = true) {
         onFinish()
     }
+    StatusBarStyle(true)
 
     val userState by viewModel.userState.collectAsStateWithLifecycle()
     val expState by viewModel.expState.collectAsStateWithLifecycle()

@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.login.components.LoginButton
 import com.tenday.feature.login.components.LoginEmptyValueMessage
 import com.tenday.feature.login.components.LoginErrorMessage
@@ -31,9 +32,8 @@ internal fun LoginRoute(
     onFinish: () -> Unit,
     loginViewModel: LoginViewModel = hiltViewModel(),
 ) {
-    BackHandler(enabled = true) {
-        onFinish()
-    }
+    BackHandler(enabled = true) { onFinish() }
+    StatusBarStyle(false)
 
     val idInputState by loginViewModel.idInput.collectAsStateWithLifecycle()
     val pwdInputState by loginViewModel.pwdInput.collectAsStateWithLifecycle()

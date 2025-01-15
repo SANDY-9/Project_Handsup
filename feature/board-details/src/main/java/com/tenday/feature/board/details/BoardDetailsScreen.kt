@@ -10,6 +10,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.tenday.core.model.BoardDetails
 import com.tenday.designsystem.theme.White
+import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.board.details.components.BoardDetailsContentView
 import com.tenday.feature.board.details.components.BoardDetailsTitleBar
 
@@ -19,13 +20,14 @@ internal fun BoardDetailsRoute(
     onNavigateBack: () -> Unit,
     viewModel: BoardDetailsViewModel = hiltViewModel(),
 ) {
-   LaunchedEffect(boardDetails) {
-       viewModel.updateReadCount(boardDetails)
-   }
-   BoardDetailsScreen(
-       boardDetails = boardDetails,
-       onNavigateBack = onNavigateBack,
-   )
+    StatusBarStyle(false)
+    LaunchedEffect(boardDetails) {
+        viewModel.updateReadCount(boardDetails)
+    }
+    BoardDetailsScreen(
+        boardDetails = boardDetails,
+        onNavigateBack = onNavigateBack,
+    )
 }
 
 @Composable
@@ -35,7 +37,9 @@ internal fun BoardDetailsScreen(
     modifier: Modifier = Modifier
 ) {
     Column(
-        modifier = modifier.fillMaxSize().background(color = White)
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = White)
     ) {
         BoardDetailsTitleBar(onNavigate = onNavigateBack)
         BoardDetailsContentView(
