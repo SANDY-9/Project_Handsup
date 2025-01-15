@@ -85,6 +85,10 @@ internal fun ExpResponse.toExpDetails(): ExpDetails {
         jobFamily = JobFamily.valueOf(jobFamily),
         lastYearExp = lastYearExp,
         totalExp = totalExp,
+        currentNextLevel = currentNextLevel,
+        expToExpectedLevel = expToExpectedLevel,
+        expToCurrentLevel = expToCurrentLevel,
+        expToCurrentNextLevel = expToCurrentNextLevel,
     )
 }
 

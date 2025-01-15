@@ -187,11 +187,15 @@ private fun PreviewExpScreen() {
                 currentYearExp = 5730,
                 expCount = 7,
                 expList = emptyMap(),
-                expToNextLevel=7770,
-                expectedLevel="F1-Ⅰ",
-                jobFamily=JobFamily.F,
-                lastYearExp=0,
-                totalExp=5730
+                expToNextLevel = 7770,
+                expectedLevel = "F1-Ⅰ",
+                jobFamily = JobFamily.F,
+                lastYearExp = 0,
+                totalExp = 5730,
+                currentNextLevel = "F1-Ⅰ",
+                expToExpectedLevel = 12345,
+                expToCurrentLevel = 12345,
+                expToCurrentNextLevel = 12345,
             )
         ),
         ExpListState(
