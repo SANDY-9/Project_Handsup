@@ -28,6 +28,7 @@ import com.tenday.feature.edit.components.EditPushSettings
 import com.tenday.feature.edit.components.EditSuccessDialog
 import com.tenday.feature.edit.components.EditTitleBar
 import com.tenday.feature.edit.components.LogoutButton
+import com.tenday.feature.edit.guide.BadgeGuideScreen
 import com.tenday.feature.edit.model.EditInputState
 import com.tenday.feature.edit.model.EditUiState
 import com.tenday.feature.edit.model.UpdateType
@@ -82,6 +83,7 @@ internal fun EditScreen(
     modifier: Modifier = Modifier
 ) {
     var selectBadge by remember { mutableStateOf(BadgeCode.NULL) }
+    var visibleGuide by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = modifier
@@ -95,7 +97,7 @@ internal fun EditScreen(
             EditBadgeView(
                 currentBadge = user?.profileBadgeCode ?: BadgeCode.NULL,
                 badgeList = user?.possibleBadgeCodeList ?: emptyList(),
-                onShowBadgeInfo = {},
+                onShowBadgeInfo = { visibleGuide = true },
                 onBadgeClick = { badge ->
                     selectBadge = badge
                 }
@@ -143,6 +145,9 @@ internal fun EditScreen(
         )
     }
 
+    if(visibleGuide) {
+        BadgeGuideScreen(onClose = { visibleGuide = false })
+    }
 }
 
 @Preview(name = "EditScreen")
