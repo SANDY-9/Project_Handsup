@@ -9,6 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tenday.designsystem.components.HandsUpFailView
+import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.theme.White
 import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.notification.components.NotificationEmptyView
@@ -41,9 +43,10 @@ internal fun NotificationScreen(
     ) {
         NotificationTitleBar(onNavigate = onNavigateBack)
         when(uiState) {
-            is NotificationUiState.EmptyItem -> NotificationEmptyView()
+            NotificationUiState.Loading -> HandsUpLoadingView()
+            NotificationUiState.EmptyItem -> NotificationEmptyView()
             is NotificationUiState.Success -> NotificationListView(uiState.data)
-            else -> { }
+            NotificationUiState.Fail -> HandsUpFailView()
         }
     }
 }

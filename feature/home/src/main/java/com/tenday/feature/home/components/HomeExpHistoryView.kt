@@ -1,6 +1,7 @@
 package com.tenday.feature.home.components
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,16 +14,17 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tenday.core.common.enums.ExpType
 import com.tenday.core.common.extentions.toData
 import com.tenday.core.model.Exp
@@ -37,6 +39,8 @@ import com.tenday.designsystem.theme.HandsUpTypography
 @Composable
 internal fun HomeExpHistoryView(
     expList: List<Exp>,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyRow(
@@ -45,10 +49,13 @@ internal fun HomeExpHistoryView(
         horizontalArrangement = Arrangement.spacedBy(Dimens.margin8)
     ) {
         items(expList) { exp ->
-            ExpHistoryItem(exp)
+            ExpHistoryItem(
+                exp,
+                onItemClick = { onExpClick(exp.expType) }
+            )
         }
         item {
-            HomeExpBanner()
+            HomeExpBanner(onBannerClick = onBannerClick)
         }
     }
 }
@@ -56,6 +63,7 @@ internal fun HomeExpHistoryView(
 @Composable
 private fun ExpHistoryItem(
     exp: Exp,
+    onItemClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     HandsUpShadowCard(
@@ -65,6 +73,10 @@ private fun ExpHistoryItem(
                 modifier = modifier.size(
                     width = 114.dp,
                     height = 129.dp,
+                ).clip(
+                    RoundedCornerShape(Dimens.cornerShape8)
+                ).clickable(
+                    onClick = onItemClick
                 ).padding(
                     horizontal = Dimens.margin12,
                     vertical = Dimens.margin16,
@@ -72,15 +84,13 @@ private fun ExpHistoryItem(
             ) {
                 Text(
                     text = exp.expType.quest,
-                    style = HandsUpTypography.body4.copy(
-                        fontSize = 10.sp
-                    ),
+                    style = HandsUpTypography.body4,
                     color = Gray600,
                 )
                 Spacer(modifier = modifier.height(Dimens.margin2))
                 Text(
                     text = exp.questName,
-                    style = HandsUpTypography.body2.copy(
+                    style = HandsUpTypography.body1.copy(
                         fontWeight = FontWeight.Bold,
                     ),
                     maxLines = 1,
@@ -89,9 +99,7 @@ private fun ExpHistoryItem(
                 Spacer(modifier = modifier.height(Dimens.margin6))
                 Text(
                     text = exp.expAt,
-                    style = HandsUpTypography.body2.copy(
-                        fontSize = 10.sp
-                    ),
+                    style = HandsUpTypography.body4,
                     color = Gray500,
                 )
                 Spacer(modifier = modifier.weight(1f))
@@ -133,6 +141,8 @@ private fun PreviewHomeExpHistoryView() {
                 questName = "월특근",
                 year = 2025
             )
-        )
+        ),
+        {},
+        {},
     )
 }

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -23,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tenday.designsystem.extentions.innerShadow
 import com.tenday.designsystem.theme.CardShadow
 import com.tenday.designsystem.theme.GradientShadow
 import com.tenday.designsystem.theme.Gray200
@@ -50,6 +52,9 @@ fun LevelGraph(
         modifier = modifier
             .fillMaxWidth()
             .height(20.dp)
+            .innerShadow(
+                shape = RoundedCornerShape(50.dp),
+            )
     ) {
         Canvas(modifier = Modifier.fillMaxSize()) {
             val cornerRadius = 50f

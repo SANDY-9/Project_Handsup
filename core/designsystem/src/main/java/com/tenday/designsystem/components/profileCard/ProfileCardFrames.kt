@@ -2,10 +2,12 @@ package com.tenday.designsystem.components.profileCard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.offset
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.designsystem.R
 
@@ -33,12 +35,13 @@ private fun ProfileFrameField(
             contentDescription = null,
         )
         Image(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f).offset(x = (-1).dp),
             painter = painterResource(R.drawable.profile_frame_field_02),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )
         Image(
+            modifier = modifier.offset(x = (-2).dp),
             painter = painterResource(R.drawable.profile_frame_field_03),
             contentDescription = null,
         )
@@ -57,12 +60,13 @@ private fun ProfileFrameManage(
             contentDescription = null,
         )
         Image(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f).offset(x = (-1).dp),
             painter = painterResource(R.drawable.profile_frame_manage_02),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )
         Image(
+            modifier = modifier.offset(x = (-2).dp),
             painter = painterResource(R.drawable.profile_frame_manage_03),
             contentDescription = null,
         )
@@ -81,12 +85,13 @@ private fun ProfileFrameCx(
             contentDescription = null,
         )
         Image(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f).offset(x = (-1).dp),
             painter = painterResource(R.drawable.profile_frame_cx_02),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )
         Image(
+            modifier = modifier.offset(x = (-2).dp),
             painter = painterResource(R.drawable.profile_frame_cx_03),
             contentDescription = null,
         )
@@ -105,12 +110,13 @@ private fun ProfileFrameTech(
             contentDescription = null,
         )
         Image(
-            modifier = modifier.weight(1f),
+            modifier = modifier.weight(1f).offset(x = (-1).dp),
             painter = painterResource(R.drawable.profile_frame_tech_02),
             contentDescription = null,
             contentScale = ContentScale.FillBounds,
         )
         Image(
+            modifier = modifier.offset(x = (-2).dp),
             painter = painterResource(R.drawable.profile_frame_tech_03),
             contentDescription = null,
         )

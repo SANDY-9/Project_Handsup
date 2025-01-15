@@ -11,6 +11,7 @@ import com.tenday.feature.board.navigation.boardScreen
 import com.tenday.feature.edit.navigation.editScreen
 import com.tenday.feature.edit.navigation.navigateToEdit
 import com.tenday.feature.exp.navigation.myExpScreen
+import com.tenday.feature.exp.navigation.navigateToExp
 import com.tenday.feature.home.navigation.homeScreen
 import com.tenday.feature.home.navigation.navigateToHome
 import com.tenday.feature.login.navigation.LoginRoute
@@ -58,6 +59,8 @@ fun HandsUpNavGraph(
             onNavigateNoti = navController::navigateToNotification,
             onNavigateEdit = navController::navigateToEdit,
             onFinish = onAppFinish,
+            onBannerClick = navController::navigateToExp,
+            onExpClick = {}, // 구현해야함
         )
 
         missionScreen()

@@ -53,7 +53,8 @@ private fun LevelBadge(
         ).padding(
             vertical = Dimens.margin2,
             horizontal = Dimens.margin6,
-        )
+        ),
+        verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(
             text = "LV. ",

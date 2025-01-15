@@ -9,7 +9,9 @@ import kotlinx.serialization.Serializable
 
 @Serializable object MyExpRoute
 
-fun NavController.navigateToExp(navOptions: NavOptions) {
+fun NavController.navigateToExp(
+    navOptions: NavOptions? = null
+) {
     navigate(MyExpRoute, navOptions)
 }
 

@@ -26,10 +26,14 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.common.enums.ExpType
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
+import com.tenday.core.model.Exp
 import com.tenday.core.model.UserDetails
+import com.tenday.designsystem.components.HandsUpFailView
+import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.components.profileCard.ProfileCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Backgroud
@@ -38,8 +42,7 @@ import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.home.components.HomeExpEmptyView
 import com.tenday.feature.home.components.HomeExpHistoryView
 import com.tenday.feature.home.components.HomeTitleBar
-import com.tenday.feature.home.model.ExpListState
-import com.tenday.feature.home.model.UserDetailsState
+import com.tenday.feature.home.model.HomeUiState
 import com.tenday.feature.home.utils.getBackResId
 
 @Composable
@@ -47,40 +50,47 @@ internal fun HomeRoute(
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
     onFinish: () -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     BackHandler(enabled = true) {
         onFinish()
     }
-    StatusBarStyle(true)
 
-    val userState by viewModel.userState.collectAsStateWithLifecycle()
-    val expState by viewModel.expState.collectAsStateWithLifecycle()
+    val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
 
     val context = LocalContext.current
     CheckPermission(
         context = context,
         onPermissionResult = viewModel::updateNotificationState,
     )
-    HomeScreen(
-        backResId = viewModel.jobFamily.getBackResId(),
-        userDetailsState = userState,
-        expListState = expState,
-        onNavigateNoti = onNavigateNoti,
-        onNavigateEdit = onNavigateEdit,
-    )
+    when (val state = uiState) {
+        is HomeUiState.Success -> HomeScreen(
+            userDetails = state.userDetails,
+            expList = state.expList,
+            onNavigateNoti = onNavigateNoti,
+            onNavigateEdit = onNavigateEdit,
+            onExpClick = onExpClick,
+            onBannerClick = onBannerClick,
+        )
+        HomeUiState.Loading -> HandsUpLoadingView()
+        HomeUiState.Fail -> HandsUpFailView()
+    }
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun HomeScreen(
-    userDetailsState: UserDetailsState,
-    expListState: ExpListState,
-    backResId: Int,
+    userDetails: UserDetails,
+    expList: List<Exp>,
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    StatusBarStyle(true)
     LazyColumn (
         modifier = modifier
             .fillMaxSize()
@@ -90,16 +100,18 @@ internal fun HomeScreen(
     ) {
         stickyHeader {
             HomeTitleBar(
-                backResId = backResId,
+                backResId = userDetails.jobFamily.getBackResId(),
                 onNavigateNoti = onNavigateNoti
             )
         }
         item {
             HomeContentView(
-                backResId = backResId,
-                user = userDetailsState,
-                exp = expListState,
+                backResId = userDetails.jobFamily.getBackResId(),
+                user = userDetails,
+                exp = expList,
                 onNavigateSettings = onNavigateEdit,
+                onExpClick = onExpClick,
+                onBannerClick = onBannerClick,
             )
         }
     }
@@ -108,9 +120,11 @@ internal fun HomeScreen(
 @Composable
 private fun HomeContentView(
     backResId: Int,
-    user: UserDetailsState,
-    exp: ExpListState,
+    user: UserDetails,
+    exp: List<Exp>,
     onNavigateSettings: (UserDetails) -> Unit,
+    onExpClick: (ExpType) -> Unit,
+    onBannerClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Box {
@@ -126,25 +140,22 @@ private fun HomeContentView(
             modifier = modifier
                 .fillMaxSize(),
         ) {
-            when(user) {
-                is UserDetailsState.Success -> ProfileCard(
-                    parentModifier = modifier.padding(
-                        horizontal = Dimens.margin12
-                    ),
-                    department = user.data.department,
-                    employeeId = user.data.employeeId,
-                    hireDate = user.data.hireDate,
-                    jobFamily = user.data.jobFamily,
-                    jobPosition = user.data.jobPosition.name,
-                    jobLevel = user.data.jobLevel,
-                    profileBadgeCode = user.data.profileBadgeCode,
-                    profileImageCode = user.data.profileImageCode,
-                    totalExpLastYear = user.data.totalExpLastYear,
-                    username = user.data.username,
-                    onNavigateSettings = { onNavigateSettings(user.data) },
-                )
-                else -> {}
-            }
+            ProfileCard(
+                parentModifier = modifier.padding(
+                    horizontal = Dimens.margin12
+                ),
+                department = user.department,
+                employeeId = user.employeeId,
+                hireDate = user.hireDate,
+                jobFamily = user.jobFamily,
+                jobPosition = user.jobPosition.name,
+                jobLevel = user.jobLevel,
+                profileBadgeCode = user.profileBadgeCode,
+                profileImageCode = user.profileImageCode,
+                totalExpLastYear = user.totalExpLastYear,
+                username = user.username,
+                onNavigateSettings = { onNavigateSettings(user) },
+            )
             Spacer(modifier = modifier.height(Dimens.margin16))
             Text(
                 modifier = modifier.padding(
@@ -154,10 +165,14 @@ private fun HomeContentView(
                 style = HandsUpTypography.title4
             )
             Spacer(modifier = modifier.height(Dimens.margin12))
-            when(exp) {
-                is ExpListState.EmptyExp -> HomeExpEmptyView()
-                is ExpListState.Success -> HomeExpHistoryView(expList = exp.data)
-                else -> {}
+
+            when {
+                exp.isEmpty() -> HomeExpEmptyView()
+                else -> HomeExpHistoryView(
+                    expList = exp,
+                    onExpClick = onExpClick,
+                    onBannerClick = onBannerClick,
+                )
             }
             Spacer(modifier = modifier.height(Dimens.margin24))
         }
@@ -168,25 +183,24 @@ private fun HomeContentView(
 @Composable
 private fun PreviewHomeScreen() {
     HomeScreen(
-        backResId = JobFamily.F.getBackResId(),
-        userDetailsState = UserDetailsState.Success(
-            UserDetails(
-                employeeId = "2023010101",
-                username = "김민수",
-                hireDate = "2023-01-01",
-                department = "음성 1센터",
-                jobPosition = JobPosition.파트장,
-                jobGroup = 1,
-                jobFamily = JobFamily.F,
-                jobLevel = "F1-Ⅰ",
-                totalExpLastYear = 5000,
-                profileImageCode = ProfileCode.F_A,
-                profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
-                possibleBadgeCodeList = emptyList()
-            )
+        UserDetails(
+            employeeId = "2023010101",
+            username = "김민수",
+            hireDate = "2023-01-01",
+            department = "음성 1센터",
+            jobPosition = JobPosition.파트장,
+            jobGroup = 1,
+            jobFamily = JobFamily.F,
+            jobLevel = "F1-Ⅰ",
+            totalExpLastYear = 5000,
+            profileImageCode = ProfileCode.F_A,
+            profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
+            possibleBadgeCodeList = emptyList()
         ),
-        expListState = ExpListState.EmptyExp,
+        expList = emptyList(),
         onNavigateNoti = {},
         onNavigateEdit = {},
+        onExpClick = {},
+        onBannerClick = {},
     )
 }
