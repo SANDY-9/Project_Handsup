@@ -25,6 +25,9 @@ import com.tenday.feature.login.components.LoginErrorMessage
 import com.tenday.feature.login.components.LoginInputBox
 import com.tenday.feature.login.components.LoginTitle
 import com.tenday.feature.login.model.LoginUiState
+import com.tenday.feature.login.model.LoginUiState.Companion.enabled
+import com.tenday.feature.login.model.LoginUiState.Companion.error
+import com.tenday.feature.login.model.LoginUiState.Companion.loading
 
 @Composable
 internal fun LoginRoute(
@@ -74,7 +77,7 @@ internal fun LoginScreen(
         LoginInputBox(
             id = id,
             pwd = pwd,
-            error = loginUiState is LoginUiState.Fail,
+            error = loginUiState.error(),
             onPwdInputChange = onPwdInputChange,
             onIdInputChange = onIdInputChange,
         )
@@ -86,8 +89,8 @@ internal fun LoginScreen(
         }
         Spacer(modifier = modifier.height(Dimens.margin24))
         LoginButton(
-            enabled = loginUiState !is LoginUiState.Loading,
-            loading = loginUiState is LoginUiState.Loading,
+            enabled = loginUiState.enabled(),
+            loading = loginUiState.loading(),
             onLogin = onLogin,
         )
     }

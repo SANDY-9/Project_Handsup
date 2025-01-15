@@ -49,9 +49,10 @@ internal class LoginViewModel @Inject constructor(
             requestLoginUseCase(id, pwd).onStart {
                 _loginUiState.value = LoginUiState.Loading
             }.catch {
+                delay(300L)
                 _loginUiState.value = LoginUiState.Fail
             }.collectLatest { isSuccess ->
-                delay(200L)
+                delay(300L)
                 if(isSuccess) {
                     _loginUiState.value = LoginUiState.Success
                 }

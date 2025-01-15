@@ -30,7 +30,7 @@ internal fun LoginInputBox(
             input = id,
             onInputChange = onIdInputChange,
             placeHolder = stringResource(R.string.login_id_placeholder),
-            error = error
+            error = error,
         )
         Spacer(modifier = modifier.height(Dimens.margin16))
         HandsUpInputBox(
