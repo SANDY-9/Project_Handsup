@@ -26,7 +26,7 @@ import com.tenday.feature.edit.R
 
 @Composable
 internal fun EditPushSettings(
-    checked: Boolean,
+    enableNoti: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -54,7 +54,7 @@ internal fun EditPushSettings(
                     Spacer(modifier = modifier.weight(1f))
                     Switch(
                         modifier = modifier.size(width = 52.dp, height = 28.dp),
-                        checked = checked,
+                        checked = enableNoti,
                         onCheckedChange = onCheckedChange,
                         colors = SwitchDefaults.colors(
                             checkedTrackColor = HandsUpOrange,

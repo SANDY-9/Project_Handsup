@@ -6,9 +6,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -34,14 +31,17 @@ internal fun EditRoute(
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
 ) {
+    val enableNoti by viewModel.notificationEnable.collectAsStateWithLifecycle()
     val editInputState by viewModel.inputState.collectAsStateWithLifecycle()
     EditScreen(
         user = user,
         inputState = editInputState,
+        enableNoti = enableNoti,
         onNavigateBack = onNavigateBack,
         onLogout = onLogout,
         onPwdInputChange = viewModel::updatePwdInputState,
         onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
+        onEnableNotiChange = viewModel::updateNotifiChange,
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -49,13 +49,14 @@ internal fun EditRoute(
 internal fun EditScreen(
     user: UserDetails,
     inputState: EditInputState,
+    enableNoti: Boolean,
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
     onPwdInputChange: (String) -> Unit,
     onPwdConfirmInputChange: (String) -> Unit,
+    onEnableNotiChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var checked by remember { mutableStateOf(true) }
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -73,8 +74,8 @@ internal fun EditScreen(
         }
         item {
             EditPushSettings(
-                checked = checked,
-                onCheckedChange = { checked = !checked }
+                checked = enableNoti,
+                onCheckedChange = onEnableNotiChange,
             )
         }
         item {
@@ -118,10 +119,12 @@ private fun PreviewEditScreen() {
             pwdError = false,
             pwdConfirmError = false,
         ),
+        enableNoti = true,
         onNavigateBack = {},
         onLogout = {},
         onPwdInputChange = {},
         onPwdConfirmInputChange = {},
+        onEnableNotiChange = {},
     )
 
 }
