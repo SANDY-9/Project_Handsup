@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -40,9 +41,7 @@ internal fun EditBadgeDialog(
         onCancel = onCancel,
     ) {
         Column(
-            modifier = modifier
-                .width(312.dp)
-                .padding(Dimens.margin20),
+            modifier = modifier.fillMaxWidth().padding(Dimens.margin20),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(Dimens.margin8)
         ) {

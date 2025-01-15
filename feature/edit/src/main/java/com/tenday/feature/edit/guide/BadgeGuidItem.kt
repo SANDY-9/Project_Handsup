@@ -54,7 +54,10 @@ internal fun BadgeGuidItem(
         }
         Spacer(modifier = modifier.width(Dimens.margin6))
         Text(
-            modifier = modifier.fillMaxWidth().padding(vertical = Dimens.margin27),
+            modifier = modifier.fillMaxWidth().padding(
+                vertical = Dimens.margin27,
+                horizontal = Dimens.margin12
+            ),
             text = badge.shortDesc,
             style = HandsUpTypography.body2.copy(
                 color = Gray700,

@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,9 +23,13 @@ fun HandsUpDialog(
     content: @Composable (ColumnScope.() -> Unit),
 ) {
     Column(
-        modifier = modifier.fillMaxSize().background(
-            color = TransparentBlack70,
-        ).clickable(onClick = onCancel),
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                color = TransparentBlack70,
+            )
+            .clickable(onClick = onCancel)
+            .padding(horizontal = Dimens.margin24),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
