@@ -62,7 +62,7 @@ fun ProfileCard(
                 hireDate = hireDate,
                 onNavigateSettings = onNavigateSettings,
             )
-            Spacer(modifier = modifier.height(Dimens.margin6))
+            Spacer(modifier = modifier.height(Dimens.margin12))
             ProfileImage(
                 modifier = modifier
                     .size(100.dp)
