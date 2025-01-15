@@ -53,8 +53,8 @@ fun ProfileCard(
         Column(
             modifier = modifier.padding(
                 top = Dimens.margin32,
-                start = Dimens.margin32,
-                end = Dimens.margin32,
+                start = Dimens.margin33,
+                end = Dimens.margin31,
                 bottom = Dimens.margin32,
             )
         ) {

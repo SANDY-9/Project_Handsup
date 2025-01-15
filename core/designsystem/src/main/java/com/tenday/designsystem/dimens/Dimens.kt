@@ -30,7 +30,10 @@ object Dimens {
     val margin27 = 27.dp
     val margin28 = 28.dp
     val margin30 = 30.dp
+    val margin31 = 30.dp
     val margin32 = 32.dp
+    val margin33 = 32.dp
+    val margin34 = 34.dp
     val margin36 = 36.dp
     val margin38 = 38.dp
     val margin40 = 40.dp
