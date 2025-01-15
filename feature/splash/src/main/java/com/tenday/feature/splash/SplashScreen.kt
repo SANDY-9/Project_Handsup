@@ -1,8 +1,13 @@
 package com.tenday.feature.splash
 
 import androidx.activity.compose.BackHandler
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -15,19 +20,22 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.HandsUpLogo
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
+import kotlinx.coroutines.delay
 
 @Composable
 internal fun SplashRoute(
@@ -39,44 +47,88 @@ internal fun SplashRoute(
         onFinish()
     }
 
-    val splashShow by viewModel.splashShow.collectAsStateWithLifecycle()
-    LaunchedEffect(splashShow) {
-        if(!splashShow) {
-            val accessToken = viewModel.getAccessToken()
-            onAccessToken(accessToken)
-        }
+    var showText by remember { mutableStateOf(false) }
+    var showLogo by remember { mutableStateOf(false) }
+    LaunchedEffect(Unit) {
+        delay(500)
+        showText = true
+        delay(1000)
+        showLogo = true
+        showText = false
+        delay(500)
+        showLogo = false
+        delay(600)
+        val accessToken = viewModel.getAccessToken()
+        onAccessToken(accessToken)
     }
-    SplashScreen()
+    SplashScreen(
+        textVisible = showText,
+        logoVisible = showLogo,
+    )
 }
 
 @Composable
 internal fun SplashScreen(
+    textVisible: Boolean,
+    logoVisible: Boolean,
     modifier: Modifier = Modifier
 ) {
-    Box(
+    Column(
         modifier = modifier.fillMaxSize().background(
             color = HandsUpOrange
         ),
-        contentAlignment = Alignment.TopCenter,
+        horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Column(
+        Spacer(modifier = modifier.fillMaxHeight(0.38f))
+        Column (
+            modifier = modifier.height(90.dp),
             horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
         ) {
-            Spacer(modifier = modifier.fillMaxHeight(0.38f))
-            Icon(
-                modifier = modifier.size(width = 200.dp, height = 30.dp),
-                imageVector = Icons.HandsUpLogo,
-                contentDescription = null,
-                tint = White,
-            )
-            Spacer(modifier = modifier.height(Dimens.margin20))
-            Text(
-                text = stringResource(R.string.app_desc),
-                style = HandsUpTypography.title5.copy(
-                    fontWeight = FontWeight.SemiBold
+            AnimatedVisibility(
+                visible = logoVisible,
+                enter = fadeIn() + expandIn(
+                    expandFrom = Alignment.TopCenter,
+                    clip = false,
                 ),
-                color = White,
-            )
+                exit = fadeOut(animationSpec = tween(durationMillis = 1000))
+            ) {
+                Icon(
+                    modifier = modifier.size(
+                        width = 200.dp,
+                        height = 30.dp
+                    ),
+                    imageVector = Icons.HandsUpLogo,
+                    contentDescription = null,
+                    tint = White,
+                )
+            }
+
+            AnimatedVisibility(
+                visible = textVisible,
+                enter = fadeIn(animationSpec = tween(durationMillis = 500)),
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Text(
+                        text = stringResource(R.string.app_desc1),
+                        style = HandsUpTypography.title5.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 32.sp,
+                        ),
+                        color = White,
+                    )
+                    Text(
+                        text = stringResource(R.string.app_desc2),
+                        style = HandsUpTypography.title5.copy(
+                            fontWeight = FontWeight.ExtraBold,
+                            fontSize = 32.sp,
+                        ),
+                        color = White,
+                    )
+                }
+            }
         }
     }
 }
@@ -84,5 +136,13 @@ internal fun SplashScreen(
 @Preview(name = "SplashScreen")
 @Composable
 private fun PreviewSplashScreen() {
-    SplashScreen()
+    var textShow by remember { mutableStateOf(true) }
+    LaunchedEffect(textShow) {
+        delay(1000L)
+        textShow = false
+    }
+    SplashScreen(
+        textShow,
+        !textShow,
+    )
 }

@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_desc">멈추지 않는 도전, 가슴 뛰는 미션</string>
+    <string name="app_desc1">멈추지 않는 도전,</string>
+    <string name="app_desc2">가슴 뛰는 미션</string>
 </resources>
