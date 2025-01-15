@@ -49,7 +49,10 @@ internal fun HomeRoute(
     val userState by viewModel.userState.collectAsStateWithLifecycle()
     val expState by viewModel.expState.collectAsStateWithLifecycle()
     val context = LocalContext.current
-    CheckPermission(context)
+    CheckPermission(
+        context = context,
+        onPermissionResult = viewModel::updateNotificationState,
+    )
     HomeScreen(
         backResId = viewModel.jobFamily.getBackResId(),
         userDetailsState = userState,

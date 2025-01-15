@@ -9,10 +9,19 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.core.content.ContextCompat
 
 @Composable
-internal fun CheckPermission(context: Context) {
+internal fun CheckPermission(
+    context: Context,
+    onPermissionResult: suspend (Boolean) -> Unit,
+) {
+    var permissionResult by remember { mutableStateOf<Boolean?>(null) }
+
     val permissionsLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
@@ -26,6 +35,7 @@ internal fun CheckPermission(context: Context) {
             Toast.makeText(context, "푸시알림 권한을 허용해주세요.", Toast.LENGTH_SHORT).show()
             Log.d("[NOTIFICATION_PERMISSION]", "Permission Denied")
         }
+        permissionResult = isGranted
     }
 
     val hasNotificationPermission = ContextCompat.checkSelfPermission(
@@ -35,6 +45,11 @@ internal fun CheckPermission(context: Context) {
     LaunchedEffect(hasNotificationPermission) {
         if(!hasNotificationPermission) {
             permissionsLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
+    }
+    LaunchedEffect(permissionResult) {
+        permissionResult?.let { isGranted ->
+            onPermissionResult(isGranted)
         }
     }
 }
