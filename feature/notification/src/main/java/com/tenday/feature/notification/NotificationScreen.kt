@@ -21,6 +21,8 @@ internal fun NotificationRoute(
     onNavigateBack: () -> Unit,
     viewModel: NotificationViewModel = hiltViewModel()
 ) {
+    StatusBarStyle(false)
+
     val notifyUiState by viewModel.notifyUiState.collectAsStateWithLifecycle()
     NotificationScreen(
         uiState = notifyUiState,
@@ -34,7 +36,6 @@ internal fun NotificationScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    StatusBarStyle(true)
     Column(
         modifier = modifier.fillMaxSize().background(color = White)
     ) {
