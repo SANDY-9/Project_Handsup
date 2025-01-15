@@ -35,6 +35,7 @@ import com.tenday.designsystem.icons.HandsUpLogo
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
+import com.tenday.designsystem.utils.StatusBarStyle
 import kotlinx.coroutines.delay
 
 @Composable
@@ -46,7 +47,7 @@ internal fun SplashRoute(
     BackHandler(enabled = true) {
         onFinish()
     }
-
+    StatusBarStyle(true)
     var showText by remember { mutableStateOf(false) }
     var showLogo by remember { mutableStateOf(false) }
     LaunchedEffect(Unit) {
