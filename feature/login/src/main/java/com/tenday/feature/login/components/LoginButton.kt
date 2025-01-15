@@ -9,17 +9,19 @@ import com.tenday.feature.login.R
 @Composable
 internal fun LoginButton(
     enabled: Boolean,
+    loading: Boolean,
     onLogin: () -> Unit,
 ) {
     HandsUpButton(
         text = stringResource(R.string.login_title),
         enabled = enabled,
-        onClick = onLogin
+        loading = loading,
+        onClick = onLogin,
     )
 }
 
 @Preview(name = "LoginButton")
 @Composable
 private fun PreviewLoginButton() {
-    LoginButton(true, {})
+    LoginButton(true, true, {})
 }

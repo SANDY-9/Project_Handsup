@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -19,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -33,6 +36,7 @@ import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTheme
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.TransparentWhite80
 import com.tenday.designsystem.theme.White
 
 @Composable
@@ -43,6 +47,7 @@ fun HandsUpButton(
     modifier: Modifier = Modifier,
     btnColor: Color = HandsUpOrange,
     textColor: Color = White,
+    loading: Boolean = false,
 ) {
     Button(
         modifier = modifier
@@ -59,11 +64,20 @@ fun HandsUpButton(
         enabled = enabled,
         onClick = onClick,
     ) {
-        Text(
-            text = text,
-            style = HandsUpTypography.title5,
-            color = textColor,
-        )
+        when {
+            loading -> CircularProgressIndicator(
+                modifier = modifier.size(24.dp),
+                color = TransparentWhite80,
+                strokeWidth = (3.5).dp,
+                strokeCap = StrokeCap.Round,
+            )
+
+            else -> Text(
+                text = text,
+                style = HandsUpTypography.title5,
+                color = textColor,
+            )
+        }
     }
 }
 
@@ -148,9 +162,11 @@ private fun Preview() {
     var selected by remember { mutableStateOf(true) }
     HandsUpTheme {
         Column(
-            modifier = Modifier.background(
-                color = Gray100
-            ).padding(10.dp)
+            modifier = Modifier
+                .background(
+                    color = Gray100
+                )
+                .padding(10.dp)
         ) {
             HandsUpButton(
                 text = "로그인",
