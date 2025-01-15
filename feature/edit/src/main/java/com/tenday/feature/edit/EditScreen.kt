@@ -1,5 +1,6 @@
 package com.tenday.feature.edit
 
+import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
@@ -12,6 +13,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -49,6 +51,15 @@ internal fun EditRoute(
     val editInputState by viewModel.inputState.collectAsStateWithLifecycle()
     val editUiState by viewModel.editUiState.collectAsStateWithLifecycle()
     val user by viewModel.user.collectAsStateWithLifecycle()
+    val logout by viewModel.logout.collectAsStateWithLifecycle()
+
+    val context = LocalContext.current
+    LaunchedEffect(logout) {
+        if(logout) {
+            onLogout()
+            Toast.makeText(context, "로그아웃 했습니다.", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     EditScreen(
         user = user,
@@ -56,7 +67,7 @@ internal fun EditRoute(
         enableNoti = enableNoti,
         editUiState = editUiState,
         onNavigateBack = onNavigateBack,
-        onLogout = onLogout,
+        onLogout = viewModel::handleLogout,
         onPwdInputChange = viewModel::updatePwdInputState,
         onPwdConfirmInputChange = viewModel::updatePwdConfirmInputState,
         onEnableNotiChange = viewModel::updateNotiChange,

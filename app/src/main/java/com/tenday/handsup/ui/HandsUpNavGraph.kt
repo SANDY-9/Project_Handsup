@@ -53,7 +53,7 @@ fun HandsUpNavGraph(
 
         homeScreen(
             onNavigateNoti = navController::navigateToNotification,
-            onNavigateEdit = navController::navigateToEdit
+            onNavigateEdit = navController::navigateToEdit,
         )
 
         missionScreen()
@@ -74,9 +74,15 @@ fun HandsUpNavGraph(
             onNavigateBack = navController::popBackStack,
         )
 
+        val logoutNavOptions = navOptionBuilder.setPopUpTo<LoginRoute>(
+            inclusive = true
+        ).setLaunchSingleTop(true).build()
         editScreen(
             navController = navController,
             onNavigateBack = navController::popBackStack,
+            onLogout = {
+                navController.navigateToLogin(logoutNavOptions)
+            }
         )
     }
 }

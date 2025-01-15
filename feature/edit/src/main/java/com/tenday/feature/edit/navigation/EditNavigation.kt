@@ -23,6 +23,7 @@ fun NavController.navigateToEdit(
 fun NavGraphBuilder.editScreen(
     navController: NavController,
     onNavigateBack: () -> Unit,
+    onLogout: () -> Unit,
 ) {
     composable<EditRoute> {
         val user = navController.previousBackStackEntry
@@ -32,7 +33,7 @@ fun NavGraphBuilder.editScreen(
         EditRoute(
             userDetails = user,
             onNavigateBack = onNavigateBack,
-            onLogout = {},
+            onLogout = onLogout,
         )
     }
 }

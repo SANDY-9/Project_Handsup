@@ -120,4 +120,14 @@ internal class EditViewModel @Inject constructor(
         _editUiState.value = EditUiState.None
     }
 
+    val logout: StateFlow<Boolean> = savedStateHandle.getStateFlow(LOG_OUT, false)
+    fun handleLogout() {
+        viewModelScope.launch {
+            appPrefsRepository.deleteAccessToken()
+            savedStateHandle[LOG_OUT] = true
+        }
+    }
+
 }
+
+private const val LOG_OUT = "logout"
