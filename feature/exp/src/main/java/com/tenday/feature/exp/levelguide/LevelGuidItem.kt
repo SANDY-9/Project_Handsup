@@ -15,6 +15,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.HandsUpLevel
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.extentions.toData
+import com.tenday.core.resources.resources
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.theme.Gray900
 import com.tenday.designsystem.theme.HandsUpBlue
 import com.tenday.designsystem.theme.HandsUpBlueSub
@@ -66,7 +67,7 @@ internal fun LevelGuidItem(
             ) {
                 Image(
                     modifier = modifier.size(32.dp),
-                    painter = svgImageLoader(level.resPath),
+                    painter = painterResource(level.resources()),
                     contentDescription = null,
                 )
                 Spacer(modifier = modifier.width(Dimens.margin4))
