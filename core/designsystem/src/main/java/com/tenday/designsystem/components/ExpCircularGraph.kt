@@ -53,14 +53,16 @@ fun ExpCircularGraph(
             easing = LinearOutSlowInEasing
         )
     )
-    val percent = remember { (animatedProgress * 100).roundToInt() }
+    val percent = (animatedProgress * 100).roundToInt()
+
     Box(
         modifier = modifier.size(140.dp), // 전체 원의 크기 (반경 = 70dp 기준)
         contentAlignment = Alignment.Center
     ) {
         // 바깥쪽 반원
         Canvas(
-            modifier = modifier.fillMaxSize()
+            modifier = modifier
+                .fillMaxSize()
                 .innerShadow(
                     shape = CircleShape,
                     offsetY = 4.dp,

@@ -130,8 +130,8 @@ internal fun MyExpScreen(
                         }
                     )
                     MyExpLastYearCard(
-                        currentLevel = data.currentLevel,
-                        previousLevel = "F1-III",
+                        currentLevel = data.currentNextLevel,
+                        previousLevel = data.currentLevel,
                         lastYearExp = data.lastYearExp,
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
                         modifier = modifier.pointerInput(Unit) {
