@@ -21,6 +21,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.tenday.core.common.extentions.toData
 import com.tenday.designsystem.components.ExpCircularGraph
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
@@ -82,7 +83,7 @@ private fun ThisYearExpCard(
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = "$exp",
+                text = exp.toData(),
                 style = HandsUpTypography.title4.copy(
                     fontWeight = FontWeight.ExtraBold,
                 )
