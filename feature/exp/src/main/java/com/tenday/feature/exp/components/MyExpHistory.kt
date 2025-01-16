@@ -1,10 +1,5 @@
 package com.tenday.feature.exp.components
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.slideInVertically
-import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -74,6 +70,7 @@ internal fun MyExpHistory(
                     MyExpHistoryHeader(
                         year = selectYear,
                         category = selectCategory,
+                        visibleDropDown = visibleDropDown,
                         onShowYearBottomSheet = onShowYearBottomSheet,
                         onShowCategoryDropdown = onShowCategoryDropdown,
                     )
@@ -103,6 +100,7 @@ internal fun MyExpHistory(
 private fun MyExpHistoryHeader(
     year: Int,
     category: ExpCategory,
+    visibleDropDown: Boolean,
     onShowYearBottomSheet: () -> Unit,
     onShowCategoryDropdown: () -> Unit,
     modifier: Modifier = Modifier,
@@ -125,7 +123,9 @@ private fun MyExpHistoryHeader(
             )
             Spacer(modifier = modifier.width(Dimens.margin4))
             Icon(
-                modifier = modifier.size(16.dp),
+                modifier = modifier.size(16.dp).rotate(
+                    degrees = if(visibleDropDown) 180f else 360f
+                ),
                 imageVector = Icons.ArrowBottom,
                 contentDescription = null,
                 tint = Gray900
