@@ -19,6 +19,7 @@ import com.tenday.core.common.enums.HandsUpLevel
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
+import com.tenday.designsystem.utils.StatusBarStyle
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -27,6 +28,7 @@ internal fun LevelGuideScreen(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    StatusBarStyle(false)
     BackHandler(enabled = true) {
         onClose()
     }

@@ -28,6 +28,7 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.extentions.svgPath
 import com.tenday.designsystem.icons.Info
@@ -41,6 +42,7 @@ internal fun MyExpProfile(
     user: UserDetails,
     currentTotalExp: Int,
     requireExp: Int,
+    onLevelGuideClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column (
@@ -69,7 +71,9 @@ internal fun MyExpProfile(
             )
             Spacer(modifier = modifier.width(Dimens.margin4))
             Icon(
-                modifier = modifier.size(16.dp),
+                modifier = modifier.size(16.dp).noRippleClickable(
+                    onClick = onLevelGuideClick
+                ),
                 imageVector = Icons.Info,
                 contentDescription = null,
                 tint = White,
@@ -137,6 +141,9 @@ private fun PreviewMyExpProfile() {
             profileImageCode = ProfileCode.F_A,
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
-        ), 13000, 27000
+        ),
+        13000,
+        27000,
+        {}
     )
 }
