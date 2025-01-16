@@ -47,7 +47,7 @@ internal fun QuestExp.toMissionExp(): MissionExp {
         index = index,
         month = month,
         startDate = range.firstOrNull(),
-        endDate = range.firstOrNull()
+        endDate = range.lastOrNull(),
     )
 }
 
