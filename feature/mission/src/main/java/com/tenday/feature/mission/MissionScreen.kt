@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -22,6 +23,7 @@ import com.tenday.designsystem.components.HandsUpFailView
 import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.utils.StatusBarStyle
+import com.tenday.feature.mission.MissionMenu.Companion.toMissionMenu
 import com.tenday.feature.mission.components.MissionTitleBar
 import com.tenday.feature.mission.components.MissionToolTip
 import com.tenday.feature.mission.components.job.MissionJobView
@@ -33,8 +35,12 @@ import com.tenday.feature.mission.model.MissionUiState
 
 @Composable
 internal fun MissionRoute(
+    expType: String,
     viewModel: MissionViewModel = hiltViewModel()
 ) {
+    LaunchedEffect(expType) {
+        viewModel.updateCurrentTabState(expType.toMissionMenu())
+    }
 
     val currentTab by viewModel.currentTab.collectAsStateWithLifecycle()
     val uiState by viewModel.missionUiState.collectAsStateWithLifecycle()

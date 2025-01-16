@@ -27,7 +27,7 @@ internal class MissionViewModel @Inject constructor(
     private val getPersonnelMissionUseCase: GetPersonnelMissionUseCase,
 ): ViewModel() {
 
-    private val _currentTab: MutableStateFlow<MissionMenu> = MutableStateFlow(MissionMenu.리더부여)
+    private val _currentTab: MutableStateFlow<MissionMenu> = MutableStateFlow(MissionMenu.NULL)
     val currentTab = _currentTab.asStateFlow()
 
     private val _missionUiState: MutableStateFlow<MissionUiState> = MutableStateFlow(MissionUiState.Loading)
@@ -46,6 +46,7 @@ internal class MissionViewModel @Inject constructor(
                     MissionMenu.직무미션 -> fetchJobMission()
                     MissionMenu.전사프로젝트 -> fetchProjectMission()
                     MissionMenu.인사평가 -> fetchPersonnelMission()
+                    else -> Unit
                 }
             }
         }
