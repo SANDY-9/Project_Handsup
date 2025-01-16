@@ -17,7 +17,7 @@ data class UserDetails(
     val jobPosition: JobPosition,
     val jobLevel: String,
     val profileBadgeCode: BadgeCode,
-    val possibleBadgeCodeList: List<BadgeCode>,
+    val possibleBadgeCodeList: List<Badge>,
     val profileImageCode: ProfileCode,
     val totalExpLastYear: Int,
     val username: String

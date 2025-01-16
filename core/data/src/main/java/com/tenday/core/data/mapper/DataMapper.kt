@@ -5,6 +5,7 @@ import com.tenday.core.common.enums.ExpType
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
+import com.tenday.core.model.Badge
 import com.tenday.core.model.BoardDetails
 import com.tenday.core.model.Exp
 import com.tenday.core.model.ExpDetails
@@ -12,6 +13,7 @@ import com.tenday.core.model.NotificationDetails
 import com.tenday.core.model.UserDetails
 import com.tenday.network.model.ExpData
 import com.tenday.network.model.ExpResponse
+import com.tenday.network.model.PossibleBadgeCode
 import com.tenday.network.model.UserResponse
 
 internal fun String.toDate(): String {
@@ -52,11 +54,18 @@ internal fun UserResponse.toUserDetails(): UserDetails {
         jobPosition = JobPosition.getPosition(jobPosition),
         jobGroup = jobGroup,
         jobLevel = jobLevel,
-        possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadgeCode() },
+        possibleBadgeCodeList = possibleBadgeCodeList.map { it.toBadge() },
         profileBadgeCode = profileBadgeCode.toBadgeCode(),
         profileImageCode = ProfileCode.valueOf(profileImageCode),
         totalExpLastYear = totalExpLastYear,
         username = username,
+    )
+}
+
+private fun PossibleBadgeCode.toBadge(): Badge {
+    return Badge(
+        badgeCode = badgeCode.toBadgeCode(),
+        createdAt = createdAt.toDate()
     )
 }
 
