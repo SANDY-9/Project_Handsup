@@ -10,6 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.model.BoardDetails
+import com.tenday.designsystem.components.HandsUpFailView
+import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.board.components.BoardContentView
@@ -50,7 +52,8 @@ internal fun BoardScreen(
                 boardItems = boardUiState.data,
                 onCardClick = onCardClick
             )
-            else -> {}
+            BoardUiState.Loading -> HandsUpLoadingView()
+            BoardUiState.Fail -> HandsUpFailView()
         }
     }
 }
