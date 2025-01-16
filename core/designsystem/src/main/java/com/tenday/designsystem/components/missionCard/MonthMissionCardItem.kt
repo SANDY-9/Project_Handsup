@@ -32,19 +32,15 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
 @Composable
-internal fun WeeklyMissionCheckItem(
+internal fun MonthMissionCheckItem(
     list: List<Int>,
-    startDateList: List<String>,
-    endDateList: List<String>,
     achieveGradeList: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
     Row {
         repeat(5) { num ->
-            MissionCheckItem(
+            MonthMissionCheckItem(
                 date = list.getOrNull(num),
-                startDate = startDateList.getOrNull(num),
-                endDate = endDateList.getOrNull(num),
                 achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.NULL
             )
             val isNullLastItem = list.size < 5 && num >= list.size - 1
@@ -62,10 +58,8 @@ internal fun WeeklyMissionCheckItem(
 }
 
 @Composable
-fun MissionCheckItem(
+private fun MonthMissionCheckItem(
     date: Int?,
-    startDate: String?,
-    endDate: String?,
     achieveGrade: AchieveGrade,
     modifier: Modifier = Modifier,
 ) {
@@ -118,22 +112,12 @@ fun MissionCheckItem(
                 }
             }
             Spacer(modifier = modifier.height(Dimens.margin6))
-            Column {
-                Text(
-                    modifier = modifier.align(Alignment.Start),
-                    text = startDate?.let { "$it~" } ?: "",
-                    style = HandsUpTypography.body4.copy(
-                        color = Gray500,
-                    ),
-                )
-                Text(
-                    modifier = modifier.align(Alignment.Start),
-                    text = endDate ?: "",
-                    style = HandsUpTypography.body4.copy(
-                        color = Gray500,
-                    ),
-                )
-            }
+            Text(
+                text = date?.let { "${it}월" } ?: "",
+                style = HandsUpTypography.body4.copy(
+                    color = Gray500,
+                ),
+            )
         }
     }
 }
@@ -141,16 +125,10 @@ fun MissionCheckItem(
 @Preview(name = "MissionCardItem")
 @Composable
 private fun PreviewMissionCardItem() {
-    WeeklyMissionCheckItem(
+    MonthMissionCheckItem(
         listOf(1, 2, 3, 4),
         listOf(
-            "01.02", "01.02", "01.02", "99.99"
-        ),
-        listOf(
-            "01.05", "01.05", "01.05", "02.08"
-        ),
-        listOf(
             AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX,
-        )
+        ),
     )
 }
