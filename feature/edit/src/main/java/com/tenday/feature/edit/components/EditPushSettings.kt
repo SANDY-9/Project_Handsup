@@ -90,7 +90,7 @@ internal fun EditPushSettings(
                         .padding(
                             horizontal = Dimens.margin20,
                         )
-                        .height(52.dp)
+                        .height(56.dp)
                     ,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
