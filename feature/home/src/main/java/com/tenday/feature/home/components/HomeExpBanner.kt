@@ -27,6 +27,7 @@ import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.ArrowCircle
 import com.tenday.designsystem.icons.Dodoong
+import com.tenday.designsystem.theme.CardShadowRegular
 import com.tenday.designsystem.theme.HandsUpOrange
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.feature.home.R
@@ -38,6 +39,7 @@ internal fun HomeExpBanner(
 ) {
     HandsUpShadowCard(
         cornerSize = Dimens.cornerShape8,
+        shadowColor = CardShadowRegular,
         content = {
             Column(
                 modifier = modifier
