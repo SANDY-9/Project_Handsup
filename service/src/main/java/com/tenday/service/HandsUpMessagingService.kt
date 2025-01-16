@@ -66,7 +66,7 @@ class HandsUpMessagingService: FirebaseMessagingService() {
             .Builder(applicationContext, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(body)
-            .setSmallIcon(com.tenday.designsystem.R.drawable.test)
+            .setSmallIcon(com.tenday.designsystem.R.drawable.app_icon)
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
