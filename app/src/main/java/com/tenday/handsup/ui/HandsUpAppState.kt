@@ -46,7 +46,7 @@ class HandsUpAppState(
         val navOption = NavOptions.Builder().build()
         when(destination) {
             BottomNavDestination.HOME -> navController.navigateToHome(navOption)
-            BottomNavDestination.MISSION -> navController.navigateToMission(navOption)
+            BottomNavDestination.MISSION -> navController.navigateToMission(navOptions = navOption)
             BottomNavDestination.EXP -> navController.navigateToExp(navOption)
             BottomNavDestination.BOARD -> navController.navigateToBoard(navOption)
         }
