@@ -7,15 +7,15 @@ import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
 import com.tenday.core.model.Exp
 import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
-import com.tenday.feature.exp.model.MyExpState
+import com.tenday.feature.exp.model.MyExpUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.shareIn
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -25,13 +25,8 @@ internal class MyExpViewModel @Inject constructor(
     getUserDetailsUseCase: GetUserDetailsUseCase,
 ): ViewModel() {
 
-    private val _myExpState: MutableStateFlow<MyExpState> = MutableStateFlow(MyExpState.Loading)
-    val myExpState = _myExpState.asStateFlow()
-
-    val userDetails = getUserDetailsUseCase().shareIn(
-        scope = viewModelScope,
-        started = SharingStarted.Eagerly,
-    )
+    private val _myExpUiState: MutableStateFlow<MyExpUiState> = MutableStateFlow(MyExpUiState.Loading)
+    val myExpUiState = _myExpUiState.asStateFlow()
 
     private val _expListState: MutableStateFlow<ExpListState> = MutableStateFlow(
         ExpListState(
@@ -47,21 +42,31 @@ internal class MyExpViewModel @Inject constructor(
     val expListState = _expListState.asStateFlow()
 
     init {
-        getExpDetailsUseCase()
-            .onEach { data ->
-                _myExpState.update { MyExpState.Success(data) }
-                _expListState.update {
-                    val expData = data.expList
-                    it.copy(
-                        originData = expData,
-                        data = expData.filterYearAndCategory(it.selectYear, it.selectCategory),
-                        yearCategories = expData.keys.toList().sorted()
-                    )
-                }
-            }.catch {
-                _myExpState.value = MyExpState.Fail
-            }.launchIn(viewModelScope)
+        combine(
+            getExpDetailsUseCase(),
+            getUserDetailsUseCase(),
+        ) {  expDetails, userDetails ->
+            MyExpUiState.Success(
+                expDetails = expDetails,
+                userDetails = userDetails
+            )
+        }.onStart {
+            _myExpUiState.value = MyExpUiState.Loading
+        }.onEach { data ->
+            _myExpUiState.value = data
+            _expListState.update {
+                val expData = data.expDetails.expList
+                it.copy(
+                    originData = expData,
+                    data = expData.filterYearAndCategory(it.selectYear, it.selectCategory),
+                    yearCategories = expData.keys.toList().sorted()
+                )
+            }
+        }.catch {
+            _myExpUiState.value = MyExpUiState.Fail
+        }.launchIn(viewModelScope)
     }
+
 
     internal fun updateBottomSheetVisible() {
         val state = expListState.value
