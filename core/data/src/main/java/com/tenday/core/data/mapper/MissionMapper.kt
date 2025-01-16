@@ -75,7 +75,7 @@ internal fun List<ProjectResponse>.toProjectMission(): List<ProjectMission> {
             content = it.content,
             exp = it.exp,
             expAt = it.expAt.toDate(),
-            period = MissionPeriod.getPeriod(it.period),
+            period = it.period,
             missionName = it.questName,
         )
     }

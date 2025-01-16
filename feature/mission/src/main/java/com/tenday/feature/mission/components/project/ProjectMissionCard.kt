@@ -21,7 +21,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.ProjectMission
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
@@ -47,7 +46,7 @@ internal fun ProjectMissionCard(
                 modifier = modifier.padding(Dimens.margin20),
             ) {
                 Text(
-                    text = data.expAt,
+                    text = data.period,
                     style = HandsUpTypography.body4.copy(
                         fontWeight = FontWeight.SemiBold,
                         color = HandsUpOrange,
@@ -129,7 +128,7 @@ private fun PreviewProjectMissionCard() {
                         "정책 개선 및 운영 비용 절감 프로젝트",
                 exp = 2440,
                 expAt = "2025.01.11",
-                period = MissionPeriod.WEEK,
+                period = "01.05-01.08",
                 missionName = "환불 프로세스 최적화"
             )
         )

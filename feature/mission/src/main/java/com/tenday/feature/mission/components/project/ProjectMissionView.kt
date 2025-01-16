@@ -11,7 +11,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.ProjectMission
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.mission.MissionMenu
@@ -56,7 +55,7 @@ private fun PreviewMissionProjectView() {
                         "정책 개선 및 운영 비용 절감 프로젝트",
                 exp = 2440,
                 expAt = "2025.01.11",
-                period = MissionPeriod.WEEK,
+                period = "01.05-01.08",
                 missionName = "환불 프로세스 최적화"
             ),
             ProjectMission(
@@ -64,7 +63,7 @@ private fun PreviewMissionProjectView() {
                         "정책 개선 및 운영 비용 절감 프로젝트",
                 exp = 2440,
                 expAt = "2025.01.11",
-                period = MissionPeriod.WEEK,
+                period = "01.05-01.08",
                 missionName = "환불 프로세스 최적화"
             ),
             ProjectMission(
@@ -72,7 +71,7 @@ private fun PreviewMissionProjectView() {
                         "정책 개선 및 운영 비용 절감 프로젝트",
                 exp = 2440,
                 expAt = "2025.01.11",
-                period = MissionPeriod.WEEK,
+                period = "01.05-01.08",
                 missionName = "환불 프로세스 최적화"
             ),
         ),
