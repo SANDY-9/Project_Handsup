@@ -31,6 +31,8 @@ import com.tenday.core.model.Exp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
+import com.tenday.designsystem.theme.CardShadow
+import com.tenday.designsystem.theme.CardShadowRegular
 import com.tenday.designsystem.theme.Gray500
 import com.tenday.designsystem.theme.Gray600
 import com.tenday.designsystem.theme.HandsUpOrange
@@ -68,6 +70,7 @@ private fun ExpHistoryItem(
 ) {
     HandsUpShadowCard(
         cornerSize = Dimens.cornerShape8,
+        shadowColor = CardShadowRegular,
         content = {
             Column(
                 modifier = modifier.width(114.dp).clip(
