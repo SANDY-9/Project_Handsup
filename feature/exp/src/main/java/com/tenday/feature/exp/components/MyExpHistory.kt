@@ -192,7 +192,7 @@ private fun MyExpHistoryItem(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(
-                    vertical = Dimens.margin12
+                    vertical = Dimens.margin14,
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
