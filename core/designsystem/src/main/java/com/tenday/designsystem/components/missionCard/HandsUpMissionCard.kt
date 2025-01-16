@@ -130,6 +130,7 @@ private fun Preview() {
                 AchieveGrade.MAX,
             )
         )
+        Spacer(modifier = Modifier.height(16.dp))
         HandsUpWeeklyMissionCard(
             month = 3,
             listOf(
