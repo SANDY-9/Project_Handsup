@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.domain.repository.AuthPrefsRepository
+import com.tenday.core.domain.usecases.auth.RequestLogoutUseCase
 import com.tenday.core.domain.usecases.user.UpdateProfileBadgeUseCase
 import com.tenday.core.domain.usecases.user.UpdateProfileImageUseCase
 import com.tenday.core.domain.usecases.user.UpdateUserPwdUseCase
@@ -34,6 +35,7 @@ internal class EditViewModel @Inject constructor(
     private val updateProfileBadgeUseCase: UpdateProfileBadgeUseCase,
     private val updateProfileImageUseCase: UpdateProfileImageUseCase,
     private val appPrefsRepository: AuthPrefsRepository,
+    private val requestLogoutUseCase: RequestLogoutUseCase,
     private val savedStateHandle: SavedStateHandle,
 ): ViewModel() {
 
@@ -125,7 +127,12 @@ internal class EditViewModel @Inject constructor(
     val logout: StateFlow<Boolean> = savedStateHandle.getStateFlow(LOG_OUT, false)
     fun handleLogout() {
         viewModelScope.launch {
-            appPrefsRepository.deleteAccessToken()
+            try {
+                requestLogoutUseCase()
+            } catch (e: Exception) {
+                _editUiState.value = EditUiState.Fail
+            }
+        }.invokeOnCompletion {
             savedStateHandle[LOG_OUT] = true
         }
     }

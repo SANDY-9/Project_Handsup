@@ -25,4 +25,5 @@ interface HandsUpDataSource {
     suspend fun updateUserPwd(accessToken: String, pwd: String): Boolean
     suspend fun updateUserProfileBadge(accessToken: String, code: String): Boolean
     suspend fun updateUserProfileImage(accessToken: String, code: String): Boolean
+    suspend fun logout(accessToken: String)
 }

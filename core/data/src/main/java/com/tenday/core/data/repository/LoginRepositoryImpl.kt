@@ -10,4 +10,8 @@ internal class LoginRepositoryImpl @Inject constructor(
     override suspend fun requestLogin(id: String, pwd: String): String {
         return handsUpDataSource.login(id, pwd)
     }
+
+    override suspend fun requestLogout(token: String) {
+        handsUpDataSource.logout(token)
+    }
 }

@@ -90,4 +90,8 @@ internal class HandsUpService @Inject constructor(
         val requestBody = UserRequestBody(profileImageCode = code)
         return api.updateProfileImage(requestBody, accessToken.toHeader()).isSuccess
     }
+
+    override suspend fun logout(accessToken: String) {
+        api.logout(token = accessToken.toHeader())
+    }
 }
