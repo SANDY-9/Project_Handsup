@@ -43,12 +43,15 @@ import com.tenday.feature.exp.lovelguide.LevelGuideActivity
 @Composable
 internal fun MyExpProfile(
     user: UserDetails,
+    currentLevel: String,
     currentTotalExp: Int,
     requireExp: Int,
     modifier: Modifier = Modifier
 ) {
     val context = LocalContext.current
-    val intent = Intent(context, LevelGuideActivity::class.java)
+    val intent = Intent(context, LevelGuideActivity::class.java).apply {
+        putExtra(LevelGuideActivity.LEVEL, currentLevel)
+    }
     Column (
         modifier = modifier
             .fillMaxWidth()
@@ -146,6 +149,7 @@ private fun PreviewMyExpProfile() {
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
         ),
+        "B1",
         13000,
         27000,
     )

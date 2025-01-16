@@ -100,6 +100,7 @@ internal fun MyExpScreen(
         item {
             MyExpProfile(
                 user = user,
+                currentLevel = exp.currentLevel,
                 currentTotalExp = exp.totalExp,
                 requireExp = exp.expToNextLevel,
             )
