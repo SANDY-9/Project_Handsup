@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -34,45 +33,46 @@ import com.tenday.designsystem.theme.Gray500
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
-@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun MonthlyMissionItem(
     month: List<Int>,
     grade: List<AchieveGrade?>,
     modifier: Modifier = Modifier
 ) {
-    Row(
-        modifier = modifier.fillMaxWidth(),
-    ) {
-        repeat(4) { index ->
-            val index = month.getOrNull(index + 1)
-            HorizontalDivider(
-                modifier = modifier.weight(1f).padding(top = Dimens.margin16),
-                color = index?.let { Gray100 } ?: Color.Transparent,
-                thickness = 4.dp,
-            )
+    Box {
+        Row(
+            modifier = modifier.fillMaxWidth(),
+        ) {
+            repeat(4) { index ->
+                val index = month.getOrNull(index + 1)
+                HorizontalDivider(
+                    modifier = modifier.weight(1f).padding(top = Dimens.margin16),
+                    color = index?.let { Gray100 } ?: Color.Transparent,
+                    thickness = 4.dp,
+                )
+            }
         }
-    }
-    Row(
-        modifier = modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween,
-    ) {
-        repeat(5) { index ->
-            val gradeItem = grade.getOrNull(index)
-            val monthItem = month.getOrNull(index)
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                MissionGradeItem(
-                    index = monthItem,
-                    achieveGrade = gradeItem ?: AchieveGrade.NULL
-                )
-                Spacer(modifier = modifier.height(Dimens.margin6))
-                Text(
-                    text = monthItem?.let { "${it}월" } ?: "",
-                    style = HandsUpTypography.body3,
-                    color = Gray500,
-                )
+        Row(
+            modifier = modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            repeat(5) { index ->
+                val gradeItem = grade.getOrNull(index)
+                val monthItem = month.getOrNull(index)
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    MissionGradeItem(
+                        index = monthItem,
+                        achieveGrade = gradeItem ?: AchieveGrade.NULL
+                    )
+                    Spacer(modifier = modifier.height(Dimens.margin6))
+                    Text(
+                        text = monthItem?.let { "${it}월" } ?: "",
+                        style = HandsUpTypography.body3,
+                        color = Gray500,
+                    )
+                }
             }
         }
     }
