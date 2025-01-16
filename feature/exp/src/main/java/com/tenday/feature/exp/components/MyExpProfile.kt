@@ -1,5 +1,6 @@
 package com.tenday.feature.exp.components
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -28,6 +30,7 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.UserDetails
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.extentions.svgPath
 import com.tenday.designsystem.icons.Info
@@ -35,14 +38,20 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.LinearGradientNavy
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.exp.R
+import com.tenday.feature.exp.lovelguide.LevelGuideActivity
 
 @Composable
 internal fun MyExpProfile(
     user: UserDetails,
+    currentLevel: String,
     currentTotalExp: Int,
     requireExp: Int,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val intent = Intent(context, LevelGuideActivity::class.java).apply {
+        putExtra(LevelGuideActivity.LEVEL, currentLevel)
+    }
     Column (
         modifier = modifier
             .fillMaxWidth()
@@ -69,7 +78,9 @@ internal fun MyExpProfile(
             )
             Spacer(modifier = modifier.width(Dimens.margin4))
             Icon(
-                modifier = modifier.size(16.dp),
+                modifier = modifier.size(16.dp).noRippleClickable(
+                    onClick = { context.startActivity(intent) }
+                ),
                 imageVector = Icons.Info,
                 contentDescription = null,
                 tint = White,
@@ -137,6 +148,9 @@ private fun PreviewMyExpProfile() {
             profileImageCode = ProfileCode.F_A,
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
-        ), 13000, 27000
+        ),
+        "B1",
+        13000,
+        27000,
     )
 }

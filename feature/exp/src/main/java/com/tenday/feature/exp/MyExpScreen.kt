@@ -89,6 +89,7 @@ internal fun MyExpScreen(
 
     val listState = rememberLazyListState()
     var visibleDropDown by remember { mutableStateOf(false) }
+
     LazyColumn(
         modifier = modifier
             .fillMaxSize()
@@ -99,6 +100,7 @@ internal fun MyExpScreen(
         item {
             MyExpProfile(
                 user = user,
+                currentLevel = exp.currentLevel,
                 currentTotalExp = exp.totalExp,
                 requireExp = exp.expToNextLevel,
             )

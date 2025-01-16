@@ -10,5 +10,6 @@ internal fun JobFamily.getBackResId(): Int {
         JobFamily.B -> R.drawable.profile_background_manage
         JobFamily.G -> R.drawable.profile_background_cx
         JobFamily.T -> R.drawable.profile_background_tech
+        JobFamily.NULL -> 0
     }
 }

@@ -1,4 +1,4 @@
-package com.tenday.feature.edit.guide
+package com.tenday.feature.exp.lovelguide
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -31,21 +30,20 @@ import com.tenday.designsystem.icons.Cancel
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
-import com.tenday.feature.edit.R
+import com.tenday.feature.exp.R
 
 @Composable
-internal fun BadgeGuideTitleBar(
+internal fun LevelGuideTitleBar(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Column(
         modifier = modifier.background(White)
     ) {
-        Spacer(modifier = modifier.systemBarsPadding())
         HandsUpTitleTopBar(
             content = {
                 Text(
-                    text = stringResource(R.string.edit_badge_guide_title),
+                    text = stringResource(R.string.exp_level_guide),
                     style = HandsUpTypography.title4,
                 )
                 Icon(
@@ -71,7 +69,7 @@ internal fun BadgeGuideTitleBar(
                         shape = RoundedCornerShape(Dimens.cornerShape8),
                     )
                     .padding(Dimens.margin6),
-                text = stringResource(R.string.edit_badge_guide_level),
+                text = stringResource(R.string.exp_level_colum),
                 style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
@@ -86,7 +84,7 @@ internal fun BadgeGuideTitleBar(
                         shape = RoundedCornerShape(Dimens.cornerShape8),
                     )
                     .padding(Dimens.margin6),
-                text = stringResource(R.string.edit_badge_guide_condition),
+                text = stringResource(R.string.exp_level_guide),
                 style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
@@ -100,7 +98,7 @@ internal fun BadgeGuideTitleBar(
 @Preview(name = "BadgeGuideTitleBar")
 @Composable
 private fun PreviewBadgeGuideTitleBar() {
-    BadgeGuideTitleBar(
+    LevelGuideTitleBar(
         {}
     )
 }
