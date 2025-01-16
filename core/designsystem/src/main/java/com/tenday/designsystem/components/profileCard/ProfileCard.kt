@@ -21,7 +21,7 @@ import com.tenday.core.common.enums.ProfileCode
 import com.tenday.designsystem.R
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.dashedFill
-import com.tenday.designsystem.theme.Gray300
+import com.tenday.designsystem.theme.Gray200
 
 @Composable
 fun ProfileCard(
@@ -44,7 +44,6 @@ fun ProfileCard(
         modifier = parentModifier
             .fillMaxWidth()
             .heightIn(
-                min = 376.dp,
                 max = 400.dp,
             )
     ) {
@@ -53,17 +52,17 @@ fun ProfileCard(
         )
         Column(
             modifier = modifier.padding(
-                top = Dimens.margin32,
+                top = Dimens.margin28,
                 start = Dimens.margin33,
                 end = Dimens.margin31,
-                bottom = Dimens.margin32,
+                bottom = Dimens.margin28,
             )
         ) {
             ProfileCardHeader(
                 hireDate = hireDate,
                 onNavigateSettings = onNavigateSettings,
             )
-            Spacer(modifier = modifier.height(Dimens.margin12))
+            Spacer(modifier = modifier.height(Dimens.margin16))
             ProfileImage(
                 modifier = modifier
                     .size(100.dp)
@@ -90,7 +89,7 @@ fun ProfileCard(
                     .fillMaxWidth()
                     .height(2.dp)
                     .padding(horizontal = Dimens.margin12)
-                    .dashedFill(color = Gray300)
+                    .dashedFill(color = Gray200)
             )
             Spacer(modifier = modifier.height(Dimens.margin16))
             ProfileCardLevel(
