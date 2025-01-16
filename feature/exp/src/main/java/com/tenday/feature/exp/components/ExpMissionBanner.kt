@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.ArrowBack
 import com.tenday.designsystem.icons.Dodoong
 import com.tenday.designsystem.theme.HandsUpTypography
@@ -63,7 +64,9 @@ internal fun ExpMissionBanner(
         )
         Spacer(modifier = modifier.weight(1f))
         Image(
-            modifier = modifier.size(48.dp),
+            modifier = modifier.size(48.dp).noRippleClickable(
+                onClick = onBannerClick,
+            ) ,
             imageVector = Icons.Dodoong,
             contentDescription = null,
         )

@@ -148,12 +148,15 @@ internal fun MyExpScreen(
                     selectCategory = expListState.selectCategory,
                     data = expListState.data,
                     categoryEntry = expListState.expCategories,
-                    onSelectCategory = onSelectCategory,
+                    visibleDropDown = visibleDropDown,
+                    onSelectCategory = {
+                        onSelectCategory(it)
+                        visibleDropDown = false
+                    },
                     onShowYearBottomSheet = {
                         onShowYearBottomSheet()
                         visibleDropDown = false
                     },
-                    visibleDropDown = visibleDropDown,
                     onShowCategoryDropdown = {
                         visibleDropDown = !visibleDropDown
                     },
