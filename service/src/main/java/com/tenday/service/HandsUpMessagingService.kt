@@ -67,7 +67,7 @@ class HandsUpMessagingService: FirebaseMessagingService() {
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(com.tenday.designsystem.R.drawable.test)
-            .setAutoCancel(false)  // 알림 클릭 시 자동으로 알림 제거
+            .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
         notifyNotification(notification)

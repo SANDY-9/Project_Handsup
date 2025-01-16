@@ -42,9 +42,9 @@ fun HandsUpNavGraph(
         val splashNavOptions = navOptionBuilder.setPopUpTo<SplashRoute>(inclusive = true).build()
         splashScreen(
             onSplashShow = { token ->
-                if(isBoardLink) navController.navigateToBoard(splashNavOptions)
-                when(token) {
-                    null -> navController.navigateToLogin(splashNavOptions)
+                when {
+                    token == null -> navController.navigateToLogin(splashNavOptions)
+                    isBoardLink -> navController.navigateToBoard(splashNavOptions)
                     else -> navController.navigateToHome(splashNavOptions)
                 }
             },
