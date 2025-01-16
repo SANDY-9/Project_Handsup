@@ -32,7 +32,7 @@ internal fun MissionLeaderCardPager(
     visibleTable: Boolean,
     onPageChange: (Int) -> Unit,
     onPagerSwipe: () -> Unit,
-    onShowToolTip: (IntOffset) -> Unit,
+    onShowToolTip: (IntOffset, MissionDetails) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState (pageCount = { item.size })
@@ -73,12 +73,15 @@ internal fun MissionLeaderCardPager(
             maxCondition = mission.maxCondition,
             medianCondition = mission.medianCondition,
             visibleTable = visibleTable,
-            onShowTooltip = onShowToolTip,
+            onShowTooltip = { offset ->
+                onShowToolTip(offset, mission)
+            },
             onPageClick = {
                 scope.launch {
                     pagerState.animateScrollToPage(page)
                 }
-            }
+            },
+            modifier = modifier,
         )
     }
 }
@@ -106,6 +109,6 @@ private fun PreviewMissionLeaderCardPager() {
         visibleTable = true,
         onPageChange = {},
         onPagerSwipe = {},
-        onShowToolTip = {},
+        onShowToolTip = { _, _ -> },
     )
 }

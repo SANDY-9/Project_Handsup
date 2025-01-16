@@ -31,7 +31,7 @@ internal fun MissionJobView(
     data: JobMission,
     totalExp: Int,
     onListScroll: () -> Unit,
-    onShowJobToolTip: (IntOffset) -> Unit,
+    onShowJobToolTip: (IntOffset, MissionDetails) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     var visibleTable by rememberSaveable { mutableStateOf(true) }
@@ -68,7 +68,9 @@ internal fun MissionJobView(
                     maxCondition = data.missionDetails.maxCondition,
                     medianCondition = data.missionDetails.medianCondition,
                     visibleTable = visibleTable,
-                    onShowTooltip = onShowJobToolTip,
+                    onShowTooltip = { offset ->
+                        onShowJobToolTip(offset, data.missionDetails)
+                    },
                 )
             }
         }
@@ -99,5 +101,5 @@ private fun PreviewMissionJobView() {
                 missionGoal = "열심히 생산성 향상하자",
                 missionName = "생산성향상"
             ),
-    ), 1, {}, {})
+    ), 1, {}, { _,_ ->})
 }

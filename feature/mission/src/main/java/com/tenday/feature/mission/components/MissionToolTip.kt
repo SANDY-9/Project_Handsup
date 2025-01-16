@@ -31,8 +31,8 @@ import com.tenday.feature.mission.R
 internal fun MissionToolTip(
     position: IntOffset,
     missionName: String,
-    maxPoint: Int = 80,
-    minPoint: Int = 40,
+    maxPoint: Int,
+    medianPoint: Int,
     modifier: Modifier = Modifier,
     size: Int = 211,
 ) {
@@ -114,7 +114,7 @@ internal fun MissionToolTip(
                 )
                 Spacer(modifier = modifier.weight(1f))
                 Text(
-                    text = "$minPoint",
+                    text = "$medianPoint",
                     style = HandsUpTypography.body4.copy(
                         fontWeight = FontWeight.ExtraBold,
                         color = White,
@@ -134,5 +134,5 @@ internal fun MissionToolTip(
 @Preview(name = "MissionToolTop")
 @Composable
 private fun PreviewMissionToolTop() {
-    MissionToolTip(IntOffset.Zero, "생산성 향상", )
+    MissionToolTip(IntOffset.Zero, "생산성 향상", 80, 40)
 }
