@@ -1,7 +1,6 @@
 package com.tenday.feature.board.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -26,7 +25,7 @@ import com.tenday.designsystem.theme.White
 import com.tenday.feature.board.R
 
 @Composable
-internal fun BoardTitleTopBar(
+internal fun BoardTitleBar(
     onNavigateNoti: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -39,7 +38,7 @@ internal fun BoardTitleTopBar(
                 Text(
                     modifier = modifier.align(Alignment.CenterStart),
                     text = stringResource(R.string.board_title),
-                    style = HandsUpTypography.title3
+                    style = HandsUpTypography.title4
                 )
                 Icon(
                     modifier = modifier.align(Alignment.CenterEnd)
@@ -59,5 +58,5 @@ internal fun BoardTitleTopBar(
 @Preview
 @Composable
 private fun Preview() {
-    BoardTitleTopBar({})
+    BoardTitleBar({})
 }

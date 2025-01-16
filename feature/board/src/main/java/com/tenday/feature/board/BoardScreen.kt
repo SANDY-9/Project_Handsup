@@ -13,7 +13,7 @@ import com.tenday.core.model.BoardDetails
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.utils.StatusBarStyle
 import com.tenday.feature.board.components.BoardContentView
-import com.tenday.feature.board.components.BoardTitleTopBar
+import com.tenday.feature.board.components.BoardTitleBar
 import com.tenday.feature.board.model.BoardUiState
 
 @Composable
@@ -44,7 +44,7 @@ internal fun BoardScreen(
     Column(
         modifier = modifier.fillMaxSize().background(color = Gray100),
     ) {
-        BoardTitleTopBar(onNavigateNoti)
+        BoardTitleBar(onNavigateNoti)
         when(boardUiState) {
             is BoardUiState.Success -> BoardContentView(
                 boardItems = boardUiState.data,
