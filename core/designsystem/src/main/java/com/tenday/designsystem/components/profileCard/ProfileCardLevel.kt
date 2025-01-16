@@ -41,9 +41,9 @@ internal fun ProfileCardLevel(
         modifier = modifier.fillMaxWidth()
     ) {
         LevelBadge(level)
-        Spacer(modifier = modifier.height(Dimens.margin4))
+        Spacer(modifier = modifier.height(Dimens.margin6))
         LevelGraph(exp, maxExp)
-        Spacer(modifier = modifier.height(Dimens.margin4))
+        Spacer(modifier = modifier.height(Dimens.margin6))
         LevelDesc(exp, maxExp)
     }
 }
