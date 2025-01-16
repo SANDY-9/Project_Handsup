@@ -64,7 +64,7 @@ internal fun ProjectMissionCard(
                 Text(
                     modifier = modifier.fillMaxWidth(),
                     text = data.content,
-                    style = HandsUpTypography.body2,
+                    style = HandsUpTypography.body3,
                     color = Gray600,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis,
