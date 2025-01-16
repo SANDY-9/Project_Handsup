@@ -68,7 +68,7 @@ private fun NotReadBoardItem(
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
             )
-            Spacer(modifier = modifier.width(Dimens.margin6))
+            Spacer(modifier = modifier.width(Dimens.margin8))
             Text(
                 text = boardDetails.createdAt,
                 color = Gray600,
