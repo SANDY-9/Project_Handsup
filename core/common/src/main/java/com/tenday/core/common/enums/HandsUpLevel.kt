@@ -35,12 +35,16 @@ enum class HandsUpLevel(
     T3(desc = "T3", exp = 52000, resPath = "level/level_T3.svg", group = JobFamily.T),
     T4(desc = "T4", exp = 78000, resPath = "level/level_T4.svg", group = JobFamily.T),
     T5(desc = "T5", exp = 117000, resPath = "level/level_T5.svg", group = JobFamily.T),
-    T6(desc = "T6", exp = 169000, resPath = "level/level_T6.svg", group = JobFamily.T);
+    T6(desc = "T6", exp = 169000, resPath = "level/level_T6.svg", group = JobFamily.T),
+    NULL(desc = "", exp = 0, resPath = "", group = JobFamily.NULL);
 
     companion object {
         fun group(level: HandsUpLevel) = HandsUpLevel.entries.filter {
             it.group == level.group
         }
+        fun level(desc: String): HandsUpLevel = HandsUpLevel.entries.firstOrNull {
+            it.desc == desc
+        } ?: NULL
     }
 
 }

@@ -20,6 +20,7 @@ internal fun ProfileCardFrame(
         JobFamily.B -> ProfileFrameManage()
         JobFamily.G -> ProfileFrameCx()
         JobFamily.T -> ProfileFrameTech()
+        else -> Unit
     }
 }
 
