@@ -19,6 +19,7 @@ import androidx.compose.material3.VerticalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -125,12 +126,22 @@ fun HandsUpThreeSpaceTable(
                     color = White,
                 )
                 diff?.let {
-                    Icon(
-                        modifier = Modifier.size(20.dp),
-                        imageVector = Icons.Up,
-                        contentDescription = null,
-                        tint = Positive,
-                    )
+                    if(diff > 0) {
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            imageVector = Icons.Up,
+                            contentDescription = null,
+                            tint = Positive,
+                        )
+                    }
+                    if(diff < 0) {
+                        Icon(
+                            modifier = Modifier.size(20.dp).rotate(180f),
+                            imageVector = Icons.Up,
+                            contentDescription = null,
+                            tint = Positive,
+                        )
+                    }
                 }
             }
         }
