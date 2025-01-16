@@ -10,4 +10,10 @@ data class BoardDetails(
     val createdAt: String,
     val title: String,
     val isRead: Boolean,
-): java.io.Serializable
+): java.io.Serializable {
+    companion object {
+        fun String.getRemoveEnter(): String {
+            return replace("\n", " ")
+        }
+    }
+}
