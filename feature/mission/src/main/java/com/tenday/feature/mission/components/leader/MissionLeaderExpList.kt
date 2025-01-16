@@ -20,11 +20,11 @@ import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.MissionDetails.Companion.getWeeklyExpList
 import com.tenday.core.model.MissionExp
-import com.tenday.designsystem.components.missionCard.MonthlyMissionCard
+import com.tenday.designsystem.components.missionCard.HandsUpMonthMissionCard
+import com.tenday.designsystem.components.missionCard.HandsUpWeeklyMissionCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.mission.MissionMenu
 import com.tenday.feature.mission.components.MissionExpTitle
-import com.tenday.feature.mission.components.MissionWeeklyCard
 import kotlinx.coroutines.flow.collectLatest
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -69,7 +69,7 @@ internal fun MissionLeaderExpList(
                     }
                     data.forEach { (month, list) ->
                         Column {
-                            MissionWeeklyCard(
+                            HandsUpWeeklyMissionCard(
                                 month = month,
                                 expList = list,
                             )
@@ -80,7 +80,7 @@ internal fun MissionLeaderExpList(
             }
             else -> {
                 item {
-                    MonthlyMissionCard(
+                    HandsUpMonthMissionCard(
                         year = year,
                         achieve = expList.map { it.achieveGrade },
                     )

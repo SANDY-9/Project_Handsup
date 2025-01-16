@@ -137,7 +137,7 @@ private fun MissionDateItem(
     modifier: Modifier = Modifier,
 ) {
     Column(
-        modifier = modifier.width(45.dp)
+        modifier = modifier.width(48.dp)
     ) {
         Text(
             text = startDate?.let { "$it~" } ?: "",

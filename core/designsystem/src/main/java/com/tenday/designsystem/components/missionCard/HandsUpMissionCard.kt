@@ -102,7 +102,7 @@ fun HandsUpWeeklyMissionCard(
                 top = 20.dp,
                 bottom = 20.dp,
                 start = 20.dp,
-                end = 11.dp,
+                end = 10.dp,
             )
     ) {
         Text(
