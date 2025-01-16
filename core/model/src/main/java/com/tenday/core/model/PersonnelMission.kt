@@ -22,6 +22,6 @@ data class PersonnelMission(
             diff < 0 -> "${-diff}등급"
             else -> "유지"
         }
-        fun isEvaluating(diff: Int?) = diff == null
+        fun isEvaluating(achieveGrade: AchieveGrade) = achieveGrade == AchieveGrade.NULL
     }
 }

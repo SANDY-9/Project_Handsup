@@ -37,7 +37,7 @@ internal fun PersonnelCardSecondHalf(
 ) {
     val dateText = if (date == null) "-" else
         "$date " + stringResource(R.string.mission_personnel_date_desc)
-    val isEvaluation = PersonnelMission.isEvaluating(diff)
+    val isEvaluation = PersonnelMission.isEvaluating(achieveGrade)
     HandsUpTextureCard(
         modifier = modifier,
         gradient = if(isEvaluation) SingleGradientGray else SingleGradientNavy,
