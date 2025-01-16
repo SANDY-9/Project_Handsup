@@ -51,7 +51,10 @@ class HandsUpMessagingService: FirebaseMessagingService() {
         val title = message.notification?.title
         val body = message.notification?.body
 
-        val deepLinkIntent = Intent(Intent.ACTION_VIEW, Uri.parse("handsup://main"))
+        val deepLinkIntent = Intent(Intent.ACTION_VIEW, Uri.parse("handsup://main")).apply {
+            putExtra(NOTIFICATION_EXTRA, title)
+        }
+
         val pendingIntent = PendingIntent.getActivity(
             this,
             0,
