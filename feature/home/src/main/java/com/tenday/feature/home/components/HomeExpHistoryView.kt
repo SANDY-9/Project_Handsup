@@ -70,10 +70,7 @@ private fun ExpHistoryItem(
         cornerSize = Dimens.cornerShape8,
         content = {
             Column(
-                modifier = modifier.size(
-                    width = 114.dp,
-                    height = 129.dp,
-                ).clip(
+                modifier = modifier.width(114.dp).clip(
                     RoundedCornerShape(Dimens.cornerShape8)
                 ).clickable(
                     onClick = onItemClick
@@ -102,11 +99,11 @@ private fun ExpHistoryItem(
                     style = HandsUpTypography.body4,
                     color = Gray500,
                 )
-                Spacer(modifier = modifier.weight(1f))
+                Spacer(modifier = modifier.height(Dimens.margin20))
                 Row(
                     modifier = modifier
                         .fillMaxWidth()
-                        .height(20.dp),
+                        .height(22.dp),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.End,
                 ) {

@@ -41,10 +41,7 @@ internal fun HomeExpBanner(
         content = {
             Column(
                 modifier = modifier
-                    .size(
-                        width = 114.dp,
-                        height = 127.dp,
-                    )
+                    .width(114.dp,)
                     .clip(
                         RoundedCornerShape(Dimens.cornerShape8)
                     ).clickable(
@@ -83,14 +80,15 @@ internal fun HomeExpBanner(
                         contentDescription = null,
                     )
                 }
-                Spacer(modifier = modifier.height(Dimens.margin1))
+                Spacer(modifier = modifier.height(Dimens.margin2))
                 Text(
                     text = stringResource(R.string.home_exp_banner_title3),
                     style = HandsUpTypography.body2.copy(
                         fontWeight = FontWeight.Bold,
                     ),
                 )
-                Spacer(modifier = modifier.weight(1f))
+                Spacer(modifier = modifier.height(Dimens.margin26
+                ))
                 Box(
                     modifier = modifier.fillMaxWidth(),
                 ) {
