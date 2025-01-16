@@ -15,6 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.core.common.extentions.toData
+import com.tenday.core.model.PersonnelMission
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
@@ -78,7 +79,7 @@ internal fun PersonnelCardFirstHalf(
             title2 = stringResource(R.string.mission_personnel_do_title),
             content2 = exp?.toData() ?: "-",
             title3 = stringResource(R.string.mission_personnel_analysis_title),
-            content3 = if(diff == null) "-" else "${diff}등급",
+            content3 = PersonnelMission.getGrade(diff),
             diff = diff,
         )
     }

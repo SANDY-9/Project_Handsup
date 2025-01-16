@@ -15,4 +15,12 @@ data class PersonnelMission(
         상반기,
         하반기,
     }
+    companion object {
+        fun getGrade(diff: Int?) = when {
+            diff == null -> "-"
+            diff > 0 -> "${diff}등급"
+            diff < 0 -> "${-diff}등급"
+            else -> "유지"
+        }
+    }
 }
