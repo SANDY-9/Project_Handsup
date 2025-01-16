@@ -21,6 +21,7 @@ import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.SingleGradientGray
+import com.tenday.designsystem.theme.SingleGradientNavy
 import com.tenday.designsystem.theme.TransparentWhite12
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.mission.R
@@ -36,9 +37,10 @@ internal fun PersonnelCardSecondHalf(
 ) {
     val dateText = if (date == null) "-" else
         "$date " + stringResource(R.string.mission_personnel_date_desc)
+    val isEvaluation = PersonnelMission.isEvaluating(diff)
     HandsUpTextureCard(
         modifier = modifier,
-        gradient = SingleGradientGray,
+        gradient = if(isEvaluation) SingleGradientGray else SingleGradientNavy,
         horizontalAlignment = Alignment.CenterHorizontally,
         bottom = Dimens.margin28,
     ) {
