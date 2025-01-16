@@ -1,4 +1,4 @@
-package com.tenday.feature.exp.lovelguide
+package com.tenday.feature.exp.levelguide
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

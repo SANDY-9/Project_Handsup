@@ -1,4 +1,4 @@
-package com.tenday.feature.exp.lovelguide
+package com.tenday.feature.exp.levelguide
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
