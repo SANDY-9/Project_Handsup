@@ -1,5 +1,7 @@
 package com.tenday.handsup.ui
 
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -37,6 +39,12 @@ fun HandsUpNavGraph(
         modifier = modifier,
         navController = navController,
         startDestination = startDestination,
+        enterTransition = {
+            EnterTransition.None
+        },
+        exitTransition = {
+            ExitTransition.None
+        }
     ) {
         val navOptionBuilder = NavOptions.Builder()
         val splashNavOptions = navOptionBuilder.setPopUpTo<SplashRoute>(inclusive = true).build()
