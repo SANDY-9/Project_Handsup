@@ -64,7 +64,7 @@ fun HandsUpNavGraph(
             onExpClick = {}, // 구현해야함
         )
 
-        missionScreen()
+        missionScreen(navController = navController)
 
         myExpScreen(
             onNavigateMission = navController::navigateToMission
