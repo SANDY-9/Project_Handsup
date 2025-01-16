@@ -19,16 +19,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.model.Badge
+import com.tenday.core.resources.offResources
+import com.tenday.core.resources.resources
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
-import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.icons.Info
 import com.tenday.designsystem.theme.CardShadowLight
 import com.tenday.designsystem.theme.Gray600
@@ -122,9 +124,9 @@ private fun ProfileBadgeItem(
     ) {
         Image(
             modifier = Modifier.size(64.dp),
-            painter = svgImageLoader(
-                if(select) badge.resFilePath
-                else badge.offResFilePath
+            painter = painterResource(
+                if(select) badge.resources()
+                else badge.offResources()
             ),
             contentDescription = null,
         )

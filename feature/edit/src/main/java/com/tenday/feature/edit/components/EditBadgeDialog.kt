@@ -14,16 +14,17 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.resources.resources
 import com.tenday.designsystem.components.HandsUpButton
 import com.tenday.designsystem.components.HandsUpDialog
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.Gray900
@@ -43,16 +44,18 @@ internal fun EditBadgeDialog(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(Dimens.margin8)
         ) {
-            Spacer(modifier = modifier.height(Dimens.margin8))
+            Spacer(modifier = modifier.height(Dimens.margin4))
             Image(
                 modifier = modifier.size(64.dp),
-                painter = svgImageLoader(selectBadge.resFilePath),
+                painter = painterResource(selectBadge.resources()),
                 contentDescription = null,
             )
+            Spacer(modifier = modifier.height(Dimens.margin4))
             Text(
                 text = selectBadge.badgeName,
                 style = HandsUpTypography.title4
             )
+            Spacer(modifier = modifier.height(Dimens.margin3))
             Text(
                 text = selectBadge.desc,
                 style = HandsUpTypography.body2.copy(

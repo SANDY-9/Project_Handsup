@@ -72,7 +72,7 @@ internal fun LoginScreen(
     val focusManager = LocalFocusManager.current
 
     LaunchedEffect(loginUiState) {
-        if(loginUiState is LoginUiState) {
+        if(loginUiState is LoginUiState.Loading) {
             focusManager.clearFocus()
         }
     }
