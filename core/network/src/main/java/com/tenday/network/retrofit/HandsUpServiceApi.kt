@@ -95,7 +95,7 @@ internal interface HandsUpServiceApi {
         @Header("Authorization") token: String,
     ): UserUpdateResponse
 
-    @POST("logout")
+    @POST("user/logout")
     suspend fun logout(
         @Header("Authorization") token: String,
     )
