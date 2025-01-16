@@ -127,7 +127,12 @@ internal class EditViewModel @Inject constructor(
     val logout: StateFlow<Boolean> = savedStateHandle.getStateFlow(LOG_OUT, false)
     fun handleLogout() {
         viewModelScope.launch {
-            requestLogoutUseCase()
+            try {
+                requestLogoutUseCase()
+            } catch (e: Exception) {
+                _editUiState.value = EditUiState.Fail
+            }
+        }.invokeOnCompletion {
             savedStateHandle[LOG_OUT] = true
         }
     }
