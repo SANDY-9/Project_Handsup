@@ -36,4 +36,11 @@ enum class HandsUpLevel(
     T4(desc = "T4", exp = 78000, resPath = "level/level_T4.svg", group = JobFamily.T),
     T5(desc = "T5", exp = 117000, resPath = "level/level_T5.svg", group = JobFamily.T),
     T6(desc = "T6", exp = 169000, resPath = "level/level_T6.svg", group = JobFamily.T);
+
+    companion object {
+        fun group(level: HandsUpLevel) = HandsUpLevel.entries.filter {
+            it.group == level.group
+        }
+    }
+
 }
