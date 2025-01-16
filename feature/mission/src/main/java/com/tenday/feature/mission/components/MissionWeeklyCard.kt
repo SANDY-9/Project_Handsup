@@ -54,10 +54,10 @@ internal fun MissionWeeklyCard(
         Row {
             repeat(5) { num ->
                 val item = expList.getOrNull(num)
-                val title = item?.startDate?.let { "$it~${item.endDate}" }
                 MissionCheckItem(
                     date = item?.index,
-                    dateTitle = title,
+                    startDate = item?.startDate,
+                    endDate = item?.endDate,
                     achieveGrade = item?.achieveGrade ?: AchieveGrade.NULL
                 )
                 val isNullLastItem = expList.size < 5 && num >= expList.lastIndex

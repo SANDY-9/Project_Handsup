@@ -40,15 +40,14 @@ fun MonthlyMissionCard(
                 shape = RoundedCornerShape(Dimens.cornerShape12),
             )
             .padding(20.dp),
-        verticalArrangement = Arrangement.spacedBy(Dimens.margin12),
+        verticalArrangement = Arrangement.spacedBy(Dimens.margin20),
     ) {
         Text(
             text = "${year}년 미션",
             style = HandsUpTypography.title5,
         )
-        WeeklyMissionCheckItem(
+        MonthMissionCheckItem(
             listOf(1,2,3,4,5),
-            listOf("1월", "2월", "3월", "4월", "5월"),
             listOf(
                 achieve.getOrNull(0),
                 achieve.getOrNull(1),
@@ -57,9 +56,8 @@ fun MonthlyMissionCard(
                 achieve.getOrNull(4),
             ),
         )
-        WeeklyMissionCheckItem(
+        MonthMissionCheckItem(
             listOf(6,7,8,9,10),
-            listOf("6월", "7월", "8월", "9월", "10월"),
             listOf(
                 achieve.getOrNull(5),
                 achieve.getOrNull(6),
@@ -68,9 +66,8 @@ fun MonthlyMissionCard(
                 achieve.getOrNull(9),
             )
         )
-        WeeklyMissionCheckItem(
+        MonthMissionCheckItem(
             listOf(11, 12),
-            listOf("11월", "12월"),
             listOf(
                 achieve.getOrNull(10),
                 achieve.getOrNull(11),

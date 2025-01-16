@@ -32,19 +32,15 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
 @Composable
-internal fun WeeklyMissionCheckItem(
+internal fun MonthMissionCheckItem(
     list: List<Int>,
-    dateTitleList: List<String>,
     achieveGradeList: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
     Row {
         repeat(5) { num ->
-            val date = list.getOrNull(num)
-            val dateTitle = dateTitleList.getOrNull(num)
-            MissionCheckItem(
-                date = date,
-                dateTitle = dateTitle,
+            MonthMissionCheckItem(
+                date = list.getOrNull(num),
                 achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.NULL
             )
             val isNullLastItem = list.size < 5 && num >= list.size - 1
@@ -62,9 +58,8 @@ internal fun WeeklyMissionCheckItem(
 }
 
 @Composable
-fun MissionCheckItem(
+private fun MonthMissionCheckItem(
     date: Int?,
-    dateTitle: String?,
     achieveGrade: AchieveGrade,
     modifier: Modifier = Modifier,
 ) {
@@ -92,13 +87,13 @@ fun MissionCheckItem(
                             shape = CircleShape,
                         )
                 ) {
-                    androidx.compose.material3.Text(
+                    Text(
                         modifier = modifier.align(Alignment.Center),
                         text = "$date",
                         style = HandsUpTypography.body2.copy(
                             fontWeight = FontWeight.ExtraBold,
                             color = White,
-                        )
+                        ),
                     )
                 }
                 if(achieveGrade == AchieveGrade.MEDIAN) {
@@ -118,7 +113,7 @@ fun MissionCheckItem(
             }
             Spacer(modifier = modifier.height(Dimens.margin6))
             Text(
-                text = dateTitle ?: "",
+                text = date?.let { "${it}월" } ?: "",
                 style = HandsUpTypography.body4.copy(
                     color = Gray500,
                 ),
@@ -130,13 +125,10 @@ fun MissionCheckItem(
 @Preview(name = "MissionCardItem")
 @Composable
 private fun PreviewMissionCardItem() {
-    WeeklyMissionCheckItem(
+    MonthMissionCheckItem(
         listOf(1, 2, 3, 4),
         listOf(
-            "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08"
-        ),
-        listOf(
             AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX,
-        )
+        ),
     )
 }
