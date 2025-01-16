@@ -34,6 +34,8 @@ import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
 import com.tenday.core.model.ExpDetails
 import com.tenday.core.model.UserDetails
+import com.tenday.designsystem.components.HandsUpFailView
+import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.utils.StatusBarStyle
@@ -53,29 +55,31 @@ internal fun MyExpRoute(
     onNavigateMission:() -> Unit,
     viewModel: MyExpViewModel = hiltViewModel()
 ) {
-    StatusBarStyle(true)
-
     val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
     val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
     val expListState by viewModel.expListState.collectAsStateWithLifecycle()
 
     Box {
-        MyExpScreen(
-            user = userDetails ?: return,
-            myExpState = myExpState,
-            expListState = expListState,
-            onBannerClick = onNavigateMission,
-            onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
-            onBottomSheetComplete = viewModel::updateSelectExpYear,
-            onSelectCategory = viewModel::updateSelectCategory,
-        )
+        when(val state = myExpState) {
+            is MyExpState.Success -> MyExpScreen(
+                user = userDetails ?: return,
+                exp = state.data,
+                expListState = expListState,
+                onBannerClick = onNavigateMission,
+                onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
+                onBottomSheetComplete = viewModel::updateSelectExpYear,
+                onSelectCategory = viewModel::updateSelectCategory,
+            )
+            MyExpState.Loading -> HandsUpLoadingView()
+            MyExpState.Fail -> HandsUpFailView()
+        }
     }
 }
 
 @Composable
 internal fun MyExpScreen(
     user: UserDetails,
-    myExpState: MyExpState,
+    exp: ExpDetails,
     expListState: ExpListState,
     onBannerClick:() -> Unit,
     onShowYearBottomSheet: () -> Unit,
@@ -83,84 +87,82 @@ internal fun MyExpScreen(
     onSelectCategory: (ExpCategory) -> Unit,
     modifier: Modifier = Modifier
 ) {
+    StatusBarStyle(true)
+
     val listState = rememberLazyListState()
     var visibleDropDown by remember { mutableStateOf(false) }
-
-    if(myExpState is MyExpState.Success) {
-        val data = myExpState.data
-        LazyColumn(
-            modifier = modifier
-                .fillMaxSize()
-                .background(color = Gray100),
-            contentPadding = PaddingValues(bottom = Dimens.margin40),
-            state = listState,
-        ) {
-            item {
-                MyExpProfile(
-                    user = user,
-                    currentTotalExp = data.totalExp,
-                    requireExp = data.expToNextLevel,
-                )
-            }
-            item {
-                Column(
-                    modifier = modifier.padding(
-                        top = Dimens.margin12,
-                        start = Dimens.margin20,
-                        end = Dimens.margin20,
-                    ),
-                    verticalArrangement = Arrangement.spacedBy(Dimens.margin12),
-                ) {
-                    ExpMissionBanner(
-                        userName = user.username,
-                        onBannerClick = onBannerClick,
-                        modifier = modifier.pointerInput(Unit) {
-                            detectTapGestures {
-                                visibleDropDown = false
-                            }
-                        }
-                    )
-                    MyExpThisYearCard(
-                        currentYearExp = data.currentYearExp,
-                        expectLevel = data.expectedLevel,
-                        modifier = modifier.pointerInput(Unit) {
-                            detectTapGestures {
-                                visibleDropDown = false
-                            }
-                        }
-                    )
-                    MyExpLastYearCard(
-                        currentLevel = data.currentNextLevel,
-                        previousLevel = data.currentLevel,
-                        lastYearExp = data.lastYearExp,
-                        currentLevelTotalExp = data.totalExp + data.expToNextLevel,
-                        modifier = modifier.pointerInput(Unit) {
-                            detectTapGestures {
-                                visibleDropDown = false
-                            }
-                        }
-                    )
-                    MyExpHistory(
-                        selectYear = expListState.selectYear,
-                        selectCategory = expListState.selectCategory,
-                        data = expListState.data,
-                        categoryEntry = expListState.expCategories,
-                        onSelectCategory = onSelectCategory,
-                        onShowYearBottomSheet = {
-                            onShowYearBottomSheet()
+    LazyColumn(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = Gray100),
+        contentPadding = PaddingValues(bottom = Dimens.margin40),
+        state = listState,
+    ) {
+        item {
+            MyExpProfile(
+                user = user,
+                currentTotalExp = exp.totalExp,
+                requireExp = exp.expToNextLevel,
+            )
+        }
+        item {
+            Column(
+                modifier = modifier.padding(
+                    top = Dimens.margin12,
+                    start = Dimens.margin20,
+                    end = Dimens.margin20,
+                ),
+                verticalArrangement = Arrangement.spacedBy(Dimens.margin12),
+            ) {
+                ExpMissionBanner(
+                    userName = user.username,
+                    onBannerClick = onBannerClick,
+                    modifier = modifier.pointerInput(Unit) {
+                        detectTapGestures {
                             visibleDropDown = false
-                        },
-                        visibleDropDown = visibleDropDown,
-                        onShowCategoryDropdown = {
-                            visibleDropDown = !visibleDropDown
-                        },
-                        modifier = modifier.pointerInput(Unit) {
-                            detectTapGestures {
-                                visibleDropDown = false
-                            }
                         }
-                    )
-                }
+                    }
+                )
+                MyExpThisYearCard(
+                    currentYearExp = exp.currentYearExp,
+                    expectLevel = exp.expectedLevel,
+                    modifier = modifier.pointerInput(Unit) {
+                        detectTapGestures {
+                            visibleDropDown = false
+                        }
+                    }
+                )
+                MyExpLastYearCard(
+                    currentLevel = exp.currentNextLevel,
+                    previousLevel = exp.currentLevel,
+                    lastYearExp = exp.lastYearExp,
+                    currentLevelTotalExp = exp.totalExp + exp.expToNextLevel,
+                    modifier = modifier.pointerInput(Unit) {
+                        detectTapGestures {
+                            visibleDropDown = false
+                        }
+                    }
+                )
+                MyExpHistory(
+                    selectYear = expListState.selectYear,
+                    selectCategory = expListState.selectCategory,
+                    data = expListState.data,
+                    categoryEntry = expListState.expCategories,
+                    onSelectCategory = onSelectCategory,
+                    onShowYearBottomSheet = {
+                        onShowYearBottomSheet()
+                        visibleDropDown = false
+                    },
+                    visibleDropDown = visibleDropDown,
+                    onShowCategoryDropdown = {
+                        visibleDropDown = !visibleDropDown
+                    },
+                    modifier = modifier.pointerInput(Unit) {
+                        detectTapGestures {
+                            visibleDropDown = false
+                        }
+                    }
+                )
             }
         }
     }
@@ -216,22 +218,20 @@ private fun PreviewExpScreen() {
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
         ),
-        MyExpState.Success(
-            ExpDetails(
-                currentLevel = "F1-Ⅰ",
-                currentYearExp = 5730,
-                expCount = 7,
-                expList = emptyMap(),
-                expToNextLevel = 7770,
-                expectedLevel = "F1-Ⅰ",
-                jobFamily = JobFamily.F,
-                lastYearExp = 0,
-                totalExp = 5730,
-                currentNextLevel = "F1-Ⅰ",
-                expToExpectedLevel = 12345,
-                expToCurrentLevel = 12345,
-                expToCurrentNextLevel = 12345,
-            )
+        ExpDetails(
+            currentLevel = "F1-Ⅰ",
+            currentYearExp = 5730,
+            expCount = 7,
+            expList = emptyMap(),
+            expToNextLevel = 7770,
+            expectedLevel = "F1-Ⅰ",
+            jobFamily = JobFamily.F,
+            lastYearExp = 0,
+            totalExp = 5730,
+            currentNextLevel = "F1-Ⅰ",
+            expToExpectedLevel = 12345,
+            expToCurrentLevel = 12345,
+            expToCurrentNextLevel = 12345,
         ),
         ExpListState(
             selectYear = 2025,
