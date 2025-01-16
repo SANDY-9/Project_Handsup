@@ -196,7 +196,7 @@ private fun PreviewEditScreen() {
             totalExpLastYear = 5000,
             profileImageCode = ProfileCode.F_A,
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
-            possibleBadgeCodeList = BadgeCode.entries,
+            possibleBadgeCodeList = emptyList(),
         ),
         inputState = EditInputState(
             pwdInput = "",

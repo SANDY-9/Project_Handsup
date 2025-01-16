@@ -26,6 +26,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.model.Badge
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
@@ -41,7 +42,7 @@ import com.tenday.feature.edit.R
 @Composable
 internal fun EditBadgeView(
     currentBadge: BadgeCode,
-    badgeList: List<BadgeCode>,
+    badgeList: List<Badge>,
     onShowBadgeInfo: () -> Unit,
     onBadgeClick: (BadgeCode) -> Unit,
     modifier: Modifier = Modifier,
@@ -87,12 +88,13 @@ internal fun EditBadgeView(
                         verticalArrangement = Arrangement.spacedBy(Dimens.margin6),
                     ) {
                         items(badgeList) { badge ->
-                            if(badge != BadgeCode.NULL) {
+                            if(badge.badgeCode != BadgeCode.NULL) {
                                 ProfileBadgeItem(
                                     modifier = modifier.weight(1f),
-                                    select = badge == currentBadge,
-                                    badge = badge,
-                                    onItemClick = { onBadgeClick(badge) }
+                                    select = badge.badgeCode == currentBadge,
+                                    badge = badge.badgeCode,
+                                    date = badge.createdAt,
+                                    onItemClick = { onBadgeClick(badge.badgeCode) },
                                 )
                             }
                         }
@@ -108,6 +110,7 @@ private fun ProfileBadgeItem(
     select: Boolean,
     badge: BadgeCode,
     onItemClick: () -> Unit,
+    date: String,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -132,7 +135,7 @@ private fun ProfileBadgeItem(
         )
         Spacer(modifier = Modifier.height(Dimens.margin2))
         Text(
-            text = "24.05.28",
+            text = date.substring(2),
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.Medium,
                 color = Gray600,
@@ -146,7 +149,12 @@ private fun ProfileBadgeItem(
 private fun PreviewEditBadgeView() {
     EditBadgeView(
         BadgeCode.JOB_EXP_OVER_1700,
-        BadgeCode.list(),
+        BadgeCode.list().map {
+            Badge(
+                badgeCode = it,
+                createdAt = "2024.05.28"
+            )
+        },
         {},
         {},
     )
