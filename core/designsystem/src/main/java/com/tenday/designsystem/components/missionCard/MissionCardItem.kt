@@ -34,17 +34,17 @@ import com.tenday.designsystem.theme.White
 @Composable
 internal fun WeeklyMissionCheckItem(
     list: List<Int>,
-    dateTitleList: List<String>,
+    startDateList: List<String>,
+    endDateList: List<String>,
     achieveGradeList: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
 ) {
     Row {
         repeat(5) { num ->
-            val date = list.getOrNull(num)
-            val dateTitle = dateTitleList.getOrNull(num)
             MissionCheckItem(
-                date = date,
-                dateTitle = dateTitle,
+                date = list.getOrNull(num),
+                startDate = startDateList.getOrNull(num),
+                endDate = endDateList.getOrNull(num),
                 achieveGrade = achieveGradeList.getOrNull(num) ?: AchieveGrade.NULL
             )
             val isNullLastItem = list.size < 5 && num >= list.size - 1
@@ -64,7 +64,8 @@ internal fun WeeklyMissionCheckItem(
 @Composable
 fun MissionCheckItem(
     date: Int?,
-    dateTitle: String?,
+    startDate: String?,
+    endDate: String?,
     achieveGrade: AchieveGrade,
     modifier: Modifier = Modifier,
 ) {
@@ -92,13 +93,13 @@ fun MissionCheckItem(
                             shape = CircleShape,
                         )
                 ) {
-                    androidx.compose.material3.Text(
+                    Text(
                         modifier = modifier.align(Alignment.Center),
                         text = "$date",
                         style = HandsUpTypography.body2.copy(
                             fontWeight = FontWeight.ExtraBold,
                             color = White,
-                        )
+                        ),
                     )
                 }
                 if(achieveGrade == AchieveGrade.MEDIAN) {
@@ -117,12 +118,22 @@ fun MissionCheckItem(
                 }
             }
             Spacer(modifier = modifier.height(Dimens.margin6))
-            Text(
-                text = dateTitle ?: "",
-                style = HandsUpTypography.body4.copy(
-                    color = Gray500,
-                ),
-            )
+            Column {
+                Text(
+                    modifier = modifier.align(Alignment.Start),
+                    text = startDate?.let { "$it~" } ?: "",
+                    style = HandsUpTypography.body4.copy(
+                        color = Gray500,
+                    ),
+                )
+                Text(
+                    modifier = modifier.align(Alignment.Start),
+                    text = endDate ?: "",
+                    style = HandsUpTypography.body4.copy(
+                        color = Gray500,
+                    ),
+                )
+            }
         }
     }
 }
@@ -133,7 +144,10 @@ private fun PreviewMissionCardItem() {
     WeeklyMissionCheckItem(
         listOf(1, 2, 3, 4),
         listOf(
-            "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08"
+            "01.02", "01.02", "01.02", "99.99"
+        ),
+        listOf(
+            "01.05", "01.05", "01.05", "02.08"
         ),
         listOf(
             AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX,
