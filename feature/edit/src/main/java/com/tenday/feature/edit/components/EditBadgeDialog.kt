@@ -37,9 +37,7 @@ internal fun EditBadgeDialog(
     onComplete: (BadgeCode) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    HandsUpDialog(
-        onCancel = onCancel,
-    ) {
+    HandsUpDialog {
         Column(
             modifier = modifier.fillMaxWidth().padding(Dimens.margin20),
             horizontalAlignment = Alignment.CenterHorizontally,
