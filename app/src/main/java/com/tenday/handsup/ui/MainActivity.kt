@@ -6,12 +6,16 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.tenday.designsystem.theme.HandsUpTheme
 import com.tenday.feature.splash.navigation.SplashRoute
+import com.tenday.service.HandsUpMessagingService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val isBoardLink = intent.getStringExtra(HandsUpMessagingService.NOTIFICATION_EXTRA)?.contains("게시") ?: false
+
         enableEdgeToEdge()
         setContent {
             val handsUpAppState = rememberHandsUpAppState()
@@ -19,7 +23,8 @@ class MainActivity : ComponentActivity() {
                 HandsUpApp(
                     appState = handsUpAppState,
                     startDestination = SplashRoute,
-                    onAppFinish = ::finishAffinity
+                    isBoardLink = isBoardLink,
+                    onAppFinish = ::finishAffinity,
                 )
             }
         }
