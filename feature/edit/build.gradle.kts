@@ -46,6 +46,7 @@ dependencies {
     implementation(project(":core:data"))
     implementation(project(":core:common"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:resources"))
 
     implementation(libs.bundles.androidx)
     implementation(platform(libs.androidx.compose.bom))
