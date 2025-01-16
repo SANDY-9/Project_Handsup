@@ -10,4 +10,14 @@ enum class AchieveGrade(val alias: String) {
     C등급("C"),
     D등급("D"),
     NULL("심사중");
+
+    companion object {
+        fun getGrade(value: String?): AchieveGrade = try {
+            value?.let {
+                AchieveGrade.valueOf(it)
+            } ?: NULL
+        } catch (e: Exception) {
+            NULL
+        }
+    }
 }

@@ -74,7 +74,7 @@ internal fun List<ExpData>.toExpMap(): Map<Int, List<Exp>> {
         Exp(
             exp = it.exp,
             expAt = it.expAt.toDate(),
-            expType = ExpType.valueOf(it.expType),
+            expType = ExpType.getExpType(it.expType),
             questName = it.questName,
             year = it.year
         )
@@ -91,7 +91,7 @@ internal fun ExpResponse.toExpDetails(): ExpDetails {
         expList = expList.toExpMap(),
         expToNextLevel = expToNextLevel,
         expectedLevel = expectedLevel,
-        jobFamily = JobFamily.valueOf(jobFamily),
+        jobFamily = JobFamily.getJobFamily(jobFamily),
         lastYearExp = lastYearExp,
         totalExp = totalExp,
         currentNextLevel = currentNextLevel,
