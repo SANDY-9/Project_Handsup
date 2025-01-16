@@ -4,7 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,7 +23,7 @@ import androidx.compose.ui.graphics.vector.path
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.extentions.noRippleClickable
+import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.HandsUpNavy
 
 @Composable
@@ -47,6 +46,10 @@ fun HandsUpToolTip(
             modifier = modifier.background(
                 color = HandsUpNavy,
                 shape = RoundedCornerShape(Dimens.cornerShape4),
+            ).blurShadow(
+                borderRadius = Dimens.cornerShape4,
+                blurRadius = Dimens.cornerShape16,
+                offsetY = 4.dp
             ).padding(
                 top = Dimens.margin10,
                 bottom = Dimens.margin12,

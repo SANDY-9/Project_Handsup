@@ -19,6 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.components.HandsUpFailView
 import com.tenday.designsystem.components.HandsUpLoadingView
 import com.tenday.designsystem.theme.Gray100
@@ -62,6 +63,7 @@ internal fun MissionScreen(
 ) {
     var visibleToolTip by remember { mutableStateOf(false) }
     var tooltipPosition by remember { mutableStateOf(IntOffset.Zero) }
+    var mission: MissionDetails? by remember { mutableStateOf(null) }
 
     Box(
         modifier = modifier
@@ -76,7 +78,10 @@ internal fun MissionScreen(
         Column {
             MissionTitleBar(
                 currentSelectedTab = currentTab,
-                onTabSelect = onTabSelect,
+                onTabSelect = {
+                    visibleToolTip = false
+                    onTabSelect(it)
+                },
             )
             when (uiState) {
                 is MissionUiState.Success -> {
@@ -86,9 +91,15 @@ internal fun MissionScreen(
                             totalExp = uiState.data.mission.totalExp,
                             onPagerSwipe = { visibleToolTip = false },
                             onListScroll = { visibleToolTip = false },
-                            onShowToolTip = {
-                                tooltipPosition = it
+                            onShowToolTip = { position, missionDetails ->
+                                tooltipPosition = position
+                                mission = missionDetails
                                 visibleToolTip = true
+                            },
+                            modifier = modifier.pointerInput(Unit) {
+                                detectTapGestures {
+                                    visibleToolTip = false
+                                }
                             }
                         )
 
@@ -96,8 +107,9 @@ internal fun MissionScreen(
                             data = uiState.data.mission,
                             totalExp = uiState.data.mission.totalExp,
                             onListScroll = { visibleToolTip = false },
-                            onShowJobToolTip = {
-                                tooltipPosition = it
+                            onShowJobToolTip = { position, missionDetails ->
+                                tooltipPosition = position
+                                mission = missionDetails
                                 visibleToolTip = true
                             },
                         )
@@ -131,10 +143,14 @@ internal fun MissionScreen(
             }
         }
         if (visibleToolTip) {
-            MissionToolTip(
-                missionName = "생산성 향상",
-                position = tooltipPosition,
-            )
+            mission?.let {
+                MissionToolTip(
+                    missionName = it.missionName,
+                    maxPoint = it.maxExp,
+                    medianPoint = it.medianExp,
+                    position = tooltipPosition,
+                )
+            }
         }
     }
 }

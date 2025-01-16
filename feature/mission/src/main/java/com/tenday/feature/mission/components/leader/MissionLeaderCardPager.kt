@@ -10,6 +10,7 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -21,6 +22,7 @@ import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun MissionLeaderCardPager(
@@ -30,7 +32,7 @@ internal fun MissionLeaderCardPager(
     visibleTable: Boolean,
     onPageChange: (Int) -> Unit,
     onPagerSwipe: () -> Unit,
-    onShowToolTip: (IntOffset) -> Unit,
+    onShowToolTip: (IntOffset, MissionDetails) -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val pagerState = rememberPagerState (pageCount = { item.size })
@@ -44,6 +46,7 @@ internal fun MissionLeaderCardPager(
             onPagerSwipe()
         }
     }
+    val scope = rememberCoroutineScope()
     HorizontalPager(
         modifier = modifier
             .fillMaxWidth()
@@ -70,7 +73,15 @@ internal fun MissionLeaderCardPager(
             maxCondition = mission.maxCondition,
             medianCondition = mission.medianCondition,
             visibleTable = visibleTable,
-            onShowTooltip = onShowToolTip,
+            onShowTooltip = { offset ->
+                onShowToolTip(offset, mission)
+            },
+            onPageClick = {
+                scope.launch {
+                    pagerState.animateScrollToPage(page)
+                }
+            },
+            modifier = modifier,
         )
     }
 }
@@ -98,6 +109,6 @@ private fun PreviewMissionLeaderCardPager() {
         visibleTable = true,
         onPageChange = {},
         onPagerSwipe = {},
-        onShowToolTip = {},
+        onShowToolTip = { _, _ -> },
     )
 }

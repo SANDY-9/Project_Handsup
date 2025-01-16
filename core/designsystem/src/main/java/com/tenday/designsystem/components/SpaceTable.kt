@@ -25,8 +25,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.icons.Remain
 import com.tenday.designsystem.icons.Up
 import com.tenday.designsystem.theme.HandsUpTypography
+import com.tenday.designsystem.theme.Negative
 import com.tenday.designsystem.theme.Positive
 import com.tenday.designsystem.theme.TransparentWhite8
 import com.tenday.designsystem.theme.TransparentWhite80
@@ -139,7 +141,15 @@ fun HandsUpThreeSpaceTable(
                             modifier = Modifier.size(20.dp).rotate(180f),
                             imageVector = Icons.Up,
                             contentDescription = null,
-                            tint = Positive,
+                            tint = Negative,
+                        )
+                    }
+                    if(diff == 0) {
+                        Icon(
+                            modifier = Modifier.size(20.dp),
+                            imageVector = Icons.Remain,
+                            contentDescription = null,
+                            tint = Color(0xFFFFC31E),
                         )
                     }
                 }

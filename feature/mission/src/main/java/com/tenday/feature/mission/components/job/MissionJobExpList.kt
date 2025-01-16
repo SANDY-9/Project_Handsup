@@ -20,11 +20,11 @@ import com.tenday.core.common.enums.AchieveGrade
 import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.core.model.MissionDetails.Companion.getWeeklyExpList
 import com.tenday.core.model.MissionExp
-import com.tenday.designsystem.components.missionCard.MonthlyMissionCard
+import com.tenday.designsystem.components.missionCard.HandsUpMonthMissionCard
+import com.tenday.designsystem.components.missionCard.HandsUpWeeklyMissionCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.feature.mission.MissionMenu
 import com.tenday.feature.mission.components.MissionExpTitle
-import com.tenday.feature.mission.components.MissionWeeklyCard
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -61,7 +61,7 @@ internal fun MissionJobExpList(
                     }
                     data.forEach { (month, list) ->
                         Column {
-                            MissionWeeklyCard(
+                            HandsUpWeeklyMissionCard(
                                 month = month,
                                 expList = list,
                             )
@@ -72,7 +72,7 @@ internal fun MissionJobExpList(
             }
             else -> {
                 item {
-                    MonthlyMissionCard(
+                    HandsUpMonthMissionCard(
                         year = year,
                         achieve = expList.map { it.achieveGrade },
                     )

@@ -1,5 +1,6 @@
 package com.tenday.designsystem.components.missionCard
 
+import WeeklyMissionItem
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -11,9 +12,11 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.AchieveGrade
+import com.tenday.core.model.MissionExp
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.blurShadow
 import com.tenday.designsystem.theme.CardShadowLight
@@ -21,7 +24,7 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 
 @Composable
-fun MonthlyMissionCard(
+fun HandsUpMonthMissionCard(
     year: Int,
     achieve: List<AchieveGrade?>,
     modifier: Modifier = Modifier,
@@ -46,7 +49,7 @@ fun MonthlyMissionCard(
             text = "${year}년 미션",
             style = HandsUpTypography.title5,
         )
-        MonthMissionCheckItem(
+        MonthlyMissionItem(
             listOf(1,2,3,4,5),
             listOf(
                 achieve.getOrNull(0),
@@ -56,7 +59,7 @@ fun MonthlyMissionCard(
                 achieve.getOrNull(4),
             ),
         )
-        MonthMissionCheckItem(
+        MonthlyMissionItem(
             listOf(6,7,8,9,10),
             listOf(
                 achieve.getOrNull(5),
@@ -66,7 +69,7 @@ fun MonthlyMissionCard(
                 achieve.getOrNull(9),
             )
         )
-        MonthMissionCheckItem(
+        MonthlyMissionItem(
             listOf(11, 12),
             listOf(
                 achieve.getOrNull(10),
@@ -77,15 +80,9 @@ fun MonthlyMissionCard(
 }
 
 @Composable
-fun WeeklyMissionCard(
-    index: Int,
-    list: List<Int> = listOf(1,2,3,4,5),
-    dateTitleList: List<String> = listOf(
-        "01.02~01.05", "01.02~01.05", "01.02~01.05", "99.99~02.08", "99.99~02.08",
-    ),
-    achieveGradeList: List<AchieveGrade> = listOf(
-        AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MAX, AchieveGrade.MEDIAN, AchieveGrade.MEDIAN,
-    ),
+fun HandsUpWeeklyMissionCard(
+    month: Int,
+    expList: List<MissionExp>,
     modifier: Modifier = Modifier,
 ) {
     Column(
@@ -101,14 +98,19 @@ fun WeeklyMissionCard(
                 color = White,
                 shape = RoundedCornerShape(Dimens.cornerShape12),
             )
-            .padding(20.dp)
+            .padding(
+                top = 20.dp,
+                bottom = 20.dp,
+                start = 20.dp,
+                end = 10.dp,
+            )
     ) {
         Text(
-            text = "${index}월 미션",
+            text = "${month}월 미션",
             style = HandsUpTypography.title5,
         )
         Spacer(modifier = modifier.height(Dimens.margin12))
-        WeeklyMissionCheckItem(list, dateTitleList, achieveGradeList)
+        WeeklyMissionItem(expList = expList)
     }
 }
 
@@ -116,14 +118,63 @@ fun WeeklyMissionCard(
 @Composable
 private fun Preview() {
     Column(
-        modifier = Modifier.padding(10.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier.background(
+            color = Color.Magenta,
+        ).padding(10.dp)
     ) {
-        MonthlyMissionCard(2025, listOf(
-            AchieveGrade.MAX,
-            AchieveGrade.MEDIAN,
-            AchieveGrade.MAX,
-        ))
-        WeeklyMissionCard(1)
+        HandsUpMonthMissionCard(
+            year = 2025,
+            achieve = listOf(
+                AchieveGrade.MAX,
+                AchieveGrade.MEDIAN,
+                AchieveGrade.MAX,
+            )
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        HandsUpWeeklyMissionCard(
+            month = 3,
+            listOf(
+                MissionExp(
+                    achieveGrade = AchieveGrade.MAX,
+                    exp = 30,
+                    index = 1,
+                    startDate = "02.04",
+                    endDate = "06.09",
+                    month = 1
+                ),
+                MissionExp(
+                    achieveGrade = AchieveGrade.MEDIAN,
+                    exp = 30,
+                    index = 1,
+                    startDate = "02.04",
+                    endDate = "06.09",
+                    month = 1
+                ),
+                MissionExp(
+                    achieveGrade = AchieveGrade.MAX,
+                    exp = 30,
+                    index = 1,
+                    startDate = "02.04",
+                    endDate = "06.09",
+                    month = 1
+                ),
+                MissionExp(
+                    achieveGrade = AchieveGrade.NULL,
+                    exp = 30,
+                    index = 1,
+                    startDate = "02.04",
+                    endDate = "06.09",
+                    month = 1
+                ),
+                MissionExp(
+                    achieveGrade = AchieveGrade.NULL,
+                    exp = 30,
+                    index = 1,
+                    startDate = "02.04",
+                    endDate = "06.09",
+                    month = 1
+                ),
+            )
+        )
     }
 }

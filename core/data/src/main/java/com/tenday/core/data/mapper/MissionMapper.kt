@@ -79,10 +79,11 @@ internal fun List<ProjectResponse>.toProjectMission(): List<ProjectMission> {
     }
 }
 
+
 internal fun List<PersonnelMissionResponse>.toPersonnelMission(): List<PersonnelMission> {
     return mapIndexed { index, it ->
         PersonnelMission(
-            achieveGrade = it.achieveGrade?.run { AchieveGrade.valueOf(this) } ?: AchieveGrade.NULL,
+            achieveGrade = AchieveGrade.getGrade(it.achieveGrade),
             diff = it.diff,
             exp = it.exp,
             expAt = it.expAt?.toDate(),

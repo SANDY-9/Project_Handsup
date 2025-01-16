@@ -25,7 +25,7 @@ internal fun MissionLeaderView(
     totalExp: Int,
     onPagerSwipe: () -> Unit,
     onListScroll: () -> Unit,
-    onShowToolTip: (IntOffset) -> Unit,
+    onShowToolTip: (IntOffset, MissionDetails) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var visibleTable by remember { mutableStateOf(true) }
@@ -98,7 +98,7 @@ private fun PreviewMissionLeaderView() {
             totalExp = 4000,
             onPagerSwipe = {},
             onListScroll = {},
-            onShowToolTip = {},
+            onShowToolTip = { _, _ -> },
         )
     }
 }
