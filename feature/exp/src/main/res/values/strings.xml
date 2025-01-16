@@ -27,4 +27,8 @@
     <string name="exp_bottom_sheet_title">연도 선택</string>
     <string name="exp_bottom_sheet_btn_title">변경완료</string>
 
+    <string name="exp_level_guide">레벨 가이드</string>
+    <string name="exp_level_colum">레벨</string>
+    <string name="exp_level_exp">필요 경험치</string>
+
 </resources>

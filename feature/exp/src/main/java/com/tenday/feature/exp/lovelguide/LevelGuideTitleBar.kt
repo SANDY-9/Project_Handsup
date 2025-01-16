@@ -1,4 +1,4 @@
-package com.tenday.feature.edit.guide
+package com.tenday.feature.exp.lovelguide
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -31,10 +31,10 @@ import com.tenday.designsystem.icons.Cancel
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
-import com.tenday.feature.edit.R
+import com.tenday.feature.exp.R
 
 @Composable
-internal fun BadgeGuideTitleBar(
+internal fun LevelGuideTitleBar(
     onClose: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -45,7 +45,7 @@ internal fun BadgeGuideTitleBar(
         HandsUpTitleTopBar(
             content = {
                 Text(
-                    text = stringResource(R.string.edit_badge_guide_title),
+                    text = stringResource(R.string.exp_level_guide),
                     style = HandsUpTypography.title4,
                 )
                 Icon(
@@ -71,7 +71,7 @@ internal fun BadgeGuideTitleBar(
                         shape = RoundedCornerShape(Dimens.cornerShape8),
                     )
                     .padding(Dimens.margin6),
-                text = stringResource(R.string.edit_badge_guide_level),
+                text = stringResource(R.string.exp_level_colum),
                 style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
@@ -86,7 +86,7 @@ internal fun BadgeGuideTitleBar(
                         shape = RoundedCornerShape(Dimens.cornerShape8),
                     )
                     .padding(Dimens.margin6),
-                text = stringResource(R.string.edit_badge_guide_condition),
+                text = stringResource(R.string.exp_level_guide),
                 style = HandsUpTypography.body2.copy(
                     fontWeight = FontWeight.SemiBold,
                 ),
@@ -100,7 +100,7 @@ internal fun BadgeGuideTitleBar(
 @Preview(name = "BadgeGuideTitleBar")
 @Composable
 private fun PreviewBadgeGuideTitleBar() {
-    BadgeGuideTitleBar(
+    LevelGuideTitleBar(
         {}
     )
 }
