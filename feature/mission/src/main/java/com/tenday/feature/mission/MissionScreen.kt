@@ -125,12 +125,12 @@ internal fun MissionScreen(
 
                 }
             }
-            if (visibleToolTip) {
-                MissionToolTip(
-                    missionName = "생산성 향상",
-                    position = tooltipPosition,
-                )
-            }
+        }
+        if (visibleToolTip) {
+            MissionToolTip(
+                missionName = "생산성 향상",
+                position = tooltipPosition,
+            )
         }
     }
 }
