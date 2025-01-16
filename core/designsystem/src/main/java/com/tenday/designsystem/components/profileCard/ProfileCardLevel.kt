@@ -1,5 +1,8 @@
 package com.tenday.designsystem.components.profileCard
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,7 +13,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -77,6 +84,14 @@ private fun LevelDesc(
     maxValue: Int,
     modifier: Modifier = Modifier,
 ) {
+    var currentExp  by remember { mutableStateOf(0) }
+    LaunchedEffect(Unit) {
+        currentExp  = exp // 예시: 목표 값으로 설정
+    }
+    val animatedValue by animateIntAsState(
+        targetValue = currentExp,
+        animationSpec = tween(durationMillis = 1000, easing = LinearEasing)
+    )
     val remainExp = remember { maxValue - exp }
     Row(
         modifier = modifier.fillMaxWidth(),
@@ -103,7 +118,7 @@ private fun LevelDesc(
         )
         Spacer(modifier = modifier.weight(1f))
         Text(
-            text = "${exp.toData()}/${maxValue.toData()}",
+            text = "${animatedValue.toData()}/${maxValue.toData()}",
             style = HandsUpTypography.body4.copy(
                 fontWeight = FontWeight.SemiBold,
             ),
