@@ -1,7 +1,6 @@
 package com.tenday.designsystem.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -19,7 +18,6 @@ import com.tenday.designsystem.theme.White
 @Composable
 fun HandsUpDialog(
     modifier: Modifier = Modifier,
-    onCancel: () -> Unit,
     content: @Composable (ColumnScope.() -> Unit),
 ) {
     Column(
@@ -28,7 +26,6 @@ fun HandsUpDialog(
             .background(
                 color = TransparentBlack70,
             )
-            .clickable(onClick = onCancel)
             .padding(horizontal = Dimens.margin24),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -47,9 +44,7 @@ fun HandsUpDialog(
 @Preview(name = "Dialog")
 @Composable
 private fun PreviewDialog() {
-    HandsUpDialog(
-        onCancel = {},
-    ) {
+    HandsUpDialog {
 
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,9 +13,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -62,8 +60,10 @@ internal fun EditBadgeView(
                     modifier = modifier
                         .fillMaxWidth()
                         .padding(Dimens.margin20),
+                    horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Row(
+                        modifier = modifier.fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically,
                     ) {
                         Text(
@@ -82,21 +82,23 @@ internal fun EditBadgeView(
                         )
                     }
                     Spacer(modifier = modifier.height(Dimens.margin12))
-                    LazyVerticalGrid(
-                        modifier = modifier.height(225.dp),
-                        columns = GridCells.Fixed(3),
-                        verticalArrangement = Arrangement.spacedBy(Dimens.margin6),
+                    FlowRow(
+                        modifier = modifier.fillMaxWidth(),
+                        maxItemsInEachRow = 3,
+                        horizontalArrangement = Arrangement.Start,
+                        verticalArrangement = Arrangement.spacedBy(
+                            Dimens.margin6,
+                            Alignment.CenterVertically
+                        )
                     ) {
-                        items(badgeList) { badge ->
-                            if(badge.badgeCode != BadgeCode.NULL) {
-                                ProfileBadgeItem(
-                                    modifier = modifier.weight(1f),
-                                    select = badge.badgeCode == currentBadge,
-                                    badge = badge.badgeCode,
-                                    date = badge.createdAt,
-                                    onItemClick = { onBadgeClick(badge.badgeCode) },
-                                )
-                            }
+                        badgeList.forEach { badge ->
+                            ProfileBadgeItem(
+                                modifier = modifier.fillMaxWidth(0.33f),
+                                select = badge.badgeCode == currentBadge,
+                                badge = badge.badgeCode,
+                                date = badge.createdAt,
+                                onItemClick = { onBadgeClick(badge.badgeCode) },
+                            )
                         }
                     }
                 }

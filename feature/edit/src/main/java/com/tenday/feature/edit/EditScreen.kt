@@ -176,6 +176,7 @@ internal fun EditScreen(
     }
 
     if(visibleGuide) {
+        focusManager.clearFocus()
         BadgeGuideScreen(onClose = { visibleGuide = false })
     }
 }

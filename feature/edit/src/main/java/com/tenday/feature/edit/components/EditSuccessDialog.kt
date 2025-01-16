@@ -26,9 +26,7 @@ internal fun EditSuccessDialog(
     onCancel: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    HandsUpDialog(
-        onCancel = onCancel,
-    ) {
+    HandsUpDialog {
         Column(
             modifier = modifier
                 .fillMaxWidth()
