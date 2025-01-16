@@ -12,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.Gray200
@@ -34,18 +33,16 @@ fun BoardDetailsContentView(
         Text(
             modifier = modifier.fillMaxWidth().padding(horizontal = Dimens.margin20),
             text = title,
-            maxLines = 1,
-            overflow = TextOverflow.Ellipsis,
             style = HandsUpTypography.title5,
         )
-        Spacer(modifier = modifier.height(Dimens.margin4))
+        Spacer(modifier = modifier.height(Dimens.margin6))
         Text(
             modifier = modifier.padding(horizontal = Dimens.margin20),
             text = date,
             style = HandsUpTypography.body2.copy(
                 fontWeight = FontWeight.Medium,
             ),
-            color = Gray600
+            color = Gray600,
         )
         Spacer(modifier = modifier.height(Dimens.margin16))
         HorizontalDivider(color = Gray200)
