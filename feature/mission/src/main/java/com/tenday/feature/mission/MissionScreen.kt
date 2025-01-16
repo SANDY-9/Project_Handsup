@@ -76,7 +76,10 @@ internal fun MissionScreen(
         Column {
             MissionTitleBar(
                 currentSelectedTab = currentTab,
-                onTabSelect = onTabSelect,
+                onTabSelect = {
+                    visibleToolTip = false
+                    onTabSelect(it)
+                },
             )
             when (uiState) {
                 is MissionUiState.Success -> {
