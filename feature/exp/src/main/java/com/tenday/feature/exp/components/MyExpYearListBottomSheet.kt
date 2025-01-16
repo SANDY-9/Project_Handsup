@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,7 +36,6 @@ import com.tenday.designsystem.components.HandsUpButton
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.icons.Cancel
-import com.tenday.designsystem.icons.Selected
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray900
 import com.tenday.designsystem.theme.HandsUpOrange
@@ -71,7 +71,7 @@ internal fun MyExpYearListBottomSheet(
                     top = Dimens.margin28,
                     start = Dimens.margin20,
                     end = Dimens.margin20,
-                    bottom = Dimens.margin13,
+                    bottom = Dimens.margin16,
                 ),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
@@ -90,11 +90,12 @@ internal fun MyExpYearListBottomSheet(
                     contentDescription = null,
                 )
             }
+            Spacer(modifier = modifier.height(Dimens.margin12))
             LazyColumn(
                 modifier = modifier.heightIn(
                     max = 212.dp,
                     min = 114.dp,
-                )
+                ),
             ) {
                 itemsIndexed(yearList) { index, year ->
                     MyExpYearItem(
@@ -129,28 +130,16 @@ private fun MyExpYearItem(
 ) {
     Column(
         modifier = modifier
+            .fillMaxWidth()
             .clickable(onClick = onSelect)
             .padding(horizontal = Dimens.margin20),
     ) {
-        Row(
-            modifier = modifier.fillMaxWidth(),
-            verticalAlignment = Alignment.CenterVertically,
-        ) {
-            Text(
-                modifier = modifier.padding(vertical = Dimens.margin13),
-                text = "${year}년",
-                style = HandsUpTypography.title5,
-                color = if(selected) HandsUpOrange else Gray900,
-            )
-            Spacer(modifier = modifier.weight(1f))
-            if(selected) {
-                Icon(
-                    imageVector = Icons.Selected,
-                    contentDescription = null,
-                    tint = HandsUpOrange,
-                )
-            }
-        }
+        Text(
+            modifier = modifier.padding(vertical = Dimens.margin13).padding(start = Dimens.margin2),
+            text = "${year}년",
+            style = HandsUpTypography.title5,
+            color = if(selected) HandsUpOrange else Gray900,
+        )
         if(visibleDivider) {
             HorizontalDivider(color = Gray100)
         }

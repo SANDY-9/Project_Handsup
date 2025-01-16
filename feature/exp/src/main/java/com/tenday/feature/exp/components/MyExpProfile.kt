@@ -104,7 +104,7 @@ internal fun MyExpProfile(
             )
             Spacer(modifier = modifier.width(Dimens.margin4))
             Text(
-                text = user.jobLevel,
+                text = currentLevel,
                 style = HandsUpTypography.body1.copy(
                     fontWeight = FontWeight.ExtraBold,
                     color = White,
@@ -143,13 +143,13 @@ private fun PreviewMyExpProfile() {
             jobPosition = JobPosition.파트장,
             jobGroup = 1,
             jobFamily = JobFamily.F,
-            jobLevel = "F1-Ⅰ",
+            jobLevel = "F1-II",
             totalExpLastYear = 5000,
             profileImageCode = ProfileCode.F_A,
             profileBadgeCode = BadgeCode.EXP_EVERY_MONTH_FOR_A_YEAR,
             possibleBadgeCodeList = emptyList()
         ),
-        "B1",
+        "F1-II",
         13000,
         27000,
     )
