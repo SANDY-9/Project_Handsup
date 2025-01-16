@@ -4,6 +4,7 @@ import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,7 +37,8 @@ internal fun BadgeGuideScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize().background(
             color = White,
-        )
+        ),
+        contentPadding = PaddingValues(bottom = Dimens.margin32),
     ) {
         stickyHeader {
             BadgeGuideTitleBar(
