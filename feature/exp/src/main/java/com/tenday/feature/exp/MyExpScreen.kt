@@ -2,6 +2,7 @@ package com.tenday.feature.exp
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,6 +23,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -79,6 +81,8 @@ internal fun MyExpScreen(
     modifier: Modifier = Modifier
 ) {
     val listState = rememberLazyListState()
+    var visibleDropDown by remember { mutableStateOf(false) }
+
     if(myExpState is MyExpState.Success) {
         val data = myExpState.data
         LazyColumn(
@@ -106,16 +110,31 @@ internal fun MyExpScreen(
                 ) {
                     ExpMissionBanner(
                         userName = user.username,
+                        modifier = modifier.pointerInput(Unit) {
+                            detectTapGestures {
+                                visibleDropDown = false
+                            }
+                        }
                     )
                     MyExpThisYearCard(
                         currentYearExp = data.currentYearExp,
                         expectLevel = data.expectedLevel,
+                        modifier = modifier.pointerInput(Unit) {
+                            detectTapGestures {
+                                visibleDropDown = false
+                            }
+                        }
                     )
                     MyExpLastYearCard(
                         currentLevel = data.currentLevel,
                         previousLevel = "F1-III",
                         lastYearExp = data.lastYearExp,
                         currentLevelTotalExp = data.totalExp + data.expToNextLevel,
+                        modifier = modifier.pointerInput(Unit) {
+                            detectTapGestures {
+                                visibleDropDown = false
+                            }
+                        }
                     )
                     MyExpHistory(
                         selectYear = expListState.selectYear,
@@ -123,7 +142,19 @@ internal fun MyExpScreen(
                         data = expListState.data,
                         categoryEntry = expListState.expCategories,
                         onSelectCategory = onSelectCategory,
-                        onShowYearBottomSheet = onShowYearBottomSheet,
+                        onShowYearBottomSheet = {
+                            onShowYearBottomSheet()
+                            visibleDropDown = false
+                        },
+                        visibleDropDown = visibleDropDown,
+                        onShowCategoryDropdown = {
+                            visibleDropDown = !visibleDropDown
+                        },
+                        modifier = modifier.pointerInput(Unit) {
+                            detectTapGestures {
+                                visibleDropDown = false
+                            }
+                        }
                     )
                 }
             }
