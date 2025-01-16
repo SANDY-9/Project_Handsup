@@ -61,7 +61,7 @@ fun HandsUpNavGraph(
             onNavigateEdit = navController::navigateToEdit,
             onFinish = onAppFinish,
             onBannerClick = navController::navigateToExp,
-            onExpClick = {}, // 구현해야함
+            onExpClick = navController::navigateToMission,
         )
 
         missionScreen(navController = navController)
