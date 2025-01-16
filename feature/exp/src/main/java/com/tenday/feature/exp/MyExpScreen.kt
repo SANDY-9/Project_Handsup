@@ -29,7 +29,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.tenday.core.common.enums.BadgeCode
-import com.tenday.core.common.enums.HandsUpLevel
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
 import com.tenday.core.common.enums.ProfileCode
@@ -46,7 +45,6 @@ import com.tenday.feature.exp.components.MyExpLastYearCard
 import com.tenday.feature.exp.components.MyExpProfile
 import com.tenday.feature.exp.components.MyExpThisYearCard
 import com.tenday.feature.exp.components.MyExpYearListBottomSheet
-import com.tenday.feature.exp.lovelguide.LevelGuideScreen
 import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
 import com.tenday.feature.exp.model.MyExpUiState
@@ -91,7 +89,6 @@ internal fun MyExpScreen(
 
     val listState = rememberLazyListState()
     var visibleDropDown by remember { mutableStateOf(false) }
-    var visibleLevelGuide by remember { mutableStateOf(false) }
 
     LazyColumn(
         modifier = modifier
@@ -105,9 +102,6 @@ internal fun MyExpScreen(
                 user = user,
                 currentTotalExp = exp.totalExp,
                 requireExp = exp.expToNextLevel,
-                onLevelGuideClick = {
-                    visibleLevelGuide = true
-                }
             )
         }
         item {
@@ -206,15 +200,6 @@ internal fun MyExpScreen(
                 color = statusSpaceColor,
             )
     )
-
-    if(visibleLevelGuide) {
-        LevelGuideScreen(
-            myLevel = HandsUpLevel.level("F1-II"),
-            onClose = {
-                visibleLevelGuide = false
-            }
-        )
-    }
 }
 
 @Preview(name = "ExpScreen")

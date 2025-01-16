@@ -35,6 +35,11 @@
             </intent-filter>
 
         </activity>
+        <activity
+            android:name="com.tenday.feature.exp.lovelguide.LevelGuideActivity"
+            android:exported="true"
+            android:theme="@style/Theme.HandsUp">
+        </activity>
     </application>
 
 </manifest>

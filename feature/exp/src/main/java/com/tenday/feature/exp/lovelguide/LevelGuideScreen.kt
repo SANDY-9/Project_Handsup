@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
@@ -39,7 +40,7 @@ internal fun LevelGuideScreen(
     LazyColumn(
         modifier = modifier.fillMaxSize().background(
             color = White,
-        )
+        ).systemBarsPadding()
     ) {
         stickyHeader {
             LevelGuideTitleBar(

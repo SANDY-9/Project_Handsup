@@ -1,5 +1,6 @@
 package com.tenday.feature.exp.components
 
+import android.content.Intent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -18,6 +19,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,15 +38,17 @@ import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.LinearGradientNavy
 import com.tenday.designsystem.theme.White
 import com.tenday.feature.exp.R
+import com.tenday.feature.exp.lovelguide.LevelGuideActivity
 
 @Composable
 internal fun MyExpProfile(
     user: UserDetails,
     currentTotalExp: Int,
     requireExp: Int,
-    onLevelGuideClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val intent = Intent(context, LevelGuideActivity::class.java)
     Column (
         modifier = modifier
             .fillMaxWidth()
@@ -72,7 +76,7 @@ internal fun MyExpProfile(
             Spacer(modifier = modifier.width(Dimens.margin4))
             Icon(
                 modifier = modifier.size(16.dp).noRippleClickable(
-                    onClick = onLevelGuideClick
+                    onClick = { context.startActivity(intent) }
                 ),
                 imageVector = Icons.Info,
                 contentDescription = null,
@@ -144,6 +148,5 @@ private fun PreviewMyExpProfile() {
         ),
         13000,
         27000,
-        {}
     )
 }
