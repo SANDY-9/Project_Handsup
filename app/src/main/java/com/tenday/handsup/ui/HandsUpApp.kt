@@ -18,6 +18,7 @@ import com.tenday.handsup.ui.bottomnav.HandsUpBottomNav
 fun HandsUpApp(
     appState: HandsUpAppState,
     startDestination: Any,
+    isBoardLink: Boolean,
     onAppFinish: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -37,6 +38,7 @@ fun HandsUpApp(
                     .fillMaxSize()
                     .weight(1f),
                 navController = appState.navController,
+                isBoardLink = isBoardLink,
                 startDestination = startDestination,
                 onAppFinish = onAppFinish,
             )
@@ -56,6 +58,7 @@ private fun PreviewHandsUpApp() {
     HandsUpApp(
         HandsUpAppState(rememberNavController(), rememberCoroutineScope()),
         LoginRoute,
+        false,
         {},
     )
 }

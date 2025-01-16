@@ -4,6 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.net.Uri
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -38,7 +41,8 @@ class HandsUpMessagingService: FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.i("[FCM_MESSAGE]", "onMessageReceived: $message")
+        Log.i("[FCM_MESSAGE]", "onMessageReceived: ${message.notification?.title}")
+        Log.i("[FCM_MESSAGE]", "onMessageReceived: ${message.notification?.body}")
         createNotification(message)
     }
 
@@ -46,11 +50,25 @@ class HandsUpMessagingService: FirebaseMessagingService() {
     private fun createNotification(message: RemoteMessage) {
         val title = message.notification?.title
         val body = message.notification?.body
+
+        val deepLinkIntent = Intent(Intent.ACTION_VIEW, Uri.parse("handsup://main")).apply {
+            putExtra(NOTIFICATION_EXTRA, title)
+        }
+
+        val pendingIntent = PendingIntent.getActivity(
+            this,
+            0,
+            deepLinkIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
+
         val notification = NotificationCompat
             .Builder(applicationContext, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(body)
             .setSmallIcon(com.tenday.designsystem.R.drawable.test)
+            .setAutoCancel(true)
+            .setContentIntent(pendingIntent)
             .build()
         notifyNotification(notification)
     }
@@ -76,6 +94,7 @@ class HandsUpMessagingService: FirebaseMessagingService() {
     companion object {
         private const val CHANNEL_ID = "channel_handsUp"
         private const val CHANNEL_NAME = "channel_handsUp_push"
+        const val NOTIFICATION_EXTRA = "notification_title"
     }
 
 }

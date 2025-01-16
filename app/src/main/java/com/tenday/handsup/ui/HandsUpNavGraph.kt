@@ -8,6 +8,7 @@ import androidx.navigation.compose.NavHost
 import com.tenday.feature.board.details.navigation.boardDetailsScreen
 import com.tenday.feature.board.details.navigation.navigateToBoardDetails
 import com.tenday.feature.board.navigation.boardScreen
+import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.edit.navigation.editScreen
 import com.tenday.feature.edit.navigation.navigateToEdit
 import com.tenday.feature.exp.navigation.myExpScreen
@@ -28,6 +29,7 @@ import com.tenday.feature.splash.navigation.splashScreen
 fun HandsUpNavGraph(
     navController: NavHostController,
     startDestination: Any,
+    isBoardLink: Boolean,
     onAppFinish: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -40,8 +42,9 @@ fun HandsUpNavGraph(
         val splashNavOptions = navOptionBuilder.setPopUpTo<SplashRoute>(inclusive = true).build()
         splashScreen(
             onSplashShow = { token ->
-                when(token) {
-                    null -> navController.navigateToLogin(splashNavOptions)
+                when {
+                    token == null -> navController.navigateToLogin(splashNavOptions)
+                    isBoardLink -> navController.navigateToBoard(splashNavOptions)
                     else -> navController.navigateToHome(splashNavOptions)
                 }
             },
