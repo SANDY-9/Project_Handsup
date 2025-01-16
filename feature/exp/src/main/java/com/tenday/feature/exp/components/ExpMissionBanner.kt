@@ -2,6 +2,7 @@ package com.tenday.feature.exp.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,6 +16,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,6 +33,7 @@ import com.tenday.feature.exp.R
 @Composable
 internal fun ExpMissionBanner(
     userName: String,
+    onBannerClick:() -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -39,6 +42,11 @@ internal fun ExpMissionBanner(
             .background(
                 brush = LinearGradientOrangeBold,
                 shape = RoundedCornerShape(Dimens.cornerShape12)
+            )
+            .clip(
+                shape = RoundedCornerShape(Dimens.cornerShape12)
+            ).clickable(
+                onClick = onBannerClick,
             )
             .padding(
                 horizontal = Dimens.margin20,
@@ -72,5 +80,5 @@ internal fun ExpMissionBanner(
 @Preview(name = "ExpMissionBanner")
 @Composable
 private fun PreviewExpMissionBanner() {
-    ExpMissionBanner("김민수")
+    ExpMissionBanner("김민수", {})
 }

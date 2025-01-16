@@ -50,6 +50,7 @@ import kotlinx.coroutines.flow.collectLatest
 
 @Composable
 internal fun MyExpRoute(
+    onNavigateMission:() -> Unit,
     viewModel: MyExpViewModel = hiltViewModel()
 ) {
     StatusBarStyle(true)
@@ -63,6 +64,7 @@ internal fun MyExpRoute(
             user = userDetails ?: return,
             myExpState = myExpState,
             expListState = expListState,
+            onBannerClick = onNavigateMission,
             onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
             onBottomSheetComplete = viewModel::updateSelectExpYear,
             onSelectCategory = viewModel::updateSelectCategory,
@@ -75,6 +77,7 @@ internal fun MyExpScreen(
     user: UserDetails,
     myExpState: MyExpState,
     expListState: ExpListState,
+    onBannerClick:() -> Unit,
     onShowYearBottomSheet: () -> Unit,
     onBottomSheetComplete: (Int) -> Unit,
     onSelectCategory: (ExpCategory) -> Unit,
@@ -110,6 +113,7 @@ internal fun MyExpScreen(
                 ) {
                     ExpMissionBanner(
                         userName = user.username,
+                        onBannerClick = onBannerClick,
                         modifier = modifier.pointerInput(Unit) {
                             detectTapGestures {
                                 visibleDropDown = false
@@ -238,6 +242,7 @@ private fun PreviewExpScreen() {
             expCategories = ExpCategory.entries,
             false,
         ),
+        {},
         {},
         {},
         {},

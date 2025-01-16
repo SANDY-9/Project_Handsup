@@ -15,8 +15,10 @@ fun NavController.navigateToExp(
     navigate(MyExpRoute, navOptions)
 }
 
-fun NavGraphBuilder.myExpScreen() {
+fun NavGraphBuilder.myExpScreen(
+    onNavigateMission:() -> Unit,
+) {
     composable<MyExpRoute> {
-        MyExpRoute()
+        MyExpRoute(onNavigateMission = onNavigateMission)
     }
 }
