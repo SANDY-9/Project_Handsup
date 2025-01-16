@@ -10,7 +10,7 @@ import kotlinx.serialization.Serializable
 @Serializable object MissionRoute
 
 fun NavController.navigateToMission(
-    navOptions: NavOptions,
+    navOptions: NavOptions? = null,
 ) {
     navigate(route = MissionRoute, navOptions)
 }

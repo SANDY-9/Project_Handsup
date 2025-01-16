@@ -18,6 +18,7 @@ import com.tenday.feature.login.navigation.LoginRoute
 import com.tenday.feature.login.navigation.loginScreen
 import com.tenday.feature.login.navigation.navigateToLogin
 import com.tenday.feature.mission.navigation.missionScreen
+import com.tenday.feature.mission.navigation.navigateToMission
 import com.tenday.feature.notification.navigation.navigateToNotification
 import com.tenday.feature.notification.navigation.notificationScreen
 import com.tenday.feature.splash.navigation.SplashRoute
@@ -65,7 +66,9 @@ fun HandsUpNavGraph(
 
         missionScreen()
 
-        myExpScreen()
+        myExpScreen(
+            onNavigateMission = navController::navigateToMission
+        )
 
         boardScreen(
             onNavigateNoti = navController::navigateToNotification,

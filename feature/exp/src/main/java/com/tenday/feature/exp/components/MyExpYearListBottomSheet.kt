@@ -92,7 +92,8 @@ internal fun MyExpYearListBottomSheet(
             }
             LazyColumn(
                 modifier = modifier.heightIn(
-                    max = 212.dp
+                    max = 212.dp,
+                    min = 114.dp,
                 )
             ) {
                 itemsIndexed(yearList) { index, year ->

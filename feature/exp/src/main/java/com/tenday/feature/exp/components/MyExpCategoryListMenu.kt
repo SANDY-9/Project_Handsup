@@ -3,15 +3,11 @@ package com.tenday.feature.exp.components
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -21,7 +17,6 @@ import androidx.compose.ui.unit.dp
 import com.tenday.designsystem.components.HandsUpShadowCard
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.extentions.noRippleClickable
-import com.tenday.designsystem.icons.Selected
 import com.tenday.designsystem.theme.Gray100
 import com.tenday.designsystem.theme.Gray900
 import com.tenday.designsystem.theme.HandsUpOrange
@@ -82,19 +77,10 @@ private fun CategoryItem(
                 modifier = modifier.padding(vertical = Dimens.margin12),
                 text = category.desc,
                 style = HandsUpTypography.body2.copy(
-                    fontWeight = FontWeight.Medium,
+                    fontWeight = if(selected) FontWeight.Bold else FontWeight.Medium,
                     color = if(selected) HandsUpOrange else Gray900,
                 ),
             )
-            Spacer(modifier = modifier.weight(1f))
-            if(selected) {
-                Icon(
-                    modifier = modifier.size(20.dp),
-                    imageVector = Icons.Selected,
-                    contentDescription = null,
-                    tint = HandsUpOrange,
-                )
-            }
         }
         if(visibleDivider) {
             HorizontalDivider(color = Gray100)

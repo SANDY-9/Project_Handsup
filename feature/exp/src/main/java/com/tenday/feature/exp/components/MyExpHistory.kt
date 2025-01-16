@@ -1,9 +1,13 @@
 package com.tenday.feature.exp.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -19,14 +23,9 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,13 +51,16 @@ internal fun MyExpHistory(
     selectCategory: ExpCategory,
     data: List<Exp>,
     categoryEntry: List<ExpCategory>,
+    visibleDropDown: Boolean,
     onShowYearBottomSheet: () -> Unit,
+    onShowCategoryDropdown: () -> Unit,
     onSelectCategory: (ExpCategory) -> Unit,
     modifier: Modifier = Modifier,
 ) {
-    var visibleDropDown by remember { mutableStateOf(false) }
 
-    Box {
+    Box(
+        contentAlignment = Alignment.TopEnd,
+    ) {
         HandsUpShadowCard(
             elevationSize = 4.dp,
             offsetY = 2.dp,
@@ -67,20 +69,13 @@ internal fun MyExpHistory(
                 Column(
                     modifier = modifier
                         .fillMaxWidth()
-                        .pointerInput(Unit) {
-                            detectTapGestures {
-                                visibleDropDown = false
-                            }
-                        }
                         .padding(Dimens.margin20),
                 ) {
                     MyExpHistoryHeader(
                         year = selectYear,
                         category = selectCategory,
                         onShowYearBottomSheet = onShowYearBottomSheet,
-                        onShowCategoryDropdown = {
-                            visibleDropDown = true
-                        },
+                        onShowCategoryDropdown = onShowCategoryDropdown,
                     )
                     Spacer(modifier = modifier.height(Dimens.margin12))
                     data.forEach { item ->
@@ -96,13 +91,9 @@ internal fun MyExpHistory(
         )
         if(visibleDropDown) {
             MyExpCategoryListMenu(
-                modifier = modifier.align(Alignment.TopEnd),
                 categoryEntry = categoryEntry,
                 selectedCategory = selectCategory,
-                onSelectCategory = {
-                    onSelectCategory(it)
-                    visibleDropDown = false
-                },
+                onSelectCategory = onSelectCategory,
             )
         }
     }
@@ -192,7 +183,7 @@ private fun MyExpHistoryItem(
             modifier = modifier
                 .fillMaxWidth()
                 .padding(
-                    vertical = Dimens.margin12
+                    vertical = Dimens.margin14,
                 ),
             verticalAlignment = Alignment.CenterVertically,
         ) {
@@ -237,6 +228,8 @@ private fun PreviewMyExpHistory() {
         selectCategory = ExpCategory.리더부여,
         data = listOf(),
         categoryEntry = ExpCategory.entries,
+        false,
+        {},
         {},
         {},
     )

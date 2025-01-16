@@ -28,7 +28,6 @@ import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.icons.Dodoong
 import com.tenday.designsystem.theme.HandsUpNavy
 import com.tenday.designsystem.theme.HandsUpTypography
-import com.tenday.designsystem.theme.TransparentWhite12
 import com.tenday.designsystem.theme.TransparentWhite8
 import com.tenday.designsystem.theme.TransparentWhite80
 import com.tenday.designsystem.theme.White
@@ -45,7 +44,7 @@ internal fun MyRemainingExpCard(
             .fillMaxWidth()
             .height(IntrinsicSize.Min)
             .background(
-                color = TransparentWhite12,
+                color = TransparentWhite8,
                 shape = RoundedCornerShape(Dimens.margin8),
             )
             .padding(Dimens.margin12),

@@ -10,6 +10,13 @@ val LinearGradientOrange = Brush.linearGradient(
     ),
 )
 
+val LinearGradientOrangeBold = Brush.linearGradient(
+    colors = listOf(
+        Color(0xFFE87A0C),
+        Color(0xFFFA610F),
+    )
+)
+
 val LinearGradientBlue = Brush.linearGradient(
     colors = listOf(
         Color(0xFF9E66E1),

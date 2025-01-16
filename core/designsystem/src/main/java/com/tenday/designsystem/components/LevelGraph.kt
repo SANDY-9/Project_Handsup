@@ -1,5 +1,8 @@
 package com.tenday.designsystem.components
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,6 +12,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -47,7 +55,14 @@ fun LevelGraph(
     maxValue: Int = 27500,
     modifier: Modifier = Modifier,
 ) {
-    val progress = currentValue.toFloat() / maxValue
+    var currentExp  by remember { mutableStateOf(0) }
+    LaunchedEffect(Unit) {
+        currentExp  = currentValue // 예시: 목표 값으로 설정
+    }
+    val animatedProgress by animateFloatAsState(
+        targetValue = currentExp.toFloat() / maxValue,
+        animationSpec = tween(durationMillis = 1000, easing = LinearOutSlowInEasing)
+    )
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -80,7 +95,7 @@ fun LevelGraph(
             // Clip progress bar to fit within the background bar
             clipPath(backgroundBarPath) {
                 // Create progress bar path with rounded left corners
-                val progressBarWidth = size.width * progress
+                val progressBarWidth = size.width * animatedProgress
                 val progressBarPath = Path().apply {
                     moveTo(0f, 0f) // Top-left corner
                     lineTo(progressBarWidth, 0f) // Top-right corner
@@ -124,7 +139,7 @@ fun LevelGraph(
             contentAlignment = androidx.compose.ui.Alignment.Center
         ) {
             BasicText(
-                text = "${(progress * 100).toInt()}%",
+                text = "${(animatedProgress * 100).toInt()}%",
                 style = HandsUpTypography.body4.copy(
                     fontWeight = FontWeight.ExtraBold,
                     fontSize = 11.sp,
@@ -142,9 +157,13 @@ fun LevelGraph(
 @Preview(name = "LevelGraph")
 @Composable
 private fun PreviewLevelGraph() {
+    var currentValue by remember { mutableStateOf(0) }
+    LaunchedEffect(Unit) {
+        currentValue = 20000 // 예시: 목표 값으로 설정
+    }
     Box(
         modifier = Modifier.padding(10.dp)
     ) {
-        LevelGraph(15000)
+        LevelGraph(currentValue)
     }
 }
