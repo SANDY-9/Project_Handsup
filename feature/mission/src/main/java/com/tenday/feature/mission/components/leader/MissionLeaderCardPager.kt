@@ -10,6 +10,7 @@ import androidx.compose.foundation.pager.PageSize
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalConfiguration
@@ -21,6 +22,7 @@ import com.tenday.core.model.MissionDetails
 import com.tenday.designsystem.dimens.Dimens
 import com.tenday.designsystem.theme.White
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 @Composable
 internal fun MissionLeaderCardPager(
@@ -44,6 +46,7 @@ internal fun MissionLeaderCardPager(
             onPagerSwipe()
         }
     }
+    val scope = rememberCoroutineScope()
     HorizontalPager(
         modifier = modifier
             .fillMaxWidth()
@@ -71,6 +74,11 @@ internal fun MissionLeaderCardPager(
             medianCondition = mission.medianCondition,
             visibleTable = visibleTable,
             onShowTooltip = onShowToolTip,
+            onPageClick = {
+                scope.launch {
+                    pagerState.animateScrollToPage(page)
+                }
+            }
         )
     }
 }

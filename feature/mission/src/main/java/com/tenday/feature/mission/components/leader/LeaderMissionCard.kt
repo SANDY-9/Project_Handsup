@@ -15,6 +15,7 @@ import com.tenday.core.common.enums.MissionPeriod
 import com.tenday.designsystem.components.HandsUpTextureCard
 import com.tenday.designsystem.components.HandsUpThreeSpaceTable
 import com.tenday.designsystem.dimens.Dimens
+import com.tenday.designsystem.extentions.noRippleClickable
 import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.White
 import com.tenday.designsystem.theme.getHandsUpGradient
@@ -32,10 +33,12 @@ internal fun LeaderMissionCard(
     maxCondition: String,
     medianCondition: String,
     visibleTable: Boolean,
+    onPageClick: () -> Unit,
     onShowTooltip: (IntOffset) -> Unit,
     modifier: Modifier = Modifier
 ) {
     HandsUpTextureCard(
+        modifier = modifier.noRippleClickable(onClick = onPageClick),
         gradient = getHandsUpGradient(index),
     ) {
         MissionToolTipTitle(
@@ -88,5 +91,6 @@ private fun PreviewMissionLeaderCardItem() {
         medianCondition = "4.3 이상",
         visibleTable = true,
         onShowTooltip = {},
+        onPageClick = {},
     )
 }
