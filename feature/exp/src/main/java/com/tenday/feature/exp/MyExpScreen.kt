@@ -47,7 +47,7 @@ import com.tenday.feature.exp.components.MyExpThisYearCard
 import com.tenday.feature.exp.components.MyExpYearListBottomSheet
 import com.tenday.feature.exp.model.ExpCategory
 import com.tenday.feature.exp.model.ExpListState
-import com.tenday.feature.exp.model.MyExpState
+import com.tenday.feature.exp.model.MyExpUiState
 import kotlinx.coroutines.flow.collectLatest
 
 @Composable
@@ -55,23 +55,21 @@ internal fun MyExpRoute(
     onNavigateMission:() -> Unit,
     viewModel: MyExpViewModel = hiltViewModel()
 ) {
-    val myExpState by viewModel.myExpState.collectAsStateWithLifecycle()
-    val userDetails by viewModel.userDetails.collectAsStateWithLifecycle(null)
+    val myExpUiState by viewModel.myExpUiState.collectAsStateWithLifecycle()
     val expListState by viewModel.expListState.collectAsStateWithLifecycle()
-
     Box {
-        when(val state = myExpState) {
-            is MyExpState.Success -> MyExpScreen(
-                user = userDetails ?: return,
-                exp = state.data,
+        when(val state = myExpUiState) {
+            is MyExpUiState.Success -> MyExpScreen(
+                user = state.userDetails,
+                exp = state.expDetails,
                 expListState = expListState,
                 onBannerClick = onNavigateMission,
                 onShowYearBottomSheet = viewModel::updateBottomSheetVisible,
                 onBottomSheetComplete = viewModel::updateSelectExpYear,
                 onSelectCategory = viewModel::updateSelectCategory,
             )
-            MyExpState.Loading -> HandsUpLoadingView()
-            MyExpState.Fail -> HandsUpFailView()
+            MyExpUiState.Loading -> HandsUpLoadingView()
+            MyExpUiState.Fail -> HandsUpFailView()
         }
     }
 }
