@@ -1,5 +1,8 @@
 package com.tenday.designsystem.components
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -7,8 +10,12 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.BasicText
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -18,17 +25,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
-import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.drawscope.clipPath
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.tenday.designsystem.theme.CardShadow
-import com.tenday.designsystem.theme.Gray200
-import com.tenday.designsystem.theme.HandsUpTypography
 import com.tenday.designsystem.theme.TransparentBlack20
-import com.tenday.designsystem.theme.White
 
 @Composable
 fun LinearExpGraph(
@@ -36,7 +36,14 @@ fun LinearExpGraph(
     maxValue: Int = 27000,
     modifier: Modifier = Modifier,
 ) {
-    val progress = currentValue.toFloat() / maxValue
+    var currentExp  by remember { mutableStateOf(0) }
+    LaunchedEffect(Unit) {
+        currentExp  = currentValue // 예시: 목표 값으로 설정
+    }
+    val animatedProgress by animateFloatAsState(
+        targetValue = currentExp.toFloat() / maxValue,
+        animationSpec = tween(durationMillis = 1000, easing = LinearOutSlowInEasing)
+    )
     Box(
         modifier = modifier
             .fillMaxWidth()
@@ -66,7 +73,7 @@ fun LinearExpGraph(
             // Clip progress bar to fit within the background bar
             clipPath(backgroundBarPath) {
                 // Create progress bar path with rounded left corners
-                val progressBarWidth = size.width * progress
+                val progressBarWidth = size.width * animatedProgress
                 val progressBarPath = Path().apply {
                     moveTo(0f, 0f) // Top-left corner
                     lineTo(progressBarWidth, 0f) // Top-right corner

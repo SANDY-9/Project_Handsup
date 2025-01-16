@@ -1,5 +1,8 @@
 package com.tenday.designsystem.components
 
+import androidx.compose.animation.core.LinearOutSlowInEasing
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -8,7 +11,11 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -35,8 +42,18 @@ fun ExpCircularGraph(
     avg: Int = 9000,
     modifier: Modifier = Modifier
 ) {
-    val progress = remember { currentYearExp.toFloat() / avg.toFloat() }
-    val percent = remember { (progress * 100).roundToInt() }
+    var currentExp  by remember { mutableStateOf(0) }
+    LaunchedEffect(Unit) {
+        currentExp  = currentYearExp // 예시: 목표 값으로 설정
+    }
+    val animatedProgress by animateFloatAsState(
+        targetValue = currentExp.toFloat() / avg.toFloat(),
+        animationSpec = tween(
+            durationMillis = 5000,
+            easing = LinearOutSlowInEasing
+        )
+    )
+    val percent = remember { (animatedProgress * 100).roundToInt() }
     Box(
         modifier = modifier.size(140.dp), // 전체 원의 크기 (반경 = 70dp 기준)
         contentAlignment = Alignment.Center
@@ -61,7 +78,7 @@ fun ExpCircularGraph(
             drawArc(
                 brush = pieChartGradientBrush, // 진행 색상
                 startAngle = 270f,
-                sweepAngle = progress * 360f, // 진행 정도
+                sweepAngle = animatedProgress * 360f, // 진행 정도
                 useCenter = true,
             )
         }
