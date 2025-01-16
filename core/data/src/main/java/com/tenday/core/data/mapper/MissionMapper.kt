@@ -14,8 +14,6 @@ import com.tenday.network.model.LeaderQuestInfo
 import com.tenday.network.model.PersonnelMissionResponse
 import com.tenday.network.model.ProjectResponse
 import com.tenday.network.model.QuestExp
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 internal fun LeaderMissionResponse.toLeaderMission(): LeaderMission {
     return LeaderMission(
@@ -82,25 +80,13 @@ internal fun List<ProjectResponse>.toProjectMission(): List<ProjectMission> {
 }
 
 internal fun List<PersonnelMissionResponse>.toPersonnelMission(): List<PersonnelMission> {
-    return map {
-        val date = it.expAt?.toLocalDate()
+    return mapIndexed { index, it ->
         PersonnelMission(
             achieveGrade = it.achieveGrade?.run { AchieveGrade.valueOf(this) } ?: AchieveGrade.NULL,
             diff = it.diff,
             exp = it.exp,
             expAt = it.expAt?.toDate(),
-            term = date?.let { parsedDate ->
-                if (parsedDate.monthValue in 1..6) PersonnelMission.EvaluationTerm.상반기
-                else PersonnelMission.EvaluationTerm.하반기
-            } ?: PersonnelMission.EvaluationTerm.하반기
+            term = if(index % 2 == 0) PersonnelMission.EvaluationTerm.상반기 else PersonnelMission.EvaluationTerm.하반기
         )
-    }
-}
-
-private fun String.toLocalDate(): LocalDate? {
-    return try {
-        LocalDate.parse(this, DateTimeFormatter.ISO_DATE_TIME) // ISO-8601 포맷으로 파싱
-    } catch (e: Exception) {
-        null
     }
 }
