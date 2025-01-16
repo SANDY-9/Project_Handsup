@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -90,11 +89,10 @@ internal fun MyExpYearListBottomSheet(
                     contentDescription = null,
                 )
             }
-            Spacer(modifier = modifier.height(Dimens.margin12))
             LazyColumn(
                 modifier = modifier.heightIn(
                     max = 212.dp,
-                    min = 114.dp,
+                    min = 144.dp,
                 ),
             ) {
                 itemsIndexed(yearList) { index, year ->
