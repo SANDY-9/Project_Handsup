@@ -1,6 +1,5 @@
 package com.tenday.feature.home
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -58,17 +57,16 @@ internal fun HomeRoute(
     onBannerClick: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
-    BackHandler(enabled = true) {
-        onFinish()
-    }
-
-    val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
-
     val context = LocalContext.current
+    BackOnPressed(
+        context = context,
+        onFinish = onFinish,
+    )
     CheckPermission(
         context = context,
         onPermissionResult = viewModel::updateNotificationState,
     )
+    val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
     when (val state = uiState) {
         is HomeUiState.Success -> {
             HomeScreen(
