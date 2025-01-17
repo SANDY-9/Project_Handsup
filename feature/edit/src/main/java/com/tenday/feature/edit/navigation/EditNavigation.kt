@@ -34,6 +34,7 @@ fun NavGraphBuilder.editScreen(
             userDetails = user,
             onNavigateBack = onNavigateBack,
             onLogout = onLogout,
+            savedStateHandle = navController.previousBackStackEntry?.savedStateHandle
         )
     }
 }

@@ -7,9 +7,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.navigation.NavDestination
+import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.tenday.feature.board.navigation.BoardRoute
 import com.tenday.feature.board.navigation.navigateToBoard
 import com.tenday.feature.exp.navigation.MyExpRoute
@@ -43,12 +44,24 @@ class HandsUpAppState(
         }
 
     fun navigateToDestination(destination: BottomNavDestination) {
-        val navOption = NavOptions.Builder().build()
+        val topLevelNavOptions = navOptions {
+            // Pop up to the start destination of the graph to
+            // avoid building up a large stack of destinations
+            // on the back stack as users select items
+            popUpTo(navController.graph.findStartDestination().id) {
+                saveState = true
+            }
+            // Avoid multiple copies of the same destination when
+            // reselecting the same item
+            launchSingleTop = true
+            // Restore state when reselecting a previously selected item
+            restoreState = true
+        }
         when(destination) {
-            BottomNavDestination.HOME -> navController.navigateToHome(navOption)
-            BottomNavDestination.MISSION -> navController.navigateToMission(navOptions = navOption)
-            BottomNavDestination.EXP -> navController.navigateToExp(navOption)
-            BottomNavDestination.BOARD -> navController.navigateToBoard(navOption)
+            BottomNavDestination.HOME -> navController.navigateToHome(topLevelNavOptions)
+            BottomNavDestination.MISSION -> navController.navigateToMission(navOptions = topLevelNavOptions)
+            BottomNavDestination.EXP -> navController.navigateToExp(topLevelNavOptions)
+            BottomNavDestination.BOARD -> navController.navigateToBoard(topLevelNavOptions)
         }
     }
 
