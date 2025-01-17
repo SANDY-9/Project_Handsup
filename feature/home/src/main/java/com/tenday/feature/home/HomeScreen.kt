@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -55,23 +56,34 @@ internal fun HomeRoute(
     onFinish: () -> Unit,
     onExpClick: (ExpType) -> Unit,
     onBannerClick: () -> Unit,
-    viewModel: HomeViewModel = hiltViewModel()
+    viewModel: HomeViewModel = hiltViewModel(),
+    receivedBadge: BadgeCode = BadgeCode.NULL,
 ) {
     val context = LocalContext.current
     BackOnPressed(
         context = context,
         onFinish = onFinish,
     )
+
+    LaunchedEffect(receivedBadge) {
+        if(receivedBadge != BadgeCode.NULL) {
+            viewModel.updateProfileBadge(receivedBadge)
+        }
+    }
+
     CheckPermission(
         context = context,
         onPermissionResult = viewModel::updateNotificationState,
     )
     val uiState by viewModel.homeUiState.collectAsStateWithLifecycle()
+    val profileBadge by viewModel.profileBadge.collectAsStateWithLifecycle()
+
     when (val state = uiState) {
         is HomeUiState.Success -> {
             HomeScreen(
                 userDetails = state.userDetails,
                 expDetails = state.expDetails,
+                profileBadgeCode = profileBadge,
                 onNavigateNoti = onNavigateNoti,
                 onNavigateEdit = onNavigateEdit,
                 onExpClick = onExpClick,
@@ -88,11 +100,12 @@ internal fun HomeRoute(
 internal fun HomeScreen(
     userDetails: UserDetails,
     expDetails: ExpDetails,
+    profileBadgeCode: BadgeCode,
     onNavigateNoti: () -> Unit,
     onNavigateEdit: (UserDetails) -> Unit,
     onExpClick: (ExpType) -> Unit,
     onBannerClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     StatusBarStyle(true)
     LazyColumn (
@@ -117,6 +130,7 @@ internal fun HomeScreen(
             HomeContentView(
                 backResId = userDetails.jobFamily.getBackResId(),
                 user = userDetails,
+                profileBadgeCode = profileBadgeCode,
                 currentLevel = expDetails.currentLevel,
                 exp = expList,
                 totalExp = expDetails.totalExp,
@@ -133,6 +147,7 @@ internal fun HomeScreen(
 private fun HomeContentView(
     backResId: Int,
     user: UserDetails,
+    profileBadgeCode: BadgeCode,
     exp: List<Exp>,
     totalExp: Int,
     currentLevel: String,
@@ -140,7 +155,7 @@ private fun HomeContentView(
     onNavigateSettings: (UserDetails) -> Unit,
     onExpClick: (ExpType) -> Unit,
     onBannerClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Box {
         Image(
@@ -165,12 +180,14 @@ private fun HomeContentView(
                 jobFamily = user.jobFamily,
                 jobPosition = user.jobPosition.name,
                 jobLevel = currentLevel,
-                profileBadgeCode = user.profileBadgeCode,
+                profileBadgeCode = profileBadgeCode,
                 profileImageCode = user.profileImageCode,
                 totalExpLastYear = totalExp,
                 username = user.username,
                 maxExp = totalExp + expToExpectedLevel,
-                onNavigateSettings = { onNavigateSettings(user) },
+                onNavigateSettings = { onNavigateSettings(user.copy(
+                    profileBadgeCode = profileBadgeCode
+                )) },
             )
             Spacer(modifier = modifier.height(Dimens.margin16))
             Text(
@@ -232,5 +249,6 @@ private fun PreviewHomeScreen() {
         onNavigateEdit = {},
         onExpClick = {},
         onBannerClick = {},
+        profileBadgeCode = BadgeCode.NULL
     )
 }

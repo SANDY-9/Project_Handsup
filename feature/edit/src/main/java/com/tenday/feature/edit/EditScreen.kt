@@ -17,7 +17,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.tenday.core.common.args.Args
 import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.common.enums.JobFamily
 import com.tenday.core.common.enums.JobPosition
@@ -46,6 +48,7 @@ internal fun EditRoute(
     onNavigateBack: () -> Unit,
     onLogout: () -> Unit,
     viewModel: EditViewModel = hiltViewModel(),
+    savedStateHandle: SavedStateHandle? = null,
 ) {
     StatusBarStyle(false)
     LaunchedEffect(userDetails) {
@@ -78,7 +81,10 @@ internal fun EditRoute(
         onEnableNotiChange = viewModel::updateNotiChange,
         onEditComplete = viewModel::requestUpdatePwdChange,
         onDialogCancel = viewModel::resetUiState,
-        onEditBadge = viewModel::requestUpdateBadgeChange,
+        onEditBadge = { badge ->
+            savedStateHandle?.set(Args.BADGE, badge.name)
+            viewModel.requestUpdateBadgeChange(badge)
+        },
     )
 }
 @OptIn(ExperimentalFoundationApi::class)
@@ -96,7 +102,7 @@ internal fun EditScreen(
     onEditComplete: () -> Unit,
     onDialogCancel: () -> Unit,
     onEditBadge: (BadgeCode) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     var selectBadge by remember { mutableStateOf(BadgeCode.NULL) }
     var visibleGuide by remember { mutableStateOf(false) }
@@ -179,6 +185,7 @@ internal fun EditScreen(
         focusManager.clearFocus()
         BadgeGuideScreen(onClose = { visibleGuide = false })
     }
+
 }
 
 @Preview(name = "EditScreen")

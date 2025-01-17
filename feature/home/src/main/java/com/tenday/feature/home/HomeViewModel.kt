@@ -1,7 +1,10 @@
 package com.tenday.feature.home
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.tenday.core.common.args.Args
+import com.tenday.core.common.enums.BadgeCode
 import com.tenday.core.domain.repository.AuthPrefsRepository
 import com.tenday.core.domain.usecases.exp.GetLastExpListUseCase
 import com.tenday.core.domain.usecases.user.GetUserDetailsUseCase
@@ -21,16 +24,20 @@ internal class HomeViewModel @Inject constructor(
     getUserDetailsUseCase: GetUserDetailsUseCase,
     getLastExpListUseCase: GetLastExpListUseCase,
     private val appPrefsRepository: AuthPrefsRepository,
+    private val savedStateHandle: SavedStateHandle,
 ): ViewModel() {
 
     private val _homeUiState: MutableStateFlow<HomeUiState> = MutableStateFlow(HomeUiState.Loading)
     val homeUiState = _homeUiState.asStateFlow()
+
+    val profileBadge = savedStateHandle.getStateFlow(Args.BADGE, BadgeCode.NULL)
 
     init {
         combine(
             getUserDetailsUseCase(),
             getLastExpListUseCase(listSize = 3)
         ) { userDetails, expDetails ->
+            updateProfileBadge(userDetails.profileBadgeCode)
             HomeUiState.Success(
                 expDetails = expDetails,
                 userDetails = userDetails
@@ -42,6 +49,10 @@ internal class HomeViewModel @Inject constructor(
         }.catch {
             _homeUiState.value = HomeUiState.Fail
         }.launchIn(viewModelScope)
+    }
+
+    fun updateProfileBadge(badgeCode: BadgeCode) {
+        savedStateHandle[Args.BADGE] = badgeCode
     }
 
     suspend fun updateNotificationState(enable: Boolean) {

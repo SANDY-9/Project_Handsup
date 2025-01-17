@@ -63,5 +63,9 @@ enum class BadgeCode(
                 MONTH_SPECIAL_JOB_OVER_6,
             )
         }
+
+        fun getBadge(name: String): BadgeCode {
+            return BadgeCode.entries.firstOrNull { it.name == name } ?: NULL
+        }
     }
 }

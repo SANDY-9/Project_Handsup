@@ -68,6 +68,7 @@ fun HandsUpNavGraph(
         )
 
         homeScreen(
+            navController = navController,
             onNavigateNoti = navController::navigateToNotification,
             onNavigateEdit = navController::navigateToEdit,
             onFinish = onAppFinish,
