@@ -14,13 +14,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tenday.core.common.enums.BadgeCode
+import com.tenday.core.resources.resources
 import com.tenday.designsystem.dimens.Dimens
-import com.tenday.designsystem.extentions.svgImageLoader
 import com.tenday.designsystem.theme.Gray700
 import com.tenday.designsystem.theme.HandsUpTypography
 
@@ -41,7 +42,7 @@ internal fun BadgeGuidItem(
 
             Image(
                 modifier = modifier.size(56.dp),
-                painter = svgImageLoader(badge.resFilePath),
+                painter = painterResource(badge.resources()),
                 contentDescription = null,
             )
             Spacer(modifier = modifier.height(Dimens.margin4))
